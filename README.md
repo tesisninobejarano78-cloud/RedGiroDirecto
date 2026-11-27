@@ -19,7 +19,7 @@ Cada carpeta tiene su propio README con lo que contiene, cómo se construyó y c
 
 Cada red tiene un visor interactivo: [`red-normada/visor-red-normada.html`](red-normada/visor-red-normada.html) y [`red-observada/visor-red-observada.html`](red-observada/visor-red-observada.html). Hay dos formas de abrirlos:
 
-- **En la web**, sin descargar nada, desde la página del proyecto en GitHub Pages, que está enlazada en la descripción del repositorio. Su portada es [`index.html`](index.html).
+- **En la web**, sin descargar nada, en la página del proyecto en GitHub Pages: <https://tesisninobejarano78-cloud.github.io/RedGiroDirecto/>. Su portada es [`index.html`](index.html).
 - **En el computador**: se descarga el archivo y se abre con doble clic. No necesita internet.
 
 GitHub muestra los archivos `.html` como código, así que desde la lista de archivos del repositorio no se ven como visores.
@@ -50,7 +50,7 @@ Después de cualquier cambio hay que respetar el orden de las carpetas de la sec
 
 ## Cómo citar
 
-Los datos para citar el repositorio están en [`CITATION.cff`](CITATION.cff). Quien use los datos debe citar también las fuentes originales que indica cada carpeta.
+Los datos para citar el repositorio están en [`CITATION.cff`](CITATION.cff). Su dirección es <https://github.com/tesisninobejarano78-cloud/RedGiroDirecto>. Quien use los datos debe citar también las fuentes originales que indica cada carpeta.
 
 ## Licencias
 
