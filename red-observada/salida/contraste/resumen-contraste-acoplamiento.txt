@@ -1,0 +1,219 @@
+Comparación con la red normada y acoplamiento entre capas — mes principal 2026-09
+
+== Red normada: centralidad por capa (25 actores con vínculos)
+         capa      id                actor  vinculos_salida  vinculos_entrada  vinculos  intermediacion_dirigida  alcance_aguas_abajo
+  informacion ASC-001             MinSalud                3                 6         9                  0.05072                    6
+  informacion ASC-009                  EPS                3                 5         8                 0.003321                    6
+  informacion ASC-007                ADRES                2                 5         7                0.0006039                    6
+  informacion ASC-010                  IPS                4                 3         7                   0.0468                    6
+  informacion ASC-212      Operadores PILA                3                 1         4                  0.01268                    7
+  informacion ASC-011           Supersalud                3                 0         3                        0                    7
+las dos capas ASC-007                ADRES               14                15        29                    0.337                   15
+las dos capas ASC-010                  IPS                4                 7        11                   0.1011                   15
+las dos capas ASC-001             MinSalud                4                 6        10                  0.02476                   15
+las dos capas ASC-009                  EPS                4                 6        10                  0.02204                   15
+las dos capas ASC-027  DTS departamentales                2                 2         4                  0.01208                   15
+las dos capas ASC-028      DTS municipales                2                 2         4                  0.01208                   15
+     recursos ASC-007                ADRES               12                10        22                   0.1975                   11
+     recursos ASC-010                  IPS                0                 4         4                        0                    0
+     recursos ASC-045 Operadores de juegos                3                 0         3                        0                   14
+     recursos ASC-009                  EPS                1                 1         2                        0                    1
+     recursos ASC-027  DTS departamentales                1                 1         2                        0                   12
+     recursos ASC-028      DTS municipales                1                 1         2                        0                   12
+
+== Nivel 1: clases de la red normada en la red observada
+  corte   clase                                                               clase_nombre vinculo_normado  receptores  aristas  eps_que_giran        girado  girado_pct
+2026-09 ASC-010                                     IPS (prestadores inscritos en el REPS)             R04        3522    11991             25 6302933658202        83.2
+2026-09 ASC-047                                             Cajas de compensación familiar             R11           9       43             15  382999011473       5.056
+2026-09 ASC-253 Proveedores de servicios y tecnologías de salud sin inscripción en el REPS             R27         256      439             23  356849501056        4.71
+2026-09 ASC-071                 Droguerías, gestores farmacéuticos y canal de dispensación             R07           2        7              5  184678463788       2.438
+2026-09 ASC-068                                                                   Disfarma             R09           1        7              7  110671605658       1.461
+2026-09 ASC-070     Importadores y distribuidores mayoristas de medicamentos y tecnologías             R25          13       30             10   85334206423       1.126
+2026-09 ASC-069                                                                  Helpharma             R10           1        3              3   71146831070      0.9391
+2026-09 ASC-067                                                                  Audifarma             R08           1        7              7   70099803103      0.9253
+2026-09 ASC-065                           Industria farmacéutica y de dispositivos médicos             R26           5        5              1   10989518485      0.1451
+
+== Nivel 1: vínculos normados de la parte común
+ id        capa                                     tipo  origen destino observabilidad  girado_en_el_mes  receptores_en_el_mes
+R03    recursos                 Reconocimiento de la UPC ASC-007 ASC-009        parcial               NaN                   NaN
+R04    recursos                   Giro directo de la UPC ASC-007 ASC-010     observable         6.303e+12                  3522
+R05    recursos     Giro directo de presupuestos máximos ASC-007 ASC-010     observable               NaN                   NaN
+R06    recursos              Pago contractual y residual ASC-009 ASC-010  no observable               NaN                   NaN
+R07    recursos               Giro directo a proveedores ASC-007 ASC-071     observable         1.847e+11                     2
+R08    recursos               Giro directo a proveedores ASC-007 ASC-067     observable          7.01e+10                     1
+R09    recursos               Giro directo a proveedores ASC-007 ASC-068     observable         1.107e+11                     1
+R10    recursos               Giro directo a proveedores ASC-007 ASC-069     observable         7.115e+10                     1
+R11    recursos         Giro directo a cajas prestadoras ASC-007 ASC-047     observable          3.83e+11                     9
+R17    recursos            Aportes de fuentes al sistema ASC-047 ASC-007  no observable               NaN                   NaN
+R25    recursos               Giro directo a proveedores ASC-007 ASC-070     observable         8.533e+10                    13
+R26    recursos               Giro directo a proveedores ASC-007 ASC-065     observable         1.099e+10                     5
+R27    recursos               Giro directo a proveedores ASC-007 ASC-253     observable         3.568e+11                   256
+I01 informacion                      Ordenación del giro ASC-009 ASC-007        parcial               NaN                   NaN
+I02 informacion                   Afiliación y novedades ASC-009 ASC-007        parcial               NaN                   NaN
+I03 informacion                  Lista de incumplimiento ASC-011 ASC-007     observable               NaN                   NaN
+I08 informacion         Inspección, vigilancia y control ASC-011 ASC-009        parcial               NaN                   NaN
+I09 informacion         Inspección, vigilancia y control ASC-011 ASC-010        parcial               NaN                   NaN
+I24 informacion Resultados del recaudo y la compensación ASC-007 ASC-009  no observable               NaN                   NaN
+
+== Nivel 1: resumen
+vinculos_normados_de_recursos_en_la_parte_comun      9
+de_ellos_con_giro_en_el_mes                          9
+clases_con_giro_sin_vinculo_normado                  0
+jaccard_vinculos_recursos                            1
+girado_a_clases_sin_vinculo_normado_pct              0
+vinculos_normados_de_informacion_en_la_parte_comun   6
+de_ellos_observables                                 1
+de_ellos_en_parte                                    4
+
+== Nivel 2: Ley 1122, art. 16 — parte del giro directo del subsidiado que llega a ESE (orientativo)
+  corte                    entidad                        nombre  girado_subsidiado  a_ese_pct  a_publicos_pct  ese_que_reciben  prestadores  por_debajo_del_60
+2026-09                      NUEVA                     NUEVA EPS       997067152389      44.17           44.43              829         1555               True
+2026-09                   COOSALUD                      COOSALUD       452926746135      41.31           41.32              507         1051               True
+2026-09                  MUTUALSER                    MUTUAL SER       356943716814      21.48           21.61              171          438               True
+2026-09                 SAVIASALUD                   SAVIA SALUD       243425693742      47.87           47.87              185          328               True
+2026-09                   EMSSANAR                      EMSSANAR       242573774283      58.87           59.36              102          163               True
+2026-09                 SALUDTOTAL                   SALUD TOTAL       236187217462      13.26           13.27              421         1200               True
+2026-09                    SANITAS                       SANITAS       216359826998       27.4           27.51              479         1416               True
+2026-09                 ASMETSALUD                   ASMET SALUD       206413589756      37.18           37.18              152          271               True
+2026-09               CAPITALSALUD                 CAPITAL SALUD       183593576318      60.71           60.71              197          325              False
+2026-09                   CAJACOPI                      CAJACOPI       179454386319      20.14           21.94              256          594               True
+2026-09                  FAMISANAR                     FAMISANAR       127994367261       30.3            30.3              253          817               True
+2026-09               SURAMERICANA                  SURAMERICANA       125096943506      6.377           6.377              288          897               True
+2026-09                   MALLAMAS                      MALLAMAS        61222127439      38.04           51.53              145          296               True
+2026-09         FAMILIARDECOLOMBIA          FAMILIAR DE COLOMBIA        50351369011      20.34           32.28              124          364               True
+2026-09                  ANASWAYUU                     ANASWAYUU        42500521752      26.02           55.82               36           96               True
+2026-09                  COMPENSAR                     COMPENSAR        42116236849      7.239           7.239               56          166               True
+2026-09               COMFAORIENTE                  COMFAORIENTE        35675448184      26.22           26.22               30           96               True
+2026-09 ASOCIACIONINDIGENADELCAUCA ASOCIACIÓN INDÍGENA DEL CAUCA        29528528160      30.15           61.54               11           50               True
+2026-09  SERVICIOOCCIDENTALDESALUD  SERVICIO OCCIDENTAL DE SALUD        27856311160      35.32           35.32               81          108               True
+2026-09                   DUSAKAWI                      DUSAKAWI        27105484150      21.19           33.57               18           91               True
+2026-09                  CAPRESOCA                     CAPRESOCA        21710086603      54.11              55               15           51               True
+2026-09                 COMFACHOCO                    COMFACHOCO        20382971641      8.356           8.356               37          115               True
+2026-09                     PIJAOS                        PIJAOS        15835685590      27.75           38.39               48          146               True
+2026-09            COMFENALCOVALLE              COMFENALCO VALLE        11903160936      19.61           19.61               25           91               True
+2026-09                   SALUDMIA                     SALUD MIA           43851680      10.18           10.18                1            4               True
+EPS por debajo del 60 % por mes: {'2026-06': {'sum': 23, 'size': 25}, '2026-07': {'sum': 24, 'size': 25}, '2026-08': {'sum': 24, 'size': 25}, '2026-09': {'sum': 24, 'size': 25}}
+Parte de todo el giro del subsidiado que llega a ESE, por mes: {'2026-06': 38.05, '2026-07': 32.39, '2026-08': 35.8, '2026-09': 36.09}
+
+== Nivel 2: Ley 1122, art. 15, parágrafo — IPS públicas con giro del contributivo de cada EPS
+  corte                   entidad                       nombre  girado_contributivo  ips_publicas_que_reciben  a_publicos_pct  prestadores
+2026-09                     NUEVA                    NUEVA EPS         822806579045                       811           21.08         1364
+2026-09              SURAMERICANA                 SURAMERICANA         770497281162                       329           2.088         1052
+2026-09                   SANITAS                      SANITAS         745400833696                       494           4.656         1360
+2026-09                SALUDTOTAL                  SALUD TOTAL         523541595492                       446           5.646         1323
+2026-09                 FAMISANAR                    FAMISANAR         250846224550                       474           16.95         1188
+2026-09                 COMPENSAR                    COMPENSAR         249301954336                        18           2.021          143
+2026-09 SERVICIOOCCIDENTALDESALUD SERVICIO OCCIDENTAL DE SALUD          85657999219                       121           10.91          293
+2026-09                 MUTUALSER                   MUTUAL SER          45258298244                       133              14          389
+2026-09                  COOSALUD                     COOSALUD          42358856586                       316           30.75          738
+2026-09           COMFENALCOVALLE             COMFENALCO VALLE          39857686741                         7           2.104           78
+2026-09                SAVIASALUD                  SAVIA SALUD          18761415243                       172           55.42          316
+2026-09              CAPITALSALUD                CAPITAL SALUD          10245767086                        29           60.32          108
+2026-09                  CAJACOPI                     CAJACOPI           8715493220                         3           7.588           15
+2026-09                  MALLAMAS                     MALLAMAS           3249694558                        42           53.69          101
+2026-09                 CAPRESOCA                    CAPRESOCA           2267834470                         7            1.92           22
+2026-09              COMFAORIENTE                 COMFAORIENTE           1427324470                         4           19.13           24
+2026-09        FAMILIARDECOLOMBIA         FAMILIAR DE COLOMBIA           1238987002                        20           9.145           36
+
+== Acoplamiento: EPS condicionadas por la capa de información (corte principal)
+  corte                    entidad                        nombre       girado  dirigido_o_excluido_por_supersalud_o_interventor  condicionado_pct_del_giro  retenido_giro_neto  condicionada_por_supersalud  con_retencion  prestadores  prestadores_dependientes
+2026-09                 ASMETSALUD                   ASMET SALUD 206413589756                                         4.246e+10                      20.57                   0                         True          False          271                        79
+2026-09 ASOCIACIONINDIGENADELCAUCA ASOCIACIÓN INDÍGENA DEL CAUCA  29528528160                                                 0                          0           1.055e+10                        False           True           50                        19
+2026-09                   CAJACOPI                      CAJACOPI 188169879539                                                 0                          0           2.947e+10                        False           True          594                       129
+2026-09                  CAPRESOCA                     CAPRESOCA  23977921073                                                 0                          0           2.619e+09                        False           True           61                        22
+2026-09                 COMFACHOCO                    COMFACHOCO  20382971641                                                 0                          0           7.889e+09                        False           True          115                        34
+2026-09            COMFENALCOVALLE              COMFENALCO VALLE  51760847677                                                 0                          0           1.126e+09                        False           True          114                        23
+2026-09                  COMPENSAR                     COMPENSAR 291418191185                                                 0                          0           4.837e+09                        False           True          226                        52
+2026-09                   DUSAKAWI                      DUSAKAWI  27105484150                                          1.02e+10                      37.64                   0                         True          False           91                        35
+2026-09                   EMSSANAR                      EMSSANAR 242573774283                                         4.211e+10                      17.36                   0                         True          False          163                        84
+2026-09         FAMILIARDECOLOMBIA          FAMILIAR DE COLOMBIA  51590356013                                                 0                          0           4.749e+09                        False           True          367                        52
+2026-09                   SALUDMIA                     SALUD MIA     43851680                                                 0                          0           3.894e+09                        False           True            4                         0
+2026-09               SURAMERICANA                  SURAMERICANA 895594224668                                                 0                          0           1.745e+10                        False           True         1138                       332
+
+== Acoplamiento: exposición de los prestadores
+  corte                    criterio                                                                                                                                        eps  eps_n  prestadores_dependientes  prestadores_dependientes_pct  giro_de_esos_prestadores_pct  prestadores_exclusivos
+2026-09 condicionada_por_supersalud                                                                                                            ASMET SALUD; DUSAKAWI; EMSSANAR      3                       198                         5.197                         4.721                      54
+2026-09               con_retencion ASOCIACIÓN INDÍGENA DEL CAUCA; CAJACOPI; CAPRESOCA; COMFACHOCO; COMFENALCO VALLE; COMPENSAR; FAMILIAR DE COLOMBIA; SALUD MIA; SURAMERICANA      9                       663                          17.4                         14.79                     348
+2026-06 condicionada_por_supersalud                                                                                                            ASMET SALUD; COOSALUD; EMSSANAR      3                       334                         9.098                         8.437                      83
+2026-06               con_retencion                                                                                                                                                 0                         0                             0                             0                       0
+2026-07 condicionada_por_supersalud                                                                                                                      ASMET SALUD; EMSSANAR      2                       154                         4.178                         4.799                      28
+2026-07               con_retencion                                                                                                                                   COOSALUD      1                        58                         1.574                         4.872                      18
+2026-08 condicionada_por_supersalud                                                                                                                                                 0                         0                             0                             0                       0
+2026-08               con_retencion                                                                                                                                                 0                         0                             0                             0                       0
+
+== Acoplamiento: asociación EPS por EPS (Spearman, permutación)
+  corte      variable_informacion             variable_red  eps  eps_con_valor_positivo  spearman  p_permutacion_dos_colas
+2026-09 condicionado_pct_del_giro prestadores_dependientes   25                       3  0.007494                   0.9722
+2026-09        retenido_giro_neto prestadores_dependientes   25                       9   -0.3178                   0.1206
+2026-06 condicionado_pct_del_giro prestadores_dependientes   25                       3     0.163                   0.4357
+2026-06        retenido_giro_neto prestadores_dependientes   25                       0       NaN                      NaN
+2026-07 condicionado_pct_del_giro prestadores_dependientes   25                       2   0.08185                   0.7325
+2026-07        retenido_giro_neto prestadores_dependientes   25                       1   0.05666                   0.8838
+2026-08 condicionado_pct_del_giro prestadores_dependientes   25                       0       NaN                      NaN
+2026-08        retenido_giro_neto prestadores_dependientes   25                       0       NaN                      NaN
+
+== Aristas ordenadas y no giradas (septiembre de 2026)
+   entidad  nombre_eps       nit                                                                razon_social                  tipo_prestador       departamento  ordenado_no_girado  eps_con_giro_en_el_mes  recibido_en_el_mes_de_otras_eps  parte_de_esa_eps_el_mes_anterior_pct
+ASMETSALUD ASMET SALUD 802020334                                                           QUIMIOSALUD S.A.S                     IPS privada          Atlántico           3.628e+08                       5                        4.184e+09                                     0
+ASMETSALUD ASMET SALUD 814006248                                       UNIDAD CARDIOQUIRURGICA DE NARIÑO SAS                     IPS privada             Nariño           8.768e+08                       3                        3.727e+09                                 19.71
+ASMETSALUD ASMET SALUD 824005694                                            CENTRO REGIONAL DE ONCOLOGIA SAS                     IPS privada              Cesar           2.917e+08                       3                        9.445e+08                                     0
+ASMETSALUD ASMET SALUD 830027158                                               RIESGO DE FRACTURA S.A. CAYRE                     IPS privada         Bogotá D.C           1.209e+08                       7                        1.269e+10                                     0
+ASMETSALUD ASMET SALUD 900016598                                      INSTITUTO CARDIOVASCULAR DEL CESAR S.A                     IPS privada              Cesar           1.318e+09                       9                        6.216e+09                                 19.54
+ASMETSALUD ASMET SALUD 900413988                                                          NP MEDICAL IPS SAS                     IPS privada         Bogotá D.C           1.318e+09                       4                        2.292e+09                                     0
+ASMETSALUD ASMET SALUD 900428862                                    IMO - INSTITUTO MÉDICO ONCOLÓGICO S.A.S.                     IPS privada              Huila             2.5e+08                       3                         1.02e+10                                     0
+ASMETSALUD ASMET SALUD 900795705                                                             AUDIFONOS S.A.S                     IPS privada    Valle del cauca           8.022e+07                       1                        1.286e+07                                     0
+ASMETSALUD ASMET SALUD 900869605                                                     TU SALUD PLUS IPS S.A.S                     IPS privada          Atlántico           6.081e+08                       0                                0                                   100
+ASMETSALUD ASMET SALUD 900954399                                                    TOCAMEDIC COLOMBIA S.A.S      Sin inscripción en el REPS                NaN            2.17e+09                       0                                0                                   NaN
+ASMETSALUD ASMET SALUD 900964776                                INSTITUCION PRESTADORA DE SALUD BIOLAB S.A.S                     IPS privada    Valle del cauca           4.989e+06                       0                                0                                   NaN
+ASMETSALUD ASMET SALUD 901645134                                                    FUNDACION CONEXION SALUD                     IPS privada             Nariño           1.913e+09                       4                        3.373e+09                                     0
+ASMETSALUD ASMET SALUD 901919515                                                             ABUSANA IPS SAS      Sin inscripción en el REPS                NaN            6.44e+09                       0                                0                                   NaN
+  COOSALUD    COOSALUD 900748002                                                           SANATY IPS S.A.S.                     IPS privada Norte de Santander           1.906e+06                       0                                0                                   NaN
+  DUSAKAWI    DUSAKAWI 819003539                                         GONAWINDUA ETTE ENNAKA IPS INDIGENA              IPS pública no ESE         La Guajira           8.368e+08                       0                                0                                   100
+  DUSAKAWI    DUSAKAWI 824002362                                                               DUSAKAWI IPSI                     IPS privada              Cesar               6e+09                       0                                0                                   100
+  DUSAKAWI    DUSAKAWI 825001800                                                        CLINICA SOMEDA S.A.S                     IPS privada         La Guajira               8e+08                       8                        1.121e+09                                     0
+  DUSAKAWI    DUSAKAWI 825003685                                                         URMEDICAS VIP S.A.S                     IPS privada              Cesar           1.894e+08                       1                        3.739e+07                                     0
+  DUSAKAWI    DUSAKAWI 892300979                                                      CLINICA DEL CESAR S.A.                     IPS privada              Cesar           1.549e+09                       5                        2.102e+09                                     0
+  DUSAKAWI    DUSAKAWI 900222619                                                              FUNDACION SUMA                     IPS privada         La Guajira            4.54e+08                       0                                0                                   100
+  DUSAKAWI    DUSAKAWI 900559160                                               IPS SALUD INTEGRAL H&B S.A.S.                     IPS privada         La Guajira            3.72e+08                       0                                0                                   100
+  EMSSANAR    EMSSANAR 891380046 HOSPITAL SAN ROQUE EMPRESA SOCIAL DEL ESTADO DEL MUNICIPIO DE GUACARÍ VALLE ESE (empresa social del Estado)    Valle del cauca           1.918e+08                       8                        3.038e+08                                 42.83
+
+== Anomalías
+                                                                 tipo                                                                               elemento                                                   medida     valor                                               lectura
+Receptor muy por encima de la curva fuerza–grado (z modificado > 3,5)                                                                    VIRREY SOLIS IPS SA z modificado del residuo de log s(k), septiembre de 2026     5.623  1 EPS; 2.27 % del giro del mes; 100 % de SALUD TOTAL
+Receptor muy por encima de la curva fuerza–grado (z modificado > 3,5)                                     CAJA DE COMPENSACION FAMILIAR DE ANTIOQUIA COMFAMA z modificado del residuo de log s(k), septiembre de 2026     4.886 1 EPS; 0.80 % del giro del mes; 100 % de SURAMERICANA
+Receptor muy por encima de la curva fuerza–grado (z modificado > 3,5)                                              SERVICIOS DE SALUD IPS SURAMERICANA S.A.S z modificado del residuo de log s(k), septiembre de 2026     4.762 1 EPS; 0.67 % del giro del mes; 100 % de SURAMERICANA
+Receptor muy por encima de la curva fuerza–grado (z modificado > 3,5)                                                         AYUDAS DIAGNOSTICAS SURA S.A.S z modificado del residuo de log s(k), septiembre de 2026     4.287 1 EPS; 0.34 % del giro del mes; 100 % de SURAMERICANA
+Receptor muy por encima de la curva fuerza–grado (z modificado > 3,5)                                                          DISTRIBUCIONES PHARMASER LTDA z modificado del residuo de log s(k), septiembre de 2026     4.214   1 EPS; 0.31 % del giro del mes; 100 % de MUTUAL SER
+Receptor muy por encima de la curva fuerza–grado (z modificado > 3,5)                                                                        NEUROMEDICA SAS z modificado del residuo de log s(k), septiembre de 2026     3.995  2 EPS; 0.69 % del giro del mes; 98 % de SURAMERICANA
+Receptor muy por encima de la curva fuerza–grado (z modificado > 3,5)                                                  DROGUERIAS Y FARMACIAS CRUZ VERDE SAS z modificado del residuo de log s(k), septiembre de 2026     3.992       4 EPS; 2.08 % del giro del mes; 83 % de SANITAS
+Receptor muy por encima de la curva fuerza–grado (z modificado > 3,5)                                                CAJA DE COMPENSACION FAMILIAR COMPENSAR z modificado del residuo de log s(k), septiembre de 2026     3.987    2 EPS; 0.68 % del giro del mes; 100 % de COMPENSAR
+Receptor muy por encima de la curva fuerza–grado (z modificado > 3,5)                                                       CENTROS MEDICOS COLSANITAS S.A.S z modificado del residuo de log s(k), septiembre de 2026     3.765      3 EPS; 0.95 % del giro del mes; 100 % de SANITAS
+Receptor muy por encima de la curva fuerza–grado (z modificado > 3,5)                                                                          HELPHARMA SAS z modificado del residuo de log s(k), septiembre de 2026     3.755 3 EPS; 0.94 % del giro del mes; 100 % de SURAMERICANA
+Receptor muy por encima de la curva fuerza–grado (z modificado > 3,5)                                                                      CLINICA DESA CALI z modificado del residuo de log s(k), septiembre de 2026     3.716    1 EPS; 0.15 % del giro del mes; 100 % de NUEVA EPS
+Receptor muy por encima de la curva fuerza–grado (z modificado > 3,5)                                                                          LOGIFARMA SAS z modificado del residuo de log s(k), septiembre de 2026     3.607      2 EPS; 0.40 % del giro del mes; 66 % de CAJACOPI
+Receptor muy por encima de la curva fuerza–grado (z modificado > 3,5)                                                                           MENNAR S.A.S z modificado del residuo de log s(k), septiembre de 2026      3.59    1 EPS; 0.13 % del giro del mes; 100 % de NUEVA EPS
+Receptor muy por encima de la curva fuerza–grado (z modificado > 3,5)                                                              BOEHRINGER INGELHEIM S.A. z modificado del residuo de log s(k), septiembre de 2026     3.586  1 EPS; 0.13 % del giro del mes; 100 % de SALUD TOTAL
+Receptor muy por encima de la curva fuerza–grado (z modificado > 3,5)                                                                   BIENESTAR IPS S.A.S. z modificado del residuo de log s(k), septiembre de 2026     3.547    2 EPS; 0.37 % del giro del mes; 100 % de NUEVA EPS
+                       Giro ordenado y no girado (septiembre de 2026)                                                        ASMET SALUD → QUIMIOSALUD S.A.S                               ordenado no girado (pesos) 3.628e+08             recibe giro por cuenta de 5 EPS en el mes
+                       Giro ordenado y no girado (septiembre de 2026)                                    ASMET SALUD → UNIDAD CARDIOQUIRURGICA DE NARIÑO SAS                               ordenado no girado (pesos) 8.768e+08             recibe giro por cuenta de 3 EPS en el mes
+                       Giro ordenado y no girado (septiembre de 2026)                                         ASMET SALUD → CENTRO REGIONAL DE ONCOLOGIA SAS                               ordenado no girado (pesos) 2.917e+08             recibe giro por cuenta de 3 EPS en el mes
+                       Giro ordenado y no girado (septiembre de 2026)                                            ASMET SALUD → RIESGO DE FRACTURA S.A. CAYRE                               ordenado no girado (pesos) 1.209e+08             recibe giro por cuenta de 7 EPS en el mes
+                       Giro ordenado y no girado (septiembre de 2026)                                   ASMET SALUD → INSTITUTO CARDIOVASCULAR DEL CESAR S.A                               ordenado no girado (pesos) 1.318e+09             recibe giro por cuenta de 9 EPS en el mes
+                       Giro ordenado y no girado (septiembre de 2026)                                                       ASMET SALUD → NP MEDICAL IPS SAS                               ordenado no girado (pesos) 1.318e+09             recibe giro por cuenta de 4 EPS en el mes
+                       Giro ordenado y no girado (septiembre de 2026)                                 ASMET SALUD → IMO - INSTITUTO MÉDICO ONCOLÓGICO S.A.S.                               ordenado no girado (pesos)   2.5e+08             recibe giro por cuenta de 3 EPS en el mes
+                       Giro ordenado y no girado (septiembre de 2026)                                                          ASMET SALUD → AUDIFONOS S.A.S                               ordenado no girado (pesos) 8.022e+07             recibe giro por cuenta de 1 EPS en el mes
+                       Giro ordenado y no girado (septiembre de 2026)                                                  ASMET SALUD → TU SALUD PLUS IPS S.A.S                               ordenado no girado (pesos) 6.081e+08             recibe giro por cuenta de 0 EPS en el mes
+                       Giro ordenado y no girado (septiembre de 2026)                                                 ASMET SALUD → TOCAMEDIC COLOMBIA S.A.S                               ordenado no girado (pesos)  2.17e+09             recibe giro por cuenta de 0 EPS en el mes
+                       Giro ordenado y no girado (septiembre de 2026)                             ASMET SALUD → INSTITUCION PRESTADORA DE SALUD BIOLAB S.A.S                               ordenado no girado (pesos) 4.989e+06             recibe giro por cuenta de 0 EPS en el mes
+                       Giro ordenado y no girado (septiembre de 2026)                                                 ASMET SALUD → FUNDACION CONEXION SALUD                               ordenado no girado (pesos) 1.913e+09             recibe giro por cuenta de 4 EPS en el mes
+                       Giro ordenado y no girado (septiembre de 2026)                                                          ASMET SALUD → ABUSANA IPS SAS                               ordenado no girado (pesos)  6.44e+09             recibe giro por cuenta de 0 EPS en el mes
+                       Giro ordenado y no girado (septiembre de 2026)                                                           COOSALUD → SANATY IPS S.A.S.                               ordenado no girado (pesos) 1.906e+06             recibe giro por cuenta de 0 EPS en el mes
+                       Giro ordenado y no girado (septiembre de 2026)                                         DUSAKAWI → GONAWINDUA ETTE ENNAKA IPS INDIGENA                               ordenado no girado (pesos) 8.368e+08             recibe giro por cuenta de 0 EPS en el mes
+                       Giro ordenado y no girado (septiembre de 2026)                                                               DUSAKAWI → DUSAKAWI IPSI                               ordenado no girado (pesos)     6e+09             recibe giro por cuenta de 0 EPS en el mes
+                       Giro ordenado y no girado (septiembre de 2026)                                                        DUSAKAWI → CLINICA SOMEDA S.A.S                               ordenado no girado (pesos)     8e+08             recibe giro por cuenta de 8 EPS en el mes
+                       Giro ordenado y no girado (septiembre de 2026)                                                         DUSAKAWI → URMEDICAS VIP S.A.S                               ordenado no girado (pesos) 1.894e+08             recibe giro por cuenta de 1 EPS en el mes
+                       Giro ordenado y no girado (septiembre de 2026)                                                      DUSAKAWI → CLINICA DEL CESAR S.A.                               ordenado no girado (pesos) 1.549e+09             recibe giro por cuenta de 5 EPS en el mes
+                       Giro ordenado y no girado (septiembre de 2026)                                                              DUSAKAWI → FUNDACION SUMA                               ordenado no girado (pesos)  4.54e+08             recibe giro por cuenta de 0 EPS en el mes
+                       Giro ordenado y no girado (septiembre de 2026)                                               DUSAKAWI → IPS SALUD INTEGRAL H&B S.A.S.                               ordenado no girado (pesos)  3.72e+08             recibe giro por cuenta de 0 EPS en el mes
+                       Giro ordenado y no girado (septiembre de 2026) EMSSANAR → HOSPITAL SAN ROQUE EMPRESA SOCIAL DEL ESTADO DEL MUNICIPIO DE GUACARÍ VALLE                               ordenado no girado (pesos) 1.918e+08             recibe giro por cuenta de 8 EPS en el mes
+

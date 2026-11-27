@@ -1,0 +1,217 @@
+Red observada del giro directo — red bipartita EPS → prestador y métricas de estructura
+Mes principal: 2026-09 · meses de control: 2026-06, 2026-07, 2026-08
+Peso: lo girado (proceso + complemento, dos regímenes). Dependencia medida sobre el giro directo.
+
+== La red en cada corte
+corte                                                   2026-09         2026-06         2026-07         2026-08
+eps                                                        25.0            25.0            25.0            25.0
+prestadores                                              3810.0          3671.0          3686.0          3629.0
+aristas                                                 12532.0         10869.0         10501.0         10911.0
+girado                                          7575702599258.0 6579615119174.0 6983200370742.0 6827313286690.0
+densidad_bipartita                                       0.1316          0.1184          0.1140          0.1203
+aristas_sin_giro                                           22.0             2.0             1.0             1.0
+ordenado_sin_giro                                 26149718352.0      43892238.0       3853189.0       4077221.0
+componentes                                                 1.0             1.0             1.0             1.0
+nodos_componente_gigante_pct                              100.0           100.0           100.0           100.0
+girado_componente_gigante_pct                             100.0           100.0           100.0           100.0
+grado_eps_min                                               4.0             7.0             7.0             6.0
+grado_eps_mediana                                         298.0           228.0           174.0           224.0
+grado_eps_max                                            1701.0          1683.0          1677.0          1700.0
+grado_prestador_mediana                                     2.0             2.0             2.0             2.0
+grado_prestador_p90                                         7.0             6.0             6.0             6.0
+grado_prestador_max                                        18.0            18.0            17.0            18.0
+prestadores_con_una_eps_pct                                35.4            37.5            38.8            37.5
+girado_a_prestadores_con_una_eps_pct                       10.2            11.2            11.6            10.7
+aristas_puente                                           1348.0          1378.0          1429.0          1362.0
+aristas_puente_pct                                         10.8            12.7            13.6            12.5
+girado_en_puentes_pct                                      10.2            11.2            11.6            10.7
+puentes_sin_prestador_aislado                            0.0000          0.0000          0.0000          0.0000
+prestadores_con_eps_mayoritaria_pct                        85.2            87.7            89.3            88.0
+prestadores_con_eps_casi_exclusiva_pct                     40.9            43.8            45.8            43.5
+girado_a_prestadores_con_eps_casi_exclusiva_pct            22.4            23.0            23.1            23.0
+parte_eps_principal_ponderada_pct                          65.7            66.6            66.6            68.0
+eps_cr1                                                    24.0            25.4            24.7            24.6
+eps_cr4                                                    58.6            58.3            59.2            59.2
+eps_hhi                                                  1136.6          1170.3          1164.0          1163.3
+prestador_cr4                                               8.2             8.1             7.2             8.2
+prestador_cr20                                             22.3            21.6            20.8            22.1
+prestador_hhi                                              44.4            42.1            39.9            44.4
+proyeccion_eps_densidad                                  0.9600          0.9267          0.9200          0.9333
+intermediacion_maxima_eps                                0.2717          0.3001          0.3167          0.3023
+intermediacion_maxima_prestador                          0.0025          0.0031          0.0034          0.0033
+
+== EPS en el corte principal, por prestadores que dependen de ella (≥ 50 % de su giro)
+                       nombre  prestadores  participacion_pct  prestadores_exclusivos  prestadores_dependientes  cartera_exclusiva_pct  intermediacion  eps_con_prestadores_comunes  girado_complemento  aristas_sin_giro  ordenado_sin_giro
+                    NUEVA EPS         1701             24.023                     139                       583                  8.172           0.251                           24               0.000                 0              0.000
+                      SANITAS         1664             12.695                     242                       441                 14.543           0.272                           24               0.000                 0              0.000
+                  SALUD TOTAL         1456             10.028                     161                       339                 11.058           0.196                           24               0.000                 0              0.000
+                 SURAMERICANA         1138             11.822                     165                       332                 14.499           0.152                           24               0.000                 0              0.000
+                     COOSALUD         1124              6.538                      85                       238                  7.562           0.122                           24             452.900                 1              0.000
+                   MUTUAL SER          481              5.309                      76                       218                 15.800           0.054                           23               0.000                 0              0.000
+                    FAMISANAR         1224              5.001                      89                       170                  7.271           0.131                           24             128.000                 0              0.000
+                  SAVIA SALUD          415              3.461                      30                       144                  7.229           0.026                           24               0.000                 0              0.000
+                     CAJACOPI          594              2.484                      65                       129                 10.943           0.062                           24              15.700                 0              0.000
+                     EMSSANAR          163              3.202                      18                        84                 11.043           0.013                           19              22.000                 1              0.190
+                  ASMET SALUD          271              2.725                      17                        79                  6.273           0.018                           24              26.700                13             15.750
+                     MALLAMAS          298              0.851                      36                        71                 12.081           0.027                           24               0.000                 0              0.000
+ SERVICIO OCCIDENTAL DE SALUD          306              1.498                      37                        59                 12.092           0.028                           23               0.000                 0              0.000
+         FAMILIAR DE COLOMBIA          367              0.681                      38                        52                 10.354           0.033                           24               0.100                 0              0.000
+                    COMPENSAR          226              3.847                      23                        52                 10.177           0.015                           23               1.800                 0              0.000
+                CAPITAL SALUD          326              2.559                      12                        39                  3.681           0.011                           24               0.000                 0              0.000
+                     DUSAKAWI           91              0.358                      19                        35                 20.879           0.011                           22               0.000                 7             10.200
+                   COMFACHOCO          115              0.269                      18                        34                 15.652           0.010                           24               6.800                 0              0.000
+                 COMFAORIENTE          101              0.490                      13                        31                 12.871           0.008                           23               0.000                 0              0.000
+                       PIJAOS          146              0.209                      16                        28                 10.959           0.010                           24               0.000                 0              0.000
+                    ANASWAYUU           96              0.561                      10                        24                 10.417           0.006                           22               0.000                 0              0.000
+             COMFENALCO VALLE          114              0.683                      11                        23                  9.649           0.008                           24               0.400                 0              0.000
+                    CAPRESOCA           61              0.317                      17                        22                 27.869           0.009                           22               0.800                 0              0.000
+ASOCIACIÓN INDÍGENA DEL CAUCA           50              0.390                      11                        19                 22.000           0.006                           21               0.000                 0              0.000
+                    SALUD MIA            4              0.001                       0                         0                  0.000           0.000                           18               0.000                 0              0.000
+
+== Prestadores con mayor intermediación (no dirigida) en el corte principal
+      nit                                                                         razon_social                  tipo_prestador    departamento  eps  participacion_pct  parte_eps_principal_pct nombre_eps_principal  intermediacion
+900532504                                                                        DAVITA S.A.S.                     IPS privada      Bogotá D.C   18             0.3563                  30.0788             COOSALUD          0.0025
+899999092                                                   INSTITUTO NACIONAL DE CANCEROLOGIA ESE (empresa social del Estado)      Bogotá D.C   17             0.6254                  31.5464            NUEVA EPS          0.0024
+890303461    E.S.E. HOSPITAL UNIVERSITARIO DEL VALLE EVARISTO GARCIA EMPRESA SOCIAL DEL ESTADO ESE (empresa social del Estado) Valle del cauca   17             1.2002                  48.3914             EMSSANAR          0.0024
+860013779                                                                ASOCIACIÓN PROFAMILIA                     IPS privada       Antioquia   17             0.1141                  25.8676         SURAMERICANA          0.0023
+900959048                           SUBRED INTEGRADA DE SERVICIOS DE SALUD SUR OCCIDENTE E.S.E ESE (empresa social del Estado)      Bogotá D.C   18             0.4921                  58.0413        CAPITAL SALUD          0.0022
+900386591                                                            GYO MEDICAL I.P.S. S.A.S.                     IPS privada      La Guajira   14             0.0955                  53.2114            NUEVA EPS          0.0020
+892000501                                       HOSPITAL DEPARTAMENTAL DE VILLAVICENCIO E.S.E. ESE (empresa social del Estado)            Meta   17             0.3590                  48.0815            NUEVA EPS          0.0020
+891855029                                             HOSPITAL REGIONAL DE LA ORINOQUIA E.S.E. ESE (empresa social del Estado)        Casanare   15             0.1641                  41.2910            NUEVA EPS          0.0020
+900958564                                    SUBRED INTEGRADA DE SERVICIOS DE SALUD SUR E.S.E. ESE (empresa social del Estado)      Bogotá D.C   17             0.4792                  59.9560        CAPITAL SALUD          0.0020
+900971006                                   SUBRED INTEGRADA DE SERVICIOS DE SALUD NORTE E.S.E ESE (empresa social del Estado)      Bogotá D.C   17             0.5101                  48.3023        CAPITAL SALUD          0.0020
+890324177                                                             FUNDACION VALLE DEL LILI                     IPS privada Valle del cauca   16             0.7620                  27.9784            NUEVA EPS          0.0019
+830007355                                                                  DAVITA COLOMBIA SAS                     IPS privada       Antioquia   14             0.4196                  24.4533            NUEVA EPS          0.0017
+890212568                                                 FUNDACION CARDIOVASCULAR DE COLOMBIA                     IPS privada       Santander   15             0.5168                  37.8004             COOSALUD          0.0017
+892120115                                                      ESE HOSPITAL SAN JOSE DE MAICAO ESE (empresa social del Estado)      La Guajira   14             0.1579                  61.1197            ANASWAYUU          0.0016
+891180117                       E.S.E. HOSPITAL DEPARTAMENTAL SAN ANTONIO DE PADUA DE LA PLATA ESE (empresa social del Estado)           Huila   13             0.0401                  63.7250            NUEVA EPS          0.0016
+891580002                                    HOSPITAL UNIVERSITARIO SAN JOSE DE POPAYAN E.S.E. ESE (empresa social del Estado)           Cauca   13             0.3074                  57.0708            NUEVA EPS          0.0016
+805027261 E.S.E. RED DE SALUD DEL CENTRO EMPRESA SOCIAL DEL ESTADO HOSPITAL PRIMITIVO IGLESIAS ESE (empresa social del Estado) Valle del cauca   13             0.0984                  51.7642             EMSSANAR          0.0016
+890706833                                               E.S.E. HOSPITAL FEDERICO LLERAS ACOSTA ESE (empresa social del Estado)          Tolima   15             0.2359                  72.0758            NUEVA EPS          0.0016
+892399994                       HOSPITAL ROSARIO PUMAREJO DE LOPEZ - EMPRESA SOCIAL DEL ESTADO ESE (empresa social del Estado)           Cesar   14             0.1768                  34.5954             COOSALUD          0.0016
+891180268                   E.S.E. HOSPITAL UNIVERSITARIO HERNANDO MONCALEANO PERDOMO DE NEIVA ESE (empresa social del Estado)           Huila   16             0.3602                  63.9371            NUEVA EPS          0.0015
+
+== Mayores receptores en el corte principal
+      nit                                                                      razon_social                    tipo_prestador                          departamento  eps  participacion_pct  parte_eps_principal_pct nombre_eps_principal  intermediacion
+800003765                                                               VIRREY SOLIS IPS SA                       IPS privada                            Bogotá D.C    1             2.2722                 100.0000          SALUD TOTAL          0.0000
+800149695                                             DROGUERIAS Y FARMACIAS CRUZ VERDE SAS               Otra clase del REPS                            Bogotá D.C    4             2.0798                  83.4722              SANITAS          0.0001
+800149384                                                           CLINICA COLSANITAS S.A.                       IPS privada                            Bogotá D.C    9             2.0447                  99.7639              SANITAS          0.0005
+860007336                                  CAJA COLOMBIANA DE SUBSIDIO FAMILIAR COLSUBSIDIO                       IPS privada                            Bogotá D.C    9             1.7729                  44.8860            FAMISANAR          0.0005
+860013570                                               CAJA DE COMPENSACION FAMILIAR CAFAM                       IPS privada                            Bogotá D.C    7             1.4964                  37.0722            NUEVA EPS          0.0003
+900580962                                                              DISFARMA G.C. S.A.S.                       IPS privada                             Santander    7             1.4609                  57.8672            NUEVA EPS          0.0003
+890303461 E.S.E. HOSPITAL UNIVERSITARIO DEL VALLE EVARISTO GARCIA EMPRESA SOCIAL DEL ESTADO   ESE (empresa social del Estado)                       Valle del cauca   17             1.2002                  48.3914             EMSSANAR          0.0024
+901041691                                                  CENTROS MEDICOS COLSANITAS S.A.S                       IPS privada                            Bogotá D.C    3             0.9519                  99.9881              SANITAS          0.0001
+900277244                                                                     HELPHARMA SAS                       IPS privada                             Antioquia    3             0.9391                  99.6322         SURAMERICANA          0.0000
+816001182                                                                      AUDIFARMA SA Gestor o dispensador farmacéutico Sin departamento (no está en el REPS)    7             0.9253                  44.2307           MUTUAL SER          0.0003
+890205361                                     FUNDACION OFTALMOLOGICA DE SANTANDER - FOSCAL                       IPS privada                             Santander    6             0.9253                  95.9437            NUEVA EPS          0.0003
+890900841                                CAJA DE COMPENSACION FAMILIAR DE ANTIOQUIA COMFAMA                       IPS privada                             Antioquia    1             0.8018                 100.0000         SURAMERICANA          0.0000
+890324177                                                          FUNDACION VALLE DEL LILI                       IPS privada                       Valle del cauca   16             0.7620                  27.9784            NUEVA EPS          0.0019
+900699359                                                                   NEUROMEDICA SAS                       IPS privada                             Antioquia    2             0.6891                  97.7120         SURAMERICANA          0.0000
+860066942                                           CAJA DE COMPENSACION FAMILIAR COMPENSAR                       IPS privada                            Bogotá D.C    2             0.6819                  99.9746            COMPENSAR          0.0000
+811007832                                         SERVICIOS DE SALUD IPS SURAMERICANA S.A.S                       IPS privada                             Antioquia    1             0.6727                 100.0000         SURAMERICANA          0.0000
+900219120                                                                    VIVA 1A IPS SA                       IPS privada                            Bogotá D.C    7             0.6622                  46.2963            NUEVA EPS          0.0004
+890300513                                                              CLINICA DE OCCIDENTE                       IPS privada                       Valle del cauca    7             0.6428                  31.7446            NUEVA EPS          0.0004
+891200528                             E.S.E. HOSPITAL UNIVERSITARIO DEPARTAMENTAL DE NARIÑO   ESE (empresa social del Estado)                                Nariño   14             0.6422                  54.4710             EMSSANAR          0.0013
+800067065                                                 PROMOTORA MEDICA LAS AMERICAS S.A                       IPS privada                             Antioquia    7             0.6359                  82.4824         SURAMERICANA          0.0004
+
+== Mayores receptores que reciben al menos el 95 % de su giro de una sola EPS
+      nit                                                            razon_social                    tipo_prestador                          departamento  eps  participacion_pct  parte_eps_principal_pct nombre_eps_principal  intermediacion
+800003765                                                     VIRREY SOLIS IPS SA                       IPS privada                            Bogotá D.C    1             2.2722                 100.0000          SALUD TOTAL          0.0000
+800149384                                                 CLINICA COLSANITAS S.A.                       IPS privada                            Bogotá D.C    9             2.0447                  99.7639              SANITAS          0.0005
+901041691                                        CENTROS MEDICOS COLSANITAS S.A.S                       IPS privada                            Bogotá D.C    3             0.9519                  99.9881              SANITAS          0.0001
+900277244                                                           HELPHARMA SAS                       IPS privada                             Antioquia    3             0.9391                  99.6322         SURAMERICANA          0.0000
+890205361                           FUNDACION OFTALMOLOGICA DE SANTANDER - FOSCAL                       IPS privada                             Santander    6             0.9253                  95.9437            NUEVA EPS          0.0003
+890900841                      CAJA DE COMPENSACION FAMILIAR DE ANTIOQUIA COMFAMA                       IPS privada                             Antioquia    1             0.8018                 100.0000         SURAMERICANA          0.0000
+900699359                                                         NEUROMEDICA SAS                       IPS privada                             Antioquia    2             0.6891                  97.7120         SURAMERICANA          0.0000
+860066942                                 CAJA DE COMPENSACION FAMILIAR COMPENSAR                       IPS privada                            Bogotá D.C    2             0.6819                  99.9746            COMPENSAR          0.0000
+811007832                               SERVICIOS DE SALUD IPS SURAMERICANA S.A.S                       IPS privada                             Antioquia    1             0.6727                 100.0000         SURAMERICANA          0.0000
+800149453                                                                  CPO SA                       IPS privada                            Bogotá D.C    9             0.5465                  99.2229          SALUD TOTAL          0.0005
+900291018                                                 CLINICA LOS NOGALES SAS                       IPS privada                            Bogotá D.C    5             0.5001                  98.2748          SALUD TOTAL          0.0001
+800223206                                                    BIENESTAR IPS S.A.S.                       IPS privada                            Bogotá D.C    2             0.3659                  99.5196            NUEVA EPS          0.0000
+800225057                                          AYUDAS DIAGNOSTICAS SURA S.A.S                       IPS privada                             Antioquia    1             0.3439                 100.0000         SURAMERICANA          0.0000
+901429936                               RAMEDICAS OPERADOR LOGISTICO FARMACEUTICO Gestor o dispensador farmacéutico Sin departamento (no está en el REPS)    3             0.3314                  99.3615            FAMISANAR          0.0000
+806011811                                           DISTRIBUCIONES PHARMASER LTDA        Sin inscripción en el REPS Sin departamento (no está en el REPS)    1             0.3102                 100.0000           MUTUAL SER          0.0000
+800058016                                    EMPRESA SOCIAL DEL ESTADO METROSALUD   ESE (empresa social del Estado)                             Antioquia   13             0.2940                  95.5392          SAVIA SALUD          0.0013
+901145394                                             LOSCOBOS MEDICAL CENTER SAS                       IPS privada                            Bogotá D.C    6             0.2440                  98.6386            COMPENSAR          0.0003
+900274660                                    INSTITUTO COLOMBIANO DEL DOLOR S.A.S                       IPS privada                             Antioquia    3             0.2300                  95.7445         SURAMERICANA          0.0001
+900980728 INSTITUCION PRESTADORA DE SERVICIOS DE SALUD CUIDADO SEGURO EN CASA S.A                       IPS privada                               Bolívar    2             0.1551                  99.0917           MUTUAL SER          0.0000
+900771349                                                       CLINICA DESA CALI                       IPS privada                       Valle del cauca    1             0.1532                 100.0000            NUEVA EPS          0.0000
+
+== Por tipo de prestador (corte principal; tipo según el REPS)
+                   tipo_prestador  prestadores        girado  eps_mediana  con_una_eps  parte_eps_principal_media_pct  girado_pct  con_una_eps_pct  casi_exclusivos_pct  intermediacion_media
+                      IPS privada         2502 4976159445184         2.00         1079                          81.33       65.69            43.13                48.92              8.87e-05
+  ESE (empresa social del Estado)          926 1774948681937         5.00           41                          64.88       23.43             4.43                 9.40              2.96e-04
+       Sin inscripción en el REPS          261  367839019541         1.00          171                          90.26        4.86            65.52                70.11              2.49e-05
+Gestor o dispensador farmacéutico           14  179178910132         1.00            9                          87.13        2.37            64.29                71.43              7.86e-05
+              Otra clase del REPS           48  169751299288         1.00           26                          87.82        2.24            54.17                62.50              1.90e-05
+                        IPS mixta            8   56412396124         4.50            2                          77.59        0.74            25.00                25.00              3.23e-04
+               IPS pública no ESE           51   51412847052         2.00           20                          80.74        0.68            39.22                47.06              8.05e-05
+
+== Por departamento del prestador (corte principal; domicilio según el REPS)
+                         departamento  prestadores  girado  eps_que_giran eps_principal  eps_cr1  eps_hhi  eps_n_equivalente  prestadores_con_una_eps_pct  girado_a_prestadores_con_una_eps_pct
+                           Bogotá D.C          300  1850.2             24       SANITAS     27.2   1602.8                6.2                         41.7                                  11.3
+                            Antioquia          361  1110.6             21  SURAMERICANA     49.8   3129.5                3.2                         29.6                                  15.0
+                      Valle del cauca          255   559.7             21     NUEVA EPS     22.0   1394.8                7.2                         38.4                                   7.7
+Sin departamento (no está en el REPS)          275   547.0             23     NUEVA EPS     20.0   1032.0                9.7                         65.5                                  24.3
+                            Santander          205   470.6             21     NUEVA EPS     49.6   2992.2                3.3                         30.2                                   2.0
+                            Atlántico          229   330.5             20    MUTUAL SER     21.6   1452.8                6.9                         34.9                                  13.3
+                              Bolívar          171   284.4             17    MUTUAL SER     40.2   2412.7                4.1                         35.1                                   8.0
+                               Nariño          174   216.0             16      EMSSANAR     42.4   2605.1                3.8                         32.8                                  10.4
+                              Córdoba          165   193.4             16     NUEVA EPS     38.1   2596.0                3.9                         38.8                                   5.2
+                               Boyacá          146   187.8             20     NUEVA EPS     59.4   3910.3                2.6                         19.2                                   1.5
+                         Cundinamarca          114   183.2             19     NUEVA EPS     37.3   2469.9                4.0                         20.2                                   1.2
+                   Norte de Santander          119   180.5             12     NUEVA EPS     45.2   3031.4                3.3                         35.3                                   5.5
+                                Cesar          156   165.9             18     NUEVA EPS     31.3   1659.7                6.0                         30.8                                  10.1
+                               Caldas           83   147.6             19     NUEVA EPS     50.9   3132.8                3.2                         21.7                                   3.0
+                            Risaralda           67   142.7             17     NUEVA EPS     23.5   1472.4                6.8                         23.9                                   0.9
+                                Huila           83   131.0             23     NUEVA EPS     48.7   3441.7                2.9                         26.5                                   1.2
+                                Cauca           84   119.4             16     NUEVA EPS     29.7   2037.7                4.9                         38.1                                  12.3
+                               Tolima          109   114.8             16     NUEVA EPS     57.8   3830.8                2.6                         20.2                                   3.7
+                           La Guajira          119   112.3             18     ANASWAYUU     32.8   1938.7                5.2                         31.1                                  11.3
+                                Sucre          124    98.1             14    MUTUAL SER     43.6   2609.6                3.8                         37.1                                  12.4
+                                 Meta           74    95.3             18     NUEVA EPS     29.1   2047.2                4.9                         35.1                                   7.2
+                            Magdalena          130    77.5             16      COOSALUD     24.2   1762.3                5.7                         32.3                                   4.7
+                              Quindío           49    68.3             16     NUEVA EPS     55.7   3494.2                2.9                         20.4                                   1.6
+                             Casanare           47    40.5             15       SANITAS     33.4   3116.4                3.2                         72.3                                  12.6
+                             Putumayo           33    36.7             13     NUEVA EPS     42.9   3277.3                3.1                         36.4                                   2.0
+                               Arauca           25    36.0              9     NUEVA EPS     63.5   4689.2                2.1                         48.0                                   7.8
+                                Chocó           58    29.0              9     NUEVA EPS     42.7   3497.6                2.9                         36.2                                  18.5
+                              Caquetá           25    22.5             13   ASMET SALUD     71.3   5363.4                1.9                         32.0                                  22.2
+                             Guaviare            7     8.0             10     NUEVA EPS     96.2   9266.4                1.1                         71.4                                  16.3
+             San Andrés y Providencia           12     5.3              6     NUEVA EPS     61.1   5160.2                1.9                         66.7                                  11.5
+                             Amazonas            5     4.4              9     NUEVA EPS     48.1   3888.1                2.6                          0.0                                   0.0
+                              Guainía            2     2.4              8     NUEVA EPS     91.2   8362.4                1.2                         50.0                                   0.1
+                               Vaupés            2     2.0              5     NUEVA EPS     87.3   7766.4                1.3                         50.0                                   5.0
+                              Vichada            2     1.7              6     NUEVA EPS     61.8   5188.9                1.9                         50.0                                   5.9
+
+== Robustez: corte principal frente a cada mes de control
+corte_control                      2026-06  2026-07  2026-08
+eps_comunes                         25.000   25.000   25.000
+eps_solo_principal                   0.000    0.000    0.000
+eps_solo_control                     0.000    0.000    0.000
+spearman_eps_girado                  0.985    0.986    0.991
+spearman_eps_dependientes            0.979    0.928    0.982
+spearman_eps_exclusivos              0.910    0.835    0.927
+spearman_eps_intermediacion          0.932    0.881    0.955
+top5_eps_dependientes_comunes        4.000    4.000    4.000
+prestadores_comunes               3563.000 3579.000 3539.000
+spearman_prestador_girado            0.906    0.902    0.920
+spearman_prestador_intermediacion    0.919    0.913    0.927
+spearman_prestador_eps               0.922    0.912    0.926
+top20_intermediacion_comunes        12.000   13.000   13.000
+top20_girado_comunes                15.000   14.000   15.000
+acuerdo_comunidades_eps              0.917    0.890    0.900
+
+== Comunidades (Louvain, 10 semillas) en el corte principal
+  modularidad en 10 semillas: 0.557 a 0.557 · acuerdo entre semillas en la agrupación de EPS: 0.993 a 1.000
+ comunidad  eps  prestadores  girado_recibido                                                                                                   eps_miembros                                                                               departamentos_principales
+         1    2          625     1.655821e+12                                                                                              NUEVA EPS; PIJAOS                                         Santander (18 %); Boyacá (10 %); Bogotá D.C (9 %); Caldas (7 %)
+         2    6          862     1.253574e+12                                  COOSALUD; MUTUAL SER; CAJACOPI; FAMILIAR DE COLOMBIA; COMFAORIENTE; SALUD MIA           Bolívar (18 %); Atlántico (16 %); Sin departamento (no está en el REPS) (15 %); Córdoba (9 %)
+         3    1          480     8.049969e+11                                                                                                        SANITAS        Bogotá D.C (57 %); Antioquia (9 %); Santander (7 %); Sin departamento (no está en el REPS) (5 %)
+         4    1          359     8.550340e+11                                                                                                   SURAMERICANA Antioquia (68 %); Valle del cauca (10 %); Bogotá D.C (6 %); Sin departamento (no está en el REPS) (6 %)
+         5    6          436     8.264822e+11 EMSSANAR; ASMET SALUD; SERVICIO OCCIDENTAL DE SALUD; MALLAMAS; COMFENALCO VALLE; ASOCIACIÓN INDÍGENA DEL CAUCA                                    Valle del cauca (44 %); Nariño (24 %); Cauca (10 %); Risaralda (5 %)
+         6    1          389     6.481512e+11                                                                                                    SALUD TOTAL         Bogotá D.C (46 %); Atlántico (10 %); Sin departamento (no está en el REPS) (8 %); Bolívar (7 %)
+         7    2          280     6.968454e+11                                                                                       FAMISANAR; CAPITAL SALUD         Bogotá D.C (70 %); Cundinamarca (13 %); Sin departamento (no está en el REPS) (6 %); Meta (5 %)
+         8    2          210     3.726753e+11                                                                                        SAVIA SALUD; COMFACHOCO       Antioquia (92 %); Sin departamento (no está en el REPS) (4 %); Chocó (3 %); Valle del cauca (0 %)
+         9    1           66     3.627534e+11                                                                                                      COMPENSAR     Bogotá D.C (94 %); Sin departamento (no está en el REPS) (3 %); Cundinamarca (3 %); Atlántico (1 %)
+        10    3          103     9.936866e+10                                                                                 ANASWAYUU; DUSAKAWI; CAPRESOCA            La Guajira (60 %); Casanare (26 %); Cesar (6 %); Sin departamento (no está en el REPS) (5 %)

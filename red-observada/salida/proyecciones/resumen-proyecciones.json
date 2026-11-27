@@ -1,0 +1,37 @@
+{
+ "eps": {
+  "eps": 25,
+  "densidad_sin_pesos": 0.96,
+  "modularidad_jaccard": 0.13283455782770826,
+  "comunidades": 3,
+  "jaccard_mediana": 0.04750174398325776,
+  "jaccard_max": 0.43009605122732125
+ },
+ "prestadores": {
+  "prestadores": 3810,
+  "pares_posibles": 7256145,
+  "umbral": 2,
+  "prestadores_en_la_red_filtrada": 2462,
+  "pares_en_la_red_filtrada": 1443352,
+  "densidad_filtrada": 0.476433829973418,
+  "comunidades": 4,
+  "modularidad": 0.08634650188562044,
+  "nmi_departamento": 0.251066258135403,
+  "ari_departamento": 0.11127412936924756,
+  "spearman_grado_proyeccion_vs_eps": 0.9133967455004202,
+  "spearman_fuerza_proyeccion_vs_eps": 0.9283158064533088
+ },
+ "densidad": {
+  "clases_en_la_parte_comun": 9,
+  "clases_normadas": 9,
+  "clases_observadas": 9,
+  "densidad_clase_norma": 1.0,
+  "densidad_clase_observada": 1.0,
+  "eps": 25,
+  "pares_eps_clase_posibles": 225,
+  "densidad_eps_clase_norma_habilita": 1.0,
+  "densidad_eps_clase_observada": 0.4266666666666667,
+  "uso_de_lo_que_la_norma_habilita": 0.4266666666666667,
+  "pares_eps_clase_fuera_de_la_norma": 0
+ }
+}

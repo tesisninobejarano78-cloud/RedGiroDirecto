@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+~$*
+.DS_Store
+Thumbs.db
+.Rhistory
+
+# Anexos de la ADRES que baja red-observada/descargar-anexos-giro.py: traen datos de personas naturales
+red-observada/datos/anexos/
+
+# Rutas propias de cada computador (ver red-observada/configuracion.py)
+rutas-locales.json
+
+# Configuración personal de Obsidian (cada quien tiene la suya)
+cerebro/.obsidian/workspace*.json
+cerebro/.trash/

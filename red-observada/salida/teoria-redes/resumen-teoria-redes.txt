@@ -1,0 +1,204 @@
+Red observada del giro directo — teoría de redes (mes principal 2026-09; meses de control 2026-06, 2026-07, 2026-08)
+
+== Distancias
+ diametro  distancia_media   corte
+        6            2.968 2026-09
+        6            3.004 2026-06
+        6            2.989 2026-07
+        6             2.99 2026-08
+
+== Concentración y heterogeneidad
+  corte                lado  nodos   gini  cr4_pct  cr20_pct   hhi  grado_medio  heterogeneidad_k2_k  heterogeneidad_k2_k2
+2026-09                 eps     25 0.6235    58.57     98.85  1137          NaN                  NaN                   NaN
+2026-09         prestadores   3810 0.8401     8.17     22.26 44.44          NaN                  NaN                   NaN
+2026-09         eps (grado)     25 0.5387      NaN       NaN   NaN        501.3                 1057                 2.109
+2026-09 prestadores (grado)   3810 0.4309      NaN       NaN   NaN        3.289                5.715                 1.737
+2026-06                 eps     25 0.6264    58.33     99.06  1170          NaN                  NaN                   NaN
+2026-06         prestadores   3671 0.8273    8.106     21.58 42.15          NaN                  NaN                   NaN
+2026-06         eps (grado)     25 0.5575      NaN       NaN   NaN        434.8                  987                  2.27
+2026-06 prestadores (grado)   3671 0.4105      NaN       NaN   NaN        2.961                4.959                 1.675
+2026-07                 eps     25 0.6303    59.22     99.09  1164          NaN                  NaN                   NaN
+2026-07         prestadores   3686 0.8306     7.16     20.79 39.85          NaN                  NaN                   NaN
+2026-07         eps (grado)     25 0.5774      NaN       NaN   NaN          420                 1023                 2.435
+2026-07 prestadores (grado)   3686 0.4071      NaN       NaN   NaN        2.849                4.796                 1.684
+2026-08                 eps     25 0.6296    59.24     99.06  1163          NaN                  NaN                   NaN
+2026-08         prestadores   3629 0.8349    8.187     22.06 44.42          NaN                  NaN                   NaN
+2026-08         eps (grado)     25 0.5505      NaN       NaN   NaN        436.4                  982                  2.25
+2026-08 prestadores (grado)   3629 0.4133      NaN       NaN   NaN        3.007                5.051                  1.68
+
+== Fuerza–grado s(k) ~ k^beta
+  corte        lado    n  exponente_beta  ic95_inferior  ic95_superior  intercepto_log10     r2  spearman_fuerza_grado
+2026-09 prestadores 3810           1.599          1.538           1.66             7.838 0.4002                 0.6295
+2026-09         eps   25           1.421         0.9944          1.661             7.577 0.8577                 0.8777
+2026-06 prestadores 3671           1.714          1.647           1.78             7.833 0.4009                 0.6342
+2026-06         eps   25           1.414              1          1.758             7.617 0.8051                 0.9108
+2026-07 prestadores 3686           1.717          1.649          1.783             7.871 0.3876                 0.6171
+2026-07         eps   25            1.41         0.9597          1.786             7.683 0.7689                 0.8762
+2026-08 prestadores 3629           1.648          1.576          1.714             7.848  0.379                 0.6136
+2026-08         eps   25           1.446         0.9501           1.82              7.54 0.7979                 0.8715
+
+== Correlaciones de Spearman entre centralidades (corte principal)
+  corte        lado       medida_1       medida_2  spearman    n
+2026-09         eps          grado         fuerza    0.8777   25
+2026-09         eps          grado intermediacion    0.9592   25
+2026-09         eps          grado       cercania    0.9954   25
+2026-09         eps          grado            knn   -0.5031   25
+2026-09         eps         fuerza intermediacion    0.8523   25
+2026-09         eps         fuerza       cercania    0.8523   25
+2026-09         eps         fuerza            knn   -0.5546   25
+2026-09         eps intermediacion       cercania    0.9492   25
+2026-09         eps intermediacion            knn   -0.6154   25
+2026-09         eps       cercania            knn   -0.4646   25
+2026-09 prestadores          grado         fuerza    0.6295 3810
+2026-09 prestadores          grado intermediacion    0.9933 3810
+2026-09 prestadores          grado       cercania    0.9125 3810
+2026-09 prestadores          grado            knn   -0.1229 3810
+2026-09 prestadores         fuerza intermediacion    0.6215 3810
+2026-09 prestadores         fuerza       cercania    0.5472 3810
+2026-09 prestadores         fuerza            knn   -0.1912 3810
+2026-09 prestadores intermediacion       cercania    0.9282 3810
+2026-09 prestadores intermediacion            knn  -0.09233 3810
+2026-09 prestadores       cercania            knn    0.2497 3810
+
+== Asortatividad bipartita sin pesos
+  corte  asortatividad  asortatividad_rangos  aristas
+2026-09        -0.1508               -0.1196    12532
+2026-06        -0.1487               -0.1175    10869
+2026-07        -0.1767               -0.1383    10501
+2026-08        -0.1591               -0.1214    10911
+
+== Prestadores exclusivos de cada EPS (corte principal)
+                       nombre  grado  exclusivos  participacion_pct
+                      SANITAS   1664         242               12.7
+                 SURAMERICANA   1138         165              11.82
+                  SALUD TOTAL   1456         161              10.03
+                    NUEVA EPS   1701         139              24.02
+                    FAMISANAR   1224          89              5.001
+                     COOSALUD   1124          85              6.538
+                   MUTUAL SER    481          76              5.309
+                     CAJACOPI    594          65              2.484
+         FAMILIAR DE COLOMBIA    367          38              0.681
+ SERVICIO OCCIDENTAL DE SALUD    306          37              1.498
+                     MALLAMAS    298          36              0.851
+                  SAVIA SALUD    415          30              3.461
+                    COMPENSAR    226          23              3.847
+                     DUSAKAWI     91          19             0.3578
+                     EMSSANAR    163          18              3.202
+                   COMFACHOCO    115          18             0.2691
+                    CAPRESOCA     61          17             0.3165
+                  ASMET SALUD    271          17              2.725
+                       PIJAOS    146          16              0.209
+                 COMFAORIENTE    101          13             0.4898
+                CAPITAL SALUD    326          12              2.559
+ASOCIACIÓN INDÍGENA DEL CAUCA     50          11             0.3898
+             COMFENALCO VALLE    114          11             0.6832
+                    ANASWAYUU     96          10              0.561
+                    SALUD MIA      4           0          0.0005788
+
+== Comunidades
+  corte                                   particion  modularidad_barber_binaria  modularidad_barber_ponderada  comunidades  modularidad_estandar_ponderada
+2026-09              binaria (Barber, 30 arranques)                      0.3227                        0.3253            7                             NaN
+2026-09 ponderada (Barber, 300 arranques + Louvain)                      0.2577                        0.5593           11                             NaN
+2026-09                Louvain estándar (semilla 0)                      0.2538                        0.5573           10                          0.5568
+2026-09    territorial (departamento del prestador)                      0.1261                        0.2726           34                             NaN
+2026-06              binaria (Barber, 30 arranques)                      0.3535                        0.3148            7                             NaN
+2026-06 ponderada (Barber, 300 arranques + Louvain)                      0.2813                        0.5597           12                             NaN
+2026-06                Louvain estándar (semilla 0)                      0.2732                        0.5576           13                          0.5572
+2026-06    territorial (departamento del prestador)                      0.1341                        0.2666           34                             NaN
+2026-07              binaria (Barber, 30 arranques)                       0.354                        0.3184            9                             NaN
+2026-07 ponderada (Barber, 300 arranques + Louvain)                      0.2869                         0.561           12                             NaN
+2026-07                Louvain estándar (semilla 0)                      0.2833                        0.5594           12                          0.5587
+2026-07    territorial (departamento del prestador)                      0.1371                        0.2634           34                             NaN
+2026-08              binaria (Barber, 30 arranques)                      0.3446                        0.3292            7                             NaN
+2026-08 ponderada (Barber, 300 arranques + Louvain)                      0.2702                        0.5688           14                             NaN
+2026-08                Louvain estándar (semilla 0)                      0.2679                        0.5675           14                          0.5669
+2026-08    territorial (departamento del prestador)                      0.1361                        0.2837           34                             NaN
+
+== Acuerdo entre particiones y con el departamento
+  corte      particion_1                particion_2    nmi    ari  nmi_media_permutaciones  ari_media_permutaciones    p_nmi    p_ari  prestadores
+2026-09          binaria                  ponderada  0.425 0.3423                      NaN                      NaN      NaN      NaN          NaN
+2026-09          binaria           louvain_estandar 0.4056 0.3295                      NaN                      NaN      NaN      NaN          NaN
+2026-09        ponderada           louvain_estandar 0.9327  0.927                      NaN                      NaN      NaN      NaN          NaN
+2026-09          binaria departamento del prestador 0.2966 0.1397                  0.01112                3.182e-07 0.000999 0.000999         3535
+2026-09        ponderada departamento del prestador  0.304  0.112                  0.01715                1.548e-05 0.000999 0.000999         3535
+2026-09 louvain_estandar departamento del prestador 0.2943  0.107                  0.01563               -3.213e-05 0.000999 0.000999         3535
+2026-06          binaria                  ponderada 0.4684 0.3568                      NaN                      NaN      NaN      NaN          NaN
+2026-06          binaria           louvain_estandar 0.4499 0.3197                      NaN                      NaN      NaN      NaN          NaN
+2026-06        ponderada           louvain_estandar 0.9342 0.9281                      NaN                      NaN      NaN      NaN          NaN
+2026-06          binaria departamento del prestador 0.2922 0.1494                  0.01152                 4.54e-06 0.000999 0.000999         3417
+2026-06        ponderada departamento del prestador 0.3019 0.1092                  0.01912               -2.275e-05 0.000999 0.000999         3417
+2026-06 louvain_estandar departamento del prestador 0.3029 0.1058                  0.02052               -1.243e-05 0.000999 0.000999         3417
+2026-07          binaria                  ponderada 0.4777  0.362                      NaN                      NaN      NaN      NaN          NaN
+2026-07          binaria           louvain_estandar 0.4714 0.3513                      NaN                      NaN      NaN      NaN          NaN
+2026-07        ponderada           louvain_estandar  0.959  0.966                      NaN                      NaN      NaN      NaN          NaN
+2026-07          binaria departamento del prestador 0.3083 0.1775                  0.01451                1.337e-06 0.000999 0.000999         3441
+2026-07        ponderada departamento del prestador 0.2963 0.1053                   0.0192                9.586e-06 0.000999 0.000999         3441
+2026-07 louvain_estandar departamento del prestador 0.2936 0.1023                  0.01914                2.561e-05 0.000999 0.000999         3441
+2026-08          binaria                  ponderada 0.4357 0.3071                      NaN                      NaN      NaN      NaN          NaN
+2026-08          binaria           louvain_estandar 0.4293 0.3017                      NaN                      NaN      NaN      NaN          NaN
+2026-08        ponderada           louvain_estandar 0.9618 0.9666                      NaN                      NaN      NaN      NaN          NaN
+2026-08          binaria departamento del prestador 0.2975 0.1601                  0.01134               -1.162e-05 0.000999 0.000999         3407
+2026-08        ponderada departamento del prestador 0.3064 0.1044                    0.021                 2.25e-05 0.000999 0.000999         3407
+2026-08 louvain_estandar departamento del prestador 0.3022 0.1015                  0.02099                3.286e-06 0.000999 0.000999         3407
+
+== Composición de la partición ponderada (corte principal)
+  corte  comunidad  eps                                                                                                   eps_miembros  prestadores  dinero_recibido  dinero_recibido_pct  dinero_dentro_de_la_comunidad_pct                                                                               departamentos_principales                                                                                   tipos_principales
+2026-09          6    3                                                                                NUEVA EPS; COMFAORIENTE; PIJAOS          662        1.678e+12                22.15                              69.58                             Santander (18 %); Boyacá (10 %); Bogotá D.C (8 %); Norte de Santander (7 %)        IPS privada (59 %); ESE (empresa social del Estado) (34 %); Sin inscripción en el REPS (5 %)
+2026-09          2    5                                                COOSALUD; MUTUAL SER; CAJACOPI; FAMILIAR DE COLOMBIA; SALUD MIA          809        1.154e+12                15.23                              72.28          Bolívar (19 %); Atlántico (17 %); Sin departamento (no está en el REPS) (15 %); Córdoba (10 %)        IPS privada (56 %); ESE (empresa social del Estado) (25 %); Sin inscripción en el REPS (9 %)
+2026-09         10    1                                                                                                   SURAMERICANA          364        8.784e+11                 11.6                              76.38 Antioquia (68 %); Valle del cauca (10 %); Bogotá D.C (6 %); Sin departamento (no está en el REPS) (5 %)         IPS privada (94 %); Sin inscripción en el REPS (5 %); ESE (empresa social del Estado) (1 %)
+2026-09          1    6 EMSSANAR; ASMET SALUD; SERVICIO OCCIDENTAL DE SALUD; MALLAMAS; COMFENALCO VALLE; ASOCIACIÓN INDÍGENA DEL CAUCA          435        8.389e+11                11.07                              71.09                                    Valle del cauca (44 %); Nariño (23 %); Cauca (10 %); Risaralda (6 %)        IPS privada (48 %); ESE (empresa social del Estado) (45 %); Sin inscripción en el REPS (5 %)
+2026-09          9    1                                                                                                        SANITAS          483        8.011e+11                10.57                              75.48        Bogotá D.C (58 %); Antioquia (9 %); Santander (7 %); Sin departamento (no está en el REPS) (5 %)               IPS privada (72 %); Otra clase del REPS (20 %); ESE (empresa social del Estado) (3 %)
+2026-09          3    2                                                                                       FAMISANAR; CAPITAL SALUD          285        7.612e+11                10.05                              49.76         Bogotá D.C (73 %); Cundinamarca (12 %); Sin departamento (no está en el REPS) (5 %); Meta (5 %) IPS privada (58 %); ESE (empresa social del Estado) (36 %); Gestor o dispensador farmacéutico (3 %)
+2026-09          8    1                                                                                                    SALUD TOTAL          390        6.485e+11                 8.56                              77.44         Bogotá D.C (46 %); Atlántico (10 %); Sin departamento (no está en el REPS) (8 %); Bolívar (7 %)       IPS privada (90 %); Sin inscripción en el REPS (4 %); Gestor o dispensador farmacéutico (4 %)
+2026-09          5    2                                                                                        SAVIA SALUD; COMFACHOCO          213        3.958e+11                5.225                              57.46       Antioquia (89 %); Sin departamento (no está en el REPS) (8 %); Chocó (3 %); Valle del cauca (0 %)        ESE (empresa social del Estado) (46 %); IPS privada (42 %); Sin inscripción en el REPS (8 %)
+2026-09          7    1                                                                                                      COMPENSAR           65        3.202e+11                4.226                              64.87     Bogotá D.C (93 %); Sin departamento (no está en el REPS) (3 %); Cundinamarca (3 %); Atlántico (1 %)                     IPS privada (96 %); Sin inscripción en el REPS (3 %); Otra clase del REPS (0 %)
+2026-09          0    2                                                                                            ANASWAYUU; DUSAKAWI           75        6.712e+10                0.886                              79.41            La Guajira (89 %); Cesar (8 %); Sin departamento (no está en el REPS) (2 %); Atlántico (1 %)               IPS privada (43 %); ESE (empresa social del Estado) (28 %); IPS pública no ESE (27 %)
+2026-09          4    1                                                                                                      CAPRESOCA           29        3.267e+10               0.4312                               50.7             Casanare (80 %); Sin departamento (no está en el REPS) (11 %); Bogotá D.C (8 %); Meta (2 %)       ESE (empresa social del Estado) (65 %); IPS privada (22 %); Sin inscripción en el REPS (11 %)
+
+== Dependencia: prestadores y dinero con una EPS principal que da al menos el umbral (corte principal)
+  corte  umbral_parte_eps_principal  prestadores_pct  dinero_pct
+2026-09                        0.05              100         100
+2026-09                         0.1              100         100
+2026-09                        0.15              100         100
+2026-09                         0.2              100         100
+2026-09                        0.25            99.82       98.86
+2026-09                         0.3            99.19       96.66
+2026-09                        0.35            97.51       90.88
+2026-09                         0.4            94.46       84.67
+2026-09                        0.45            90.05        74.9
+2026-09                         0.5             85.2       67.28
+2026-09                        0.55               79       60.57
+2026-09                         0.6            72.83       51.61
+2026-09                        0.65            67.27       44.78
+2026-09                         0.7            61.81       40.17
+2026-09                        0.75            57.38        35.8
+2026-09                         0.8            53.25          33
+2026-09                        0.85            48.85       27.76
+2026-09                         0.9            44.72       24.61
+2026-09                        0.95            40.94       22.45
+2026-09                           1            35.38       10.23
+
+== Prestadores lejos de la curva fuerza–grado (|z modificado| > 3,5, corte principal)
+      nit  residuo_log10  z_modificado  grado    fuerza  participacion_pct  parte_eps_principal                    tipo_prestador                          departamento
+800223206          2.124         3.547      2 2.772e+10             0.3659               0.9952                       IPS privada                            Bogotá D.C
+860000753          2.148         3.586      1 9.669e+09             0.1276                    1 Gestor o dispensador farmacéutico Sin departamento (no está en el REPS)
+817005385           2.15          3.59      1 9.722e+09             0.1283                    1        Sin inscripción en el REPS Sin departamento (no está en el REPS)
+900073223           2.16         3.607      2 3.016e+10             0.3981               0.6586        Sin inscripción en el REPS Sin departamento (no está en el REPS)
+900771349          2.227         3.716      1 1.161e+10             0.1532                    1                       IPS privada                       Valle del cauca
+900277244          2.251         3.755      3 7.115e+10             0.9391               0.9963                       IPS privada                             Antioquia
+901041691          2.257         3.765      3 7.212e+10             0.9519               0.9999                       IPS privada                            Bogotá D.C
+860066942          2.394         3.987      2 5.166e+10             0.6819               0.9997                       IPS privada                            Bogotá D.C
+800149695          2.397         3.992      4 1.576e+11               2.08               0.8347               Otra clase del REPS                            Bogotá D.C
+900699359          2.399         3.995      2 5.221e+10             0.6891               0.9771                       IPS privada                             Antioquia
+806011811          2.533         4.214      1  2.35e+10             0.3102                    1        Sin inscripción en el REPS Sin departamento (no está en el REPS)
+800225057          2.578         4.287      1 2.605e+10             0.3439                    1                       IPS privada                             Antioquia
+811007832           2.87         4.762      1 5.096e+10             0.6727                    1                       IPS privada                             Antioquia
+890900841          2.946         4.886      1 6.074e+10             0.8018                    1                       IPS privada                             Antioquia
+800003765          3.398         5.623      1 1.721e+11              2.272                    1                       IPS privada                            Bogotá D.C
+
+== Estabilidad de las aristas entre meses
+  mes_1   mes_2  aristas_mes_1  aristas_mes_2  aristas_comunes  jaccard_aristas  dinero_mes_2_en_aristas_del_mes_1_pct
+2026-06 2026-07          10869          10501             9251           0.7633                                   94.4
+2026-07 2026-08          10501          10911             9041           0.7308                                  94.31
+2026-08 2026-09          10911          12532             9641           0.6985                                  94.54
+

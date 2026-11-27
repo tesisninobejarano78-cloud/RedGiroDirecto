@@ -1,0 +1,1936 @@
+﻿serie,corte,proceso,codigo_eps,causa,operaciones,valor_girado,valor_no_girado,operaciones_por_correo,operaciones_no_giradas
+contributivo,2024-01,proceso,EPS005,(vacía),10,335476843,0,0,0
+contributivo,2024-01,proceso,EPS017,(vacía),1421,198116059722,0,0,0
+contributivo,2024-01,proceso,EPS017,embargo,5,19809214,2201024,0,5
+contributivo,2024-01,proceso,EPS017,falla bancaria,1,0,2153002,0,1
+contributivo,2024-01,proceso,EPS017,giro tras un rechazo,2,4499989,0,0,0
+contributivo,2024-01,proceso,EPS018,(vacía),4,699945730,0,0,0
+contributivo,2024-01,proceso,EPS040,(vacía),228,11226870184,0,0,0
+contributivo,2024-01,proceso,EPSC25,(vacía),24,1415470452,0,0,0
+contributivo,2024-01,proceso,ESSC18,(vacía),703,10260283233,0,0,0
+contributivo,2024-01,proceso,ESSC62,(vacía),16,5856373485,0,0,0
+contributivo,2024-02,proceso,EPS005,(vacía),14,873311885,0,0,0
+contributivo,2024-02,proceso,EPS017,(vacía),1337,221610420065,0,0,0
+contributivo,2024-02,proceso,EPS017,embargo,3,6485089,720565,0,3
+contributivo,2024-02,proceso,EPS017,giro tras un rechazo,4,63337936,0,0,0
+contributivo,2024-02,proceso,EPS018,(vacía),6,402286076,0,0,0
+contributivo,2024-02,proceso,EPS040,(vacía),196,12661098801,0,0,0
+contributivo,2024-02,proceso,EPSC25,(vacía),20,1472355040,0,0,0
+contributivo,2024-02,proceso,ESSC18,(vacía),644,10973554624,0,0,0
+contributivo,2024-02,proceso,ESSC18,giro tras un rechazo,1,113406247,0,0,0
+contributivo,2024-02,proceso,ESSC62,(vacía),37,6267854063,0,0,0
+contributivo,2024-03,proceso,EPS017,(vacía),1298,186325361676,0,0,0
+contributivo,2024-03,proceso,EPS017,embargo,6,21820871,3781968,0,6
+contributivo,2024-03,proceso,EPS018,(vacía),1,194233314,0,0,0
+contributivo,2024-03,proceso,EPS040,(vacía),143,9943438205,0,0,0
+contributivo,2024-03,proceso,EPSC25,(vacía),21,1231042323,0,0,0
+contributivo,2024-03,proceso,ESSC18,(vacía),499,9050155834,0,0,0
+contributivo,2024-03,proceso,ESSC62,(vacía),19,5170289925,0,0,0
+contributivo,2024-04,proceso,CCFC20,(vacía),6,118462228,0,0,0
+contributivo,2024-04,proceso,CCFC33,(vacía),27,117202604,0,0,0
+contributivo,2024-04,proceso,CCFC33,embargo,1,10690846,1187872,0,1
+contributivo,2024-04,proceso,EPS005,(vacía),2671,556839728580,0,0,0
+contributivo,2024-04,proceso,EPS005,embargo,8,239530112,26908633,0,8
+contributivo,2024-04,proceso,EPS005,falla bancaria,2,0,4322464,0,2
+contributivo,2024-04,proceso,EPS005,giro tras un rechazo,7,2337338305,0,0,0
+contributivo,2024-04,proceso,EPS010,(vacía),242,86304875585,0,0,0
+contributivo,2024-04,proceso,EPS010,embargo,1,1491954,734843,0,1
+contributivo,2024-04,proceso,EPS010,giro tras un rechazo,3,178299342,0,0,0
+contributivo,2024-04,proceso,EPS017,(vacía),1464,229387200857,0,0,0
+contributivo,2024-04,proceso,EPS017,embargo,8,29949599,3327733,0,8
+contributivo,2024-04,proceso,EPS018,(vacía),98,27486072385,0,0,0
+contributivo,2024-04,proceso,EPS037,(vacía),979,607010566252,0,0,0
+contributivo,2024-04,proceso,EPS037,embargo,18,1596454283,184283419,0,18
+contributivo,2024-04,proceso,EPS037,falla bancaria,1,0,41013868,0,1
+contributivo,2024-04,proceso,EPS037,giro tras un rechazo,5,3013596297,0,0,0
+contributivo,2024-04,proceso,EPS040,(vacía),318,14237530871,0,0,0
+contributivo,2024-04,proceso,EPS041,(vacía),38,27565316888,0,0,0
+contributivo,2024-04,proceso,EPS041,embargo,1,67932225,7548025,0,1
+contributivo,2024-04,proceso,EPSC25,(vacía),29,1901964134,0,0,0
+contributivo,2024-04,proceso,EPSC34,(vacía),77,1137047219,0,0,0
+contributivo,2024-04,proceso,ESSC18,(vacía),677,12031696334,0,0,0
+contributivo,2024-04,proceso,ESSC62,(vacía),176,7124702205,0,0,0
+contributivo,2024-05,proceso,EPS005,(vacía),2466,537150300088,0,0,0
+contributivo,2024-05,proceso,EPS005,embargo,6,87942044,9771338,0,6
+contributivo,2024-05,proceso,EPS005,falla bancaria,1,0,3627297,0,1
+contributivo,2024-05,proceso,EPS005,giro tras un rechazo,6,317901697,0,0,0
+contributivo,2024-05,proceso,EPS010,(vacía),1514,566604921938,0,0,0
+contributivo,2024-05,proceso,EPS010,embargo,3,15934483,1770498,0,3
+contributivo,2024-05,proceso,EPS010,giro tras un rechazo,6,545124375,0,0,0
+contributivo,2024-05,proceso,EPS017,(vacía),1241,218364454370,0,0,0
+contributivo,2024-05,proceso,EPS017,embargo,4,7577108,841901,0,4
+contributivo,2024-05,proceso,EPS017,giro tras un rechazo,1,1662449,0,0,0
+contributivo,2024-05,proceso,EPS018,(vacía),234,72326354730,0,0,0
+contributivo,2024-05,proceso,EPS037,(vacía),1460,683906360799,0,0,0
+contributivo,2024-05,proceso,EPS037,embargo,7,1224431060,136047896,0,7
+contributivo,2024-05,proceso,EPS037,giro tras un rechazo,5,2984187280,0,0,0
+contributivo,2024-05,proceso,EPS040,(vacía),193,13297445729,0,0,0
+contributivo,2024-05,proceso,EPS040,giro tras un rechazo,1,8478042,0,0,0
+contributivo,2024-05,proceso,EPS041,(vacía),7,34163749212,0,0,0
+contributivo,2024-05,proceso,EPSC25,(vacía),31,1931985954,0,0,0
+contributivo,2024-05,proceso,EPSC34,(vacía),98,7145490323,0,0,0
+contributivo,2024-05,proceso,ESSC18,(vacía),627,11759653081,0,0,0
+contributivo,2024-05,proceso,ESSC62,(vacía),15,7004254299,0,0,0
+contributivo,2024-06,proceso,CCFC20,(vacía),9,154633660,0,0,0
+contributivo,2024-06,proceso,EPS005,(vacía),1869,482281480083,0,0,0
+contributivo,2024-06,proceso,EPS005,embargo,4,91163236,10129248,0,4
+contributivo,2024-06,proceso,EPS005,falla bancaria,2,0,12295288,0,2
+contributivo,2024-06,proceso,EPS005,giro tras un rechazo,4,824761963,0,0,0
+contributivo,2024-06,proceso,EPS010,(vacía),1613,515294592170,0,0,0
+contributivo,2024-06,proceso,EPS010,embargo,3,36859461,1825372,0,3
+contributivo,2024-06,proceso,EPS017,(vacía),1348,197334215740,0,0,0
+contributivo,2024-06,proceso,EPS017,embargo,3,5011268,556807,0,3
+contributivo,2024-06,proceso,EPS018,(vacía),323,65482097520,0,0,0
+contributivo,2024-06,proceso,EPS018,embargo,1,1024740,113860,0,1
+contributivo,2024-06,proceso,EPS037,(vacía),1730,644513280447,0,0,0
+contributivo,2024-06,proceso,EPS037,embargo,8,188296153,20921795,0,8
+contributivo,2024-06,proceso,EPS040,(vacía),215,11870584643,0,0,0
+contributivo,2024-06,proceso,EPS041,(vacía),6,30496254696,0,0,0
+contributivo,2024-06,proceso,EPS048,(vacía),55,2094682869,0,0,0
+contributivo,2024-06,proceso,EPSC25,(vacía),31,1600117456,0,0,0
+contributivo,2024-06,proceso,EPSC34,(vacía),121,5671125716,0,0,0
+contributivo,2024-06,proceso,ESSC07,(vacía),30,4061384688,0,0,0
+contributivo,2024-06,proceso,ESSC07,embargo,1,1035524,115058,0,1
+contributivo,2024-06,proceso,ESSC18,(vacía),630,10325296695,0,0,0
+contributivo,2024-06,proceso,ESSC62,(vacía),110,6136965947,0,0,0
+contributivo,2024-06,proceso,ESSC62,embargo,1,3483242,1715627,0,1
+contributivo,2024-07,proceso,CCFC20,(vacía),17,457274155,0,0,0
+contributivo,2024-07,proceso,EPS005,(vacía),2789,516948490833,0,0,0
+contributivo,2024-07,proceso,EPS005,embargo,5,37411940,4156882,0,5
+contributivo,2024-07,proceso,EPS005,falla bancaria,3,0,21156019,0,3
+contributivo,2024-07,proceso,EPS005,giro tras un rechazo,3,77413142,0,0,0
+contributivo,2024-07,proceso,EPS010,(vacía),2115,548309719791,0,0,0
+contributivo,2024-07,proceso,EPS010,embargo,2,28780598,3197844,0,2
+contributivo,2024-07,proceso,EPS010,giro tras un rechazo,1,13510323,0,0,0
+contributivo,2024-07,proceso,EPS017,(vacía),1134,223598100724,0,0,0
+contributivo,2024-07,proceso,EPS017,embargo,1,5816251,646250,0,1
+contributivo,2024-07,proceso,EPS017,falla bancaria,1,0,883703708,0,1
+contributivo,2024-07,proceso,EPS017,giro tras un rechazo,2,343681187,0,0,0
+contributivo,2024-07,proceso,EPS018,(vacía),288,69257796558,0,0,0
+contributivo,2024-07,proceso,EPS037,(vacía),2360,671880810393,0,0,0
+contributivo,2024-07,proceso,EPS037,embargo,7,103430090,17974848,0,7
+contributivo,2024-07,proceso,EPS037,falla bancaria,2,0,4438043,0,2
+contributivo,2024-07,proceso,EPS037,giro tras un rechazo,1,71692006,0,0,0
+contributivo,2024-07,proceso,EPS040,(vacía),193,12839475013,0,0,0
+contributivo,2024-07,proceso,EPS041,(vacía),15,33010759169,0,0,0
+contributivo,2024-07,proceso,EPS048,(vacía),203,12907301892,0,0,0
+contributivo,2024-07,proceso,EPS048,embargo,7,163463360,17296967,0,7
+contributivo,2024-07,proceso,EPSC25,(vacía),19,1764159678,0,0,0
+contributivo,2024-07,proceso,EPSC34,(vacía),140,7340976556,0,0,0
+contributivo,2024-07,proceso,ESSC07,(vacía),256,17461627260,0,0,0
+contributivo,2024-07,proceso,ESSC07,embargo,4,40537800,4504200,0,4
+contributivo,2024-07,proceso,ESSC18,(vacía),630,10868375811,0,0,0
+contributivo,2024-07,proceso,ESSC62,(vacía),74,6439397004,0,0,0
+contributivo,2024-08,proceso,CCFC20,(vacía),39,668787097,0,0,0
+contributivo,2024-08,proceso,EPS005,(vacía),2510,532432251777,0,0,0
+contributivo,2024-08,proceso,EPS005,falla bancaria,2,0,120274926,0,2
+contributivo,2024-08,proceso,EPS010,(vacía),2322,567617060375,0,0,0
+contributivo,2024-08,proceso,EPS010,embargo,3,11602383,1765958,0,3
+contributivo,2024-08,proceso,EPS010,falla bancaria,2,0,46359135,0,2
+contributivo,2024-08,proceso,EPS017,(vacía),1020,234949033293,0,0,0
+contributivo,2024-08,proceso,EPS017,falla bancaria,1,0,1679817,0,1
+contributivo,2024-08,proceso,EPS018,(vacía),338,71023461963,0,0,0
+contributivo,2024-08,proceso,EPS037,(vacía),1159,688566880099,0,0,0
+contributivo,2024-08,proceso,EPS037,falla bancaria,1,0,154778632,0,1
+contributivo,2024-08,proceso,EPS040,(vacía),192,13690500305,0,0,0
+contributivo,2024-08,proceso,EPS041,(vacía),75,35565183682,0,0,0
+contributivo,2024-08,proceso,EPS048,(vacía),301,13506175605,0,0,0
+contributivo,2024-08,proceso,EPS048,embargo,4,38788524,4309836,0,4
+contributivo,2024-08,proceso,EPS048,falla bancaria,1,0,26599967,0,1
+contributivo,2024-08,proceso,EPSC25,(vacía),28,1915704579,0,0,0
+contributivo,2024-08,proceso,EPSC34,(vacía),168,6991086967,0,0,0
+contributivo,2024-08,proceso,EPSIC5,(vacía),131,2145220367,0,0,0
+contributivo,2024-08,proceso,ESSC07,(vacía),436,18590498515,0,0,0
+contributivo,2024-08,proceso,ESSC07,embargo,1,18000000,2000000,0,1
+contributivo,2024-08,proceso,ESSC07,falla bancaria,2,0,133999920,0,2
+contributivo,2024-08,proceso,ESSC18,(vacía),591,11227383184,0,0,0
+contributivo,2024-08,proceso,ESSC18,falla bancaria,1,0,9514016,0,1
+contributivo,2024-08,proceso,ESSC62,(vacía),172,6683848744,0,0,0
+contributivo,2024-09,proceso,CCFC20,(vacía),30,458007556,0,0,0
+contributivo,2024-09,proceso,CCFC55,(vacía),4,1111090926,0,0,0
+contributivo,2024-09,proceso,EPS005,(vacía),2158,506665951554,0,0,0
+contributivo,2024-09,proceso,EPS005,falla bancaria,2,0,47921479,0,2
+contributivo,2024-09,proceso,EPS010,(vacía),1929,537070644377,0,0,0
+contributivo,2024-09,proceso,EPS010,embargo,2,1903638,937612,0,2
+contributivo,2024-09,proceso,EPS012,(vacía),6,3500710736,0,0,0
+contributivo,2024-09,proceso,EPS017,(vacía),1208,221815875132,0,0,0
+contributivo,2024-09,proceso,EPS017,falla bancaria,1,0,196086102,0,1
+contributivo,2024-09,proceso,EPS018,(vacía),389,68962764299,0,0,0
+contributivo,2024-09,proceso,EPS037,(vacía),1287,659126373335,0,0,0
+contributivo,2024-09,proceso,EPS037,embargo,2,11063937,1700068,0,2
+contributivo,2024-09,proceso,EPS040,(vacía),164,12861589820,0,0,0
+contributivo,2024-09,proceso,EPS041,(vacía),5,34145758093,0,0,0
+contributivo,2024-09,proceso,EPS048,(vacía),262,13065770964,0,0,0
+contributivo,2024-09,proceso,EPS048,embargo,6,64370018,10062151,0,6
+contributivo,2024-09,proceso,EPSC25,(vacía),29,1752156360,0,0,0
+contributivo,2024-09,proceso,EPSC34,(vacía),79,5528166504,0,0,0
+contributivo,2024-09,proceso,EPSIC5,(vacía),97,2041297920,0,0,0
+contributivo,2024-09,proceso,ESSC07,(vacía),606,17467103061,0,0,0
+contributivo,2024-09,proceso,ESSC07,embargo,3,21011367,2334596,0,3
+contributivo,2024-09,proceso,ESSC18,(vacía),503,10443632270,0,0,0
+contributivo,2024-09,proceso,ESSC18,falla bancaria,1,0,12671278,0,1
+contributivo,2024-09,proceso,ESSC62,(vacía),131,6252526106,0,0,0
+contributivo,2024-09,proceso,ESSC62,falla bancaria,1,0,15804299,0,1
+contributivo,2024-10,proceso,CCFC55,(vacía),22,7851659203,0,0,0
+contributivo,2024-10,proceso,EPS005,(vacía),2163,536817321172,0,0,0
+contributivo,2024-10,proceso,EPS005,embargo,1,3088314,8083,0,1
+contributivo,2024-10,proceso,EPS010,(vacía),2246,564917314488,0,0,0
+contributivo,2024-10,proceso,EPS012,(vacía),70,30524779156,0,0,0
+contributivo,2024-10,proceso,EPS017,(vacía),1121,232484677296,0,0,0
+contributivo,2024-10,proceso,EPS018,(vacía),438,71441105927,0,0,0
+contributivo,2024-10,proceso,EPS037,(vacía),1021,691083349622,0,0,0
+contributivo,2024-10,proceso,EPS040,(vacía),189,14019725140,0,0,0
+contributivo,2024-10,proceso,EPS041,(vacía),8,38076878687,0,0,0
+contributivo,2024-10,proceso,EPS048,(vacía),134,13912340153,0,0,0
+contributivo,2024-10,proceso,EPS048,embargo,2,18734636,2081626,0,2
+contributivo,2024-10,proceso,EPSC25,(vacía),43,1941305848,0,0,0
+contributivo,2024-10,proceso,EPSIC5,(vacía),120,2236238482,0,0,0
+contributivo,2024-10,proceso,EPSIC5,falla bancaria,2,0,24249387,0,2
+contributivo,2024-10,proceso,ESSC07,(vacía),411,19161949474,0,0,0
+contributivo,2024-10,proceso,ESSC07,embargo,8,110648182,20947427,0,8
+contributivo,2024-10,proceso,ESSC18,(vacía),421,11307328207,0,0,0
+contributivo,2024-10,proceso,ESSC18,falla bancaria,2,0,15419328,0,2
+contributivo,2024-10,proceso,ESSC62,(vacía),364,7025285450,0,0,0
+contributivo,2024-10,proceso,ESSC62,embargo,1,1051099,116789,0,1
+contributivo,2024-11,proceso,CCFC55,(vacía),14,7199551774,0,0,0
+contributivo,2024-11,proceso,EPS005,(vacía),1737,496790729010,0,0,0
+contributivo,2024-11,proceso,EPS005,embargo,1,29633448,3292605,0,1
+contributivo,2024-11,proceso,EPS010,(vacía),2163,522425490902,0,0,0
+contributivo,2024-11,proceso,EPS012,(vacía),104,28604966600,0,0,0
+contributivo,2024-11,proceso,EPS017,(vacía),1298,215787795303,0,0,0
+contributivo,2024-11,proceso,EPS018,(vacía),521,66361401673,0,0,0
+contributivo,2024-11,proceso,EPS037,(vacía),3561,654920705838,0,0,0
+contributivo,2024-11,proceso,EPS037,embargo,13,180894615,20099401,0,13
+contributivo,2024-11,proceso,EPS037,falla bancaria,4,0,51318614,0,4
+contributivo,2024-11,proceso,EPS040,(vacía),321,12776875284,0,0,0
+contributivo,2024-11,proceso,EPS041,(vacía),10,34648332691,0,0,0
+contributivo,2024-11,proceso,EPS042,(vacía),1,1105842600,0,0,0
+contributivo,2024-11,proceso,EPS048,(vacía),260,12787194886,0,0,0
+contributivo,2024-11,proceso,EPS048,embargo,6,62743117,6971457,0,6
+contributivo,2024-11,proceso,EPSC25,(vacía),26,1773718348,0,0,0
+contributivo,2024-11,proceso,EPSC34,(vacía),8,3317619442,0,0,0
+contributivo,2024-11,proceso,EPSIC5,(vacía),88,2085558842,0,0,0
+contributivo,2024-11,proceso,ESSC07,(vacía),304,17203253986,0,0,0
+contributivo,2024-11,proceso,ESSC07,embargo,5,22462472,2495830,0,5
+contributivo,2024-11,proceso,ESSC18,(vacía),461,10168393690,0,0,0
+contributivo,2024-11,proceso,ESSC24,(vacía),1,4442560108,0,0,0
+contributivo,2024-11,proceso,ESSC62,(vacía),476,6145884415,0,0,0
+contributivo,2024-11,proceso,ESSC62,embargo,2,15952116,1772457,0,2
+contributivo,2024-12,proceso,CCFC55,(vacía),12,7888348590,0,0,0
+contributivo,2024-12,proceso,EPS005,(vacía),1703,535273453057,0,0,0
+contributivo,2024-12,proceso,EPS005,embargo,2,225078102,25008678,0,2
+contributivo,2024-12,proceso,EPS010,(vacía),1941,557049284371,0,0,0
+contributivo,2024-12,proceso,EPS010,embargo,1,1783723,198191,0,1
+contributivo,2024-12,proceso,EPS012,(vacía),62,30526680581,0,0,0
+contributivo,2024-12,proceso,EPS017,(vacía),1425,215389464160,0,0,0
+contributivo,2024-12,proceso,EPS017,embargo,1,5834480,648275,0,1
+contributivo,2024-12,proceso,EPS018,(vacía),375,70799715551,0,0,0
+contributivo,2024-12,proceso,EPS037,(vacía),3825,686876218664,0,0,0
+contributivo,2024-12,proceso,EPS037,embargo,5,837900955,58273547,0,5
+contributivo,2024-12,proceso,EPS037,falla bancaria,2,0,98004031,0,2
+contributivo,2024-12,proceso,EPS040,(vacía),236,13923665437,0,0,0
+contributivo,2024-12,proceso,EPS040,embargo,1,1705413,189490,0,1
+contributivo,2024-12,proceso,EPS041,(vacía),10,40322438226,0,0,0
+contributivo,2024-12,proceso,EPS042,(vacía),94,8782181192,0,0,0
+contributivo,2024-12,proceso,EPS048,(vacía),163,13810023004,0,0,0
+contributivo,2024-12,proceso,EPSC25,(vacía),31,1976977174,0,0,0
+contributivo,2024-12,proceso,EPSC34,(vacía),168,7243858230,0,0,0
+contributivo,2024-12,proceso,EPSIC5,(vacía),72,2650006089,0,0,0
+contributivo,2024-12,proceso,ESSC07,(vacía),530,19814970910,0,0,0
+contributivo,2024-12,proceso,ESSC18,(vacía),471,11444571823,0,0,0
+contributivo,2024-12,proceso,ESSC24,(vacía),314,25473377658,0,0,0
+contributivo,2024-12,proceso,ESSC24,embargo,3,18194103,2021567,0,3
+contributivo,2024-12,proceso,ESSC24,falla bancaria,2,0,41905692,0,2
+contributivo,2024-12,proceso,ESSC62,(vacía),356,7215369574,0,0,0
+contributivo,2025-01,proceso,CCFC55,(vacía),21,6569609972,0,0,0
+contributivo,2025-01,proceso,EPS005,(vacía),1535,540906606783,0,0,0
+contributivo,2025-01,proceso,EPS010,(vacía),1937,570706937210,0,0,0
+contributivo,2025-01,proceso,EPS012,(vacía),102,31365790789,0,0,0
+contributivo,2025-01,proceso,EPS017,(vacía),1105,247164157115,0,0,0
+contributivo,2025-01,proceso,EPS018,(vacía),400,72338098248,0,0,0
+contributivo,2025-01,proceso,EPS037,(vacía),1599,705181123491,0,0,0
+contributivo,2025-01,proceso,EPS037,embargo,4,12125182,1347243,0,4
+contributivo,2025-01,proceso,EPS037,falla bancaria,1,0,12737307,0,1
+contributivo,2025-01,proceso,EPS040,(vacía),322,13992273706,0,0,0
+contributivo,2025-01,proceso,EPS041,(vacía),5,36151430816,0,0,0
+contributivo,2025-01,proceso,EPS042,(vacía),283,8601817651,0,0,0
+contributivo,2025-01,proceso,EPS042,embargo,2,8510242,945583,0,2
+contributivo,2025-01,proceso,EPS048,(vacía),224,14069396711,0,0,0
+contributivo,2025-01,proceso,EPS048,embargo,2,3205178,356131,0,2
+contributivo,2025-01,proceso,EPSC25,(vacía),20,1622236412,0,0,0
+contributivo,2025-01,proceso,EPSC34,(vacía),139,7068466972,0,0,0
+contributivo,2025-01,proceso,EPSIC5,(vacía),66,1805269211,0,0,0
+contributivo,2025-01,proceso,EPSIC5,embargo,1,92261894,10251322,0,1
+contributivo,2025-01,proceso,ESSC07,(vacía),378,18057316610,0,0,0
+contributivo,2025-01,proceso,ESSC07,embargo,7,65765415,7307268,0,7
+contributivo,2025-01,proceso,ESSC18,(vacía),386,10620759105,0,0,0
+contributivo,2025-01,proceso,ESSC24,(vacía),682,23722207394,0,0,0
+contributivo,2025-01,proceso,ESSC24,embargo,2,24575807,2730646,0,2
+contributivo,2025-01,proceso,ESSC24,falla bancaria,1,0,14325090,0,1
+contributivo,2025-01,proceso,ESSC62,(vacía),192,6417528747,0,0,0
+contributivo,2025-02,proceso,EPS005,(vacía),1860,520422705595,0,0,0
+contributivo,2025-02,proceso,EPS005,falla bancaria,1,0,2153285,0,1
+contributivo,2025-02,proceso,EPS010,(vacía),1610,547482473009,0,0,0
+contributivo,2025-02,proceso,EPS010,falla bancaria,1,0,4925399,0,1
+contributivo,2025-02,proceso,EPS012,(vacía),37,30098250686,0,0,0
+contributivo,2025-02,proceso,EPS017,(vacía),954,221250354274,0,0,0
+contributivo,2025-02,proceso,EPS018,(vacía),347,68816460980,0,0,0
+contributivo,2025-02,proceso,EPS037,(vacía),651,679126384564,0,0,0
+contributivo,2025-02,proceso,EPS037,otra,1,271385525,0,0,0
+contributivo,2025-02,proceso,EPS040,(vacía),139,12608632748,0,0,0
+contributivo,2025-02,proceso,EPS041,(vacía),4,31718303973,0,0,0
+contributivo,2025-02,proceso,EPS042,(vacía),83,9787943298,0,0,0
+contributivo,2025-02,proceso,EPS042,embargo,1,8888822,987647,0,1
+contributivo,2025-02,proceso,EPS048,(vacía),270,13247194982,0,0,0
+contributivo,2025-02,proceso,EPS048,embargo,7,72766724,12108008,0,7
+contributivo,2025-02,proceso,EPSC25,(vacía),23,1434234173,0,0,0
+contributivo,2025-02,proceso,EPSC34,(vacía),144,6739839036,0,0,0
+contributivo,2025-02,proceso,EPSIC5,(vacía),73,1670796883,0,0,0
+contributivo,2025-02,proceso,ESSC07,(vacía),375,15776845944,0,0,0
+contributivo,2025-02,proceso,ESSC07,embargo,7,62860194,10718684,0,7
+contributivo,2025-02,proceso,ESSC18,(vacía),398,9488650689,0,0,0
+contributivo,2025-02,proceso,ESSC18,falla bancaria,2,0,5122300,0,2
+contributivo,2025-02,proceso,ESSC24,(vacía),200,21182651967,0,0,0
+contributivo,2025-02,proceso,ESSC62,(vacía),278,5512978228,0,0,0
+contributivo,2025-03,proceso,CCFC55,(vacía),6,1107049577,0,0,0
+contributivo,2025-03,proceso,EPS005,(vacía),2368,545620270025,0,0,0
+contributivo,2025-03,proceso,EPS005,embargo,1,2433175,270353,0,1
+contributivo,2025-03,proceso,EPS010,(vacía),2155,572780251264,0,0,0
+contributivo,2025-03,proceso,EPS010,falla bancaria,1,0,4008648,0,1
+contributivo,2025-03,proceso,EPS012,(vacía),88,31098147957,0,0,0
+contributivo,2025-03,proceso,EPS017,(vacía),1167,236990950145,0,0,0
+contributivo,2025-03,proceso,EPS018,(vacía),227,72359666946,0,0,0
+contributivo,2025-03,proceso,EPS037,(vacía),1132,706038420670,0,0,0
+contributivo,2025-03,proceso,EPS037,embargo,2,16635081,3921377,0,2
+contributivo,2025-03,proceso,EPS040,(vacía),306,13888276540,0,0,0
+contributivo,2025-03,proceso,EPS041,(vacía),6,36335663631,0,0,0
+contributivo,2025-03,proceso,EPS042,(vacía),95,11960922250,0,0,0
+contributivo,2025-03,proceso,EPS042,embargo,1,2781626,1370055,0,1
+contributivo,2025-03,proceso,EPS048,(vacía),103,14005701051,0,0,0
+contributivo,2025-03,proceso,EPSC25,(vacía),18,1699987611,0,0,0
+contributivo,2025-03,proceso,EPSC34,(vacía),157,6889303148,0,0,0
+contributivo,2025-03,proceso,EPSIC5,(vacía),157,2078945203,0,0,0
+contributivo,2025-03,proceso,ESSC07,(vacía),269,17710724245,0,0,0
+contributivo,2025-03,proceso,ESSC07,embargo,7,67293228,11046248,0,7
+contributivo,2025-03,proceso,ESSC18,(vacía),409,10399111598,0,0,0
+contributivo,2025-03,proceso,ESSC24,(vacía),395,23993544800,0,0,0
+contributivo,2025-03,proceso,ESSC62,(vacía),156,5397251698,0,0,0
+contributivo,2025-04,proceso,CCFC20,(vacía),35,430346379,0,0,0
+contributivo,2025-04,proceso,CCFC50,(vacía),39,1031817709,0,0,0
+contributivo,2025-04,proceso,CCFC55,(vacía),61,6615098482,0,0,0
+contributivo,2025-04,proceso,EPS002,(vacía),1301,352717445003,0,0,0
+contributivo,2025-04,proceso,EPS002,embargo,1,1499162,738393,0,1
+contributivo,2025-04,proceso,EPS002,falla bancaria,1,6793093,0,0,0
+contributivo,2025-04,proceso,EPS005,(vacía),1981,503697325978,0,0,0
+contributivo,2025-04,proceso,EPS008,(vacía),201,185977082598,0,0,0
+contributivo,2025-04,proceso,EPS008,falla bancaria,1,0,36076061,0,1
+contributivo,2025-04,proceso,EPS010,(vacía),1963,523098963162,0,0,0
+contributivo,2025-04,proceso,EPS012,(vacía),51,29392686337,0,0,0
+contributivo,2025-04,proceso,EPS017,(vacía),1320,216080293555,0,0,0
+contributivo,2025-04,proceso,EPS018,(vacía),310,66849422043,0,0,0
+contributivo,2025-04,proceso,EPS037,(vacía),982,669267113359,0,0,0
+contributivo,2025-04,proceso,EPS040,(vacía),196,12693634472,0,0,0
+contributivo,2025-04,proceso,EPS041,(vacía),5,33993716698,0,0,0
+contributivo,2025-04,proceso,EPS042,(vacía),143,10771203960,0,0,0
+contributivo,2025-04,proceso,EPS042,embargo,1,722193,355707,0,1
+contributivo,2025-04,proceso,EPS048,(vacía),242,13105370498,0,0,0
+contributivo,2025-04,proceso,EPS048,embargo,1,1154589,568678,0,1
+contributivo,2025-04,proceso,EPSC25,(vacía),18,1588526381,0,0,0
+contributivo,2025-04,proceso,EPSC34,(vacía),155,6444359248,0,0,0
+contributivo,2025-04,proceso,EPSIC5,(vacía),129,2068682000,0,0,0
+contributivo,2025-04,proceso,ESSC07,(vacía),356,15311711798,0,0,0
+contributivo,2025-04,proceso,ESSC07,embargo,7,59316746,29215710,0,7
+contributivo,2025-04,proceso,ESSC18,(vacía),66,696347802,0,0,0
+contributivo,2025-04,proceso,ESSC24,(vacía),330,22383858382,0,0,0
+contributivo,2025-04,proceso,ESSC62,(vacía),148,3241833216,0,0,0
+contributivo,2025-05,proceso,CCFC50,(vacía),26,1279582866,0,0,0
+contributivo,2025-05,proceso,CCFC55,(vacía),12,8489614014,0,0,0
+contributivo,2025-05,proceso,EPS002,(vacía),2637,437129579987,0,0,0
+contributivo,2025-05,proceso,EPS002,embargo,2,3151776,1552368,0,2
+contributivo,2025-05,proceso,EPS005,(vacía),2511,614366084659,0,0,0
+contributivo,2025-05,proceso,EPS005,embargo,1,1274407,627693,0,1
+contributivo,2025-05,proceso,EPS008,(vacía),291,225912189609,0,0,0
+contributivo,2025-05,proceso,EPS010,(vacía),2494,640842960027,0,0,0
+contributivo,2025-05,proceso,EPS012,(vacía),123,34504741311,0,0,0
+contributivo,2025-05,proceso,EPS017,(vacía),1366,259086517623,0,0,0
+contributivo,2025-05,proceso,EPS018,(vacía),339,79843255096,0,0,0
+contributivo,2025-05,proceso,EPS037,(vacía),691,761195987758,0,0,0
+contributivo,2025-05,proceso,EPS037,embargo,2,16884659,8316324,0,2
+contributivo,2025-05,proceso,EPS040,(vacía),177,17083991674,0,0,0
+contributivo,2025-05,proceso,EPS041,(vacía),6,45456171503,0,0,0
+contributivo,2025-05,proceso,EPS042,(vacía),252,12694556374,0,0,0
+contributivo,2025-05,proceso,EPS048,(vacía),138,15818817672,0,0,0
+contributivo,2025-05,proceso,EPSC25,(vacía),22,2168359859,0,0,0
+contributivo,2025-05,proceso,EPSC34,(vacía),168,8369024298,0,0,0
+contributivo,2025-05,proceso,EPSIC5,(vacía),128,2682817459,0,0,0
+contributivo,2025-05,proceso,ESSC07,(vacía),545,20173879479,0,0,0
+contributivo,2025-05,proceso,ESSC07,embargo,5,52376253,25797259,0,5
+contributivo,2025-05,proceso,ESSC24,(vacía),411,28883461827,0,0,0
+contributivo,2025-05,proceso,ESSC62,(vacía),148,5054595570,0,0,0
+contributivo,2025-06,proceso,CCFC50,(vacía),33,1073896831,0,0,0
+contributivo,2025-06,proceso,CCFC55,(vacía),17,7022586507,0,0,0
+contributivo,2025-06,proceso,EPS002,(vacía),1628,381532949237,0,0,0
+contributivo,2025-06,proceso,EPS002,embargo,2,3748525,1846289,0,2
+contributivo,2025-06,proceso,EPS002,falla bancaria,2,0,415775534,0,2
+contributivo,2025-06,proceso,EPS005,(vacía),2344,537651873227,0,0,0
+contributivo,2025-06,proceso,EPS005,embargo,2,6614354,3257816,0,2
+contributivo,2025-06,proceso,EPS008,(vacía),295,194251022202,0,0,0
+contributivo,2025-06,proceso,EPS010,(vacía),1944,554949526688,0,0,0
+contributivo,2025-06,proceso,EPS010,falla bancaria,1,0,6982516,0,1
+contributivo,2025-06,proceso,EPS012,(vacía),48,30492476692,0,0,0
+contributivo,2025-06,proceso,EPS017,(vacía),1348,236379753697,0,0,0
+contributivo,2025-06,proceso,EPS017,falla bancaria,1,0,6093750,0,1
+contributivo,2025-06,proceso,EPS018,(vacía),398,70285725644,0,0,0
+contributivo,2025-06,proceso,EPS037,(vacía),492,693703490685,0,0,0
+contributivo,2025-06,proceso,EPS037,embargo,2,49176209,24221118,0,2
+contributivo,2025-06,proceso,EPS040,(vacía),198,13936715870,0,0,0
+contributivo,2025-06,proceso,EPS041,(vacía),4,39102553986,0,0,0
+contributivo,2025-06,proceso,EPS042,(vacía),69,10944794684,0,0,0
+contributivo,2025-06,proceso,EPS048,(vacía),233,13922739266,0,0,0
+contributivo,2025-06,proceso,EPSC25,(vacía),21,1809130249,0,0,0
+contributivo,2025-06,proceso,EPSC34,(vacía),124,7007316981,0,0,0
+contributivo,2025-06,proceso,EPSIC5,(vacía),133,2393507812,0,0,0
+contributivo,2025-06,proceso,ESSC07,(vacía),336,18212484102,0,0,0
+contributivo,2025-06,proceso,ESSC07,embargo,4,45275227,16112674,0,4
+contributivo,2025-06,proceso,ESSC24,(vacía),125,24111511021,0,0,0
+contributivo,2025-06,proceso,ESSC62,(vacía),148,3333979282,0,0,0
+contributivo,2025-07,proceso,CCFC33,(vacía),99,532302327,0,0,0
+contributivo,2025-07,proceso,CCFC33,embargo,5,18349731,9037927,0,5
+contributivo,2025-07,proceso,CCFC50,(vacía),23,1119243566,0,0,0
+contributivo,2025-07,proceso,CCFC55,(vacía),22,7023614370,0,0,0
+contributivo,2025-07,proceso,EPS002,(vacía),1909,386861148915,0,0,0
+contributivo,2025-07,proceso,EPS002,embargo,1,7626737,3756453,0,1
+contributivo,2025-07,proceso,EPS002,falla bancaria,1,0,2617352745,0,1
+contributivo,2025-07,proceso,EPS005,(vacía),2120,550200412342,0,0,0
+contributivo,2025-07,proceso,EPS005,embargo,4,61044627,30066757,0,4
+contributivo,2025-07,proceso,EPS008,(vacía),270,197431382724,0,0,0
+contributivo,2025-07,proceso,EPS010,(vacía),1889,572372092657,0,0,0
+contributivo,2025-07,proceso,EPS012,(vacía),51,31262275254,0,0,0
+contributivo,2025-07,proceso,EPS017,(vacía),1117,234065845612,0,0,0
+contributivo,2025-07,proceso,EPS017,falla bancaria,1,0,81368533,0,1
+contributivo,2025-07,proceso,EPS018,(vacía),360,71395588881,0,0,0
+contributivo,2025-07,proceso,EPS037,(vacía),265,701793167934,0,0,0
+contributivo,2025-07,proceso,EPS040,(vacía),353,14420251472,0,0,0
+contributivo,2025-07,proceso,EPS041,(vacía),5,40432572670,0,0,0
+contributivo,2025-07,proceso,EPS042,(vacía),50,10552478312,0,0,0
+contributivo,2025-07,proceso,EPS042,falla bancaria,1,0,414058725,0,1
+contributivo,2025-07,proceso,EPS048,(vacía),153,13876321435,0,0,0
+contributivo,2025-07,proceso,EPSC25,(vacía),16,1826356149,0,0,0
+contributivo,2025-07,proceso,EPSC34,(vacía),127,7457050300,0,0,0
+contributivo,2025-07,proceso,EPSIC5,(vacía),138,2452952282,0,0,0
+contributivo,2025-07,proceso,ESSC07,(vacía),400,19263109157,0,0,0
+contributivo,2025-07,proceso,ESSC07,embargo,2,17259825,8501108,0,2
+contributivo,2025-07,proceso,ESSC24,(vacía),99,24401300051,0,0,0
+contributivo,2025-07,proceso,ESSC24,embargo,2,53103848,26155627,0,2
+contributivo,2025-08,proceso,CCFC33,(vacía),139,1008307502,0,0,0
+contributivo,2025-08,proceso,CCFC33,embargo,2,2027967,998849,0,2
+contributivo,2025-08,proceso,CCFC50,(vacía),36,1180014566,0,0,0
+contributivo,2025-08,proceso,CCFC55,(vacía),16,7767932117,0,0,0
+contributivo,2025-08,proceso,EPS002,(vacía),1408,412518729468,0,0,0
+contributivo,2025-08,proceso,EPS002,embargo,2,5148599,2535877,0,2
+contributivo,2025-08,proceso,EPS002,falla bancaria,2,0,276601156,0,2
+contributivo,2025-08,proceso,EPS005,(vacía),2676,579112554891,3243107,0,1
+contributivo,2025-08,proceso,EPS005,embargo,5,320932740,158071349,0,5
+contributivo,2025-08,proceso,EPS005,falla bancaria,1,0,8486965,0,1
+contributivo,2025-08,proceso,EPS008,(vacía),252,211223196714,0,0,0
+contributivo,2025-08,proceso,EPS010,(vacía),2461,599505925578,0,0,0
+contributivo,2025-08,proceso,EPS010,embargo,1,3029725,1492253,0,1
+contributivo,2025-08,proceso,EPS010,falla bancaria,3,0,127468258,0,3
+contributivo,2025-08,proceso,EPS012,(vacía),56,32555261811,0,0,0
+contributivo,2025-08,proceso,EPS017,(vacía),908,245024027801,0,0,0
+contributivo,2025-08,proceso,EPS017,falla bancaria,2,0,63563284,0,2
+contributivo,2025-08,proceso,EPS018,(vacía),333,74506566836,0,0,0
+contributivo,2025-08,proceso,EPS018,embargo,1,866469,426768,0,1
+contributivo,2025-08,proceso,EPS037,(vacía),675,724929799703,0,0,0
+contributivo,2025-08,proceso,EPS037,embargo,2,15119570,7446953,0,2
+contributivo,2025-08,proceso,EPS040,(vacía),110,15379821754,0,0,0
+contributivo,2025-08,proceso,EPS040,embargo,1,5742186,1156007,0,1
+contributivo,2025-08,proceso,EPS041,(vacía),4,43753662828,0,0,0
+contributivo,2025-08,proceso,EPS042,(vacía),335,11642305266,0,0,0
+contributivo,2025-08,proceso,EPS042,embargo,1,13134108,6469038,0,1
+contributivo,2025-08,proceso,EPS048,(vacía),186,14944653838,0,0,0
+contributivo,2025-08,proceso,EPSC25,(vacía),26,1966631474,0,0,0
+contributivo,2025-08,proceso,EPSC34,(vacía),212,7964291456,0,0,0
+contributivo,2025-08,proceso,EPSIC5,(vacía),114,2709959825,0,0,0
+contributivo,2025-08,proceso,ESSC07,(vacía),603,20990682402,0,0,0
+contributivo,2025-08,proceso,ESSC07,embargo,2,23486044,7497895,0,2
+contributivo,2025-08,proceso,ESSC24,(vacía),469,26193121547,25029198,0,1
+contributivo,2025-08,proceso,ESSC24,embargo,2,2392124,1178210,0,2
+contributivo,2025-08,proceso,ESSC62,(vacía),113,4239758019,0,0,0
+contributivo,2025-09,proceso,CCFC33,(vacía),59,975215658,0,0,0
+contributivo,2025-09,proceso,CCFC50,(vacía),44,1153208656,0,0,0
+contributivo,2025-09,proceso,CCFC55,(vacía),19,7409054902,0,0,0
+contributivo,2025-09,proceso,EPS002,(vacía),1646,402548654176,0,0,0
+contributivo,2025-09,proceso,EPS002,embargo,1,4437326,2185548,0,1
+contributivo,2025-09,proceso,EPS005,(vacía),2343,564883847845,0,0,0
+contributivo,2025-09,proceso,EPS005,embargo,3,10218047,5032769,0,3
+contributivo,2025-09,proceso,EPS008,(vacía),303,203263214008,0,0,0
+contributivo,2025-09,proceso,EPS010,(vacía),2070,587044247062,0,0,0
+contributivo,2025-09,proceso,EPS012,(vacía),56,31477371344,0,0,0
+contributivo,2025-09,proceso,EPS017,(vacía),1161,236711443166,0,0,0
+contributivo,2025-09,proceso,EPS018,(vacía),350,72260898802,0,0,0
+contributivo,2025-09,proceso,EPS018,falla bancaria,1,0,5134137,0,1
+contributivo,2025-09,proceso,EPS037,(vacía),1526,706775037121,0,0,0
+contributivo,2025-09,proceso,EPS037,embargo,4,124308272,61226463,0,4
+contributivo,2025-09,proceso,EPS037,otra,1,6191167,3049381,0,1
+contributivo,2025-09,proceso,EPS040,(vacía),287,15528836702,0,0,0
+contributivo,2025-09,proceso,EPS040,falla bancaria,1,0,38015158,0,1
+contributivo,2025-09,proceso,EPS041,(vacía),6,42719972367,0,0,0
+contributivo,2025-09,proceso,EPS042,(vacía),273,9472933949,0,0,0
+contributivo,2025-09,proceso,EPS042,embargo,1,1551532,764188,0,1
+contributivo,2025-09,proceso,EPS048,(vacía),109,14644306434,0,0,0
+contributivo,2025-09,proceso,EPSC25,(vacía),28,1845721517,0,0,0
+contributivo,2025-09,proceso,EPSC34,(vacía),141,7766276335,0,0,0
+contributivo,2025-09,proceso,EPSIC5,(vacía),161,2463887303,0,0,0
+contributivo,2025-09,proceso,ESSC07,(vacía),296,20428176975,0,0,0
+contributivo,2025-09,proceso,ESSC07,embargo,1,12271177,6044013,0,1
+contributivo,2025-09,proceso,ESSC24,(vacía),435,20825548004,0,0,0
+contributivo,2025-09,proceso,ESSC62,(vacía),148,3764722712,0,0,0
+contributivo,2025-10,proceso,CCFC33,(vacía),99,1155937930,0,0,0
+contributivo,2025-10,proceso,CCFC50,(vacía),29,1251553287,0,0,0
+contributivo,2025-10,proceso,CCFC55,(vacía),19,8728505519,0,0,0
+contributivo,2025-10,proceso,EPS002,(vacía),2091,427098062224,0,0,0
+contributivo,2025-10,proceso,EPS002,embargo,2,6186626,3047144,0,2
+contributivo,2025-10,proceso,EPS005,(vacía),2473,597658316475,0,0,0
+contributivo,2025-10,proceso,EPS005,embargo,1,1331926,656024,0,1
+contributivo,2025-10,proceso,EPS008,(vacía),218,212103357244,0,0,0
+contributivo,2025-10,proceso,EPS010,(vacía),2216,611919115757,0,0,0
+contributivo,2025-10,proceso,EPS012,(vacía),61,33161457152,0,0,0
+contributivo,2025-10,proceso,EPS017,(vacía),1137,247658102535,0,0,0
+contributivo,2025-10,proceso,EPS018,(vacía),300,75529103067,0,0,0
+contributivo,2025-10,proceso,EPS018,embargo,1,29835204,14694951,0,1
+contributivo,2025-10,proceso,EPS018,falla bancaria,1,0,6473606,0,1
+contributivo,2025-10,proceso,EPS037,(vacía),1400,729221233440,0,0,0
+contributivo,2025-10,proceso,EPS037,embargo,1,29525433,14542377,0,1
+contributivo,2025-10,proceso,EPS040,(vacía),239,16152006573,0,0,0
+contributivo,2025-10,proceso,EPS041,(vacía),4,47045537847,0,0,0
+contributivo,2025-10,proceso,EPS042,(vacía),164,11575274672,0,0,0
+contributivo,2025-10,proceso,EPS048,(vacía),172,15119607150,0,0,0
+contributivo,2025-10,proceso,EPS048,embargo,1,898349,442471,0,1
+contributivo,2025-10,proceso,EPSC25,(vacía),22,2022827492,0,0,0
+contributivo,2025-10,proceso,EPSC34,(vacía),67,8360365684,0,0,0
+contributivo,2025-10,proceso,EPSIC5,(vacía),62,2896085524,0,0,0
+contributivo,2025-10,proceso,ESSC07,(vacía),275,21852949243,0,0,0
+contributivo,2025-10,proceso,ESSC07,embargo,1,13059188,6432138,0,1
+contributivo,2025-10,proceso,ESSC24,(vacía),670,27786260554,0,0,0
+contributivo,2025-10,proceso,ESSC24,embargo,1,1309898,645174,0,1
+contributivo,2025-10,proceso,ESSC62,(vacía),94,2929620130,0,0,0
+contributivo,2025-11,proceso,CCFC33,(vacía),74,933288786,0,0,0
+contributivo,2025-11,proceso,CCFC50,(vacía),22,1150024072,0,0,0
+contributivo,2025-11,proceso,CCFC55,(vacía),15,7189544194,0,0,0
+contributivo,2025-11,proceso,EPS002,(vacía),1978,387099904409,0,0,0
+contributivo,2025-11,proceso,EPS002,falla bancaria,1,0,7874242,0,1
+contributivo,2025-11,proceso,EPS005,(vacía),1515,547154625037,0,0,0
+contributivo,2025-11,proceso,EPS008,(vacía),326,194420136279,0,0,0
+contributivo,2025-11,proceso,EPS010,(vacía),1939,563994449516,0,0,0
+contributivo,2025-11,proceso,EPS012,(vacía),47,30741403567,0,0,0
+contributivo,2025-11,proceso,EPS017,(vacía),1122,221674470193,0,0,0
+contributivo,2025-11,proceso,EPS017,falla bancaria,1,0,3735117147,0,1
+contributivo,2025-11,proceso,EPS018,(vacía),389,69945741496,0,0,0
+contributivo,2025-11,proceso,EPS037,(vacía),887,678333520019,0,0,0
+contributivo,2025-11,proceso,EPS037,embargo,1,1928384,949801,0,1
+contributivo,2025-11,proceso,EPS040,(vacía),115,14570746925,0,0,0
+contributivo,2025-11,proceso,EPS041,(vacía),662,39982087275,0,0,0
+contributivo,2025-11,proceso,EPS041,embargo,1,1928384,949801,0,1
+contributivo,2025-11,proceso,EPS042,(vacía),93,10545481661,0,0,0
+contributivo,2025-11,proceso,EPS048,(vacía),91,14195005230,0,0,0
+contributivo,2025-11,proceso,EPSC25,(vacía),27,1628542105,0,0,0
+contributivo,2025-11,proceso,EPSC25,falla bancaria,1,0,196577421,0,1
+contributivo,2025-11,proceso,EPSC34,(vacía),102,7542098034,0,0,0
+contributivo,2025-11,proceso,EPSIC5,(vacía),152,2710657438,0,0,0
+contributivo,2025-11,proceso,ESSC07,(vacía),323,19684026217,0,0,0
+contributivo,2025-11,proceso,ESSC07,embargo,1,13862269,6827685,0,1
+contributivo,2025-11,proceso,ESSC24,(vacía),590,24678956531,0,0,0
+contributivo,2025-11,proceso,ESSC24,embargo,1,1455443,716860,0,1
+contributivo,2025-11,proceso,ESSC24,falla bancaria,1,0,5808872,0,1
+contributivo,2025-11,proceso,ESSC62,(vacía),77,3619626220,0,0,0
+contributivo,2025-12,proceso,CCFC33,(vacía),79,1213076405,0,0,0
+contributivo,2025-12,proceso,CCFC33,embargo,1,5986122,2948388,0,1
+contributivo,2025-12,proceso,CCFC50,(vacía),38,1289416395,0,0,0
+contributivo,2025-12,proceso,CCFC55,(vacía),16,7755480722,0,0,0
+contributivo,2025-12,proceso,EPS002,(vacía),1988,415739018061,0,0,0
+contributivo,2025-12,proceso,EPS005,(vacía),2232,594801079016,0,0,0
+contributivo,2025-12,proceso,EPS005,falla bancaria,1,0,7290844,0,1
+contributivo,2025-12,proceso,EPS008,(vacía),361,211442061808,0,0,0
+contributivo,2025-12,proceso,EPS010,(vacía),2042,606603341970,0,0,0
+contributivo,2025-12,proceso,EPS012,(vacía),59,32218988082,0,0,0
+contributivo,2025-12,proceso,EPS017,(vacía),1083,229962607512,0,0,0
+contributivo,2025-12,proceso,EPS018,(vacía),244,73655678946,0,0,0
+contributivo,2025-12,proceso,EPS037,(vacía),1241,706186742166,0,0,0
+contributivo,2025-12,proceso,EPS037,embargo,1,9369470,4614814,0,1
+contributivo,2025-12,proceso,EPS037,falla bancaria,2,0,76428435,0,2
+contributivo,2025-12,proceso,EPS040,(vacía),412,15885157017,0,0,0
+contributivo,2025-12,proceso,EPS041,(vacía),25,45851175213,0,0,0
+contributivo,2025-12,proceso,EPS042,(vacía),171,11265226156,0,0,0
+contributivo,2025-12,proceso,EPS048,(vacía),271,15120982891,0,0,0
+contributivo,2025-12,proceso,EPSC25,(vacía),25,2162809000,0,0,0
+contributivo,2025-12,proceso,EPSC34,(vacía),191,8340780005,0,0,0
+contributivo,2025-12,proceso,EPSIC5,(vacía),142,3225195337,0,0,0
+contributivo,2025-12,proceso,ESSC07,(vacía),262,22120391073,0,0,0
+contributivo,2025-12,proceso,ESSC24,(vacía),300,27882502065,0,0,0
+contributivo,2025-12,proceso,ESSC24,embargo,1,1694141,834427,0,1
+contributivo,2025-12,proceso,ESSC62,(vacía),74,1056816558,0,0,0
+contributivo,2025-12,proceso,ESSC62,embargo,1,1339329,659669,0,1
+contributivo,2026-01,proceso,CCFC33,(vacía),42,1041967901,0,0,0
+contributivo,2026-01,proceso,CCFC50,(vacía),18,1162819624,0,0,0
+contributivo,2026-01,proceso,CCFC55,(vacía),21,7675587171,0,0,0
+contributivo,2026-01,proceso,EPS002,(vacía),2349,448079927581,0,0,0
+contributivo,2026-01,proceso,EPS002,embargo,2,16148306,7953643,0,2
+contributivo,2026-01,proceso,EPS002,falla bancaria,1,0,1343459,0,1
+contributivo,2026-01,proceso,EPS005,(vacía),2473,624961534327,0,0,0
+contributivo,2026-01,proceso,EPS005,falla bancaria,1,0,1448320,0,1
+contributivo,2026-01,proceso,EPS008,(vacía),416,218944970836,0,0,0
+contributivo,2026-01,proceso,EPS008,embargo,2,185025013,91131723,0,2
+contributivo,2026-01,proceso,EPS010,(vacía),2417,649086515209,0,0,0
+contributivo,2026-01,proceso,EPS010,embargo,1,2186324,1076846,0,1
+contributivo,2026-01,proceso,EPS012,(vacía),125,34797214419,0,0,0
+contributivo,2026-01,proceso,EPS017,(vacía),985,251038343488,0,0,0
+contributivo,2026-01,proceso,EPS018,(vacía),269,78246448141,0,0,0
+contributivo,2026-01,proceso,EPS018,embargo,2,136563420,67262580,0,2
+contributivo,2026-01,proceso,EPS037,(vacía),1100,736786754172,0,0,0
+contributivo,2026-01,proceso,EPS037,embargo,2,406718384,200323980,0,2
+contributivo,2026-01,proceso,EPS040,(vacía),315,16573421766,0,0,0
+contributivo,2026-01,proceso,EPS041,(vacía),278,43753772797,0,0,0
+contributivo,2026-01,proceso,EPS041,falla bancaria,1,0,14407680,0,1
+contributivo,2026-01,proceso,EPS042,(vacía),99,11629908034,0,0,0
+contributivo,2026-01,proceso,EPS048,(vacía),121,16058718955,0,0,0
+contributivo,2026-01,proceso,EPSC25,(vacía),17,1838786823,0,0,0
+contributivo,2026-01,proceso,EPSC34,(vacía),131,8511405656,0,0,0
+contributivo,2026-01,proceso,EPSIC5,(vacía),123,2377882390,0,0,0
+contributivo,2026-01,proceso,ESSC07,(vacía),298,21571492932,0,0,0
+contributivo,2026-01,proceso,ESSC24,(vacía),282,27462678045,0,0,0
+contributivo,2026-02,proceso,CCFC33,(vacía),6,744711122,0,0,0
+contributivo,2026-02,proceso,CCFC50,(vacía),18,1111050996,0,0,0
+contributivo,2026-02,proceso,CCFC55,(vacía),40,6634379157,0,0,0
+contributivo,2026-02,proceso,EPS002,(vacía),1994,415873238512,7565137,0,1
+contributivo,2026-02,proceso,EPS002,falla bancaria,1,0,6489062,0,1
+contributivo,2026-02,proceso,EPS005,(vacía),1840,600168683148,0,0,0
+contributivo,2026-02,proceso,EPS005,falla bancaria,1,0,8526684,0,1
+contributivo,2026-02,proceso,EPS008,(vacía),243,208094375308,0,0,0
+contributivo,2026-02,proceso,EPS010,(vacía),2015,613706800649,0,0,0
+contributivo,2026-02,proceso,EPS012,(vacía),51,33449619736,0,0,0
+contributivo,2026-02,proceso,EPS017,(vacía),956,237662373309,0,0,0
+contributivo,2026-02,proceso,EPS017,falla bancaria,1,0,1641600,0,1
+contributivo,2026-02,proceso,EPS018,(vacía),242,74214190263,58224516,0,1
+contributivo,2026-02,proceso,EPS018,falla bancaria,1,0,300000000,0,1
+contributivo,2026-02,proceso,EPS037,(vacía),1326,699190363557,136336273,0,1
+contributivo,2026-02,proceso,EPS037,falla bancaria,1,0,85864327,0,1
+contributivo,2026-02,proceso,EPS040,(vacía),214,15040501869,0,0,0
+contributivo,2026-02,proceso,EPS041,(vacía),55,37884799789,0,0,0
+contributivo,2026-02,proceso,EPS042,(vacía),349,10962086076,0,0,0
+contributivo,2026-02,proceso,EPS042,embargo,1,5040075,2482425,0,1
+contributivo,2026-02,proceso,EPS048,(vacía),199,15043596894,0,0,0
+contributivo,2026-02,proceso,EPSC25,(vacía),8,1653695178,0,0,0
+contributivo,2026-02,proceso,EPSC34,(vacía),47,7562591413,0,0,0
+contributivo,2026-02,proceso,EPSIC5,(vacía),80,2071421696,0,0,0
+contributivo,2026-02,proceso,ESSC07,(vacía),220,18100782918,0,0,0
+contributivo,2026-02,proceso,ESSC24,(vacía),152,24312176246,0,0,0
+contributivo,2026-03,proceso,CCFC33,(vacía),117,1047933938,0,0,0
+contributivo,2026-03,proceso,CCFC50,(vacía),26,1288879350,0,0,0
+contributivo,2026-03,proceso,CCFC55,(vacía),34,7555972961,0,0,0
+contributivo,2026-03,proceso,EPS002,(vacía),2027,462043371182,0,0,0
+contributivo,2026-03,proceso,EPS002,falla bancaria,1,0,4940382,0,1
+contributivo,2026-03,proceso,EPS005,(vacía),2043,652900547894,0,0,0
+contributivo,2026-03,proceso,EPS005,falla bancaria,1,0,2464456,0,1
+contributivo,2026-03,proceso,EPS008,(vacía),267,227884155615,0,0,0
+contributivo,2026-03,proceso,EPS010,(vacía),2250,677209220658,0,0,0
+contributivo,2026-03,proceso,EPS012,(vacía),80,35138543549,0,0,0
+contributivo,2026-03,proceso,EPS017,(vacía),1012,255846166296,0,0,0
+contributivo,2026-03,proceso,EPS017,falla bancaria,3,0,44750586,0,3
+contributivo,2026-03,proceso,EPS018,(vacía),217,79345262997,0,0,0
+contributivo,2026-03,proceso,EPS037,(vacía),601,735231616214,0,0,0
+contributivo,2026-03,proceso,EPS040,(vacía),464,17352111524,0,0,0
+contributivo,2026-03,proceso,EPS041,(vacía),1312,46272487986,0,0,0
+contributivo,2026-03,proceso,EPS041,embargo,1,2562750,1262250,0,1
+contributivo,2026-03,proceso,EPS041,falla bancaria,1,0,61695587,0,1
+contributivo,2026-03,proceso,EPS042,(vacía),47,11884418051,0,0,0
+contributivo,2026-03,proceso,EPS048,(vacía),312,17001352297,0,0,0
+contributivo,2026-03,proceso,EPSC25,(vacía),16,2117346270,0,0,0
+contributivo,2026-03,proceso,EPSC34,(vacía),144,9037751399,0,0,0
+contributivo,2026-03,proceso,EPSIC5,(vacía),140,2830754837,0,0,0
+contributivo,2026-03,proceso,ESSC07,(vacía),460,22931038278,0,0,0
+contributivo,2026-03,proceso,ESSC24,(vacía),335,28714807225,0,0,0
+contributivo,2026-03,proceso,ESSC24,embargo,1,3839100,1890900,0,1
+contributivo,2026-04,proceso,CCFC33,(vacía),6,1206194726,0,0,0
+contributivo,2026-04,proceso,CCFC50,(vacía),47,1318535935,0,0,0
+contributivo,2026-04,proceso,CCFC55,(vacía),17,8526236841,0,0,0
+contributivo,2026-04,proceso,EPS002,(vacía),1900,472960546143,0,0,0
+contributivo,2026-04,proceso,EPS002,falla bancaria,1,0,7690887,0,1
+contributivo,2026-04,proceso,EPS005,(vacía),2152,671579545553,0,0,0
+contributivo,2026-04,proceso,EPS008,(vacía),187,231306883978,0,0,0
+contributivo,2026-04,proceso,EPS010,(vacía),2093,691401890436,0,0,0
+contributivo,2026-04,proceso,EPS012,(vacía),78,36026076114,0,0,0
+contributivo,2026-04,proceso,EPS017,(vacía),837,260065888144,0,0,0
+contributivo,2026-04,proceso,EPS018,(vacía),190,81044823900,0,0,0
+contributivo,2026-04,proceso,EPS037,(vacía),1493,735129748981,0,0,0
+contributivo,2026-04,proceso,EPS037,embargo,3,23585841,11616907,0,3
+contributivo,2026-04,proceso,EPS040,(vacía),345,17718493650,0,0,0
+contributivo,2026-04,proceso,EPS041,(vacía),4,49290902645,0,0,0
+contributivo,2026-04,proceso,EPS042,(vacía),61,11952657090,0,0,0
+contributivo,2026-04,proceso,EPS048,(vacía),324,17259659352,0,0,0
+contributivo,2026-04,proceso,EPSC25,(vacía),15,2311651987,0,0,0
+contributivo,2026-04,proceso,EPSC34,(vacía),66,9464452205,0,0,0
+contributivo,2026-04,proceso,EPSIC5,(vacía),135,3140431798,0,0,0
+contributivo,2026-04,proceso,ESSC07,(vacía),375,24316852181,0,0,0
+contributivo,2026-04,proceso,ESSC24,(vacía),58,30058347078,0,0,0
+contributivo,2026-05,proceso,CCFC33,(vacía),111,959575371,0,0,0
+contributivo,2026-05,proceso,CCFC50,(vacía),29,1212231844,0,0,0
+contributivo,2026-05,proceso,CCFC50,descuento de auditoría,1,5841586,9002,0,1
+contributivo,2026-05,proceso,CCFC55,(vacía),16,7836686464,0,0,0
+contributivo,2026-05,proceso,EPS002,(vacía),2025,442368253166,0,0,0
+contributivo,2026-05,proceso,EPS002,descuento de auditoría,6,1566875272,3632580,0,6
+contributivo,2026-05,proceso,EPS005,(vacía),2143,632276768323,0,0,0
+contributivo,2026-05,proceso,EPS005,descuento de auditoría,6,459766773,3149079,0,6
+contributivo,2026-05,proceso,EPS008,(vacía),175,214878838665,0,0,0
+contributivo,2026-05,proceso,EPS008,descuento de auditoría,1,19029393,109642,0,1
+contributivo,2026-05,proceso,EPS010,(vacía),2322,648897101012,0,0,0
+contributivo,2026-05,proceso,EPS010,descuento de auditoría,4,2010909644,1029902,0,4
+contributivo,2026-05,proceso,EPS012,(vacía),56,32816097022,0,0,0
+contributivo,2026-05,proceso,EPS012,descuento de auditoría,1,1253551288,10521,0,1
+contributivo,2026-05,proceso,EPS017,(vacía),839,225165653726,0,0,0
+contributivo,2026-05,proceso,EPS017,descuento de auditoría,4,14966452515,1090480,0,4
+contributivo,2026-05,proceso,EPS018,(vacía),109,74761583652,0,0,0
+contributivo,2026-05,proceso,EPS037,(vacía),1356,680571486643,0,0,0
+contributivo,2026-05,proceso,EPS037,descuento de auditoría,4,12877967478,1107413,0,4
+contributivo,2026-05,proceso,EPS037,embargo,1,2592900,1277100,0,1
+contributivo,2026-05,proceso,EPS040,(vacía),318,16277271120,0,0,0
+contributivo,2026-05,proceso,EPS041,(vacía),6,44595748506,0,0,0
+contributivo,2026-05,proceso,EPS042,(vacía),100,8802309029,0,0,0
+contributivo,2026-05,proceso,EPS042,descuento de auditoría,1,997060741,2939259,0,1
+contributivo,2026-05,proceso,EPS042,falla bancaria,1,0,25379862,0,1
+contributivo,2026-05,proceso,EPS048,(vacía),343,16377013290,0,0,0
+contributivo,2026-05,proceso,EPS048,descuento de auditoría,2,367575421,482725,0,2
+contributivo,2026-05,proceso,EPSC25,(vacía),27,2008798897,0,0,0
+contributivo,2026-05,proceso,EPSC25,descuento de auditoría,1,52679248,165512,0,1
+contributivo,2026-05,proceso,EPSC34,(vacía),97,8778587712,0,0,0
+contributivo,2026-05,proceso,EPSIC5,(vacía),110,2831439199,0,0,0
+contributivo,2026-05,proceso,ESSC07,(vacía),358,22008945641,0,0,0
+contributivo,2026-05,proceso,ESSC07,descuento de auditoría,2,528077941,1251546,0,2
+contributivo,2026-05,proceso,ESSC07,falla bancaria,1,0,2246626,0,1
+contributivo,2026-05,proceso,ESSC24,(vacía),302,22607105153,0,0,0
+contributivo,2026-05,proceso,ESSC24,descuento de auditoría,2,36320804,1400042,0,2
+contributivo,2026-05,proceso,ESSC24,embargo,1,1774563,874039,0,1
+contributivo,2026-06,proceso,CCFC33,(vacía),37,1085298327,0,0,0
+contributivo,2026-06,proceso,CCFC50,(vacía),29,1212797246,0,0,0
+contributivo,2026-06,proceso,CCFC50,descuento de auditoría,1,9470125,0,0,0
+contributivo,2026-06,proceso,CCFC55,(vacía),21,7954930935,0,0,0
+contributivo,2026-06,proceso,EPS002,(vacía),2056,447650335451,1921839,0,9
+contributivo,2026-06,proceso,EPS002,descuento de auditoría,8,232477840,0,0,0
+contributivo,2026-06,proceso,EPS002,embargo,1,11605900,0,0,0
+contributivo,2026-06,proceso,EPS005,(vacía),2133,633774833609,1139154,0,4
+contributivo,2026-06,proceso,EPS005,descuento de auditoría,5,353574275,0,0,0
+contributivo,2026-06,proceso,EPS005,falla bancaria,1,0,42183479,0,1
+contributivo,2026-06,proceso,EPS008,(vacía),284,216625391805,5166,0,1
+contributivo,2026-06,proceso,EPS010,(vacía),2231,653601024855,261948,0,5
+contributivo,2026-06,proceso,EPS010,descuento de auditoría,6,743540124,0,0,0
+contributivo,2026-06,proceso,EPS012,(vacía),118,34054805672,0,0,0
+contributivo,2026-06,proceso,EPS017,(vacía),968,217844845781,4343,0,1
+contributivo,2026-06,proceso,EPS017,descuento de auditoría,3,1114824530,0,0,0
+contributivo,2026-06,proceso,EPS017,falla bancaria,2,6665804,1708759,0,1
+contributivo,2026-06,proceso,EPS018,(vacía),131,74431697039,1091,0,1
+contributivo,2026-06,proceso,EPS018,descuento de auditoría,1,79052032,0,0,0
+contributivo,2026-06,proceso,EPS037,(vacía),1083,684014725909,16381552,0,30
+contributivo,2026-06,proceso,EPS037,descuento de auditoría,3,829868651,0,0,0
+contributivo,2026-06,proceso,EPS040,(vacía),344,16306407177,37541,0,2
+contributivo,2026-06,proceso,EPS040,descuento de auditoría,2,19337980,0,0,0
+contributivo,2026-06,proceso,EPS040,embargo,1,13059416,0,0,0
+contributivo,2026-06,proceso,EPS041,(vacía),4,44149719577,0,0,0
+contributivo,2026-06,proceso,EPS042,(vacía),19,2579914474,0,0,0
+contributivo,2026-06,proceso,EPS048,(vacía),169,16450394293,10401,0,1
+contributivo,2026-06,proceso,EPS048,descuento de auditoría,1,88676162,0,0,0
+contributivo,2026-06,proceso,EPSC25,(vacía),12,2062089621,0,0,0
+contributivo,2026-06,proceso,EPSC34,(vacía),155,8636963865,0,0,0
+contributivo,2026-06,proceso,EPSIC5,(vacía),134,2868993109,0,0,0
+contributivo,2026-06,proceso,EPSIC5,descuento de auditoría,1,6463982,0,0,0
+contributivo,2026-06,proceso,EPSIC5,falla bancaria,1,5810732,0,0,0
+contributivo,2026-06,proceso,ESSC07,(vacía),471,21703611458,337283,0,3
+contributivo,2026-06,proceso,ESSC07,descuento de auditoría,4,35016675,0,0,0
+contributivo,2026-06,proceso,ESSC24,(vacía),25,7171386952,0,0,0
+contributivo,2026-07,proceso,CCFC33,(vacía),59,1608336021,0,0,0
+contributivo,2026-07,proceso,CCFC50,(vacía),43,1391250903,0,0,0
+contributivo,2026-07,proceso,CCFC55,(vacía),22,8652433375,0,0,0
+contributivo,2026-07,proceso,EPS002,(vacía),2674,505315040256,0,0,0
+contributivo,2026-07,proceso,EPS002,falla bancaria,3,0,194562052,0,3
+contributivo,2026-07,proceso,EPS005,(vacía),3555,707750834953,0,0,0
+contributivo,2026-07,proceso,EPS005,falla bancaria,4,0,272767492,0,4
+contributivo,2026-07,proceso,EPS008,(vacía),240,242069132711,0,0,0
+contributivo,2026-07,proceso,EPS010,(vacía),2396,728532174280,0,0,0
+contributivo,2026-07,proceso,EPS010,falla bancaria,1,0,1337504,0,1
+contributivo,2026-07,proceso,EPS012,(vacía),90,37274224795,0,0,0
+contributivo,2026-07,proceso,EPS017,(vacía),955,242150009143,0,0,0
+contributivo,2026-07,proceso,EPS017,falla bancaria,1,0,4623128,0,1
+contributivo,2026-07,proceso,EPS018,(vacía),124,81318040641,0,0,0
+contributivo,2026-07,proceso,EPS037,(vacía),1462,730008353440,0,0,0
+contributivo,2026-07,proceso,EPS037,embargo,1,966099,475840,0,1
+contributivo,2026-07,proceso,EPS037,falla bancaria,2,0,446922486,0,2
+contributivo,2026-07,proceso,EPS040,(vacía),248,18418350443,0,0,0
+contributivo,2026-07,proceso,EPS041,(vacía),7,50855108319,0,0,0
+contributivo,2026-07,proceso,EPS048,(vacía),306,18537575602,0,0,0
+contributivo,2026-07,proceso,EPSC25,(vacía),15,2360600181,0,0,0
+contributivo,2026-07,proceso,EPSC34,(vacía),100,10014286132,0,0,0
+contributivo,2026-07,proceso,EPSC34,falla bancaria,1,0,13640190,0,1
+contributivo,2026-07,proceso,EPSIC5,(vacía),56,3250112950,0,0,0
+contributivo,2026-07,proceso,ESSC07,(vacía),391,25714971445,0,0,0
+contributivo,2026-07,proceso,ESSC07,falla bancaria,1,0,3504143,0,1
+contributivo,2026-08,proceso,CCFC33,(vacía),123,1120177981,0,0,0
+contributivo,2026-08,proceso,CCFC50,(vacía),39,1353612939,0,0,0
+contributivo,2026-08,proceso,CCFC55,(vacía),28,8435284003,0,0,0
+contributivo,2026-08,proceso,EPS002,(vacía),2322,493382124197,0,0,0
+contributivo,2026-08,proceso,EPS002,falla bancaria,2,0,71646275,0,2
+contributivo,2026-08,proceso,EPS005,(vacía),2094,702272076885,0,0,0
+contributivo,2026-08,proceso,EPS008,(vacía),236,240806212187,0,0,0
+contributivo,2026-08,proceso,EPS010,(vacía),2403,725370531009,0,0,0
+contributivo,2026-08,proceso,EPS010,falla bancaria,3,0,267252774,0,3
+contributivo,2026-08,proceso,EPS012,(vacía),106,37375034160,0,0,0
+contributivo,2026-08,proceso,EPS017,(vacía),307,239136132465,0,0,0
+contributivo,2026-08,proceso,EPS018,(vacía),195,80400151362,0,0,0
+contributivo,2026-08,proceso,EPS037,(vacía),1652,743442595994,0,0,0
+contributivo,2026-08,proceso,EPS037,embargo,1,1129384,556263,0,1
+contributivo,2026-08,proceso,EPS037,falla bancaria,2,0,329982913,0,2
+contributivo,2026-08,proceso,EPS040,(vacía),269,17453859551,0,0,0
+contributivo,2026-08,proceso,EPS041,(vacía),6,46986485175,0,0,0
+contributivo,2026-08,proceso,EPS048,(vacía),221,18658046465,0,0,0
+contributivo,2026-08,proceso,EPSC25,(vacía),12,2093212298,0,0,0
+contributivo,2026-08,proceso,EPSC34,(vacía),132,9559377142,0,0,0
+contributivo,2026-08,proceso,EPSIC5,(vacía),162,2949911777,0,0,0
+contributivo,2026-08,proceso,ESSC07,(vacía),455,23621269556,0,0,0
+contributivo,2026-09,proceso,CCFC33,(vacía),38,1238987002,0,0,0
+contributivo,2026-09,proceso,CCFC50,(vacía),39,1427324470,0,0,0
+contributivo,2026-09,proceso,CCFC55,(vacía),16,8715493220,0,0,0
+contributivo,2026-09,proceso,EPS002,(vacía),2043,523541595492,0,0,0
+contributivo,2026-09,proceso,EPS005,(vacía),2207,745400833696,0,0,0
+contributivo,2026-09,proceso,EPS008,(vacía),253,249301954336,0,0,0
+contributivo,2026-09,proceso,EPS010,(vacía),2441,770497281162,0,0,0
+contributivo,2026-09,proceso,EPS012,(vacía),107,39857686741,0,0,0
+contributivo,2026-09,proceso,EPS017,(vacía),1993,250841422416,0,0,0
+contributivo,2026-09,proceso,EPS017,embargo,1,4802134,2365229,0,1
+contributivo,2026-09,proceso,EPS018,(vacía),432,85657999219,0,0,0
+contributivo,2026-09,proceso,EPS037,(vacía),1857,771391044341,0,0,0
+contributivo,2026-09,proceso,EPS037,embargo,1,979707,482541,0,1
+contributivo,2026-09,proceso,EPS040,(vacía),499,18761415243,0,0,0
+contributivo,2026-09,proceso,EPS041,(vacía),7,51414554997,0,0,0
+contributivo,2026-09,proceso,EPS042,(vacía),750,12121071135,0,0,0
+contributivo,2026-09,proceso,EPS042,falla bancaria,1,0,1905800,0,1
+contributivo,2026-09,proceso,EPS048,(vacía),266,19969271910,0,0,0
+contributivo,2026-09,proceso,EPSC25,(vacía),30,2267834470,0,0,0
+contributivo,2026-09,proceso,EPSC34,(vacía),156,10245767086,0,0,0
+contributivo,2026-09,proceso,EPSC34,falla bancaria,1,0,6253535,0,1
+contributivo,2026-09,proceso,EPSIC5,(vacía),124,3249694558,0,0,0
+contributivo,2026-09,proceso,ESSC07,(vacía),447,25289026334,0,0,0
+contributivo,2026-09,proceso,ESSC24,(vacía),527,30237785451,0,0,0
+subsidiado-ips,2024-01,complemento,EPSI01,comunicación de la Supersalud,48,16126477602,0,48,0
+subsidiado-ips,2024-01,complemento,EPSI01,comunicación sin emisor identificado,16,8380228496,0,16,0
+subsidiado-ips,2024-01,complemento,ESS062,comunicación de la Supersalud,361,159246254500,0,361,0
+subsidiado-ips,2024-01,complemento,ESS118,comunicación de la Supersalud,466,181563576368,0,466,0
+subsidiado-ips,2024-01,proceso,CCF033,(vacía),165,16590635330,0,0,0
+subsidiado-ips,2024-01,proceso,CCF050,(vacía),96,20410846914,0,0,0
+subsidiado-ips,2024-01,proceso,CCF055,(vacía),612,111660348380,0,0,0
+subsidiado-ips,2024-01,proceso,CCF102,(vacía),115,13143473192,0,0,0
+subsidiado-ips,2024-01,proceso,EPS025,(vacía),61,16028247500,0,0,0
+subsidiado-ips,2024-01,proceso,EPSI03,(vacía),193,33408422238,0,0,0
+subsidiado-ips,2024-01,proceso,EPSI04,(vacía),29,5029451489,0,0,0
+subsidiado-ips,2024-01,proceso,EPSI05,(vacía),247,32453826599,0,0,0
+subsidiado-ips,2024-01,proceso,EPSI06,(vacía),229,11609843810,0,0,0
+subsidiado-ips,2024-01,proceso,EPSS01,(vacía),9,469264180,0,0,0
+subsidiado-ips,2024-01,proceso,EPSS02,(vacía),972,125577817251,0,0,0
+subsidiado-ips,2024-01,proceso,EPSS05,(vacía),730,57249800967,0,0,0
+subsidiado-ips,2024-01,proceso,EPSS08,(vacía),13,4918434943,0,0,0
+subsidiado-ips,2024-01,proceso,EPSS10,(vacía),666,70196179987,0,0,0
+subsidiado-ips,2024-01,proceso,EPSS12,(vacía),73,4836147393,0,0,0
+subsidiado-ips,2024-01,proceso,EPSS17,(vacía),708,88834945728,0,0,0
+subsidiado-ips,2024-01,proceso,EPSS18,(vacía),90,11839444400,0,0,0
+subsidiado-ips,2024-01,proceso,EPSS34,(vacía),99,94839620260,0,0,0
+subsidiado-ips,2024-01,proceso,EPSS37,(vacía),534,12750840278,0,0,0
+subsidiado-ips,2024-01,proceso,EPSS40,(vacía),365,180044041605,0,0,0
+subsidiado-ips,2024-01,proceso,EPSS41,(vacía),920,275773111545,0,0,0
+subsidiado-ips,2024-01,proceso,EPSS42,(vacía),189,1952769430,0,0,0
+subsidiado-ips,2024-01,proceso,EPSS46,(vacía),2,527831538,0,0,0
+subsidiado-ips,2024-01,proceso,EPSS48,(vacía),57,645716984,0,0,0
+subsidiado-ips,2024-01,proceso,ESS024,(vacía),446,150661583188,0,0,0
+subsidiado-ips,2024-01,proceso,ESS207,(vacía),381,170333691626,0,0,0
+subsidiado-ips,2024-02,complemento,EPSI01,comunicación sin emisor identificado,80,24444387261,0,80,0
+subsidiado-ips,2024-02,complemento,ESS062,comunicación de la Supersalud,483,164099239948,0,483,0
+subsidiado-ips,2024-02,complemento,ESS118,comunicación de la Supersalud,32,13611448704,0,32,0
+subsidiado-ips,2024-02,complemento,ESS118,comunicación sin emisor identificado,356,173784938621,0,356,0
+subsidiado-ips,2024-02,proceso,CCF033,(vacía),160,16923450610,0,0,0
+subsidiado-ips,2024-02,proceso,CCF050,(vacía),95,22970132678,0,0,0
+subsidiado-ips,2024-02,proceso,CCF055,(vacía),625,122386357635,0,0,0
+subsidiado-ips,2024-02,proceso,CCF102,(vacía),108,14190990492,0,0,0
+subsidiado-ips,2024-02,proceso,EPS025,(vacía),76,16129641666,0,0,0
+subsidiado-ips,2024-02,proceso,EPSI03,(vacía),207,33182320446,0,0,0
+subsidiado-ips,2024-02,proceso,EPSI04,(vacía),34,2914396279,0,0,0
+subsidiado-ips,2024-02,proceso,EPSI05,(vacía),224,31244215368,0,0,0
+subsidiado-ips,2024-02,proceso,EPSI06,(vacía),115,12077984961,0,0,0
+subsidiado-ips,2024-02,proceso,EPSS01,(vacía),16,265527014,0,0,0
+subsidiado-ips,2024-02,proceso,EPSS02,(vacía),974,116658773729,0,0,0
+subsidiado-ips,2024-02,proceso,EPSS05,(vacía),766,76112143351,0,0,0
+subsidiado-ips,2024-02,proceso,EPSS08,(vacía),27,7845508777,0,0,0
+subsidiado-ips,2024-02,proceso,EPSS10,(vacía),630,64524446917,0,0,0
+subsidiado-ips,2024-02,proceso,EPSS12,(vacía),79,5259021979,0,0,0
+subsidiado-ips,2024-02,proceso,EPSS17,(vacía),621,93015980053,0,0,0
+subsidiado-ips,2024-02,proceso,EPSS18,(vacía),100,13291144758,0,0,0
+subsidiado-ips,2024-02,proceso,EPSS34,(vacía),98,106881161881,0,0,0
+subsidiado-ips,2024-02,proceso,EPSS37,(vacía),468,18480698989,0,0,0
+subsidiado-ips,2024-02,proceso,EPSS40,(vacía),310,183174215704,0,0,0
+subsidiado-ips,2024-02,proceso,EPSS41,(vacía),1072,283679601988,0,0,0
+subsidiado-ips,2024-02,proceso,EPSS42,(vacía),59,2308244004,0,0,0
+subsidiado-ips,2024-02,proceso,EPSS46,(vacía),2,529558767,0,0,0
+subsidiado-ips,2024-02,proceso,EPSS48,(vacía),8,442539842,0,0,0
+subsidiado-ips,2024-02,proceso,ESS024,(vacía),558,193224295555,0,0,0
+subsidiado-ips,2024-02,proceso,ESS207,(vacía),556,162911440397,0,0,0
+subsidiado-ips,2024-03,complemento,EPSI01,comunicación de la Supersalud,91,24818702645,0,91,0
+subsidiado-ips,2024-03,complemento,ESS062,comunicación de la Supersalud,365,172323174873,0,365,0
+subsidiado-ips,2024-03,complemento,ESS118,comunicación de la Supersalud,355,186196097516,0,355,0
+subsidiado-ips,2024-03,proceso,CCF033,(vacía),202,18794668196,0,0,0
+subsidiado-ips,2024-03,proceso,CCF050,(vacía),95,22671341710,0,0,0
+subsidiado-ips,2024-03,proceso,CCF055,(vacía),624,123465397509,0,0,0
+subsidiado-ips,2024-03,proceso,CCF102,(vacía),111,13351022590,0,0,0
+subsidiado-ips,2024-03,proceso,EPS025,(vacía),69,17004379321,0,0,0
+subsidiado-ips,2024-03,proceso,EPSI03,(vacía),262,32888328585,0,0,0
+subsidiado-ips,2024-03,proceso,EPSI04,(vacía),21,2034782630,0,0,0
+subsidiado-ips,2024-03,proceso,EPSI05,(vacía),200,31844910428,0,0,0
+subsidiado-ips,2024-03,proceso,EPSI06,(vacía),119,12769176488,0,0,0
+subsidiado-ips,2024-03,proceso,EPSS01,(vacía),7,151720825,0,0,0
+subsidiado-ips,2024-03,proceso,EPSS02,(vacía),839,107503066574,0,0,0
+subsidiado-ips,2024-03,proceso,EPSS05,(vacía),761,66924875156,0,0,0
+subsidiado-ips,2024-03,proceso,EPSS08,(vacía),24,8209987656,0,0,0
+subsidiado-ips,2024-03,proceso,EPSS10,(vacía),616,49079895972,0,0,0
+subsidiado-ips,2024-03,proceso,EPSS12,(vacía),53,5452644767,0,0,0
+subsidiado-ips,2024-03,proceso,EPSS17,(vacía),639,94528801870,0,0,0
+subsidiado-ips,2024-03,proceso,EPSS18,(vacía),112,13997501855,0,0,0
+subsidiado-ips,2024-03,proceso,EPSS34,(vacía),88,92615113016,0,0,0
+subsidiado-ips,2024-03,proceso,EPSS37,(vacía),586,20874868357,0,0,0
+subsidiado-ips,2024-03,proceso,EPSS40,(vacía),354,177296615389,0,0,0
+subsidiado-ips,2024-03,proceso,EPSS41,(vacía),978,280107615241,0,0,0
+subsidiado-ips,2024-03,proceso,EPSS42,(vacía),72,2624928782,0,0,0
+subsidiado-ips,2024-03,proceso,EPSS46,(vacía),2,255575555,0,0,0
+subsidiado-ips,2024-03,proceso,EPSS48,(vacía),13,443634297,0,0,0
+subsidiado-ips,2024-03,proceso,ESS024,(vacía),458,192010784296,0,0,0
+subsidiado-ips,2024-03,proceso,ESS207,(vacía),484,185108078939,0,0,0
+subsidiado-ips,2024-04,complemento,EPSI01,comunicación de la Supersalud,163,25208275658,0,163,0
+subsidiado-ips,2024-04,complemento,EPSS05,cargue en PISIS,987,146725447254,0,0,0
+subsidiado-ips,2024-04,complemento,EPSS37,cargue en PISIS,1202,135249785390,0,0,0
+subsidiado-ips,2024-04,complemento,EPSS41,cargue en PISIS,1333,519974090683,0,0,0
+subsidiado-ips,2024-04,complemento,ESS062,comunicación de la Supersalud,402,160753454848,0,402,0
+subsidiado-ips,2024-04,complemento,ESS118,comunicación de la Supersalud,342,183589603525,0,342,0
+subsidiado-ips,2024-04,proceso,CCF033,(vacía),211,19035197776,0,0,0
+subsidiado-ips,2024-04,proceso,CCF050,(vacía),98,22922189926,0,0,0
+subsidiado-ips,2024-04,proceso,CCF055,(vacía),640,118495157150,0,0,0
+subsidiado-ips,2024-04,proceso,CCF102,(vacía),108,13325046163,0,0,0
+subsidiado-ips,2024-04,proceso,EPS025,(vacía),65,17558985870,0,0,0
+subsidiado-ips,2024-04,proceso,EPSI03,(vacía),189,31492009182,0,0,0
+subsidiado-ips,2024-04,proceso,EPSI04,(vacía),36,2258055088,0,0,0
+subsidiado-ips,2024-04,proceso,EPSI05,(vacía),202,34845429335,0,0,0
+subsidiado-ips,2024-04,proceso,EPSI06,(vacía),143,12795315824,0,0,0
+subsidiado-ips,2024-04,proceso,EPSS01,(vacía),9,139118426,0,0,0
+subsidiado-ips,2024-04,proceso,EPSS02,(vacía),978,113578941564,0,0,0
+subsidiado-ips,2024-04,proceso,EPSS08,(vacía),21,10375725539,0,0,0
+subsidiado-ips,2024-04,proceso,EPSS10,(vacía),689,69610881346,0,0,0
+subsidiado-ips,2024-04,proceso,EPSS12,(vacía),78,5535879033,0,0,0
+subsidiado-ips,2024-04,proceso,EPSS17,(vacía),649,99708265761,0,0,0
+subsidiado-ips,2024-04,proceso,EPSS18,(vacía),107,14224709480,0,0,0
+subsidiado-ips,2024-04,proceso,EPSS34,(vacía),236,94228360572,0,0,0
+subsidiado-ips,2024-04,proceso,EPSS40,(vacía),432,181096722485,0,0,0
+subsidiado-ips,2024-04,proceso,EPSS42,(vacía),40,2485688528,0,0,0
+subsidiado-ips,2024-04,proceso,EPSS46,(vacía),2,195481230,0,0,0
+subsidiado-ips,2024-04,proceso,EPSS48,(vacía),11,506343441,0,0,0
+subsidiado-ips,2024-04,proceso,ESS024,(vacía),461,162321185290,0,0,0
+subsidiado-ips,2024-04,proceso,ESS207,(vacía),539,206135065119,0,0,0
+subsidiado-ips,2024-05,complemento,EPSI01,comunicación de la Supersalud,114,24758547005,0,114,0
+subsidiado-ips,2024-05,complemento,ESS062,comunicación de la Supersalud,419,156041773311,0,419,0
+subsidiado-ips,2024-05,complemento,ESS118,comunicación de la Supersalud,387,192607770551,0,387,0
+subsidiado-ips,2024-05,proceso,CCF033,(vacía),156,18948703020,0,0,0
+subsidiado-ips,2024-05,proceso,CCF050,(vacía),105,22819332773,0,0,0
+subsidiado-ips,2024-05,proceso,CCF055,(vacía),623,121991689106,0,0,0
+subsidiado-ips,2024-05,proceso,CCF102,(vacía),104,13541478880,0,0,0
+subsidiado-ips,2024-05,proceso,EPS025,(vacía),58,16501075947,0,0,0
+subsidiado-ips,2024-05,proceso,EPSI03,(vacía),250,34867893336,0,0,0
+subsidiado-ips,2024-05,proceso,EPSI04,(vacía),62,1872036332,0,0,0
+subsidiado-ips,2024-05,proceso,EPSI05,(vacía),224,38075059079,0,0,0
+subsidiado-ips,2024-05,proceso,EPSI06,(vacía),222,12545684889,0,0,0
+subsidiado-ips,2024-05,proceso,EPSS01,(vacía),6,95381357,0,0,0
+subsidiado-ips,2024-05,proceso,EPSS02,(vacía),990,118492535573,0,0,0
+subsidiado-ips,2024-05,proceso,EPSS05,(vacía),978,146738202021,0,0,0
+subsidiado-ips,2024-05,proceso,EPSS08,(vacía),20,14996778048,0,0,0
+subsidiado-ips,2024-05,proceso,EPSS10,(vacía),706,91220825473,0,0,0
+subsidiado-ips,2024-05,proceso,EPSS12,(vacía),75,5798234565,0,0,0
+subsidiado-ips,2024-05,proceso,EPSS17,(vacía),646,98428393509,0,0,0
+subsidiado-ips,2024-05,proceso,EPSS18,(vacía),128,17154063031,0,0,0
+subsidiado-ips,2024-05,proceso,EPSS34,(vacía),234,95275837518,0,0,0
+subsidiado-ips,2024-05,proceso,EPSS37,(vacía),636,135238620690,0,0,0
+subsidiado-ips,2024-05,proceso,EPSS40,(vacía),402,180654370269,0,0,0
+subsidiado-ips,2024-05,proceso,EPSS41,(vacía),1444,519974090684,0,0,0
+subsidiado-ips,2024-05,proceso,EPSS42,(vacía),153,2199916873,0,0,0
+subsidiado-ips,2024-05,proceso,EPSS46,(vacía),2,510469327,0,0,0
+subsidiado-ips,2024-05,proceso,EPSS48,(vacía),19,217983720,0,0,0
+subsidiado-ips,2024-05,proceso,ESS024,(vacía),528,189152655175,0,0,0
+subsidiado-ips,2024-05,proceso,ESS207,(vacía),475,201291359342,0,0,0
+subsidiado-ips,2024-06,complemento,ESS062,comunicación de la Supersalud,433,150938744104,11451538,433,1
+subsidiado-ips,2024-06,proceso,CCF033,(vacía),161,18525858028,0,0,0
+subsidiado-ips,2024-06,proceso,CCF050,(vacía),105,23624637789,0,0,0
+subsidiado-ips,2024-06,proceso,CCF055,(vacía),659,122745983636,0,0,0
+subsidiado-ips,2024-06,proceso,CCF102,(vacía),98,15355032164,0,0,0
+subsidiado-ips,2024-06,proceso,EPS025,(vacía),63,16561022652,0,0,0
+subsidiado-ips,2024-06,proceso,EPSI03,(vacía),195,36470700613,0,0,0
+subsidiado-ips,2024-06,proceso,EPSI04,(vacía),60,3881141588,0,0,0
+subsidiado-ips,2024-06,proceso,EPSI05,(vacía),215,36857505785,0,0,0
+subsidiado-ips,2024-06,proceso,EPSI06,(vacía),128,12491977883,0,0,0
+subsidiado-ips,2024-06,proceso,EPSS01,(vacía),5,56162651,0,0,0
+subsidiado-ips,2024-06,proceso,EPSS02,(vacía),1037,124693667739,0,0,0
+subsidiado-ips,2024-06,proceso,EPSS05,(vacía),1016,146996285993,0,0,0
+subsidiado-ips,2024-06,proceso,EPSS08,(vacía),19,9973158874,0,0,0
+subsidiado-ips,2024-06,proceso,EPSS10,(vacía),768,70241050332,0,0,0
+subsidiado-ips,2024-06,proceso,EPSS12,(vacía),57,5836136843,0,0,0
+subsidiado-ips,2024-06,proceso,EPSS17,(vacía),640,96976970677,0,0,0
+subsidiado-ips,2024-06,proceso,EPSS18,(vacía),94,16966738427,0,0,0
+subsidiado-ips,2024-06,proceso,EPSS34,(vacía),249,107395032181,0,0,0
+subsidiado-ips,2024-06,proceso,EPSS37,(vacía),655,133778298898,0,0,0
+subsidiado-ips,2024-06,proceso,EPSS40,(vacía),348,180129654547,0,0,0
+subsidiado-ips,2024-06,proceso,EPSS41,(vacía),1449,518890190266,0,0,0
+subsidiado-ips,2024-06,proceso,EPSS42,(vacía),185,1812658888,0,0,0
+subsidiado-ips,2024-06,proceso,EPSS46,(vacía),2,509619529,0,0,0
+subsidiado-ips,2024-06,proceso,EPSS48,(vacía),19,229929640,0,0,0
+subsidiado-ips,2024-06,proceso,ESS024,(vacía),459,207624820307,0,0,0
+subsidiado-ips,2024-06,proceso,ESS207,(vacía),527,200002379722,0,0,0
+subsidiado-ips,2024-07,complemento,EPSI01,comunicación sin emisor identificado,129,25955913808,0,129,0
+subsidiado-ips,2024-07,complemento,ESS062,comunicación de la Supersalud,533,164396500356,11124398,533,1
+subsidiado-ips,2024-07,complemento,ESS118,comunicación de la Supersalud,391,188557837782,0,391,0
+subsidiado-ips,2024-07,proceso,CCF033,(vacía),178,19594473863,0,0,0
+subsidiado-ips,2024-07,proceso,CCF050,(vacía),118,22759376646,0,0,0
+subsidiado-ips,2024-07,proceso,CCF055,(vacía),645,122699863722,0,0,0
+subsidiado-ips,2024-07,proceso,CCF055,embargo,3,702573647,169143670,0,3
+subsidiado-ips,2024-07,proceso,CCF102,(vacía),102,13624390917,0,0,0
+subsidiado-ips,2024-07,proceso,EPS025,(vacía),77,16381443823,0,0,0
+subsidiado-ips,2024-07,proceso,EPSI03,(vacía),234,31678945749,0,0,0
+subsidiado-ips,2024-07,proceso,EPSI04,(vacía),49,1566113004,0,0,0
+subsidiado-ips,2024-07,proceso,EPSI05,(vacía),218,39683604776,0,0,0
+subsidiado-ips,2024-07,proceso,EPSI06,(vacía),201,12497350900,0,0,0
+subsidiado-ips,2024-07,proceso,EPSS01,(vacía),25,359145384,0,0,0
+subsidiado-ips,2024-07,proceso,EPSS02,(vacía),1061,141943851816,0,0,0
+subsidiado-ips,2024-07,proceso,EPSS05,(vacía),1019,144260123430,0,0,0
+subsidiado-ips,2024-07,proceso,EPSS05,embargo,1,1559567647,50973774,0,1
+subsidiado-ips,2024-07,proceso,EPSS08,(vacía),19,7542289634,0,0,0
+subsidiado-ips,2024-07,proceso,EPSS10,(vacía),689,89608233482,0,0,0
+subsidiado-ips,2024-07,proceso,EPSS12,(vacía),73,5623841320,0,0,0
+subsidiado-ips,2024-07,proceso,EPSS17,(vacía),608,103863872875,0,0,0
+subsidiado-ips,2024-07,proceso,EPSS18,(vacía),87,17627109070,0,0,0
+subsidiado-ips,2024-07,proceso,EPSS34,(vacía),187,105154463515,0,0,0
+subsidiado-ips,2024-07,proceso,EPSS37,(vacía),561,132766218938,0,0,0
+subsidiado-ips,2024-07,proceso,EPSS40,(vacía),313,190033696872,0,0,0
+subsidiado-ips,2024-07,proceso,EPSS41,(vacía),1049,517186588184,0,0,0
+subsidiado-ips,2024-07,proceso,EPSS41,embargo,6,3611496593,142648495,0,5
+subsidiado-ips,2024-07,proceso,EPSS42,(vacía),52,2256520982,0,0,0
+subsidiado-ips,2024-07,proceso,EPSS42,embargo,1,9735292,4091156,0,1
+subsidiado-ips,2024-07,proceso,EPSS46,(vacía),2,507669503,0,0,0
+subsidiado-ips,2024-07,proceso,EPSS48,(vacía),7,338259901,0,0,0
+subsidiado-ips,2024-07,proceso,ESS024,(vacía),498,200254205143,0,0,0
+subsidiado-ips,2024-07,proceso,ESS024,embargo,1,93008369,23182992,0,1
+subsidiado-ips,2024-07,proceso,ESS207,(vacía),441,158649513422,0,0,0
+subsidiado-ips,2024-07,proceso,ESS207,embargo,5,1061479583,120626624,0,4
+subsidiado-ips,2024-08,complemento,EPSI01,comunicación de la Supersalud,117,23931861873,739366,117,1
+subsidiado-ips,2024-08,complemento,ESS062,comunicación de la Supersalud,556,167400234503,19504007,556,1
+subsidiado-ips,2024-08,complemento,ESS118,comunicación de la Supersalud,349,196205073870,0,349,0
+subsidiado-ips,2024-08,proceso,CCF033,(vacía),223,20900275858,0,0,0
+subsidiado-ips,2024-08,proceso,CCF033,embargo,1,270304274,10588200,0,1
+subsidiado-ips,2024-08,proceso,CCF050,(vacía),107,22829069545,0,0,0
+subsidiado-ips,2024-08,proceso,CCF055,(vacía),628,124031156260,0,0,0
+subsidiado-ips,2024-08,proceso,CCF102,(vacía),114,12342775222,0,0,0
+subsidiado-ips,2024-08,proceso,EPS025,(vacía),74,16672312957,0,0,0
+subsidiado-ips,2024-08,proceso,EPSI03,(vacía),241,34518119721,0,0,0
+subsidiado-ips,2024-08,proceso,EPSI04,(vacía),36,3162584082,0,0,0
+subsidiado-ips,2024-08,proceso,EPSI05,(vacía),241,38420042294,0,0,0
+subsidiado-ips,2024-08,proceso,EPSI06,(vacía),137,12504595950,0,0,0
+subsidiado-ips,2024-08,proceso,EPSS01,(vacía),7,490893498,0,0,0
+subsidiado-ips,2024-08,proceso,EPSS02,(vacía),1045,132266954022,0,0,0
+subsidiado-ips,2024-08,proceso,EPSS05,(vacía),1074,147015128117,0,0,0
+subsidiado-ips,2024-08,proceso,EPSS08,(vacía),19,8397743268,0,0,0
+subsidiado-ips,2024-08,proceso,EPSS10,(vacía),889,93535321362,0,0,0
+subsidiado-ips,2024-08,proceso,EPSS12,(vacía),48,5740515207,0,0,0
+subsidiado-ips,2024-08,proceso,EPSS17,(vacía),583,97684579261,0,0,0
+subsidiado-ips,2024-08,proceso,EPSS18,(vacía),141,17274461871,0,0,0
+subsidiado-ips,2024-08,proceso,EPSS34,(vacía),217,126049417198,0,0,0
+subsidiado-ips,2024-08,proceso,EPSS37,(vacía),583,131895167281,0,0,0
+subsidiado-ips,2024-08,proceso,EPSS40,(vacía),359,196369434149,0,0,0
+subsidiado-ips,2024-08,proceso,EPSS41,(vacía),1311,521447665300,0,0,0
+subsidiado-ips,2024-08,proceso,EPSS41,embargo,5,398935382,55523235,0,5
+subsidiado-ips,2024-08,proceso,EPSS42,(vacía),186,2830353822,0,0,0
+subsidiado-ips,2024-08,proceso,EPSS46,(vacía),2,507052655,0,0,0
+subsidiado-ips,2024-08,proceso,EPSS48,(vacía),87,587543648,0,0,0
+subsidiado-ips,2024-08,proceso,ESS024,(vacía),460,192891001595,0,0,0
+subsidiado-ips,2024-08,proceso,ESS207,(vacía),510,190567583545,0,0,0
+subsidiado-ips,2024-08,proceso,ESS207,embargo,8,2801860169,521976653,0,7
+subsidiado-ips,2024-09,complemento,EPSI01,comunicación de la Supersalud,83,24475915849,885624,83,1
+subsidiado-ips,2024-09,complemento,ESS062,comunicación de la Supersalud,496,164959097435,1890155,496,1
+subsidiado-ips,2024-09,complemento,ESS118,comunicación de la Supersalud,357,193931503671,0,357,0
+subsidiado-ips,2024-09,proceso,CCF033,(vacía),219,21297914456,0,0,0
+subsidiado-ips,2024-09,proceso,CCF050,(vacía),92,22865916901,0,0,0
+subsidiado-ips,2024-09,proceso,CCF055,(vacía),648,125668230150,0,0,0
+subsidiado-ips,2024-09,proceso,CCF102,(vacía),118,15482726275,0,0,0
+subsidiado-ips,2024-09,proceso,EPS025,(vacía),53,16787668905,0,0,0
+subsidiado-ips,2024-09,proceso,EPSI03,(vacía),184,37162400989,0,0,0
+subsidiado-ips,2024-09,proceso,EPSI04,(vacía),33,1502253159,0,0,0
+subsidiado-ips,2024-09,proceso,EPSI05,(vacía),229,36774471804,0,0,0
+subsidiado-ips,2024-09,proceso,EPSI06,(vacía),199,12445079395,0,0,0
+subsidiado-ips,2024-09,proceso,EPSS01,(vacía),12,486539203,0,0,0
+subsidiado-ips,2024-09,proceso,EPSS02,(vacía),1058,135999423289,0,0,0
+subsidiado-ips,2024-09,proceso,EPSS05,(vacía),1125,146063106211,0,0,0
+subsidiado-ips,2024-09,proceso,EPSS08,(vacía),110,11274545350,0,0,0
+subsidiado-ips,2024-09,proceso,EPSS10,(vacía),806,80912284287,0,0,0
+subsidiado-ips,2024-09,proceso,EPSS12,(vacía),63,5477950270,0,0,0
+subsidiado-ips,2024-09,proceso,EPSS17,(vacía),602,97885834513,0,0,0
+subsidiado-ips,2024-09,proceso,EPSS18,(vacía),175,17167703116,0,0,0
+subsidiado-ips,2024-09,proceso,EPSS34,(vacía),231,131137422236,0,0,0
+subsidiado-ips,2024-09,proceso,EPSS37,(vacía),686,132692753646,0,0,0
+subsidiado-ips,2024-09,proceso,EPSS40,(vacía),360,199406224299,0,0,0
+subsidiado-ips,2024-09,proceso,EPSS41,(vacía),1384,522242701881,0,0,0
+subsidiado-ips,2024-09,proceso,EPSS41,embargo,3,282270903,87160658,0,3
+subsidiado-ips,2024-09,proceso,EPSS42,(vacía),192,2504420586,0,0,0
+subsidiado-ips,2024-09,proceso,EPSS46,(vacía),2,525239352,0,0,0
+subsidiado-ips,2024-09,proceso,EPSS48,(vacía),18,578381829,0,0,0
+subsidiado-ips,2024-09,proceso,ESS024,(vacía),516,192026412443,0,0,0
+subsidiado-ips,2024-09,proceso,ESS207,(vacía),555,218085610278,0,0,0
+subsidiado-ips,2024-09,proceso,ESS207,embargo,3,394682354,61803558,0,3
+subsidiado-ips,2024-10,complemento,EPSI01,comunicación de la Supersalud,71,25173152430,0,71,0
+subsidiado-ips,2024-10,complemento,ESS062,comunicación de la Supersalud,425,160937882341,3036470,425,1
+subsidiado-ips,2024-10,complemento,ESS118,comunicación de la Supersalud,315,194253840923,0,315,0
+subsidiado-ips,2024-10,proceso,CCF033,(vacía),188,23450820041,0,0,0
+subsidiado-ips,2024-10,proceso,CCF050,(vacía),123,22909162995,0,0,0
+subsidiado-ips,2024-10,proceso,CCF055,(vacía),639,124626900502,0,0,0
+subsidiado-ips,2024-10,proceso,CCF102,(vacía),106,14700918639,0,0,0
+subsidiado-ips,2024-10,proceso,EPS025,(vacía),54,16145975598,0,0,0
+subsidiado-ips,2024-10,proceso,EPSI03,(vacía),193,36086707015,0,0,0
+subsidiado-ips,2024-10,proceso,EPSI04,(vacía),40,2121618135,0,0,0
+subsidiado-ips,2024-10,proceso,EPSI05,(vacía),230,35399266685,0,0,0
+subsidiado-ips,2024-10,proceso,EPSI06,(vacía),155,12266923798,0,0,0
+subsidiado-ips,2024-10,proceso,EPSS01,(vacía),18,176212520,0,0,0
+subsidiado-ips,2024-10,proceso,EPSS02,(vacía),1055,140448090979,0,0,0
+subsidiado-ips,2024-10,proceso,EPSS05,(vacía),1116,146254058521,0,0,0
+subsidiado-ips,2024-10,proceso,EPSS08,(vacía),61,15396027808,0,0,0
+subsidiado-ips,2024-10,proceso,EPSS10,(vacía),823,67522931845,0,0,0
+subsidiado-ips,2024-10,proceso,EPSS12,(vacía),85,5910160277,0,0,0
+subsidiado-ips,2024-10,proceso,EPSS17,(vacía),592,97254208663,0,0,0
+subsidiado-ips,2024-10,proceso,EPSS18,(vacía),166,17413400372,0,0,0
+subsidiado-ips,2024-10,proceso,EPSS34,(vacía),223,128437513119,0,0,0
+subsidiado-ips,2024-10,proceso,EPSS37,(vacía),521,135292217016,0,0,0
+subsidiado-ips,2024-10,proceso,EPSS40,(vacía),330,191506928890,0,0,0
+subsidiado-ips,2024-10,proceso,EPSS41,(vacía),819,530302404795,0,0,0
+subsidiado-ips,2024-10,proceso,EPSS41,embargo,3,321079199,46181015,0,3
+subsidiado-ips,2024-10,proceso,EPSS42,(vacía),12,2463307921,0,0,0
+subsidiado-ips,2024-10,proceso,EPSS46,(vacía),2,521715011,0,0,0
+subsidiado-ips,2024-10,proceso,EPSS48,(vacía),89,1976246199,0,0,0
+subsidiado-ips,2024-10,proceso,ESS024,(vacía),464,194317815155,0,0,0
+subsidiado-ips,2024-10,proceso,ESS207,(vacía),470,243368133894,0,0,0
+subsidiado-ips,2024-10,proceso,ESS207,embargo,7,1133227957,424038147,0,7
+subsidiado-ips,2024-11,complemento,EPSI01,comunicación de la Supersalud,120,25106745733,0,120,0
+subsidiado-ips,2024-11,complemento,ESS062,comunicación de la Supersalud,417,160491773751,3602922,417,1
+subsidiado-ips,2024-11,complemento,ESS118,comunicación sin emisor identificado,304,194105780610,0,304,0
+subsidiado-ips,2024-11,proceso,CCF033,(vacía),216,21595341163,0,0,0
+subsidiado-ips,2024-11,proceso,CCF033,embargo,1,28106820,7055702,0,1
+subsidiado-ips,2024-11,proceso,CCF050,(vacía),108,22859806174,0,0,0
+subsidiado-ips,2024-11,proceso,CCF055,(vacía),647,121861989740,0,0,0
+subsidiado-ips,2024-11,proceso,CCF102,(vacía),112,16002241881,0,0,0
+subsidiado-ips,2024-11,proceso,EPS025,(vacía),59,16279141946,0,0,0
+subsidiado-ips,2024-11,proceso,EPSI03,(vacía),173,34549210860,0,0,0
+subsidiado-ips,2024-11,proceso,EPSI04,(vacía),73,2970459453,0,0,0
+subsidiado-ips,2024-11,proceso,EPSI05,(vacía),224,35767245861,0,0,0
+subsidiado-ips,2024-11,proceso,EPSI06,(vacía),133,12119144896,0,0,0
+subsidiado-ips,2024-11,proceso,EPSS01,(vacía),6,140971040,0,0,0
+subsidiado-ips,2024-11,proceso,EPSS02,(vacía),1047,145617138332,0,0,0
+subsidiado-ips,2024-11,proceso,EPSS05,(vacía),1203,146837519256,0,0,0
+subsidiado-ips,2024-11,proceso,EPSS08,(vacía),30,14020478164,0,0,0
+subsidiado-ips,2024-11,proceso,EPSS10,(vacía),870,89167981882,0,0,0
+subsidiado-ips,2024-11,proceso,EPSS12,(vacía),86,5914786726,0,0,0
+subsidiado-ips,2024-11,proceso,EPSS17,(vacía),673,97697903635,0,0,0
+subsidiado-ips,2024-11,proceso,EPSS18,(vacía),180,17376292355,0,0,0
+subsidiado-ips,2024-11,proceso,EPSS34,(vacía),216,125989756497,0,0,0
+subsidiado-ips,2024-11,proceso,EPSS37,(vacía),470,135150579412,0,0,0
+subsidiado-ips,2024-11,proceso,EPSS40,(vacía),360,197765282062,0,0,0
+subsidiado-ips,2024-11,proceso,EPSS41,(vacía),1185,530818764978,0,0,0
+subsidiado-ips,2024-11,proceso,EPSS41,embargo,2,443364480,63290419,0,2
+subsidiado-ips,2024-11,proceso,EPSS42,(vacía),18,2231691169,0,0,0
+subsidiado-ips,2024-11,proceso,EPSS46,(vacía),2,510778241,0,0,0
+subsidiado-ips,2024-11,proceso,EPSS48,(vacía),103,1114174910,0,0,0
+subsidiado-ips,2024-11,proceso,ESS024,(vacía),401,191524642284,0,0,0
+subsidiado-ips,2024-11,proceso,ESS024,embargo,1,272483691,71366309,0,1
+subsidiado-ips,2024-11,proceso,ESS207,(vacía),540,253098222579,0,0,0
+subsidiado-ips,2024-11,proceso,ESS207,embargo,5,1165477616,98848129,0,4
+subsidiado-ips,2024-12,complemento,EPSI01,comunicación sin emisor identificado,72,25995303928,0,72,0
+subsidiado-ips,2024-12,complemento,ESS024,comunicación sin emisor identificado,6,3190538136,0,6,0
+subsidiado-ips,2024-12,complemento,ESS062,comunicación de la Supersalud,410,152345005727,3495693,410,1
+subsidiado-ips,2024-12,complemento,ESS118,comunicación sin emisor identificado,452,186138704511,0,452,0
+subsidiado-ips,2024-12,proceso,CCF033,(vacía),195,22934214545,0,0,0
+subsidiado-ips,2024-12,proceso,CCF033,resolución sin emisor identificado,1,0,11371680,0,1
+subsidiado-ips,2024-12,proceso,CCF050,(vacía),85,23443068663,0,0,0
+subsidiado-ips,2024-12,proceso,CCF055,(vacía),521,102440947165,0,0,0
+subsidiado-ips,2024-12,proceso,CCF055,resolución sin emisor identificado,1,0,10850299,0,1
+subsidiado-ips,2024-12,proceso,CCF102,(vacía),110,14731541215,0,0,0
+subsidiado-ips,2024-12,proceso,EPS025,(vacía),61,16662294471,0,0,0
+subsidiado-ips,2024-12,proceso,EPSI03,(vacía),182,34386935498,0,0,0
+subsidiado-ips,2024-12,proceso,EPSI04,(vacía),31,1251177519,0,0,0
+subsidiado-ips,2024-12,proceso,EPSI05,(vacía),230,38323018323,0,0,0
+subsidiado-ips,2024-12,proceso,EPSI06,(vacía),92,11575715720,0,0,0
+subsidiado-ips,2024-12,proceso,EPSS01,(vacía),14,309700312,0,0,0
+subsidiado-ips,2024-12,proceso,EPSS02,(vacía),1062,126436781002,0,0,0
+subsidiado-ips,2024-12,proceso,EPSS05,(vacía),1285,147229225831,0,0,0
+subsidiado-ips,2024-12,proceso,EPSS08,(vacía),34,15461713234,0,0,0
+subsidiado-ips,2024-12,proceso,EPSS10,(vacía),830,88160429522,0,0,0
+subsidiado-ips,2024-12,proceso,EPSS12,(vacía),71,5976414700,0,0,0
+subsidiado-ips,2024-12,proceso,EPSS17,(vacía),120,92676657690,0,0,0
+subsidiado-ips,2024-12,proceso,EPSS18,(vacía),192,17757899763,0,0,0
+subsidiado-ips,2024-12,proceso,EPSS34,(vacía),206,108945668261,0,0,0
+subsidiado-ips,2024-12,proceso,EPSS37,(vacía),472,138075971121,0,0,0
+subsidiado-ips,2024-12,proceso,EPSS40,(vacía),378,187989457317,0,0,0
+subsidiado-ips,2024-12,proceso,EPSS41,(vacía),1280,535938257116,0,0,0
+subsidiado-ips,2024-12,proceso,EPSS41,embargo,1,61237434,14243064,0,1
+subsidiado-ips,2024-12,proceso,EPSS46,(vacía),2,536078172,0,0,0
+subsidiado-ips,2024-12,proceso,EPSS48,(vacía),152,1371005653,0,0,0
+subsidiado-ips,2024-12,proceso,ESS024,(vacía),785,311976554722,0,0,0
+subsidiado-ips,2024-12,proceso,ESS024,embargo,1,2256856662,53777428,0,1
+subsidiado-ips,2024-12,proceso,ESS024,resolución sin emisor identificado,1,0,1815710,0,1
+subsidiado-ips,2024-12,proceso,ESS207,(vacía),601,257813254423,0,0,0
+subsidiado-ips,2024-12,proceso,ESS207,embargo,6,631083474,129165550,0,6
+subsidiado-ips,2025-01,complemento,EPSI01,comunicación de la Supersalud,52,26570953161,0,52,0
+subsidiado-ips,2025-01,complemento,ESS062,comunicación de la Supersalud,487,176039645317,0,487,0
+subsidiado-ips,2025-01,complemento,ESS118,comunicación de la Supersalud,232,61965129014,0,232,0
+subsidiado-ips,2025-01,complemento,ESS118,comunicación sin emisor identificado,76,143434409975,0,76,0
+subsidiado-ips,2025-01,proceso,CCF033,(vacía),184,27471929931,0,0,0
+subsidiado-ips,2025-01,proceso,CCF033,embargo,1,28724261,7436824,0,1
+subsidiado-ips,2025-01,proceso,CCF050,(vacía),104,25032032270,0,0,0
+subsidiado-ips,2025-01,proceso,CCF055,(vacía),616,123169812449,0,0,0
+subsidiado-ips,2025-01,proceso,CCF102,(vacía),105,14492973007,0,0,0
+subsidiado-ips,2025-01,proceso,EPS025,(vacía),56,17925530550,0,0,0
+subsidiado-ips,2025-01,proceso,EPSI03,(vacía),159,23016303571,0,0,0
+subsidiado-ips,2025-01,proceso,EPSI04,(vacía),21,712411620,0,0,0
+subsidiado-ips,2025-01,proceso,EPSI05,(vacía),237,36060360752,0,0,0
+subsidiado-ips,2025-01,proceso,EPSI06,(vacía),220,12691086127,0,0,0
+subsidiado-ips,2025-01,proceso,EPSS01,(vacía),14,268687680,0,0,0
+subsidiado-ips,2025-01,proceso,EPSS02,(vacía),1061,143405585569,0,0,0
+subsidiado-ips,2025-01,proceso,EPSS05,(vacía),1104,144914454253,0,0,0
+subsidiado-ips,2025-01,proceso,EPSS08,(vacía),26,7125508789,0,0,0
+subsidiado-ips,2025-01,proceso,EPSS10,(vacía),808,88681319074,0,0,0
+subsidiado-ips,2025-01,proceso,EPSS12,(vacía),46,5982652173,0,0,0
+subsidiado-ips,2025-01,proceso,EPSS17,(vacía),703,97589047519,0,0,0
+subsidiado-ips,2025-01,proceso,EPSS18,(vacía),176,18096341378,0,0,0
+subsidiado-ips,2025-01,proceso,EPSS34,(vacía),220,133072954576,0,0,0
+subsidiado-ips,2025-01,proceso,EPSS37,(vacía),758,135136550314,0,0,0
+subsidiado-ips,2025-01,proceso,EPSS40,(vacía),295,189781275827,0,0,0
+subsidiado-ips,2025-01,proceso,EPSS41,(vacía),1459,535572978781,0,0,0
+subsidiado-ips,2025-01,proceso,EPSS41,embargo,2,272299765,29477610,0,2
+subsidiado-ips,2025-01,proceso,EPSS42,(vacía),2,3016714540,0,0,0
+subsidiado-ips,2025-01,proceso,EPSS46,(vacía),2,491414231,0,0,0
+subsidiado-ips,2025-01,proceso,EPSS48,(vacía),96,1875384766,0,0,0
+subsidiado-ips,2025-01,proceso,ESS024,(vacía),793,311839549108,0,0,0
+subsidiado-ips,2025-01,proceso,ESS207,(vacía),494,264416706738,0,0,0
+subsidiado-ips,2025-01,proceso,ESS207,embargo,2,271727251,45411893,0,2
+subsidiado-ips,2025-02,complemento,EPSI01,comunicación de la Supersalud,77,27078590145,0,77,0
+subsidiado-ips,2025-02,complemento,EPSS42,comunicación sin emisor identificado,27,3821899838,0,27,0
+subsidiado-ips,2025-02,complemento,ESS062,comunicación de la Supersalud,528,175301231792,0,528,0
+subsidiado-ips,2025-02,complemento,ESS118,comunicación de la Supersalud,395,210031044122,0,395,0
+subsidiado-ips,2025-02,proceso,CCF033,(vacía),216,27265079922,0,0,0
+subsidiado-ips,2025-02,proceso,CCF050,(vacía),113,24362965843,0,0,0
+subsidiado-ips,2025-02,proceso,CCF055,(vacía),619,127111518190,0,0,0
+subsidiado-ips,2025-02,proceso,CCF055,embargo,1,10638193,5239707,0,1
+subsidiado-ips,2025-02,proceso,CCF102,(vacía),101,14598466978,0,0,0
+subsidiado-ips,2025-02,proceso,EPS025,(vacía),36,17030415288,0,0,0
+subsidiado-ips,2025-02,proceso,EPSI03,(vacía),59,21863159446,0,0,0
+subsidiado-ips,2025-02,proceso,EPSI04,(vacía),92,14055794494,0,0,0
+subsidiado-ips,2025-02,proceso,EPSI05,(vacía),204,35531334423,0,0,0
+subsidiado-ips,2025-02,proceso,EPSI06,(vacía),165,13138680773,0,0,0
+subsidiado-ips,2025-02,proceso,EPSS01,(vacía),18,142735491,0,0,0
+subsidiado-ips,2025-02,proceso,EPSS02,(vacía),1106,158372081834,0,0,0
+subsidiado-ips,2025-02,proceso,EPSS05,(vacía),1127,153345491370,0,0,0
+subsidiado-ips,2025-02,proceso,EPSS08,(vacía),47,13504776200,0,0,0
+subsidiado-ips,2025-02,proceso,EPSS10,(vacía),798,76060134556,0,0,0
+subsidiado-ips,2025-02,proceso,EPSS12,(vacía),76,6347583039,0,0,0
+subsidiado-ips,2025-02,proceso,EPSS17,(vacía),660,100192138631,0,0,0
+subsidiado-ips,2025-02,proceso,EPSS18,(vacía),185,19567639949,0,0,0
+subsidiado-ips,2025-02,proceso,EPSS34,(vacía),214,125299975413,0,0,0
+subsidiado-ips,2025-02,proceso,EPSS37,(vacía),862,143151461882,0,0,0
+subsidiado-ips,2025-02,proceso,EPSS40,(vacía),250,202254812276,0,0,0
+subsidiado-ips,2025-02,proceso,EPSS41,(vacía),875,567130162311,0,0,0
+subsidiado-ips,2025-02,proceso,EPSS41,embargo,1,106960626,16075954,0,1
+subsidiado-ips,2025-02,proceso,EPSS42,(vacía),1,148357,0,0,0
+subsidiado-ips,2025-02,proceso,EPSS46,(vacía),2,482185836,0,0,0
+subsidiado-ips,2025-02,proceso,EPSS48,(vacía),102,1480216684,0,0,0
+subsidiado-ips,2025-02,proceso,ESS024,(vacía),984,329012819344,0,0,0
+subsidiado-ips,2025-02,proceso,ESS024,embargo,2,371706217,655537885,0,2
+subsidiado-ips,2025-02,proceso,ESS207,(vacía),523,287395858317,0,0,0
+subsidiado-ips,2025-02,proceso,ESS207,embargo,4,564083603,190986184,0,4
+subsidiado-ips,2025-03,complemento,EPSI01,comunicación sin emisor identificado,90,27208286864,0,90,0
+subsidiado-ips,2025-03,complemento,EPSS42,comunicación sin emisor identificado,13,2195184576,0,13,0
+subsidiado-ips,2025-03,complemento,ESS024,comunicación sin emisor identificado,14,6877501829,0,14,0
+subsidiado-ips,2025-03,complemento,ESS062,comunicación de la Supersalud,488,178840346649,0,488,0
+subsidiado-ips,2025-03,complemento,ESS118,comunicación de la Supersalud,231,96191502574,0,231,0
+subsidiado-ips,2025-03,complemento,ESS118,comunicación sin emisor identificado,142,113354115986,0,142,0
+subsidiado-ips,2025-03,proceso,CCF033,(vacía),223,29251782307,0,0,0
+subsidiado-ips,2025-03,proceso,CCF050,(vacía),85,26023769548,0,0,0
+subsidiado-ips,2025-03,proceso,CCF055,(vacía),578,149639529657,0,0,0
+subsidiado-ips,2025-03,proceso,CCF102,(vacía),102,13695612822,0,0,0
+subsidiado-ips,2025-03,proceso,EPS025,(vacía),41,17910078245,0,0,0
+subsidiado-ips,2025-03,proceso,EPSI03,(vacía),63,22713425389,0,0,0
+subsidiado-ips,2025-03,proceso,EPSI04,(vacía),82,19840291905,0,0,0
+subsidiado-ips,2025-03,proceso,EPSI05,(vacía),203,35761554860,0,0,0
+subsidiado-ips,2025-03,proceso,EPSI06,(vacía),129,13263504356,0,0,0
+subsidiado-ips,2025-03,proceso,EPSS01,(vacía),10,309194237,0,0,0
+subsidiado-ips,2025-03,proceso,EPSS02,(vacía),910,118676142151,0,0,0
+subsidiado-ips,2025-03,proceso,EPSS05,(vacía),1186,158240366243,0,0,0
+subsidiado-ips,2025-03,proceso,EPSS08,(vacía),41,7883803329,0,0,0
+subsidiado-ips,2025-03,proceso,EPSS10,(vacía),707,69293928667,0,0,0
+subsidiado-ips,2025-03,proceso,EPSS12,(vacía),48,5707399293,0,0,0
+subsidiado-ips,2025-03,proceso,EPSS17,(vacía),623,101558020757,0,0,0
+subsidiado-ips,2025-03,proceso,EPSS18,(vacía),195,21167555365,0,0,0
+subsidiado-ips,2025-03,proceso,EPSS34,(vacía),241,120997408914,0,0,0
+subsidiado-ips,2025-03,proceso,EPSS37,(vacía),278,155752729732,0,0,0
+subsidiado-ips,2025-03,proceso,EPSS40,(vacía),244,205031143281,0,0,0
+subsidiado-ips,2025-03,proceso,EPSS41,(vacía),994,583957379789,0,0,0
+subsidiado-ips,2025-03,proceso,EPSS41,embargo,1,107105903,16022872,0,1
+subsidiado-ips,2025-03,proceso,EPSS42,(vacía),10,1626863618,0,0,0
+subsidiado-ips,2025-03,proceso,EPSS46,(vacía),1,120285379,0,0,0
+subsidiado-ips,2025-03,proceso,EPSS48,(vacía),142,2171547319,0,0,0
+subsidiado-ips,2025-03,proceso,ESS024,(vacía),894,333589443622,0,0,0
+subsidiado-ips,2025-03,proceso,ESS207,(vacía),534,288115766988,0,0,0
+subsidiado-ips,2025-03,proceso,ESS207,embargo,6,1091470409,304771415,0,6
+subsidiado-ips,2025-04,complemento,EPSI01,comunicación de la Supersalud,80,27989617395,0,80,0
+subsidiado-ips,2025-04,complemento,ESS062,comunicación de la Supersalud,423,174374509685,0,423,0
+subsidiado-ips,2025-04,complemento,ESS118,comunicación de la Supersalud,329,209199216011,0,329,0
+subsidiado-ips,2025-04,proceso,CCF033,(vacía),221,29685644507,0,0,0
+subsidiado-ips,2025-04,proceso,CCF050,(vacía),91,26107483680,0,0,0
+subsidiado-ips,2025-04,proceso,CCF055,(vacía),571,147469338589,0,0,0
+subsidiado-ips,2025-04,proceso,CCF102,(vacía),125,14443379825,0,0,0
+subsidiado-ips,2025-04,proceso,EPS025,(vacía),49,18896196668,0,0,0
+subsidiado-ips,2025-04,proceso,EPSI03,(vacía),61,17256649675,0,0,0
+subsidiado-ips,2025-04,proceso,EPSI04,(vacía),69,18917595711,0,0,0
+subsidiado-ips,2025-04,proceso,EPSI05,(vacía),184,34611698272,0,0,0
+subsidiado-ips,2025-04,proceso,EPSI06,(vacía),121,13270668374,0,0,0
+subsidiado-ips,2025-04,proceso,EPSS01,(vacía),7,80913430,0,0,0
+subsidiado-ips,2025-04,proceso,EPSS02,(vacía),909,107918784398,0,0,0
+subsidiado-ips,2025-04,proceso,EPSS05,(vacía),1110,160672176646,0,0,0
+subsidiado-ips,2025-04,proceso,EPSS08,(vacía),32,8335807573,0,0,0
+subsidiado-ips,2025-04,proceso,EPSS10,(vacía),829,70266957650,0,0,0
+subsidiado-ips,2025-04,proceso,EPSS12,(vacía),77,5969909583,0,0,0
+subsidiado-ips,2025-04,proceso,EPSS17,(vacía),667,108631634136,0,0,0
+subsidiado-ips,2025-04,proceso,EPSS18,(vacía),173,20241603550,0,0,0
+subsidiado-ips,2025-04,proceso,EPSS34,(vacía),190,110285013657,0,0,0
+subsidiado-ips,2025-04,proceso,EPSS37,(vacía),3,156976147424,0,0,0
+subsidiado-ips,2025-04,proceso,EPSS40,(vacía),247,210330671581,0,0,0
+subsidiado-ips,2025-04,proceso,EPSS41,(vacía),1094,587022633743,0,0,0
+subsidiado-ips,2025-04,proceso,EPSS41,embargo,1,69365826,12720024,0,1
+subsidiado-ips,2025-04,proceso,EPSS42,(vacía),12,3681461460,0,0,0
+subsidiado-ips,2025-04,proceso,EPSS46,(vacía),1,120285379,0,0,0
+subsidiado-ips,2025-04,proceso,EPSS48,(vacía),38,1303566021,0,0,0
+subsidiado-ips,2025-04,proceso,ESS024,(vacía),784,340729829216,0,0,0
+subsidiado-ips,2025-04,proceso,ESS207,(vacía),535,255912389685,0,0,0
+subsidiado-ips,2025-04,proceso,ESS207,embargo,6,971221452,546989680,0,6
+subsidiado-ips,2025-05,complemento,EPSI01,comunicación de la Supersalud,93,28239823912,0,93,0
+subsidiado-ips,2025-05,complemento,ESS024,comunicación de la EPS,12,9879043079,0,12,0
+subsidiado-ips,2025-05,complemento,ESS062,comunicación de la Supersalud,499,175107841455,0,499,0
+subsidiado-ips,2025-05,complemento,ESS118,comunicación de la EPS,223,112633001935,0,223,0
+subsidiado-ips,2025-05,complemento,ESS118,comunicación de la Supersalud,136,96211293829,59218189,136,1
+subsidiado-ips,2025-05,proceso,CCF033,(vacía),292,30952091207,0,0,0
+subsidiado-ips,2025-05,proceso,CCF050,(vacía),91,25964365827,0,0,0
+subsidiado-ips,2025-05,proceso,CCF055,(vacía),565,145090927015,0,0,0
+subsidiado-ips,2025-05,proceso,CCF102,(vacía),64,5813416248,0,0,0
+subsidiado-ips,2025-05,proceso,EPS025,(vacía),47,17371433172,0,0,0
+subsidiado-ips,2025-05,proceso,EPSI03,(vacía),60,21165075160,0,0,0
+subsidiado-ips,2025-05,proceso,EPSI04,(vacía),72,16873402558,0,0,0
+subsidiado-ips,2025-05,proceso,EPSI05,(vacía),189,38767861682,0,0,0
+subsidiado-ips,2025-05,proceso,EPSI06,(vacía),118,13236645672,0,0,0
+subsidiado-ips,2025-05,proceso,EPSS01,(vacía),8,90463615,0,0,0
+subsidiado-ips,2025-05,proceso,EPSS02,(vacía),1068,158732904836,0,0,0
+subsidiado-ips,2025-05,proceso,EPSS05,(vacía),1150,160449882429,0,0,0
+subsidiado-ips,2025-05,proceso,EPSS08,(vacía),44,7284363414,0,0,0
+subsidiado-ips,2025-05,proceso,EPSS10,(vacía),812,62008226119,0,0,0
+subsidiado-ips,2025-05,proceso,EPSS12,(vacía),69,4648036628,0,0,0
+subsidiado-ips,2025-05,proceso,EPSS17,(vacía),659,101509204634,0,0,0
+subsidiado-ips,2025-05,proceso,EPSS18,(vacía),185,20757212598,0,0,0
+subsidiado-ips,2025-05,proceso,EPSS34,(vacía),206,113365475805,0,0,0
+subsidiado-ips,2025-05,proceso,EPSS37,(vacía),31,153990304022,0,0,0
+subsidiado-ips,2025-05,proceso,EPSS40,(vacía),224,190358965854,0,0,0
+subsidiado-ips,2025-05,proceso,EPSS41,(vacía),902,585267620811,0,0,0
+subsidiado-ips,2025-05,proceso,EPSS41,embargo,1,37587311,58798140,0,1
+subsidiado-ips,2025-05,proceso,EPSS42,(vacía),12,3861517733,0,0,0
+subsidiado-ips,2025-05,proceso,EPSS46,(vacía),1,120285380,0,0,0
+subsidiado-ips,2025-05,proceso,EPSS48,(vacía),91,604212254,0,0,0
+subsidiado-ips,2025-05,proceso,ESS024,(vacía),828,329413227191,0,0,0
+subsidiado-ips,2025-05,proceso,ESS207,(vacía),544,265828223050,0,0,0
+subsidiado-ips,2025-05,proceso,ESS207,embargo,5,514457486,448398603,0,5
+subsidiado-ips,2025-06,complemento,EPSI01,comunicación de la Supersalud,55,27751446509,0,55,0
+subsidiado-ips,2025-06,complemento,ESS062,comunicación de la Supersalud,597,175228457136,0,597,0
+subsidiado-ips,2025-06,complemento,ESS118,comunicación de la Supersalud,375,208189923677,52644827,375,1
+subsidiado-ips,2025-06,proceso,CCF033,(vacía),267,32632773092,0,0,0
+subsidiado-ips,2025-06,proceso,CCF033,embargo,2,124833149,45939294,0,2
+subsidiado-ips,2025-06,proceso,CCF050,(vacía),75,26022060262,0,0,0
+subsidiado-ips,2025-06,proceso,CCF055,(vacía),566,144106277247,0,0,0
+subsidiado-ips,2025-06,proceso,CCF102,(vacía),83,12625782006,0,0,0
+subsidiado-ips,2025-06,proceso,EPS025,(vacía),51,17288233237,0,0,0
+subsidiado-ips,2025-06,proceso,EPSI03,(vacía),47,19435315552,0,0,0
+subsidiado-ips,2025-06,proceso,EPSI03,embargo,1,6089480,2999296,0,1
+subsidiado-ips,2025-06,proceso,EPSI04,(vacía),80,26920414284,0,0,0
+subsidiado-ips,2025-06,proceso,EPSI05,(vacía),221,39090089601,0,0,0
+subsidiado-ips,2025-06,proceso,EPSI06,(vacía),118,13060137121,0,0,0
+subsidiado-ips,2025-06,proceso,EPSI06,embargo,1,59888377,71978006,0,1
+subsidiado-ips,2025-06,proceso,EPSS01,(vacía),20,392639200,0,0,0
+subsidiado-ips,2025-06,proceso,EPSS02,(vacía),1116,160980443875,0,0,0
+subsidiado-ips,2025-06,proceso,EPSS05,(vacía),1185,157902652204,0,0,0
+subsidiado-ips,2025-06,proceso,EPSS08,(vacía),57,10056249417,0,0,0
+subsidiado-ips,2025-06,proceso,EPSS10,(vacía),754,53436727269,0,0,0
+subsidiado-ips,2025-06,proceso,EPSS12,(vacía),56,5693207711,0,0,0
+subsidiado-ips,2025-06,proceso,EPSS17,(vacía),742,98440220943,0,0,0
+subsidiado-ips,2025-06,proceso,EPSS18,(vacía),153,19754280556,0,0,0
+subsidiado-ips,2025-06,proceso,EPSS34,(vacía),203,118833273271,0,0,0
+subsidiado-ips,2025-06,proceso,EPSS37,(vacía),32,151108814541,0,0,0
+subsidiado-ips,2025-06,proceso,EPSS40,(vacía),194,210924276964,0,0,0
+subsidiado-ips,2025-06,proceso,EPSS41,(vacía),1459,585111756208,0,0,0
+subsidiado-ips,2025-06,proceso,EPSS41,embargo,2,62956894,72661261,0,2
+subsidiado-ips,2025-06,proceso,EPSS42,(vacía),4,3521617439,0,0,0
+subsidiado-ips,2025-06,proceso,EPSS46,(vacía),1,386690581,0,0,0
+subsidiado-ips,2025-06,proceso,EPSS48,(vacía),193,2273996340,0,0,0
+subsidiado-ips,2025-06,proceso,ESS024,(vacía),795,334154464316,0,0,0
+subsidiado-ips,2025-06,proceso,ESS024,embargo,2,2080491222,429948300,0,2
+subsidiado-ips,2025-06,proceso,ESS207,(vacía),546,245038848010,0,0,0
+subsidiado-ips,2025-06,proceso,ESS207,embargo,3,472341328,260258937,0,3
+subsidiado-ips,2025-07,complemento,EPSI01,comunicación de la Supersalud,80,27996896560,11768262,80,1
+subsidiado-ips,2025-07,complemento,ESS062,comunicación de la Supersalud,579,176393544295,10894748,579,2
+subsidiado-ips,2025-07,complemento,ESS118,comunicación de la Supersalud,364,207817681708,54296361,364,1
+subsidiado-ips,2025-07,proceso,CCF033,(vacía),254,32541563924,0,0,0
+subsidiado-ips,2025-07,proceso,CCF050,(vacía),87,26038423092,0,0,0
+subsidiado-ips,2025-07,proceso,CCF055,(vacía),572,144252654212,0,0,0
+subsidiado-ips,2025-07,proceso,CCF055,embargo,1,41862340,258137657,0,1
+subsidiado-ips,2025-07,proceso,CCF102,(vacía),88,9880766293,0,0,0
+subsidiado-ips,2025-07,proceso,EPS025,(vacía),50,17293031382,0,0,0
+subsidiado-ips,2025-07,proceso,EPSI03,(vacía),35,18813483258,0,0,0
+subsidiado-ips,2025-07,proceso,EPSI03,embargo,1,3926016,1933710,0,1
+subsidiado-ips,2025-07,proceso,EPSI04,(vacía),82,17783197007,0,0,0
+subsidiado-ips,2025-07,proceso,EPSI05,(vacía),188,39381425475,0,0,0
+subsidiado-ips,2025-07,proceso,EPSI06,(vacía),126,13475135528,0,0,0
+subsidiado-ips,2025-07,proceso,EPSI06,embargo,1,52125389,80176716,0,1
+subsidiado-ips,2025-07,proceso,EPSS01,(vacía),21,187258118,0,0,0
+subsidiado-ips,2025-07,proceso,EPSS02,(vacía),1042,161580235382,0,0,0
+subsidiado-ips,2025-07,proceso,EPSS05,(vacía),1201,159564772389,0,0,0
+subsidiado-ips,2025-07,proceso,EPSS08,(vacía),43,10021430095,0,0,0
+subsidiado-ips,2025-07,proceso,EPSS10,(vacía),684,54985481877,0,0,0
+subsidiado-ips,2025-07,proceso,EPSS12,(vacía),58,6610088500,0,0,0
+subsidiado-ips,2025-07,proceso,EPSS17,(vacía),716,98863212669,0,0,0
+subsidiado-ips,2025-07,proceso,EPSS18,(vacía),162,20705131826,0,0,0
+subsidiado-ips,2025-07,proceso,EPSS34,(vacía),203,117946706256,0,0,0
+subsidiado-ips,2025-07,proceso,EPSS37,(vacía),327,175433742771,0,0,0
+subsidiado-ips,2025-07,proceso,EPSS40,(vacía),205,212886332234,0,0,0
+subsidiado-ips,2025-07,proceso,EPSS40,embargo,1,61316148,30200491,0,1
+subsidiado-ips,2025-07,proceso,EPSS41,(vacía),488,719243287690,0,0,0
+subsidiado-ips,2025-07,proceso,EPSS42,(vacía),263,4211232933,0,0,0
+subsidiado-ips,2025-07,proceso,EPSS46,(vacía),2,61372558,0,0,0
+subsidiado-ips,2025-07,proceso,EPSS48,(vacía),137,2502199681,0,0,0
+subsidiado-ips,2025-07,proceso,ESS024,(vacía),544,341205834983,0,0,0
+subsidiado-ips,2025-07,proceso,ESS207,(vacía),457,207300982717,0,0,0
+subsidiado-ips,2025-07,proceso,ESS207,embargo,4,274263898,345096894,0,4
+subsidiado-ips,2025-08,complemento,EPSI01,comunicación de la Supersalud,95,28982519208,0,95,0
+subsidiado-ips,2025-08,complemento,ESS062,comunicación de la Supersalud,771,179325934504,314858451,771,1
+subsidiado-ips,2025-08,complemento,ESS118,comunicación de la Supersalud,364,209218380473,1073866275,364,2
+subsidiado-ips,2025-08,proceso,CCF033,(vacía),288,30306165898,0,0,0
+subsidiado-ips,2025-08,proceso,CCF050,(vacía),86,26172016565,0,0,0
+subsidiado-ips,2025-08,proceso,CCF055,(vacía),572,145430472845,0,0,0
+subsidiado-ips,2025-08,proceso,CCF055,embargo,1,229071223,70928779,0,1
+subsidiado-ips,2025-08,proceso,CCF102,(vacía),93,11909421243,0,0,0
+subsidiado-ips,2025-08,proceso,EPS025,(vacía),56,17507904809,0,0,0
+subsidiado-ips,2025-08,proceso,EPSI03,(vacía),28,6514871923,0,0,0
+subsidiado-ips,2025-08,proceso,EPSI04,(vacía),87,16611309319,0,0,0
+subsidiado-ips,2025-08,proceso,EPSI05,(vacía),190,36581591376,0,0,0
+subsidiado-ips,2025-08,proceso,EPSI06,(vacía),117,13206147270,0,0,0
+subsidiado-ips,2025-08,proceso,EPSI06,embargo,1,70406452,60947270,0,1
+subsidiado-ips,2025-08,proceso,EPSS01,(vacía),6,127045693,0,0,0
+subsidiado-ips,2025-08,proceso,EPSS02,(vacía),1028,132375206918,0,0,0
+subsidiado-ips,2025-08,proceso,EPSS05,(vacía),1133,157428608738,0,0,0
+subsidiado-ips,2025-08,proceso,EPSS08,(vacía),57,14754399281,0,0,0
+subsidiado-ips,2025-08,proceso,EPSS10,(vacía),691,54867674426,0,0,0
+subsidiado-ips,2025-08,proceso,EPSS12,(vacía),61,5162876144,0,0,0
+subsidiado-ips,2025-08,proceso,EPSS17,(vacía),569,98258282028,0,0,0
+subsidiado-ips,2025-08,proceso,EPSS18,(vacía),149,19939396117,0,0,0
+subsidiado-ips,2025-08,proceso,EPSS34,(vacía),213,134461481393,0,0,0
+subsidiado-ips,2025-08,proceso,EPSS37,(vacía),11,146947948020,0,0,0
+subsidiado-ips,2025-08,proceso,EPSS40,(vacía),223,210343899115,0,0,0
+subsidiado-ips,2025-08,proceso,EPSS40,embargo,1,43874628,38643502,0,1
+subsidiado-ips,2025-08,proceso,EPSS41,(vacía),1489,586616277161,0,0,0
+subsidiado-ips,2025-08,proceso,EPSS41,embargo,1,10643631,5242386,0,1
+subsidiado-ips,2025-08,proceso,EPSS42,(vacía),9,3910045531,0,0,0
+subsidiado-ips,2025-08,proceso,EPSS46,(vacía),2,51251663,0,0,0
+subsidiado-ips,2025-08,proceso,EPSS48,(vacía),97,1442008101,0,0,0
+subsidiado-ips,2025-08,proceso,ESS024,(vacía),895,336974285433,0,0,0
+subsidiado-ips,2025-08,proceso,ESS024,embargo,1,421171504,225509485,0,1
+subsidiado-ips,2025-08,proceso,ESS207,(vacía),497,266920878678,0,0,0
+subsidiado-ips,2025-08,proceso,ESS207,embargo,4,889831279,272622223,0,4
+subsidiado-ips,2025-09,complemento,EPSI01,comunicación de la Supersalud,95,29569586998,0,95,0
+subsidiado-ips,2025-09,complemento,ESS118,comunicación de la Supersalud,366,205029698937,1033883339,366,1
+subsidiado-ips,2025-09,proceso,CCF033,(vacía),287,33582693499,0,0,0
+subsidiado-ips,2025-09,proceso,CCF050,(vacía),83,26326742631,0,0,0
+subsidiado-ips,2025-09,proceso,CCF055,(vacía),582,144044311698,0,0,0
+subsidiado-ips,2025-09,proceso,CCF102,(vacía),87,9708997749,0,0,0
+subsidiado-ips,2025-09,proceso,EPS025,(vacía),59,17599437647,0,0,0
+subsidiado-ips,2025-09,proceso,EPSI03,(vacía),32,6629731873,0,0,0
+subsidiado-ips,2025-09,proceso,EPSI04,(vacía),86,21806254422,0,0,0
+subsidiado-ips,2025-09,proceso,EPSI05,(vacía),201,40071443568,0,0,0
+subsidiado-ips,2025-09,proceso,EPSI06,(vacía),111,13160745312,0,0,0
+subsidiado-ips,2025-09,proceso,EPSI06,embargo,1,45845813,80603130,0,1
+subsidiado-ips,2025-09,proceso,EPSS01,(vacía),11,190633807,0,0,0
+subsidiado-ips,2025-09,proceso,EPSS02,(vacía),1098,162715924199,0,0,0
+subsidiado-ips,2025-09,proceso,EPSS05,(vacía),1236,159146393307,0,0,0
+subsidiado-ips,2025-09,proceso,EPSS05,embargo,1,4364570,2149713,0,1
+subsidiado-ips,2025-09,proceso,EPSS08,(vacía),64,12882373395,0,0,0
+subsidiado-ips,2025-09,proceso,EPSS10,(vacía),829,88274756252,0,0,0
+subsidiado-ips,2025-09,proceso,EPSS12,(vacía),63,6725880129,0,0,0
+subsidiado-ips,2025-09,proceso,EPSS17,(vacía),791,98357702115,0,0,0
+subsidiado-ips,2025-09,proceso,EPSS18,(vacía),167,20858900027,0,0,0
+subsidiado-ips,2025-09,proceso,EPSS34,(vacía),196,112399609618,0,0,0
+subsidiado-ips,2025-09,proceso,EPSS37,(vacía),790,155519952506,0,0,0
+subsidiado-ips,2025-09,proceso,EPSS40,(vacía),228,201250681035,0,0,0
+subsidiado-ips,2025-09,proceso,EPSS41,(vacía),1082,596665319388,0,0,0
+subsidiado-ips,2025-09,proceso,EPSS42,(vacía),9,4062046674,0,0,0
+subsidiado-ips,2025-09,proceso,EPSS46,(vacía),2,31716238,0,0,0
+subsidiado-ips,2025-09,proceso,EPSS48,(vacía),112,1346553627,0,0,0
+subsidiado-ips,2025-09,proceso,ESS024,(vacía),934,350397180106,0,0,0
+subsidiado-ips,2025-09,proceso,ESS024,embargo,2,2308156839,140317729,0,2
+subsidiado-ips,2025-09,proceso,ESS062,(vacía),614,181124870496,0,0,0
+subsidiado-ips,2025-09,proceso,ESS207,(vacía),453,280279572254,0,0,0
+subsidiado-ips,2025-09,proceso,ESS207,embargo,1,94946569,132697975,0,1
+subsidiado-ips,2025-10,complemento,ESS062,comunicación de la Supersalud,53,9275309937,0,53,0
+subsidiado-ips,2025-10,complemento,ESS118,comunicación de la Supersalud,42,40916171859,1125406886,42,1
+subsidiado-ips,2025-10,proceso,CCF033,(vacía),237,36437227373,0,0,0
+subsidiado-ips,2025-10,proceso,CCF050,(vacía),80,26143807452,0,0,0
+subsidiado-ips,2025-10,proceso,CCF055,(vacía),581,147606779215,0,0,0
+subsidiado-ips,2025-10,proceso,CCF102,(vacía),101,11552431549,0,0,0
+subsidiado-ips,2025-10,proceso,EPS025,(vacía),80,17794266580,0,0,0
+subsidiado-ips,2025-10,proceso,EPSI01,(vacía),80,26822920645,0,0,0
+subsidiado-ips,2025-10,proceso,EPSI03,(vacía),48,10202967559,0,0,0
+subsidiado-ips,2025-10,proceso,EPSI04,(vacía),101,27955265888,0,0,0
+subsidiado-ips,2025-10,proceso,EPSI05,(vacía),210,43316900615,0,0,0
+subsidiado-ips,2025-10,proceso,EPSI06,(vacía),116,13142494864,0,0,0
+subsidiado-ips,2025-10,proceso,EPSI06,embargo,1,34800518,91758062,0,1
+subsidiado-ips,2025-10,proceso,EPSS01,(vacía),8,72005059,0,0,0
+subsidiado-ips,2025-10,proceso,EPSS02,(vacía),1108,151031647899,0,0,0
+subsidiado-ips,2025-10,proceso,EPSS05,(vacía),1168,158498293720,0,0,0
+subsidiado-ips,2025-10,proceso,EPSS05,embargo,1,1521193,749245,0,1
+subsidiado-ips,2025-10,proceso,EPSS08,(vacía),48,12211179916,0,0,0
+subsidiado-ips,2025-10,proceso,EPSS10,(vacía),760,82491477403,0,0,0
+subsidiado-ips,2025-10,proceso,EPSS12,(vacía),60,6289792901,0,0,0
+subsidiado-ips,2025-10,proceso,EPSS17,(vacía),638,96048938846,0,0,0
+subsidiado-ips,2025-10,proceso,EPSS18,(vacía),121,20418975393,0,0,0
+subsidiado-ips,2025-10,proceso,EPSS34,(vacía),210,118897544824,0,0,0
+subsidiado-ips,2025-10,proceso,EPSS37,(vacía),1406,154816857506,0,0,0
+subsidiado-ips,2025-10,proceso,EPSS40,(vacía),269,209110770836,0,0,0
+subsidiado-ips,2025-10,proceso,EPSS41,(vacía),1512,594134183522,0,0,0
+subsidiado-ips,2025-10,proceso,EPSS42,(vacía),13,4346070634,0,0,0
+subsidiado-ips,2025-10,proceso,EPSS46,(vacía),1,17349305,0,0,0
+subsidiado-ips,2025-10,proceso,EPSS48,(vacía),78,1383077426,0,0,0
+subsidiado-ips,2025-10,proceso,ESS024,(vacía),927,338965701597,0,0,0
+subsidiado-ips,2025-10,proceso,ESS024,embargo,1,26653148,41706957,0,1
+subsidiado-ips,2025-10,proceso,ESS062,(vacía),515,165763214411,0,0,0
+subsidiado-ips,2025-10,proceso,ESS118,(vacía),341,165001172587,0,0,0
+subsidiado-ips,2025-10,proceso,ESS207,(vacía),419,289736094616,0,0,0
+subsidiado-ips,2025-10,proceso,ESS207,embargo,1,90318833,138088006,0,1
+subsidiado-ips,2025-11,complemento,ESS118,comunicación de la Supersalud,67,34846182781,167952943,67,1
+subsidiado-ips,2025-11,proceso,CCF033,(vacía),265,30684792676,0,0,0
+subsidiado-ips,2025-11,proceso,CCF050,(vacía),89,26261306768,0,0,0
+subsidiado-ips,2025-11,proceso,CCF055,(vacía),587,146873891430,0,0,0
+subsidiado-ips,2025-11,proceso,CCF102,(vacía),100,15754273505,0,0,0
+subsidiado-ips,2025-11,proceso,EPS025,(vacía),53,17620919682,0,0,0
+subsidiado-ips,2025-11,proceso,EPSI01,(vacía),86,28899605028,0,0,0
+subsidiado-ips,2025-11,proceso,EPSI03,(vacía),49,20907113291,0,0,0
+subsidiado-ips,2025-11,proceso,EPSI04,(vacía),86,29407025247,0,0,0
+subsidiado-ips,2025-11,proceso,EPSI05,(vacía),210,45991192632,0,0,0
+subsidiado-ips,2025-11,proceso,EPSI06,(vacía),121,13405651027,0,0,0
+subsidiado-ips,2025-11,proceso,EPSS01,(vacía),17,274602032,0,0,0
+subsidiado-ips,2025-11,proceso,EPSS02,(vacía),1199,163050564337,0,0,0
+subsidiado-ips,2025-11,proceso,EPSS05,(vacía),1201,157883719611,0,0,0
+subsidiado-ips,2025-11,proceso,EPSS08,(vacía),30,11014212171,0,0,0
+subsidiado-ips,2025-11,proceso,EPSS10,(vacía),809,80438595639,0,0,0
+subsidiado-ips,2025-11,proceso,EPSS12,(vacía),84,6263241816,0,0,0
+subsidiado-ips,2025-11,proceso,EPSS17,(vacía),684,95869678418,0,0,0
+subsidiado-ips,2025-11,proceso,EPSS18,(vacía),202,20638925013,0,0,0
+subsidiado-ips,2025-11,proceso,EPSS34,(vacía),203,136688589075,0,0,0
+subsidiado-ips,2025-11,proceso,EPSS37,(vacía),1148,153816056635,0,0,0
+subsidiado-ips,2025-11,proceso,EPSS40,(vacía),280,207566600083,0,0,0
+subsidiado-ips,2025-11,proceso,EPSS41,(vacía),1177,594792704607,0,0,0
+subsidiado-ips,2025-11,proceso,EPSS42,(vacía),23,4434824551,0,0,0
+subsidiado-ips,2025-11,proceso,EPSS46,(vacía),1,6069140,0,0,0
+subsidiado-ips,2025-11,proceso,EPSS48,(vacía),72,1240818885,0,0,0
+subsidiado-ips,2025-11,proceso,ESS024,(vacía),948,381180366356,0,0,0
+subsidiado-ips,2025-11,proceso,ESS062,(vacía),497,175412248618,0,0,0
+subsidiado-ips,2025-11,proceso,ESS118,(vacía),294,170724466890,0,0,0
+subsidiado-ips,2025-11,proceso,ESS118,embargo,2,735322064,849227819,0,2
+subsidiado-ips,2025-11,proceso,ESS207,(vacía),504,258179621838,0,0,0
+subsidiado-ips,2025-11,proceso,ESS207,embargo,1,109181597,118104545,0,1
+subsidiado-ips,2025-12,complemento,EPS025,comunicación de la EPS,4,300000000,0,4,0
+subsidiado-ips,2025-12,complemento,EPSI01,comunicación de la Supersalud,65,28463825495,0,65,0
+subsidiado-ips,2025-12,complemento,EPSS42,comunicación de la EPS,4,762811038,0,4,0
+subsidiado-ips,2025-12,complemento,ESS118,comunicación de la Supersalud,343,192136965903,1601547035,0,2
+subsidiado-ips,2025-12,proceso,CCF033,(vacía),263,30178667159,0,0,0
+subsidiado-ips,2025-12,proceso,CCF050,(vacía),87,26258809665,0,0,0
+subsidiado-ips,2025-12,proceso,CCF055,(vacía),578,144634037575,0,0,0
+subsidiado-ips,2025-12,proceso,CCF102,(vacía),87,11915642555,0,0,0
+subsidiado-ips,2025-12,proceso,EPS025,(vacía),65,16504318817,0,0,0
+subsidiado-ips,2025-12,proceso,EPSI03,(vacía),52,19080782159,0,0,0
+subsidiado-ips,2025-12,proceso,EPSI04,(vacía),95,20058145577,0,0,0
+subsidiado-ips,2025-12,proceso,EPSI05,(vacía),211,47358028562,0,0,0
+subsidiado-ips,2025-12,proceso,EPSI06,(vacía),126,13076574643,0,0,0
+subsidiado-ips,2025-12,proceso,EPSS01,(vacía),26,299655688,0,0,0
+subsidiado-ips,2025-12,proceso,EPSS02,(vacía),1192,163431171183,0,0,0
+subsidiado-ips,2025-12,proceso,EPSS05,(vacía),1203,159205280202,0,0,0
+subsidiado-ips,2025-12,proceso,EPSS08,(vacía),66,10605019158,0,0,0
+subsidiado-ips,2025-12,proceso,EPSS10,(vacía),849,85388543140,0,0,0
+subsidiado-ips,2025-12,proceso,EPSS12,(vacía),60,5885855812,0,0,0
+subsidiado-ips,2025-12,proceso,EPSS17,(vacía),640,96912630316,0,0,0
+subsidiado-ips,2025-12,proceso,EPSS18,(vacía),92,21095522802,0,0,0
+subsidiado-ips,2025-12,proceso,EPSS34,(vacía),100,119895539832,0,0,0
+subsidiado-ips,2025-12,proceso,EPSS37,(vacía),15,154898688801,0,0,0
+subsidiado-ips,2025-12,proceso,EPSS40,(vacía),274,203005776500,0,0,0
+subsidiado-ips,2025-12,proceso,EPSS41,(vacía),829,596436242084,0,0,0
+subsidiado-ips,2025-12,proceso,EPSS42,(vacía),5,3685546529,0,0,0
+subsidiado-ips,2025-12,proceso,EPSS46,(vacía),1,24151028,0,0,0
+subsidiado-ips,2025-12,proceso,EPSS48,(vacía),67,1283784266,0,0,0
+subsidiado-ips,2025-12,proceso,ESS024,(vacía),1001,351763120072,0,0,0
+subsidiado-ips,2025-12,proceso,ESS062,(vacía),558,163902341741,0,0,0
+subsidiado-ips,2025-12,proceso,ESS062,embargo,1,370131811,190721392,0,1
+subsidiado-ips,2025-12,proceso,ESS207,(vacía),458,265519237846,0,0,0
+subsidiado-ips,2025-12,proceso,ESS207,embargo,1,221955658,3391498,0,1
+subsidiado-ips,2026-01,complemento,EPS025,comunicación del agente interventor,23,14130450987,0,23,0
+subsidiado-ips,2026-01,complemento,EPSS42,comunicación del agente interventor,122,4013047990,0,122,0
+subsidiado-ips,2026-01,complemento,ESS062,comunicación de la Supersalud,176,32021361295,0,176,0
+subsidiado-ips,2026-01,complemento,ESS118,comunicación de la Supersalud,102,61170137354,0,102,0
+subsidiado-ips,2026-01,proceso,CCF033,(vacía),313,36439457475,0,0,0
+subsidiado-ips,2026-01,proceso,CCF050,(vacía),85,28536840505,0,0,0
+subsidiado-ips,2026-01,proceso,CCF055,(vacía),577,148055216417,0,0,0
+subsidiado-ips,2026-01,proceso,CCF102,(vacía),101,14435916899,0,0,0
+subsidiado-ips,2026-01,proceso,EPS025,(vacía),21,2719850740,0,0,0
+subsidiado-ips,2026-01,proceso,EPSI01,(vacía),86,35072730373,0,0,0
+subsidiado-ips,2026-01,proceso,EPSI03,(vacía),56,17233166952,0,0,0
+subsidiado-ips,2026-01,proceso,EPSI04,(vacía),70,13239653145,0,0,0
+subsidiado-ips,2026-01,proceso,EPSI05,(vacía),237,46883391755,0,0,0
+subsidiado-ips,2026-01,proceso,EPSI06,(vacía),133,14476684615,0,0,0
+subsidiado-ips,2026-01,proceso,EPSS01,(vacía),19,164307015,0,0,0
+subsidiado-ips,2026-01,proceso,EPSS02,(vacía),1049,164429908850,0,0,0
+subsidiado-ips,2026-01,proceso,EPSS05,(vacía),1290,156746757312,0,0,0
+subsidiado-ips,2026-01,proceso,EPSS08,(vacía),76,9630539785,0,0,0
+subsidiado-ips,2026-01,proceso,EPSS10,(vacía),716,78178597807,0,0,0
+subsidiado-ips,2026-01,proceso,EPSS12,(vacía),85,6776087562,0,0,0
+subsidiado-ips,2026-01,proceso,EPSS17,(vacía),632,94566231080,0,0,0
+subsidiado-ips,2026-01,proceso,EPSS18,(vacía),114,20689222634,0,0,0
+subsidiado-ips,2026-01,proceso,EPSS34,(vacía),231,135389598638,0,0,0
+subsidiado-ips,2026-01,proceso,EPSS37,(vacía),38,155752136544,0,0,0
+subsidiado-ips,2026-01,proceso,EPSS40,(vacía),234,201125848745,0,0,0
+subsidiado-ips,2026-01,proceso,EPSS41,(vacía),1459,689023282997,0,0,0
+subsidiado-ips,2026-01,proceso,EPSS41,embargo,1,74135007,318610084,0,1
+subsidiado-ips,2026-01,proceso,EPSS42,(vacía),10,319740594,0,0,0
+subsidiado-ips,2026-01,proceso,EPSS46,(vacía),1,24151028,0,0,0
+subsidiado-ips,2026-01,proceso,EPSS48,(vacía),48,1354594833,0,0,0
+subsidiado-ips,2026-01,proceso,ESS024,(vacía),970,339381165318,0,0,0
+subsidiado-ips,2026-01,proceso,ESS062,(vacía),428,156297240084,0,0,0
+subsidiado-ips,2026-01,proceso,ESS118,(vacía),328,166526654116,0,0,0
+subsidiado-ips,2026-01,proceso,ESS118,embargo,1,4990464739,644906707,0,1
+subsidiado-ips,2026-01,proceso,ESS207,(vacía),442,287315182705,0,0,0
+subsidiado-ips,2026-01,proceso,ESS207,embargo,1,228947274,8830687,0,1
+subsidiado-ips,2026-02,complemento,CCF055,comunicación de la EPS,4,5500000000,0,4,0
+subsidiado-ips,2026-02,complemento,EPS025,comunicación de la Supersalud,1,4271986220,0,1,0
+subsidiado-ips,2026-02,complemento,ESS062,comunicación de la Supersalud,496,206412355479,0,496,0
+subsidiado-ips,2026-02,complemento,ESS118,comunicación de la Supersalud,489,239153832798,825515427,489,1
+subsidiado-ips,2026-02,proceso,CCF033,(vacía),255,38616917678,0,0,0
+subsidiado-ips,2026-02,proceso,CCF050,(vacía),82,31356439224,0,0,0
+subsidiado-ips,2026-02,proceso,CCF055,(vacía),598,152074698041,0,0,0
+subsidiado-ips,2026-02,proceso,CCF102,(vacía),108,14280961114,0,0,0
+subsidiado-ips,2026-02,proceso,EPS025,(vacía),44,15107829402,0,0,0
+subsidiado-ips,2026-02,proceso,EPSI01,(vacía),80,34107625853,0,0,0
+subsidiado-ips,2026-02,proceso,EPSI03,(vacía),52,17399957843,0,0,0
+subsidiado-ips,2026-02,proceso,EPSI04,(vacía),72,27261323309,0,0,0
+subsidiado-ips,2026-02,proceso,EPSI05,(vacía),213,38055659901,0,0,0
+subsidiado-ips,2026-02,proceso,EPSI06,(vacía),139,15306859738,0,0,0
+subsidiado-ips,2026-02,proceso,EPSS01,(vacía),16,224490017,0,0,0
+subsidiado-ips,2026-02,proceso,EPSS02,(vacía),1205,197770892831,0,0,0
+subsidiado-ips,2026-02,proceso,EPSS05,(vacía),1296,183724108862,0,0,0
+subsidiado-ips,2026-02,proceso,EPSS08,(vacía),78,14218107712,0,0,0
+subsidiado-ips,2026-02,proceso,EPSS10,(vacía),830,95778803138,0,0,0
+subsidiado-ips,2026-02,proceso,EPSS12,(vacía),94,7774825652,0,0,0
+subsidiado-ips,2026-02,proceso,EPSS17,(vacía),318,110217700580,0,0,0
+subsidiado-ips,2026-02,proceso,EPSS18,(vacía),127,23999573206,0,0,0
+subsidiado-ips,2026-02,proceso,EPSS34,(vacía),236,154710883819,0,0,0
+subsidiado-ips,2026-02,proceso,EPSS37,(vacía),769,195937830944,0,0,0
+subsidiado-ips,2026-02,proceso,EPSS37,embargo,1,126757556,190044516,0,1
+subsidiado-ips,2026-02,proceso,EPSS40,(vacía),474,242204147903,0,0,0
+subsidiado-ips,2026-02,proceso,EPSS41,(vacía),892,760200808171,0,0,0
+subsidiado-ips,2026-02,proceso,EPSS42,(vacía),293,5002500000,0,0,0
+subsidiado-ips,2026-02,proceso,EPSS46,(vacía),1,24151028,0,0,0
+subsidiado-ips,2026-02,proceso,EPSS48,(vacía),93,987845159,0,0,0
+subsidiado-ips,2026-02,proceso,ESS024,(vacía),536,407755716114,0,0,0
+subsidiado-ips,2026-02,proceso,ESS207,(vacía),439,276933592157,0,0,0
+subsidiado-ips,2026-03,complemento,EPSI01,comunicación sin emisor identificado,132,34109306582,0,0,0
+subsidiado-ips,2026-03,complemento,ESS062,comunicación de la Supersalud,410,194167962286,0,410,0
+subsidiado-ips,2026-03,complemento,ESS062,comunicación sin emisor identificado,25,8124124470,0,25,0
+subsidiado-ips,2026-03,complemento,ESS118,comunicación de la Supersalud,179,225108544742,0,0,0
+subsidiado-ips,2026-03,complemento,ESS118,comunicación sin emisor identificado,14,15524544409,0,14,0
+subsidiado-ips,2026-03,proceso,CCF033,(vacía),330,42725421466,0,0,0
+subsidiado-ips,2026-03,proceso,CCF050,(vacía),88,31289033982,0,0,0
+subsidiado-ips,2026-03,proceso,CCF055,(vacía),597,159006922945,0,0,0
+subsidiado-ips,2026-03,proceso,CCF102,(vacía),101,14908676250,0,0,0
+subsidiado-ips,2026-03,proceso,EPS025,(vacía),52,20778586070,0,0,0
+subsidiado-ips,2026-03,proceso,EPSI03,(vacía),51,17603846715,0,0,0
+subsidiado-ips,2026-03,proceso,EPSI04,(vacía),127,28832676811,0,0,0
+subsidiado-ips,2026-03,proceso,EPSI05,(vacía),217,37073609362,0,0,0
+subsidiado-ips,2026-03,proceso,EPSI06,(vacía),124,15972780455,0,0,0
+subsidiado-ips,2026-03,proceso,EPSS01,(vacía),17,293462223,0,0,0
+subsidiado-ips,2026-03,proceso,EPSS02,(vacía),1078,191210016476,0,0,0
+subsidiado-ips,2026-03,proceso,EPSS05,(vacía),1268,189114151872,0,0,0
+subsidiado-ips,2026-03,proceso,EPSS08,(vacía),68,10573883848,0,0,0
+subsidiado-ips,2026-03,proceso,EPSS10,(vacía),818,87005616209,0,0,0
+subsidiado-ips,2026-03,proceso,EPSS12,(vacía),89,8249025423,0,0,0
+subsidiado-ips,2026-03,proceso,EPSS17,(vacía),585,115016113602,0,0,0
+subsidiado-ips,2026-03,proceso,EPSS18,(vacía),94,26961874574,0,0,0
+subsidiado-ips,2026-03,proceso,EPSS34,(vacía),223,149893701908,0,0,0
+subsidiado-ips,2026-03,proceso,EPSS37,(vacía),22,198639209985,0,0,0
+subsidiado-ips,2026-03,proceso,EPSS40,(vacía),416,244806795520,0,0,0
+subsidiado-ips,2026-03,proceso,EPSS41,(vacía),1617,727934931490,0,0,0
+subsidiado-ips,2026-03,proceso,EPSS42,(vacía),266,5135153558,0,0,0
+subsidiado-ips,2026-03,proceso,EPSS46,(vacía),1,28024333,0,0,0
+subsidiado-ips,2026-03,proceso,EPSS48,(vacía),44,1359819569,0,0,0
+subsidiado-ips,2026-03,proceso,EPSS49,(vacía),1,3525066,0,0,0
+subsidiado-ips,2026-03,proceso,ESS024,(vacía),534,395980088709,0,0,0
+subsidiado-ips,2026-03,proceso,ESS207,(vacía),454,270052828191,0,0,0
+subsidiado-ips,2026-04,complemento,ESS118,comunicación sin emisor identificado,486,242374085609,0,486,0
+subsidiado-ips,2026-04,proceso,CCF033,(vacía),338,43067553439,0,0,0
+subsidiado-ips,2026-04,proceso,CCF033,descuento de auditoría,1,135209793,106782,0,1
+subsidiado-ips,2026-04,proceso,CCF050,(vacía),86,31435701211,0,0,0
+subsidiado-ips,2026-04,proceso,CCF055,(vacía),599,160907807050,0,0,0
+subsidiado-ips,2026-04,proceso,CCF055,descuento de auditoría,1,669323084,903907,0,1
+subsidiado-ips,2026-04,proceso,CCF102,(vacía),106,16828385134,0,0,0
+subsidiado-ips,2026-04,proceso,EPS025,(vacía),53,15392510245,0,0,0
+subsidiado-ips,2026-04,proceso,EPS025,descuento de auditoría,2,4149142793,857207,0,2
+subsidiado-ips,2026-04,proceso,EPSI01,(vacía),101,35565911719,0,0,0
+subsidiado-ips,2026-04,proceso,EPSI03,(vacía),53,19763397122,0,0,0
+subsidiado-ips,2026-04,proceso,EPSI04,(vacía),112,25489298317,0,0,0
+subsidiado-ips,2026-04,proceso,EPSI05,(vacía),214,40888033952,0,0,0
+subsidiado-ips,2026-04,proceso,EPSI06,(vacía),130,15536214128,0,0,0
+subsidiado-ips,2026-04,proceso,EPSS01,(vacía),1,1240096,0,0,0
+subsidiado-ips,2026-04,proceso,EPSS02,(vacía),1121,201253986127,0,0,0
+subsidiado-ips,2026-04,proceso,EPSS02,descuento de auditoría,2,211851268,2486250,0,2
+subsidiado-ips,2026-04,proceso,EPSS05,(vacía),1308,218332531368,0,0,0
+subsidiado-ips,2026-04,proceso,EPSS08,(vacía),39,11328507420,0,0,0
+subsidiado-ips,2026-04,proceso,EPSS10,(vacía),827,78092679792,0,0,0
+subsidiado-ips,2026-04,proceso,EPSS12,(vacía),109,6313478558,0,0,0
+subsidiado-ips,2026-04,proceso,EPSS12,descuento de auditoría,1,1693191624,249090,0,1
+subsidiado-ips,2026-04,proceso,EPSS17,(vacía),607,117287569206,0,0,0
+subsidiado-ips,2026-04,proceso,EPSS18,(vacía),63,27019820503,0,0,0
+subsidiado-ips,2026-04,proceso,EPSS34,(vacía),216,119504086894,0,0,0
+subsidiado-ips,2026-04,proceso,EPSS34,descuento de auditoría,1,21505541891,4311,0,1
+subsidiado-ips,2026-04,proceso,EPSS37,(vacía),24,185859132623,0,0,0
+subsidiado-ips,2026-04,proceso,EPSS37,descuento de auditoría,1,9218127179,115052,0,1
+subsidiado-ips,2026-04,proceso,EPSS40,(vacía),259,210990757166,0,0,0
+subsidiado-ips,2026-04,proceso,EPSS40,descuento de auditoría,4,27920253934,2120534,0,4
+subsidiado-ips,2026-04,proceso,EPSS41,(vacía),1576,688313377120,0,0,0
+subsidiado-ips,2026-04,proceso,EPSS41,descuento de auditoría,9,14124105058,1974258,0,9
+subsidiado-ips,2026-04,proceso,EPSS42,(vacía),1,5750000003,0,0,0
+subsidiado-ips,2026-04,proceso,EPSS46,(vacía),1,23955028,0,0,0
+subsidiado-ips,2026-04,proceso,EPSS48,(vacía),157,1940521002,0,0,0
+subsidiado-ips,2026-04,proceso,EPSS49,(vacía),1,3362948,0,0,0
+subsidiado-ips,2026-04,proceso,ESS024,(vacía),637,410841069645,0,0,0
+subsidiado-ips,2026-04,proceso,ESS024,descuento de auditoría,6,13691658044,668903,0,6
+subsidiado-ips,2026-04,proceso,ESS062,(vacía),415,201661871007,0,0,0
+subsidiado-ips,2026-04,proceso,ESS062,descuento de auditoría,3,1321108332,544089,0,3
+subsidiado-ips,2026-04,proceso,ESS207,(vacía),413,286931599223,0,0,0
+subsidiado-ips,2026-04,proceso,ESS207,descuento de auditoría,3,8275320469,400392,0,3
+subsidiado-ips,2026-05,complemento,ESS118,comunicación de la Supersalud,57,39196270295,0,57,0
+subsidiado-ips,2026-05,complemento,ESS118,comunicación sin emisor identificado,163,198959855096,0,163,0
+subsidiado-ips,2026-05,proceso,CCF033,(vacía),343,43681422504,0,0,0
+subsidiado-ips,2026-05,proceso,CCF050,(vacía),91,31519753134,0,0,0
+subsidiado-ips,2026-05,proceso,CCF055,(vacía),606,162514701637,0,0,0
+subsidiado-ips,2026-05,proceso,CCF102,(vacía),102,13623343276,0,0,0
+subsidiado-ips,2026-05,proceso,EPS025,(vacía),23,19775356551,0,0,0
+subsidiado-ips,2026-05,proceso,EPSI01,(vacía),89,35769756447,0,0,0
+subsidiado-ips,2026-05,proceso,EPSI03,(vacía),31,21779623845,0,0,0
+subsidiado-ips,2026-05,proceso,EPSI04,(vacía),98,32673911654,0,0,0
+subsidiado-ips,2026-05,proceso,EPSI05,(vacía),208,46718030187,0,0,0
+subsidiado-ips,2026-05,proceso,EPSI06,(vacía),126,15674500720,0,0,0
+subsidiado-ips,2026-05,proceso,EPSS02,(vacía),1205,197102158372,0,0,0
+subsidiado-ips,2026-05,proceso,EPSS05,(vacía),1265,190203828236,0,0,0
+subsidiado-ips,2026-05,proceso,EPSS08,(vacía),24,8568780846,0,0,0
+subsidiado-ips,2026-05,proceso,EPSS10,(vacía),794,55652376854,0,0,0
+subsidiado-ips,2026-05,proceso,EPSS12,(vacía),106,7778305393,0,0,0
+subsidiado-ips,2026-05,proceso,EPSS17,(vacía),491,118770701887,0,0,0
+subsidiado-ips,2026-05,proceso,EPSS18,(vacía),81,25648351186,0,0,0
+subsidiado-ips,2026-05,proceso,EPSS34,(vacía),236,156142553819,0,0,0
+subsidiado-ips,2026-05,proceso,EPSS37,(vacía),21,201682417762,0,0,0
+subsidiado-ips,2026-05,proceso,EPSS40,(vacía),283,235504575564,0,0,0
+subsidiado-ips,2026-05,proceso,EPSS41,(vacía),1515,742031965711,0,0,0
+subsidiado-ips,2026-05,proceso,EPSS41,embargo,1,52596380,25905679,0,1
+subsidiado-ips,2026-05,proceso,EPSS42,(vacía),1,5522079963,0,0,0
+subsidiado-ips,2026-05,proceso,EPSS46,(vacía),1,28058634,0,0,0
+subsidiado-ips,2026-05,proceso,EPSS48,(vacía),156,2701566708,0,0,0
+subsidiado-ips,2026-05,proceso,EPSS49,(vacía),1,4152554,0,0,0
+subsidiado-ips,2026-05,proceso,ESS024,(vacía),514,401833163029,0,0,0
+subsidiado-ips,2026-05,proceso,ESS062,(vacía),552,203396801455,0,0,0
+subsidiado-ips,2026-05,proceso,ESS207,(vacía),428,317584946548,0,0,0
+subsidiado-ips,2026-05,proceso,ESS207,embargo,1,784181264,345139200,0,1
+subsidiado-ips,2026-06,complemento,EPSS42,comunicación del agente interventor,19,5501407212,0,0,0
+subsidiado-ips,2026-06,complemento,ESS024,comunicación del agente interventor,562,400706499607,0,0,0
+subsidiado-ips,2026-06,complemento,ESS062,comunicación de la Supersalud,232,179047068161,0,232,0
+subsidiado-ips,2026-06,complemento,ESS118,comunicación de la Supersalud,160,242390468601,0,160,0
+subsidiado-ips,2026-06,proceso,CCF033,(vacía),400,42090167555,0,0,0
+subsidiado-ips,2026-06,proceso,CCF050,(vacía),96,31367319538,0,0,0
+subsidiado-ips,2026-06,proceso,CCF055,(vacía),602,162378237642,0,0,0
+subsidiado-ips,2026-06,proceso,CCF102,(vacía),109,11783628721,0,0,0
+subsidiado-ips,2026-06,proceso,EPS025,(vacía),38,20080035545,0,0,0
+subsidiado-ips,2026-06,proceso,EPSI01,(vacía),86,36773372785,0,0,0
+subsidiado-ips,2026-06,proceso,EPSI03,(vacía),26,12467186939,0,0,0
+subsidiado-ips,2026-06,proceso,EPSI04,(vacía),97,30424046763,0,0,0
+subsidiado-ips,2026-06,proceso,EPSI05,(vacía),223,50867894673,0,0,0
+subsidiado-ips,2026-06,proceso,EPSI06,(vacía),120,15128007279,0,0,0
+subsidiado-ips,2026-06,proceso,EPSS02,(vacía),1189,198693357203,0,0,0
+subsidiado-ips,2026-06,proceso,EPSS05,(vacía),1293,187879623730,0,0,0
+subsidiado-ips,2026-06,proceso,EPSS08,(vacía),63,14537209736,0,0,0
+subsidiado-ips,2026-06,proceso,EPSS10,(vacía),315,44725357684,0,0,0
+subsidiado-ips,2026-06,proceso,EPSS12,(vacía),47,8087364224,0,0,0
+subsidiado-ips,2026-06,proceso,EPSS17,(vacía),732,116011786847,0,0,0
+subsidiado-ips,2026-06,proceso,EPSS18,(vacía),79,25000000001,0,0,0
+subsidiado-ips,2026-06,proceso,EPSS34,(vacía),248,148071851764,0,0,0
+subsidiado-ips,2026-06,proceso,EPSS37,(vacía),22,199439117618,0,0,0
+subsidiado-ips,2026-06,proceso,EPSS40,(vacía),287,242753588238,0,0,0
+subsidiado-ips,2026-06,proceso,EPSS41,(vacía),1555,741587973764,0,0,0
+subsidiado-ips,2026-06,proceso,EPSS46,(vacía),5,34308136,0,0,0
+subsidiado-ips,2026-06,proceso,EPSS48,(vacía),110,2339076453,0,0,0
+subsidiado-ips,2026-06,proceso,EPSS49,(vacía),2,22408120,0,0,0
+subsidiado-ips,2026-06,proceso,ESS207,(vacía),424,311697143252,0,0,0
+subsidiado-ips,2026-07,complemento,EPSS42,comunicación sin emisor identificado,9,5453609214,0,9,0
+subsidiado-ips,2026-07,complemento,ESS024,comunicación sin emisor identificado,149,419574941393,0,0,0
+subsidiado-ips,2026-07,complemento,ESS062,comunicación de la Supersalud,264,192942467465,0,264,0
+subsidiado-ips,2026-07,complemento,ESS118,comunicación de la Supersalud,174,242221072456,0,174,0
+subsidiado-ips,2026-07,proceso,CCF033,(vacía),359,48698743666,0,0,0
+subsidiado-ips,2026-07,proceso,CCF033,descuento de auditoría,1,276671382,4510,0,1
+subsidiado-ips,2026-07,proceso,CCF050,(vacía),91,31189938528,0,0,0
+subsidiado-ips,2026-07,proceso,CCF050,descuento de auditoría,1,18322170,4346,0,1
+subsidiado-ips,2026-07,proceso,CCF055,(vacía),588,157282279301,0,0,0
+subsidiado-ips,2026-07,proceso,CCF055,descuento de auditoría,5,5141406401,3504503,0,5
+subsidiado-ips,2026-07,proceso,CCF102,(vacía),89,10671495695,0,0,0
+subsidiado-ips,2026-07,proceso,EPS025,(vacía),30,21056893889,0,0,0
+subsidiado-ips,2026-07,proceso,EPSI01,(vacía),90,35838162730,0,0,0
+subsidiado-ips,2026-07,proceso,EPSI03,(vacía),31,14134368006,0,0,0
+subsidiado-ips,2026-07,proceso,EPSI04,(vacía),97,25559121704,0,0,0
+subsidiado-ips,2026-07,proceso,EPSI04,descuento de auditoría,1,110970440,6192,0,1
+subsidiado-ips,2026-07,proceso,EPSI05,(vacía),220,43280032127,0,0,0
+subsidiado-ips,2026-07,proceso,EPSI06,(vacía),118,15506690775,0,0,0
+subsidiado-ips,2026-07,proceso,EPSS02,(vacía),1160,200623519230,0,0,0
+subsidiado-ips,2026-07,proceso,EPSS05,(vacía),1267,189877692752,0,0,0
+subsidiado-ips,2026-07,proceso,EPSS05,descuento de auditoría,2,307049559,799945,0,2
+subsidiado-ips,2026-07,proceso,EPSS08,(vacía),70,9300992841,0,0,0
+subsidiado-ips,2026-07,proceso,EPSS10,(vacía),812,80543793321,0,0,0
+subsidiado-ips,2026-07,proceso,EPSS10,descuento de auditoría,1,185154692,76282,0,1
+subsidiado-ips,2026-07,proceso,EPSS12,(vacía),83,7983253712,0,0,0
+subsidiado-ips,2026-07,proceso,EPSS17,(vacía),618,116346042092,0,0,0
+subsidiado-ips,2026-07,proceso,EPSS17,descuento de auditoría,1,1199289,2666,0,1
+subsidiado-ips,2026-07,proceso,EPSS18,(vacía),33,23624476882,0,0,0
+subsidiado-ips,2026-07,proceso,EPSS34,(vacía),252,164786244369,0,0,0
+subsidiado-ips,2026-07,proceso,EPSS34,descuento de auditoría,1,2003701760,557110,0,1
+subsidiado-ips,2026-07,proceso,EPSS37,(vacía),23,202717582677,0,0,0
+subsidiado-ips,2026-07,proceso,EPSS40,(vacía),289,230758124872,0,0,0
+subsidiado-ips,2026-07,proceso,EPSS40,descuento de auditoría,2,14084637559,435450,0,2
+subsidiado-ips,2026-07,proceso,EPSS41,(vacía),1584,726394979960,0,0,0
+subsidiado-ips,2026-07,proceso,EPSS41,descuento de auditoría,8,12177168832,3239003,0,8
+subsidiado-ips,2026-07,proceso,EPSS46,(vacía),6,44487169,0,0,0
+subsidiado-ips,2026-07,proceso,EPSS48,(vacía),138,3127462499,0,0,0
+subsidiado-ips,2026-07,proceso,EPSS49,(vacía),2,5312341,0,0,0
+subsidiado-ips,2026-07,proceso,ESS207,(vacía),480,313904071858,0,0,0
+subsidiado-ips,2026-07,proceso,ESS207,descuento de auditoría,2,224433445,1393151,0,2
+subsidiado-ips,2026-08,proceso,CCF033,(vacía),455,42791275049,0,0,0
+subsidiado-ips,2026-08,proceso,CCF050,(vacía),95,31279239216,0,0,0
+subsidiado-ips,2026-08,proceso,CCF055,(vacía),586,163121856138,0,0,0
+subsidiado-ips,2026-08,proceso,CCF102,(vacía),92,11461640316,0,0,0
+subsidiado-ips,2026-08,proceso,EPS025,(vacía),21,19132181249,0,0,0
+subsidiado-ips,2026-08,proceso,EPSI01,(vacía),88,36007160552,0,0,0
+subsidiado-ips,2026-08,proceso,EPSI03,(vacía),43,15912549270,0,0,0
+subsidiado-ips,2026-08,proceso,EPSI04,(vacía),106,33834448470,0,0,0
+subsidiado-ips,2026-08,proceso,EPSI05,(vacía),216,42385118422,0,0,0
+subsidiado-ips,2026-08,proceso,EPSI06,(vacía),120,15756316583,0,0,0
+subsidiado-ips,2026-08,proceso,EPSS02,(vacía),1205,201100143833,0,0,0
+subsidiado-ips,2026-08,proceso,EPSS05,(vacía),1203,192034729956,0,0,0
+subsidiado-ips,2026-08,proceso,EPSS08,(vacía),26,10990239949,0,0,0
+subsidiado-ips,2026-08,proceso,EPSS10,(vacía),804,50762414049,0,0,0
+subsidiado-ips,2026-08,proceso,EPSS12,(vacía),84,8116806608,0,0,0
+subsidiado-ips,2026-08,proceso,EPSS17,(vacía),403,114882199581,0,0,0
+subsidiado-ips,2026-08,proceso,EPSS18,(vacía),36,24539691070,0,0,0
+subsidiado-ips,2026-08,proceso,EPSS34,(vacía),225,148964267836,0,0,0
+subsidiado-ips,2026-08,proceso,EPSS37,(vacía),19,190158438034,0,0,0
+subsidiado-ips,2026-08,proceso,EPSS40,(vacía),266,228231825028,0,0,0
+subsidiado-ips,2026-08,proceso,EPSS41,(vacía),1511,699240187076,0,0,0
+subsidiado-ips,2026-08,proceso,EPSS42,(vacía),7,5255505227,0,0,0
+subsidiado-ips,2026-08,proceso,EPSS46,(vacía),4,29292755,0,0,0
+subsidiado-ips,2026-08,proceso,EPSS48,(vacía),154,3799534327,0,0,0
+subsidiado-ips,2026-08,proceso,EPSS49,(vacía),2,3969731,0,0,0
+subsidiado-ips,2026-08,proceso,ESS024,(vacía),503,413028116866,0,0,0
+subsidiado-ips,2026-08,proceso,ESS062,(vacía),591,183934357220,0,0,0
+subsidiado-ips,2026-08,proceso,ESS118,(vacía),203,239515295063,0,0,0
+subsidiado-ips,2026-08,proceso,ESS207,(vacía),451,306591599349,0,0,0
+subsidiado-ips,2026-08,proceso,ESS207,descuento de auditoría,1,35663337,216654,0,1
+subsidiado-ips,2026-09,complemento,CCF033,comunicación sin emisor identificado,1,53586273,0,1,0
+subsidiado-ips,2026-09,complemento,CCF055,comunicación de la EPS,9,15663446442,0,9,0
+subsidiado-ips,2026-09,complemento,CCF102,otra,66,6796759125,0,0,0
+subsidiado-ips,2026-09,complemento,EPS025,comunicación sin emisor identificado,4,769095350,0,0,0
+subsidiado-ips,2026-09,complemento,EPSS08,comunicación de la EPS,7,1843400085,0,7,0
+subsidiado-ips,2026-09,complemento,EPSS12,comunicación de la EPS,5,373978910,0,5,0
+subsidiado-ips,2026-09,complemento,EPSS17,comunicación de la EPS,817,127994367261,0,817,0
+subsidiado-ips,2026-09,complemento,ESS024,comunicación de la EPS,1562,452926746135,0,0,0
+subsidiado-ips,2026-09,complemento,ESS062,comunicación de la Supersalud,54,26703829593,0,54,0
+subsidiado-ips,2026-09,complemento,ESS118,comunicación de la Supersalud,17,20933073500,0,17,0
+subsidiado-ips,2026-09,complemento,ESS118,otra,1,1110253616,0,1,0
+subsidiado-ips,2026-09,proceso,CCF033,(vacía),364,50297782738,0,0,0
+subsidiado-ips,2026-09,proceso,CCF050,(vacía),96,35675448184,0,0,0
+subsidiado-ips,2026-09,proceso,CCF055,(vacía),594,163790939877,0,0,0
+subsidiado-ips,2026-09,proceso,CCF102,(vacía),98,13586212516,0,0,0
+subsidiado-ips,2026-09,proceso,EPS025,(vacía),48,20940991253,0,0,0
+subsidiado-ips,2026-09,proceso,EPSI01,(vacía),91,27105484150,0,0,0
+subsidiado-ips,2026-09,proceso,EPSI01,comunicación de la Supersalud,7,0,10201408827,0,7
+subsidiado-ips,2026-09,proceso,EPSI03,(vacía),50,29528528160,0,0,0
+subsidiado-ips,2026-09,proceso,EPSI04,(vacía),96,42500521752,0,0,0
+subsidiado-ips,2026-09,proceso,EPSI05,(vacía),296,61222127439,0,0,0
+subsidiado-ips,2026-09,proceso,EPSI06,(vacía),146,15835685590,0,0,0
+subsidiado-ips,2026-09,proceso,EPSS02,(vacía),1200,236187217462,0,0,0
+subsidiado-ips,2026-09,proceso,EPSS05,(vacía),1416,216359826998,0,0,0
+subsidiado-ips,2026-09,proceso,EPSS08,(vacía),165,40272836764,0,0,0
+subsidiado-ips,2026-09,proceso,EPSS10,(vacía),897,125096943506,0,0,0
+subsidiado-ips,2026-09,proceso,EPSS12,(vacía),87,11529182026,0,0,0
+subsidiado-ips,2026-09,proceso,EPSS18,(vacía),108,27856311160,0,0,0
+subsidiado-ips,2026-09,proceso,EPSS34,(vacía),325,183593576318,0,0,0
+subsidiado-ips,2026-09,proceso,EPSS37,(vacía),17,215101293580,0,0,0
+subsidiado-ips,2026-09,proceso,EPSS40,(vacía),328,243425693742,0,0,0
+subsidiado-ips,2026-09,proceso,EPSS41,(vacía),1541,781965858809,0,0,0
+subsidiado-ips,2026-09,proceso,EPSS46,(vacía),3,35054344,0,0,0
+subsidiado-ips,2026-09,proceso,EPSS48,(vacía),151,4810029769,0,0,0
+subsidiado-ips,2026-09,proceso,EPSS49,(vacía),1,8797336,0,0,0
+subsidiado-ips,2026-09,proceso,ESS062,(vacía),246,179709760163,0,0,0
+subsidiado-ips,2026-09,proceso,ESS062,comunicación de la Supersalud,13,0,15754643081,0,13
+subsidiado-ips,2026-09,proceso,ESS118,(vacía),155,220316225399,0,0,0
+subsidiado-ips,2026-09,proceso,ESS118,comunicación de la Supersalud,9,214221768,21174579729,0,9
+subsidiado-ips,2026-09,proceso,ESS207,(vacía),426,352133687045,0,0,0
+subsidiado-ips,2026-10,proceso,CCF033,(vacía),435,46298753635,0,0,0
+subsidiado-ips,2026-10,proceso,CCF050,(vacía),120,35545497021,0,0,0
+subsidiado-ips,2026-10,proceso,CCF055,(vacía),587,164194982992,0,0,0
+subsidiado-ips,2026-10,proceso,CCF102,(vacía),108,17718998565,0,0,0
+subsidiado-ips,2026-10,proceso,EPS025,(vacía),40,21685903851,0,0,0
+subsidiado-ips,2026-10,proceso,EPSI01,(vacía),74,37473939061,0,0,0
+subsidiado-ips,2026-10,proceso,EPSI03,(vacía),39,40151458363,0,0,0
+subsidiado-ips,2026-10,proceso,EPSI04,(vacía),121,43173532757,0,0,0
+subsidiado-ips,2026-10,proceso,EPSI05,(vacía),229,61195053322,0,0,0
+subsidiado-ips,2026-10,proceso,EPSI06,(vacía),148,15499575996,0,0,0
+subsidiado-ips,2026-10,proceso,EPSS02,(vacía),1222,235734969967,0,0,0
+subsidiado-ips,2026-10,proceso,EPSS05,(vacía),1290,215822567571,0,0,0
+subsidiado-ips,2026-10,proceso,EPSS08,(vacía),119,41802070100,0,0,0
+subsidiado-ips,2026-10,proceso,EPSS10,(vacía),881,110683856612,0,0,0
+subsidiado-ips,2026-10,proceso,EPSS12,(vacía),97,10928897737,0,0,0
+subsidiado-ips,2026-10,proceso,EPSS17,(vacía),1066,128918223923,0,0,0
+subsidiado-ips,2026-10,proceso,EPSS18,(vacía),248,28743981198,0,0,0
+subsidiado-ips,2026-10,proceso,EPSS34,(vacía),338,183210658100,0,0,0
+subsidiado-ips,2026-10,proceso,EPSS37,(vacía),19,213595794451,0,0,0
+subsidiado-ips,2026-10,proceso,EPSS40,(vacía),271,247834599275,0,0,0
+subsidiado-ips,2026-10,proceso,EPSS41,(vacía),1575,780318107545,0,0,0
+subsidiado-ips,2026-10,proceso,EPSS42,(vacía),10,6148352487,0,0,0
+subsidiado-ips,2026-10,proceso,EPSS46,(vacía),5,82662767,0,0,0
+subsidiado-ips,2026-10,proceso,EPSS48,(vacía),168,4714022224,0,0,0
+subsidiado-ips,2026-10,proceso,EPSS49,(vacía),2,13173862,0,0,0
+subsidiado-ips,2026-10,proceso,ESS024,(vacía),1209,439852762980,0,0,0
+subsidiado-ips,2026-10,proceso,ESS024,embargo,1,4675404,2302810,0,1
+subsidiado-ips,2026-10,proceso,ESS062,(vacía),510,210745758078,0,0,0
+subsidiado-ips,2026-10,proceso,ESS118,(vacía),312,241925809185,0,0,0
+subsidiado-ips,2026-10,proceso,ESS207,(vacía),472,349717306398,0,0,0

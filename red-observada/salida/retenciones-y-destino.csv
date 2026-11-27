@@ -1,0 +1,21 @@
+﻿corte,codigo_eps,nombre_eps,motivo,norma_citada,retenido,luego_giro_directo,luego_tesoreria,comunicacion_de,menciona_embargo,proceso_sobre_upc_apropiada_pct,proceso_sobre_upc_neta_pct,luego_giro_directo_pct,entidad
+2026-02,CCF055,Cajacopi,porcentaje mínimo de giro directo,sin nombrarla,40728099729.0,5500000000.0,35228099729.0,la EPS,False,77.11499200392959,78.77160551500795,13.504190071710577,CAJACOPI
+2026-02,EPS025,Capresoca,porcentaje mínimo de giro directo,sin nombrarla,8915896426.0,4271986220.0,4643910206.0,la EPS,False,61.34830144242161,62.88711940372672,47.91426476806405,CAPRESOCA
+2026-07,EPSS42,Coosalud,cargue del archivo fuera de tiempo,sin nombrarla,6085277306.0,5453609214.0,631668092.0,sin decir,False,0.0,0.0,89.61973201488807,COOSALUD
+2026-07,ESS024,Coosalud,cargue del archivo fuera de tiempo,sin nombrarla,488794926495.0,419574941393.0,69219985102.0,la Supersalud,True,0.0,0.0,85.83864493063471,COOSALUD
+2026-09,CCF033,Familiar de Colombia,porcentaje mínimo de giro directo,Decreto 930 de 2026,4749322022.0,53586273.0,4695735749.0,la EPS,False,89.65681597785623,91.02248686683778,1.128293106927168,FAMILIARDECOLOMBIA
+2026-09,CCF055,Proteger,porcentaje mínimo de giro directo,Decreto 930 de 2026,29474172693.0,15663446442.0,13810726251.0,la EPS,True,82.53867514674988,84.48251365406487,53.14295537706477,CAJACOPI
+2026-09,CCF102,Comfachoco,porcentaje mínimo de giro directo,Decreto 930 de 2026,7889266606.0,6796759125.0,1092507481.0,la EPS,False,61.41489375499012,62.861681074849024,86.1519766594132,COMFACHOCO
+2026-09,EPS025,Capresoca,porcentaje mínimo de giro directo,Decreto 930 de 2026,2618760671.0,769095350.0,1849665321.0,la EPS,False,86.90850375603408,88.85179316889416,29.368676508583476,CAPRESOCA
+2026-09,EPSI03,Asociación Indígena del Cauca,porcentaje mínimo de giro directo,Decreto 930 de 2026,10551734903.0,0.0,0.0,sin comunicación,False,72.76840103205922,73.66396521276737,0.0,ASOCIACIONINDIGENADELCAUCA
+2026-09,EPSS08,Compensar,porcentaje mínimo de giro directo,Decreto 930 de 2026,4837266848.0,1843400085.0,2993866763.0,la EPS,False,86.7061489819959,89.19054360870817,38.108298403305284,COMPENSAR
+2026-09,EPSS10,Suramericana,porcentaje mínimo de giro directo,Decreto 930 de 2026,17450747283.0,10732698654.0,6718048629.0,la EPS,False,83.94576177372282,87.72414277886851,61.502802601785866,SURAMERICANA
+2026-09,EPSS12,Comfenalco Valle,porcentaje mínimo de giro directo,Decreto 930 de 2026,1125704660.0,373978910.0,751725750.0,la EPS,False,88.34649144159977,90.95564531968571,33.221760848000756,COMFENALCOVALLE
+2026-09,EPSS46,Salud Mia,porcentaje mínimo de giro directo,Decreto 930 de 2026,3634476255.0,0.0,3634476255.0,la EPS,False,0.9341374157794539,0.955281419633149,0.0,SALUDMIA
+2026-09,EPSS49,Salud Mia,porcentaje mínimo de giro directo,Decreto 930 de 2026,259794937.0,0.0,259794937.0,la EPS,False,3.2496038650731345,3.275349622585755,0.0,SALUDMIA
+2026-10,CCF033,Familiar de Colombia,porcentaje mínimo de giro directo,Decreto 930 de 2026,9600392667.0,0.0,0.0,sin comunicación,False,81.29192222980922,82.5858240449488,0.0,FAMILIARDECOLOMBIA
+2026-10,CCF055,Proteger,porcentaje mínimo de giro directo,Decreto 930 de 2026,25492652724.0,0.0,0.0,sin comunicación,False,83.1672868417927,85.01245632930305,0.0,CAJACOPI
+2026-10,EPSS10,Suramericana,porcentaje mínimo de giro directo,Decreto 930 de 2026,32289102104.0,0.0,0.0,sin comunicación,False,73.04878262009832,77.40517466808667,0.0,SURAMERICANA
+2026-10,EPSS12,Comfenalco Valle,porcentaje mínimo de giro directo,Decreto 930 de 2026,1749622679.0,0.0,0.0,sin comunicación,False,83.60166908609322,86.10810313693716,0.0,COMFENALCOVALLE
+2026-10,EPSS42,Coosalud,porcentaje mínimo de giro directo,Decreto 930 de 2026,870719.0,0.0,0.0,sin comunicación,False,90.22478093907948,99.79584677085026,0.0,COOSALUD
+2026-10,ESS024,Coosalud,porcentaje mínimo de giro directo,Decreto 930 de 2026,45755761566.0,0.0,0.0,sin comunicación,False,88.06731573368438,89.76934442263945,0.0,COOSALUD

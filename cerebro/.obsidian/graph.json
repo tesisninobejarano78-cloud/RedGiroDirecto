@@ -1,0 +1,57 @@
+{
+  "colorGroups": [
+    {
+      "query": "path:sistema/",
+      "color": {
+        "a": 1,
+        "rgb": 3049131
+      }
+    },
+    {
+      "query": "path:actores/",
+      "color": {
+        "a": 1,
+        "rgb": 14711327
+      }
+    },
+    {
+      "query": "path:normas/",
+      "color": {
+        "a": 1,
+        "rgb": 6966419
+      }
+    },
+    {
+      "query": "path:redes/",
+      "color": {
+        "a": 1,
+        "rgb": 2792847
+      }
+    },
+    {
+      "query": "path:metodo/",
+      "color": {
+        "a": 1,
+        "rgb": 12597547
+      }
+    },
+    {
+      "query": "path:datos/",
+      "color": {
+        "a": 1,
+        "rgb": 9268835
+      }
+    },
+    {
+      "query": "path:referencias/",
+      "color": {
+        "a": 1,
+        "rgb": 8359053
+      }
+    }
+  ],
+  "showTags": false,
+  "showAttachments": false,
+  "hideUnresolved": true,
+  "showOrphans": true
+}

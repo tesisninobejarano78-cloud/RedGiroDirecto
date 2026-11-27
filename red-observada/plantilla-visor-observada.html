@@ -1,0 +1,1315 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Red observada del giro directo</title>
+<!--
+  Visor de la red observada del giro directo: la ADRES gira al prestador por cuenta de
+  cada EPS (EPS → prestador). La flecha dice quién ordena y de quién es la UPC, no quién
+  transfiere el dinero.
+  Lo genera observada/construir-visor-observada.py a partir de esta plantilla: no
+  editar el visor generado, editar la plantilla y volver a correr el script.
+  Sin dependencias externas: funciona sin conexión.
+-->
+<style>
+  :root {
+    color-scheme: light;
+    --page: #f9f9f7;
+    --surface: #fcfcfb;
+    --ink: #0b0b0b;
+    --ink-2: #52514e;
+    --muted: #898781;
+    --grid: #e1e0d9;
+    --border: rgba(11, 11, 11, 0.10);
+    --wash: rgba(11, 11, 11, 0.05);
+    --control: #ffffff;
+    --control-hover: #efeee9;
+    --border-strong: rgba(11, 11, 11, 0.20);
+    --seleccion: rgba(42, 120, 214, 0.12);
+    --sombra: 0 1px 3px rgba(0, 0, 0, 0.06), 0 6px 20px rgba(0, 0, 0, 0.08);
+    --recursos: #2a78d6;
+    --informacion: #eb6834;
+    --ambas: #1baf7a;
+    --dep-repartida: #86b6ef;
+    --dep-mayoritaria: #2a78d6;
+    --dep-una: #104281;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page: #0d0d0d;
+      --surface: #1a1a19;
+      --ink: #f0efec;
+      --ink-2: #c3c2b7;
+      --muted: #898781;
+      --grid: #2c2c2a;
+      --border: rgba(255, 255, 255, 0.10);
+      --wash: rgba(255, 255, 255, 0.06);
+      --control: #262625;
+      --control-hover: #31312f;
+      --border-strong: rgba(255, 255, 255, 0.18);
+      --seleccion: rgba(57, 135, 229, 0.24);
+      --sombra: 0 1px 3px rgba(0, 0, 0, 0.35), 0 6px 20px rgba(0, 0, 0, 0.45);
+      --recursos: #3987e5;
+      --informacion: #d95926;
+      --ambas: #199e70;
+      --dep-repartida: #184f95;
+      --dep-mayoritaria: #3987e5;
+      --dep-una: #b7d3f6;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --ink: #f0efec;
+    --ink-2: #c3c2b7;
+    --muted: #898781;
+    --grid: #2c2c2a;
+    --border: rgba(255, 255, 255, 0.10);
+    --wash: rgba(255, 255, 255, 0.06);
+    --control: #262625;
+    --control-hover: #31312f;
+    --border-strong: rgba(255, 255, 255, 0.18);
+    --seleccion: rgba(57, 135, 229, 0.24);
+    --sombra: 0 1px 3px rgba(0, 0, 0, 0.35), 0 6px 20px rgba(0, 0, 0, 0.45);
+    --recursos: #3987e5;
+    --informacion: #d95926;
+    --ambas: #199e70;
+    --dep-repartida: #184f95;
+    --dep-mayoritaria: #3987e5;
+    --dep-una: #b7d3f6;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--page);
+    color: var(--ink);
+    font: 13px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  #app {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+  }
+  header {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  header h1 { font-size: 15px; margin: 0; font-weight: 600; }
+  header .version { color: var(--ink-2); font-size: 12px; }
+  header .acciones { margin-left: auto; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  button, select, input[type="search"], input[type="text"] {
+    font: inherit;
+    color: var(--ink);
+    background-color: var(--control);
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    padding: 5px 10px;
+    min-height: 30px;
+  }
+  select { cursor: pointer; }
+  /* Las opciones de una lista se dibujan aparte de la página: llevan fondo y color propios para leerse en los dos temas. */
+  select option, select optgroup { background-color: var(--control); color: var(--ink); }
+  button { cursor: pointer; transition: background-color 0.12s, border-color 0.12s, opacity 0.12s; }
+  button:hover:not(:disabled), select:hover { background-color: var(--control-hover); }
+  button:active:not(:disabled) { transform: translateY(1px); }
+  button:disabled { opacity: 0.4; cursor: default; }
+  button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--recursos); outline-offset: 1px; }
+  input[type="checkbox"], input[type="radio"] { accent-color: var(--recursos); margin: 0; width: 14px; height: 14px; flex: none; cursor: pointer; }
+  input::placeholder { color: var(--muted); }
+  header .grupo { display: flex; gap: 6px; align-items: center; }
+  header .grupo + .grupo { padding-left: 8px; border-left: 1px solid var(--border); }
+  #contrastes { max-width: 260px; }
+  #filtros {
+    overflow-y: auto;
+    border-right: 1px solid var(--border);
+    background: var(--surface);
+    padding: 6px 16px 24px;
+  }
+  #filtros { scrollbar-width: thin; scrollbar-color: var(--grid) transparent; }
+  #filtros details { border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+  #filtros details:last-of-type { border-bottom: none; }
+  #filtros summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-2);
+    margin: 12px 0 6px;
+    font-weight: 600;
+    user-select: none;
+  }
+  #filtros summary::-webkit-details-marker { display: none; }
+  #filtros summary::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-right: 1.5px solid var(--muted);
+    border-bottom: 1.5px solid var(--muted);
+    transform: rotate(45deg);
+    margin: 0 4px 3px 0;
+    transition: transform 0.15s;
+  }
+  #filtros details:not([open]) > summary::after { transform: rotate(-45deg); margin-bottom: 0; }
+  #filtros summary:hover { color: var(--ink); }
+  #filtros label { display: flex; align-items: center; gap: 7px; padding: 3px 5px; margin: 0 -5px; border-radius: 5px; cursor: pointer; }
+  #filtros label:hover { background: var(--wash); }
+  #filtros label .cuenta { margin-left: auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+  #filtros label .nota { color: var(--muted); font-size: 11px; }
+  #filtros select, #filtros input[type="search"] { width: 100%; }
+  .enlaces { display: flex; gap: 6px; margin: 0 0 6px; }
+  .enlaces[hidden] { display: none; }
+  .enlaces button { min-height: 0; padding: 1px 10px; font-size: 11.5px; border-radius: 999px; color: var(--ink-2); }
+  .pista { color: var(--muted); font-size: 11.5px; margin-top: 3px; }
+  .subtitulo { font-size: 12px; color: var(--ink-2); margin: 8px 0 2px; }
+  .ayuda { font-size: 12px; color: var(--muted); margin: 4px 0 0; }
+  .clave-linea { width: 26px; height: 10px; flex: none; }
+  main { position: relative; overflow: hidden; background: var(--surface); }
+  #lienzo { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+  #lienzo.arrastrando { cursor: grabbing; }
+  .flotante {
+    position: absolute;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--sombra);
+  }
+  #resumen { left: 12px; top: 12px; padding: 6px 10px; max-width: min(620px, calc(100% - 380px)); font-size: 12px; color: var(--ink-2); }
+  #resumen strong { color: var(--ink); }
+  #leyenda { left: 12px; bottom: 12px; padding: 8px 12px; font-size: 12px; max-width: calc(100% - 80px); }
+  #leyenda .fila { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; margin: 2px 0; }
+  #leyenda .item { display: inline-flex; align-items: center; gap: 6px; }
+  #leyenda .titulo { color: var(--ink-2); min-width: 64px; }
+  #zoom { right: 12px; bottom: 12px; display: flex; flex-direction: column; overflow: hidden; }
+  #zoom button { border: none; border-radius: 0; width: 34px; height: 32px; min-height: 0; padding: 0; font-size: 17px; display: flex; align-items: center; justify-content: center; background-color: var(--surface); }
+  #zoom button + button { border-top: 1px solid var(--border); }
+  #detalle { right: 12px; top: 12px; width: 350px; max-height: calc(100% - 70px); overflow-y: auto; padding: 12px 14px; display: none; }
+  #detalle h3 { margin: 0 26px 2px 0; font-size: 14px; }
+  #detalle .sub { color: var(--ink-2); font-size: 12px; margin-bottom: 8px; }
+  #detalle dl { display: grid; grid-template-columns: 150px 1fr; gap: 3px 10px; margin: 0 0 8px; font-size: 12px; }
+  #detalle dt { color: var(--ink-2); }
+  #detalle dd { margin: 0; font-variant-numeric: tabular-nums; }
+  #detalle h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-2); margin: 12px 0 4px; }
+  #detalle ul { list-style: none; padding: 0; margin: 0; }
+  #detalle li { padding: 4px 0; border-top: 1px solid var(--border); font-size: 12px; display: flex; gap: 8px; }
+  #detalle li .nombre { flex: 1; }
+  #detalle li .valor { color: var(--ink-2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  #detalle li button { border: none; background: none; padding: 0; min-height: 0; text-align: left; color: var(--ink); text-decoration: underline; text-decoration-color: var(--muted); }
+  #detalle .cerrar { position: absolute; right: 8px; top: 8px; border: none; font-size: 16px; padding: 2px 8px; }
+  #detalle p { font-size: 12px; color: var(--ink-2); margin: 6px 0; }
+  #tooltip { pointer-events: none; padding: 6px 9px; font-size: 12px; display: none; max-width: 320px; z-index: 5; }
+  #tooltip strong { display: block; color: var(--ink); }
+  #tooltip span { color: var(--ink-2); display: block; }
+  #tabla { position: absolute; inset: 0; overflow: auto; background: var(--surface); padding: 14px 18px 40px; display: none; }
+  #tabla h2 { font-size: 13px; margin: 8px 0; }
+  #tabla p { color: var(--ink-2); margin: 0 0 8px; font-size: 12px; }
+  table { border-collapse: collapse; width: 100%; font-size: 12px; margin-bottom: 18px; }
+  tbody tr:hover td { background: var(--wash); }
+  th, td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+  th { color: var(--ink-2); font-weight: 600; position: sticky; top: -14px; background: var(--surface); }
+  td.num, th.num { font-variant-numeric: tabular-nums; text-align: right; }
+  #aviso { left: 50%; bottom: 18px; transform: translateX(-50%); padding: 8px 14px; font-size: 12.5px; display: none; z-index: 10; background: var(--ink); color: var(--page); border-color: transparent; white-space: nowrap; }
+  #campo-enlace { width: 100%; margin-top: 6px; font: inherit; font-size: 11px; display: none; }
+  @media (max-width: 860px) {
+    #app { grid-template-columns: 1fr; grid-template-rows: auto auto 75vh; height: auto; }
+    #filtros { border-right: none; border-bottom: 1px solid var(--border); max-height: none; }
+    #detalle { width: calc(100% - 24px); }
+    #resumen { max-width: calc(100% - 24px); }
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div>
+      <h1 id="titulo"></h1>
+      <div class="version" id="version"></div>
+    </div>
+    <div class="acciones">
+      <div class="grupo">
+        <select id="contrastes" aria-label="Vistas sugeridas" title="Vistas preparadas para comparar"></select>
+      </div>
+      <div class="grupo">
+        <button id="btn-ajustar" type="button" title="Encuadrar toda la red">Ajustar vista</button>
+        <button id="btn-vista" type="button" title="Ver lo resaltado como tabla">Tabla</button>
+      </div>
+      <div class="grupo">
+        <button id="btn-png" type="button" title="Descargar la vista actual como imagen">Exportar PNG</button>
+        <button id="btn-enlace" type="button" title="Copiar un enlace que reproduce esta vista">Copiar enlace</button>
+      </div>
+      <div class="grupo">
+        <button id="btn-restablecer" type="button" title="Quitar los filtros y volver al encuadre inicial">Restablecer</button>
+        <button id="btn-tema" type="button" title="Cambiar de tema">Tema</button>
+      </div>
+    </div>
+  </header>
+
+  <aside id="filtros" aria-label="Filtros">
+    <details open><summary>Mes</summary>
+    <div id="meses"></div>
+
+    </details>
+    <details open><summary>Capas</summary>
+    <label><input type="checkbox" id="capa-recursos" checked>
+      <svg class="clave-linea" viewBox="0 0 26 10" aria-hidden="true"><line x1="1" y1="5" x2="25" y2="5" stroke="var(--recursos)" stroke-width="2"/></svg>
+      Recursos: giro de la ADRES por cuenta de la EPS</label>
+    <label><input type="checkbox" id="capa-informacion" checked>
+      <svg class="clave-linea" viewBox="0 0 26 10" aria-hidden="true"><line x1="1" y1="5" x2="25" y2="5" stroke="var(--informacion)" stroke-width="2" stroke-dasharray="6 4"/></svg>
+      Información: hacia la ADRES</label>
+
+    </details>
+    <details open><summary>Color de los prestadores</summary>
+    <select id="color" aria-label="Color de los prestadores">
+      <option value="capas">Capa en que participan</option>
+      <option value="dependencia">Dependencia de su EPS principal</option>
+    </select>
+
+    </details>
+    <details open><summary>Tipo de prestador</summary>
+    <div class="enlaces">
+      <button type="button" id="tipos-todos">Todos</button><button type="button" id="tipos-ninguno">Ninguno</button>
+    </div>
+    <div id="tipos"></div>
+
+    </details>
+    <details open><summary>Dependencia de su EPS principal</summary>
+    <div id="dependencia"></div>
+    <p class="ayuda">Sobre lo que el prestador recibe por giro directo en el mes.</p>
+
+    </details>
+    <details open><summary>Departamento del prestador</summary>
+    <select id="depto" aria-label="Departamento del prestador"></select>
+
+    </details>
+    <details open><summary>Buscar</summary>
+    <input type="search" id="buscar" list="lista-nombres" placeholder="EPS, prestador o NIT" aria-label="Buscar EPS o prestador">
+    <datalist id="lista-nombres"></datalist>
+    <p class="ayuda">Enter selecciona la primera coincidencia y muestra sus vínculos.</p>
+
+    </details>
+    <details open><summary>Presentación</summary>
+    <label><input type="checkbox" id="ocultar"> Ocultar en vez de atenuar</label>
+    <div class="subtitulo">Aristas de recursos</div>
+    <select id="aristas" aria-label="Aristas de recursos">
+      <option value="todas">Las de lo resaltado, más el resto tenue</option>
+      <option value="resaltadas">Solo las de lo resaltado</option>
+    </select>
+    <div class="subtitulo">Etiquetas</div>
+    <select id="etiquetas" aria-label="Etiquetas">
+      <option value="eps">EPS, ADRES y Supersalud</option>
+      <option value="todas">También prestadores al acercar</option>
+      <option value="ninguna">Ninguna</option>
+    </select>
+    <input type="text" id="campo-enlace" readonly aria-label="Enlace de la vista">
+    </details>
+  </aside>
+
+  <main id="principal">
+    <canvas id="lienzo" role="img" aria-label="Red del giro directo: EPS en un anillo, sus prestadores alrededor y la ADRES en el centro. La vista de tabla contiene la misma información."></canvas>
+    <div id="resumen" class="flotante"></div>
+    <div id="leyenda" class="flotante" aria-label="Leyenda"></div>
+    <div id="zoom" class="flotante">
+      <button type="button" id="zoom-mas" aria-label="Acercar" title="Acercar (tecla +)">+</button>
+      <button type="button" id="zoom-menos" aria-label="Alejar" title="Alejar (tecla −)">&minus;</button>
+      <button type="button" id="zoom-ajustar" aria-label="Ajustar vista" title="Ajustar vista (tecla 0)"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+    </div>
+    <div id="detalle" class="flotante" aria-live="polite"></div>
+    <div id="tooltip" class="flotante" role="tooltip"></div>
+    <div id="aviso" class="flotante" role="status"></div>
+    <div id="tabla"></div>
+  </main>
+</div>
+
+<script>window.DATOS = /*__DATOS__*/null;</script>
+<script>
+(function () {
+  "use strict";
+  const D = window.DATOS;
+  if (!D) { document.body.textContent = "El visor no tiene datos: genérelo con observada/construir-visor-observada.py."; return; }
+
+  // ------------------------------------------------------------ formato
+  const $ = id => document.getElementById(id);
+  const normalizar = t => (t || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  const f0 = new Intl.NumberFormat("es-CO", { maximumFractionDigits: 0 });
+  const f1 = new Intl.NumberFormat("es-CO", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const f2 = new Intl.NumberFormat("es-CO", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const f3 = new Intl.NumberFormat("es-CO", { minimumFractionDigits: 3, maximumFractionDigits: 3 });
+  function pesos(v) {
+    if (v == null) return "—";
+    if (Math.abs(v) >= 1e12) return "$" + f2.format(v / 1e12) + " billones";
+    if (Math.abs(v) >= 1e6) return "$" + f0.format(Math.round(v / 1e6)) + " millones";
+    return "$" + f0.format(Math.round(v));
+  }
+  const pct = v => v == null ? "—" : f1.format(v) + " %";
+  const el = (etiqueta, props, hijos) => {
+    const n = document.createElement(etiqueta);
+    if (props) Object.keys(props).forEach(k => {
+      if (k === "texto") n.textContent = props[k];
+      else if (k === "clase") n.className = props[k];
+      else n.setAttribute(k, props[k]);
+    });
+    (hijos || []).forEach(h => n.appendChild(typeof h === "string" ? document.createTextNode(h) : h));
+    return n;
+  };
+
+  // ------------------------------------------------------------ catálogos
+  const EPS = D.eps;
+  const PRE = D.prestadores.map(p => ({ nit: p[0], nombre: p[1], tipo: p[2], forma: p[3], depto: p[4], municipio: p[5] }));
+  const TIPOS = D.tipos;
+  const DEPTOS = D.departamentos;
+  const CORTES = D.meta.cortes;
+  const ADRES = { x: 0, y: -20 }, SNS = { x: 0, y: 36 };
+  const DEP = {
+    todas: "Todos",
+    una: "Reciben de una sola EPS",
+    mayoritaria: "Su EPS principal da la mitad o más",
+    repartida: "Ninguna EPS da la mitad"
+  };
+  const nivelDep = p => p.eps === 1 ? "una" : (p.parte >= 50 ? "mayoritaria" : "repartida");
+  const FORMAS = {
+    circulo: "Prestador público",
+    cuadrado: "Prestador privado o mixto",
+    triangulo: "Receptor sin inscripción en el REPS"
+  };
+  const idxEps = nombre => EPS.findIndex(e => normalizar(e.nombre) === normalizar(nombre));
+
+  const CACHE = {};
+  function datosCorte(c) {
+    if (CACHE[c]) return CACHE[c];
+    const d = D.cortes[c];
+    const pres = d.prestadores.map(r => ({ i: r[0], x: r[1], y: r[2], girado: r[3], eps: r[4], parte: r[5], inter: r[6], s: PRE[r[0]] }));
+    const porPre = new Map(pres.map(p => [p.i, p]));
+    const aristas = d.aristas.map(r => ({ e: r[0], p: r[1], w: r[2] }));
+    const porEps = new Map(), dePre = new Map();
+    aristas.forEach(a => {
+      if (!porEps.has(a.e)) porEps.set(a.e, []);
+      porEps.get(a.e).push(a);
+      if (!dePre.has(a.p)) dePre.set(a.p, []);
+      dePre.get(a.p).push(a);
+    });
+    const eps = new Map(d.eps.map(o => [o.i, o]));
+    let gmaxP = 1, wmax = 1, gmaxE = 1, progMax = 1;
+    pres.forEach(p => { if (p.girado > gmaxP) gmaxP = p.girado; });
+    aristas.forEach(a => { if (a.w > wmax) wmax = a.w; });
+    d.eps.forEach(o => { gmaxE = Math.max(gmaxE, o.girado); progMax = Math.max(progMax, o.programado, o.sns_girado); });
+    CACHE[c] = { d, pres, porPre, aristas, porEps, dePre, eps, gmaxP, wmax, gmaxE, progMax };
+    return CACHE[c];
+  }
+
+  // --------------------------------------------------------------- estado
+  function estadoInicial() {
+    return {
+      corte: D.meta.principal,
+      capas: { recursos: true, informacion: true },
+      color: "capas",
+      tipos: new Set(TIPOS.map((_, i) => i)),
+      dep: "todas",
+      depto: "",
+      buscar: "",
+      sel: null,
+      ocultar: false,
+      aristas: "todas",
+      etiquetas: "eps",
+      vista: "grafo"
+    };
+  }
+  let E = estadoInicial();
+
+  const CONTRASTES = [
+    { id: "", etiqueta: "Vistas sugeridas…" },
+    { id: "una", etiqueta: "Prestadores que reciben de una sola EPS", aplicar: e => { e.dep = "una"; e.color = "dependencia"; } },
+    { id: "mayoritaria", etiqueta: "Prestadores donde una EPS da la mitad o más", aplicar: e => { e.dep = "mayoritaria"; e.color = "dependencia"; } },
+    { id: "repartida", etiqueta: "Prestadores repartidos entre varias EPS", aplicar: e => { e.dep = "repartida"; e.color = "dependencia"; } },
+    { id: "ese", etiqueta: "Hospitales públicos (ESE)", aplicar: e => { e.tipos = new Set([0]); e.color = "dependencia"; } },
+    { id: "privadas", etiqueta: "IPS privadas", aplicar: e => { e.tipos = new Set([2]); e.color = "dependencia"; } },
+    { id: "sinreps", etiqueta: "Receptores sin inscripción en el REPS", aplicar: e => { e.tipos = new Set([5, 6]); e.color = "dependencia"; } },
+    { id: "nueva", etiqueta: "Nueva EPS y sus prestadores", aplicar: e => { e.sel = { t: "e", i: idxEps("NUEVA EPS") }; } },
+    { id: "sanitas", etiqueta: "Sanitas y sus prestadores", aplicar: e => { e.sel = { t: "e", i: idxEps("SANITAS") }; } },
+    { id: "informacion", etiqueta: "La capa de información sola", aplicar: e => { e.capas = { recursos: false, informacion: true }; } },
+    { id: "sns", etiqueta: "Lo que la Supersalud le comunica a la ADRES", aplicar: e => { e.sel = { t: "sns" }; } }
+  ];
+
+  // ------------------------------------------------------- datos derivados
+  let C = null;
+  function derivar() {
+    const K = datosCorte(E.corte);
+    const q = normalizar(E.buscar.trim());
+    const epsSel = E.sel && E.sel.t === "e" ? E.sel.i : null;
+    const preSel = E.sel && E.sel.t === "p" ? E.sel.i : null;
+    const cartera = epsSel != null ? new Set((K.porEps.get(epsSel) || []).map(a => a.p)) : null;
+    const coincide = new Set();
+    K.pres.forEach(p => {
+      if (!E.tipos.has(p.s.tipo)) return;
+      if (E.dep !== "todas" && nivelDep(p) !== E.dep) return;
+      if (E.depto !== "" && String(p.s.depto) !== E.depto) return;
+      if (q && !normalizar(p.s.nombre + " " + p.s.nit).includes(q)) return;
+      if (cartera && !cartera.has(p.i)) return;
+      if (preSel != null && p.i !== preSel) return;
+      coincide.add(p.i);
+    });
+    const epsRes = new Set();
+    if (epsSel != null) epsRes.add(epsSel);
+    else if (preSel != null) (K.dePre.get(preSel) || []).forEach(a => epsRes.add(a.e));
+    else if (E.sel && E.sel.t === "sns") K.d.eps.forEach(o => { if (o.sns_girado > 0 || o.sns_retenido > 0) epsRes.add(o.i); });
+    else K.d.eps.forEach(o => epsRes.add(o.i));
+    const resaltadas = [], tenues = [];
+    K.aristas.forEach(a => (coincide.has(a.p) && epsRes.has(a.e) ? resaltadas : tenues).push(a));
+    C = { K, coincide, epsRes, resaltadas, tenues, epsSel, preSel };
+    return C;
+  }
+
+  // ------------------------------------------------------------- lienzo
+  const lienzo = $("lienzo");
+  const ctx = lienzo.getContext("2d");
+  let ancho = 0, alto = 0, dpr = 1;
+  const T = { k: 1, x: 0, y: 0 };
+  const colores = {};
+  function leerColores() {
+    const cs = getComputedStyle(document.documentElement);
+    ["--surface", "--ink", "--ink-2", "--muted", "--grid", "--recursos", "--informacion", "--ambas",
+     "--dep-una", "--dep-mayoritaria", "--dep-repartida"].forEach(v => { colores[v] = cs.getPropertyValue(v).trim(); });
+  }
+  function medir() {
+    const r = lienzo.parentElement.getBoundingClientRect();
+    dpr = window.devicePixelRatio || 1;
+    ancho = Math.max(200, r.width);
+    alto = Math.max(200, r.height);
+    lienzo.width = Math.round(ancho * dpr);
+    lienzo.height = Math.round(alto * dpr);
+  }
+  function encuadre() {
+    const K = datosCorte(E.corte);
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    const ver = (x, y) => { x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y); };
+    K.pres.forEach(p => ver(p.x, p.y));
+    EPS.forEach(e => ver(e.lx, e.ly));
+    // Márgenes para los nombres de las EPS (van por fuera de las nubes) y para la leyenda.
+    const margen = { izq: 150, der: 150, arr: 64, aba: 150 };
+    const k = Math.min((ancho - margen.izq - margen.der) / Math.max(1, x1 - x0), (alto - margen.arr - margen.aba) / Math.max(1, y1 - y0));
+    const kk = Math.max(0.2, Math.min(4, k));
+    return { k: kk,
+             x: margen.izq + ((ancho - margen.izq - margen.der) - (x1 - x0) * kk) / 2 - x0 * kk,
+             y: margen.arr + ((alto - margen.arr - margen.aba) - (y1 - y0) * kk) / 2 - y0 * kk };
+  }
+  function ajustar() { Object.assign(T, encuadre()); }
+  function vistaAjustada() {
+    const e = encuadre();
+    return Math.abs(e.k - T.k) < 1e-6 && Math.abs(e.x - T.x) < 0.5 && Math.abs(e.y - T.y) < 0.5;
+  }
+  const P = n => [n.x * T.k + T.x, n.y * T.k + T.y];
+  const escalaZoom = () => Math.min(1.9, 0.8 + 0.2 * T.k);
+  const radioP = p => (1.3 + 6.5 * Math.sqrt(p.girado / C.K.gmaxP)) * escalaZoom();
+  function radioE(i) {
+    const o = C.K.eps.get(i);
+    return 6 + 13 * Math.sqrt((o ? o.girado : 0) / C.K.gmaxE);
+  }
+  function colorPre(p) {
+    return E.color === "dependencia" ? colores["--dep-" + nivelDep(p)] : colores["--recursos"];
+  }
+  function trazarForma(g, forma, x, y, r) {
+    g.beginPath();
+    if (forma === "cuadrado") {
+      const s = r * 0.88;
+      g.rect(x - s, y - s, 2 * s, 2 * s);
+    } else if (forma === "triangulo") {
+      const h = r * 1.18;
+      g.moveTo(x, y - h); g.lineTo(x + h * 0.98, y + h * 0.72); g.lineTo(x - h * 0.98, y + h * 0.72); g.closePath();
+    } else if (forma === "hexagono") {
+      for (let k = 0; k < 6; k++) {
+        const a = Math.PI / 6 + k * Math.PI / 3;
+        const px = x + r * Math.cos(a), py = y + r * Math.sin(a);
+        if (k) g.lineTo(px, py); else g.moveTo(px, py);
+      }
+      g.closePath();
+    } else {
+      g.arc(x, y, r, 0, Math.PI * 2);
+    }
+  }
+
+  function alfaResaltadas(n) { return Math.min(0.85, Math.max(0.05, 0.9 * Math.sqrt(40 / Math.max(40, n)))); }
+  function dibujarRecursos(g) {
+    if (!E.capas.recursos) return;
+    const K = C.K;
+    const linea = (a, alfa) => {
+      const e = EPS[a.e], p = K.porPre.get(a.p);
+      const [x1, y1] = P(e), [x2, y2] = P(p);
+      g.globalAlpha = alfa;
+      g.lineWidth = 0.5 + 2.6 * Math.sqrt(a.w / K.wmax);
+      g.beginPath(); g.moveTo(x1, y1); g.lineTo(x2, y2); g.stroke();
+    };
+    g.save();
+    g.strokeStyle = colores["--recursos"];
+    if (!E.ocultar && E.aristas === "todas" && C.resaltadas.length < K.aristas.length) C.tenues.forEach(a => linea(a, 0.02));
+    const alfa = alfaResaltadas(C.resaltadas.length);
+    C.resaltadas.forEach(a => linea(a, alfa));
+    g.restore();
+  }
+  function flechaPunteada(g, de, a, ancho, alfa, rDestino) {
+    const [x1, y1] = P(de), [x2, y2] = P(a);
+    const L = Math.hypot(x2 - x1, y2 - y1) || 1, ux = (x2 - x1) / L, uy = (y2 - y1) / L;
+    const punta = [x2 - ux * (rDestino + 3), y2 - uy * (rDestino + 3)];
+    const base = [punta[0] - ux * 8, punta[1] - uy * 8];
+    g.save();
+    g.globalAlpha = alfa;
+    g.strokeStyle = colores["--informacion"];
+    g.fillStyle = colores["--informacion"];
+    g.lineWidth = ancho;
+    g.setLineDash([6, 4]);
+    g.beginPath(); g.moveTo(x1, y1); g.lineTo(base[0], base[1]); g.stroke();
+    g.setLineDash([]);
+    g.beginPath();
+    g.moveTo(punta[0], punta[1]);
+    g.lineTo(base[0] - uy * 4.5, base[1] + ux * 4.5);
+    g.lineTo(base[0] + uy * 4.5, base[1] - ux * 4.5);
+    g.closePath(); g.fill();
+    g.restore();
+  }
+  function dibujarInformacion(g) {
+    if (!E.capas.informacion) return;
+    const K = C.K;
+    const algunaSel = !!E.sel;
+    K.d.eps.forEach(o => {
+      if (!o.programado) return;
+      const res = !algunaSel || C.epsRes.has(o.i) || (E.sel && E.sel.t === "adres");
+      if (!res && E.ocultar) return;
+      flechaPunteada(g, EPS[o.i], ADRES, 0.8 + 3 * Math.sqrt(o.programado / K.progMax), res ? 0.55 : 0.08, 9);
+    });
+    const sns = K.d.red.sns_girado + K.d.red.sns_retenido;
+    if (sns > 0) {
+      const res = !algunaSel || (E.sel && (E.sel.t === "sns" || E.sel.t === "adres")) ||
+        K.d.eps.some(o => C.epsRes.has(o.i) && (o.sns_girado > 0 || o.sns_retenido > 0));
+      if (res || !E.ocultar) flechaPunteada(g, SNS, ADRES, 0.8 + 3 * Math.sqrt(sns / K.progMax), res ? 0.8 : 0.1, 9);
+    }
+  }
+  function dibujarNodos(g) {
+    const K = C.K;
+    const orden = [false, true];
+    orden.forEach(turno => K.pres.forEach(p => {
+      const m = C.coincide.has(p.i);
+      if (m !== turno || (!m && E.ocultar)) return;
+      const [x, y] = P(p);
+      if (x < -20 || y < -20 || x > ancho + 20 || y > alto + 20) return;
+      const r = radioP(p);
+      g.globalAlpha = m ? 1 : 0.12;
+      trazarForma(g, p.s.forma, x, y, r);
+      g.fillStyle = colorPre(p);
+      g.fill();
+      if (r > 2.6) { g.lineWidth = 1; g.strokeStyle = colores["--surface"]; g.stroke(); }
+    }));
+    g.globalAlpha = 1;
+    EPS.forEach((e, i) => {
+      if (!K.eps.has(i)) return;
+      const res = C.epsRes.has(i) || (E.sel && E.sel.t === "adres");
+      if (!res && E.ocultar) return;
+      const [x, y] = P(e);
+      g.globalAlpha = res ? 1 : 0.2;
+      trazarForma(g, "hexagono", x, y, radioE(i));
+      g.fillStyle = colores["--ambas"]; g.fill();
+      g.lineWidth = 2; g.strokeStyle = colores["--surface"]; g.stroke();
+    });
+    [[ADRES, colores["--ambas"]], [SNS, colores["--informacion"]]].forEach(([n, color]) => {
+      if (!E.capas.informacion && n === SNS) return;
+      const [x, y] = P(n);
+      g.globalAlpha = 1;
+      trazarForma(g, "circulo", x, y, 9);
+      g.fillStyle = color; g.fill();
+      g.lineWidth = 2; g.strokeStyle = colores["--surface"]; g.stroke();
+    });
+    g.globalAlpha = 1;
+  }
+  function rotulo(g, texto, x, y, alinear, fuerte, puestas) {
+    g.font = (fuerte ? "600 " : "") + "12px system-ui, -apple-system, 'Segoe UI', sans-serif";
+    const w = g.measureText(texto).width;
+    const x0 = alinear === "right" ? x - w : alinear === "center" ? x - w / 2 : x;
+    const caja = { x: x0 - 2, y: y - 8, w: w + 4, h: 16 };
+    if (puestas.some(p => caja.x < p.x + p.w && p.x < caja.x + caja.w && caja.y < p.y + p.h && p.y < caja.y + caja.h)) return false;
+    puestas.push(caja);
+    g.textAlign = alinear; g.textBaseline = "middle";
+    g.lineWidth = 3; g.lineJoin = "round"; g.strokeStyle = colores["--surface"];
+    g.strokeText(texto, x, y);
+    g.fillStyle = colores["--ink"];
+    g.fillText(texto, x, y);
+    return true;
+  }
+  function dibujarEtiquetas(g) {
+    const puestas = [];
+    const K = C.K;
+    g.save();
+    if (C.preSel != null) {
+      const p = K.porPre.get(C.preSel);
+      // En el lienzo el nombre se acorta; la ficha lo muestra completo.
+      const corto = p && p.s.nombre.length > 46 ? p.s.nombre.slice(0, 44) + "…" : (p ? p.s.nombre : "");
+      if (p) { const [x, y] = P(p); rotulo(g, corto, x + radioP(p) + 5, y, "left", true, puestas); }
+    }
+    if (E.etiquetas !== "ninguna") {
+      const [ax, ay] = P(ADRES);
+      rotulo(g, "ADRES", ax + 13, ay, "left", true, puestas);
+      if (E.capas.informacion) { const [sx, sy] = P(SNS); rotulo(g, "Supersalud", sx + 13, sy, "left", true, puestas); }
+      const orden = EPS.map((e, i) => i).filter(i => K.eps.has(i)).sort((a, b) => K.eps.get(b).girado - K.eps.get(a).girado);
+      orden.forEach(i => {
+        const e = EPS[i];
+        if (!C.epsRes.has(i) && E.sel) return;
+        // Si el nombre choca con otro ya puesto, se prueba más afuera sobre el mismo radio.
+        const L = Math.hypot(e.lx, e.ly) || 1, ux = e.lx / L, uy = e.ly / L;
+        for (const extra of [0, 16, 32, 48]) {
+          const [x, y] = P({ x: e.lx + ux * extra / T.k, y: e.ly + uy * extra / T.k });
+          if (rotulo(g, e.nombre, x, y, e.ancla, C.epsRes.has(i) && !!E.sel, puestas)) break;
+        }
+      });
+    }
+    if (E.etiquetas === "todas" && T.k >= 2) {
+      const vis = K.pres.filter(p => C.coincide.has(p.i)).sort((a, b) => b.girado - a.girado);
+      let n = 0;
+      for (const p of vis) {
+        const [x, y] = P(p);
+        if (x < 0 || y < 0 || x > ancho || y > alto) continue;
+        if (rotulo(g, p.s.nombre.length > 38 ? p.s.nombre.slice(0, 36) + "…" : p.s.nombre, x + radioP(p) + 4, y, "left", false, puestas)) n++;
+        if (n >= 40) break;
+      }
+    }
+    g.restore();
+  }
+  function dibujarSeleccion(g) {
+    if (!E.sel) return;
+    let n = null, r = 0;
+    if (E.sel.t === "e") { n = EPS[E.sel.i]; r = radioE(E.sel.i); }
+    else if (E.sel.t === "p") { n = C.K.porPre.get(E.sel.i); if (n) r = radioP(n); }
+    else if (E.sel.t === "adres") { n = ADRES; r = 9; }
+    else if (E.sel.t === "sns") { n = SNS; r = 9; }
+    if (!n) return;
+    const [x, y] = P(n);
+    g.save();
+    g.strokeStyle = colores["--ink"]; g.lineWidth = 2;
+    g.beginPath(); g.arc(x, y, r + 5, 0, Math.PI * 2); g.stroke();
+    g.restore();
+  }
+  function pintarEscena(g, w, h) {
+    g.fillStyle = colores["--surface"];
+    g.fillRect(0, 0, w, h);
+    dibujarRecursos(g);
+    dibujarInformacion(g);
+    dibujarNodos(g);
+    dibujarSeleccion(g);
+    dibujarEtiquetas(g);
+  }
+  let dibujoEnCola = false;
+  function dibujar() {
+    derivar();
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    pintarEscena(ctx, ancho, alto);
+    pintarResumen();
+  }
+  function redibujar() {
+    if (dibujoEnCola) return;
+    dibujoEnCola = true;
+    requestAnimationFrame(() => { dibujoEnCola = false; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); pintarEscena(ctx, ancho, alto); });
+  }
+
+  // ------------------------------------------------------- textos de la vista
+  function nombreCorte(c) {
+    const d = D.cortes[c];
+    return d.nombre.charAt(0).toUpperCase() + d.nombre.slice(1);
+  }
+  function descripcionVista() {
+    const partes = [];
+    const capas = [E.capas.recursos ? "recursos" : null, E.capas.informacion ? "información" : null].filter(Boolean);
+    partes.push("Capas: " + (capas.length ? capas.join(" e ") : "ninguna"));
+    if (E.tipos.size < TIPOS.length) partes.push("Tipo: " + (E.tipos.size ? [...E.tipos].sort().map(i => TIPOS[i]).join(", ") : "ninguno"));
+    if (E.dep !== "todas") partes.push("Dependencia: " + DEP[E.dep].toLowerCase());
+    if (E.depto !== "") partes.push("Departamento: " + DEPTOS[+E.depto]);
+    if (E.buscar.trim()) partes.push("Búsqueda: «" + E.buscar.trim() + "»");
+    if (E.sel) partes.push("Seleccionado: " + nombreSel());
+    return partes.join(" · ");
+  }
+  function nombreSel() {
+    if (!E.sel) return "";
+    if (E.sel.t === "e") return EPS[E.sel.i].nombre;
+    if (E.sel.t === "p") return PRE[E.sel.i].nombre;
+    return E.sel.t === "adres" ? "ADRES" : "Supersalud";
+  }
+  function pintarResumen() {
+    const K = C.K, r = K.d.red;
+    const caja = $("resumen");
+    caja.textContent = "";
+    const esPrincipal = E.corte === D.meta.principal;
+    caja.appendChild(el("strong", { texto: nombreCorte(E.corte) }));
+    caja.appendChild(document.createTextNode(" · " + (esPrincipal ? D.meta.nota_principal : D.meta.nota_control).toLowerCase() +
+      " · " + f0.format(r.eps) + " EPS → " + f0.format(r.prestadores) + " prestadores · " + f0.format(r.aristas) +
+      " parejas · " + pesos(r.girado) + " girados por la ADRES. " + f1.format(r.una_eps_pct) + " % de los prestadores recibe de una sola EPS."));
+    const resaltados = C.coincide.size;
+    if (resaltados < K.pres.length) {
+      caja.appendChild(el("br"));
+      let girado = 0;
+      C.coincide.forEach(i => { girado += K.porPre.get(i).girado; });
+      caja.appendChild(document.createTextNode("Resaltados: " + f0.format(resaltados) + " prestadores, " + pesos(girado) +
+        " (" + f1.format(100 * girado / r.girado) + " % del mes). " + descripcionVista()));
+    }
+    caja.appendChild(el("div", { clase: "pista", texto: "Arrastre para mover · rueda o +/− para acercar · clic en una EPS o un prestador para ver su ficha" }));
+  }
+  function claveLinea(capa) {
+    const ns = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("viewBox", "0 0 26 10");
+    svg.setAttribute("class", "clave-linea");
+    svg.setAttribute("aria-hidden", "true");
+    const l = document.createElementNS(ns, "line");
+    l.setAttribute("x1", "1"); l.setAttribute("y1", "5"); l.setAttribute("x2", "25"); l.setAttribute("y2", "5");
+    l.setAttribute("stroke", capa === "recursos" ? "var(--recursos)" : "var(--informacion)");
+    l.setAttribute("stroke-width", "2");
+    if (capa === "informacion") l.setAttribute("stroke-dasharray", "6 4");
+    svg.appendChild(l);
+    return svg;
+  }
+  function claveNodo(color, forma) {
+    const c = document.createElement("canvas");
+    c.width = 28; c.height = 28; c.style.width = "14px"; c.style.height = "14px";
+    const g = c.getContext("2d");
+    g.scale(2, 2);
+    trazarForma(g, forma, 7, 7, 5);
+    g.fillStyle = color; g.fill();
+    return c;
+  }
+  function itemsLeyenda() {
+    const colorItems = E.color === "dependencia"
+      ? ["una", "mayoritaria", "repartida"].map(k => [colores["--dep-" + k], "circulo", DEP[k]])
+      : [[colores["--recursos"], "circulo", "Prestador: solo recursos"]];
+    colorItems.push([colores["--ambas"], "hexagono", "EPS: las dos capas"]);
+    colorItems.push([colores["--ambas"], "circulo", "ADRES: las dos capas"]);
+    if (E.capas.informacion) colorItems.push([colores["--informacion"], "circulo", "Supersalud: solo información"]);
+    const formas = Object.keys(FORMAS).map(f => [colores["--ink-2"], f, FORMAS[f]]);
+    return { colorItems, formas };
+  }
+  function pintarLeyenda() {
+    const L = $("leyenda");
+    L.textContent = "";
+    const fila = (titulo, items) => {
+      const f = el("div", { clase: "fila" }, [el("span", { clase: "titulo", texto: titulo })]);
+      items.forEach(i => f.appendChild(i));
+      L.appendChild(f);
+    };
+    const lineas = [];
+    if (E.capas.recursos) lineas.push(el("span", { clase: "item" }, [claveLinea("recursos"), "Recursos: giro de la ADRES por cuenta de la EPS"]));
+    if (E.capas.informacion) lineas.push(el("span", { clase: "item" }, [claveLinea("informacion"), "Información: programación y comunicaciones"]));
+    fila("Capas", lineas);
+    const { colorItems, formas } = itemsLeyenda();
+    fila("Color", colorItems.map(([c, f, t]) => el("span", { clase: "item" }, [claveNodo(c, f), t])));
+    fila("Forma", formas.map(([c, f, t]) => el("span", { clase: "item" }, [claveNodo(c, f), t])));
+    fila("Tamaño", [el("span", { clase: "item", texto: "Lo girado en el mes; el grosor de la línea, lo girado en la pareja" })]);
+  }
+
+  // ------------------------------------------------------------- controles
+  function construirControles() {
+    $("titulo").textContent = D.meta.titulo;
+    $("version").textContent = D.meta.version;
+    const sel = $("contrastes");
+    CONTRASTES.forEach(c => sel.appendChild(el("option", { value: c.id, texto: c.etiqueta })));
+    const meses = $("meses");
+    CORTES.forEach(c => {
+      const i = el("input", { type: "radio", name: "mes", value: c });
+      const nota = c === D.meta.principal ? D.meta.nota_principal : D.meta.nota_control;
+      meses.appendChild(el("label", {}, [i, nombreCorte(c), el("span", { clase: "nota", texto: "· " + nota.toLowerCase() })]));
+      i.addEventListener("change", () => { E.corte = c; if (E.sel && E.sel.t === "p" && !datosCorte(c).porPre.has(E.sel.i)) E.sel = null; cambio(); });
+    });
+    const tipos = $("tipos");
+    TIPOS.forEach((t, i) => {
+      const cb = el("input", { type: "checkbox", value: String(i) });
+      cb.addEventListener("change", () => { cb.checked ? E.tipos.add(i) : E.tipos.delete(i); cambio(); });
+      tipos.appendChild(el("label", {}, [cb, claveNodo(colores["--ink-2"], i === 0 || i === 1 ? "circulo" : i === 6 || i === 5 ? "triangulo" : "cuadrado"),
+        t, el("span", { clase: "cuenta", "data-tipo": String(i) })]));
+    });
+    const dep = $("dependencia");
+    Object.keys(DEP).forEach(k => {
+      const r = el("input", { type: "radio", name: "dep", value: k });
+      r.addEventListener("change", () => { E.dep = k; cambio(); });
+      dep.appendChild(el("label", {}, [r, DEP[k], el("span", { clase: "cuenta", "data-dep": k })]));
+    });
+    const depto = $("depto");
+    depto.appendChild(el("option", { value: "", texto: "Todos" }));
+    DEPTOS.forEach((d, i) => depto.appendChild(el("option", { value: String(i), texto: d })));
+    const lista = $("lista-nombres");
+    EPS.forEach(e => lista.appendChild(el("option", { value: e.nombre })));
+  }
+  function sincronizarControles() {
+    document.querySelectorAll('input[name="mes"]').forEach(i => { i.checked = i.value === E.corte; });
+    $("capa-recursos").checked = E.capas.recursos;
+    $("capa-informacion").checked = E.capas.informacion;
+    $("color").value = E.color;
+    $("tipos").querySelectorAll("input").forEach(cb => { cb.checked = E.tipos.has(+cb.value); });
+    document.querySelectorAll('input[name="dep"]').forEach(r => { r.checked = r.value === E.dep; });
+    $("depto").value = E.depto;
+    if ($("buscar").value !== E.buscar) $("buscar").value = E.buscar;
+    $("ocultar").checked = E.ocultar;
+    $("aristas").value = E.aristas;
+    $("etiquetas").value = E.etiquetas;
+    $("btn-vista").textContent = E.vista === "grafo" ? "Tabla" : "Gráfica";
+    const K = datosCorte(E.corte);
+    const porTipo = new Array(TIPOS.length).fill(0), porDep = { todas: K.pres.length, una: 0, mayoritaria: 0, repartida: 0 };
+    K.pres.forEach(p => { porTipo[p.s.tipo]++; porDep[nivelDep(p)]++; });
+    document.querySelectorAll("[data-tipo]").forEach(s => { s.textContent = f0.format(porTipo[+s.dataset.tipo]); });
+    document.querySelectorAll("[data-dep]").forEach(s => { s.textContent = f0.format(porDep[s.dataset.dep]); });
+  }
+
+  // ----------------------------------------------------------------- ficha
+  function filaDl(dl, t, v) { dl.appendChild(el("dt", { texto: t })); dl.appendChild(el("dd", { texto: v })); }
+  function botonSel(texto, sel) {
+    const b = el("button", { type: "button", texto });
+    b.addEventListener("click", () => { E.sel = sel; cambio(); });
+    return b;
+  }
+  function pintarDetalle() {
+    const caja = $("detalle");
+    caja.textContent = "";
+    if (!E.sel || E.vista === "tabla") { caja.style.display = "none"; return; }
+    const K = C.K, mes = D.cortes[E.corte].nombre;
+    const cerrar = el("button", { type: "button", clase: "cerrar", "aria-label": "Cerrar", texto: "×" });
+    cerrar.addEventListener("click", () => { E.sel = null; cambio(); });
+    caja.appendChild(cerrar);
+    if (E.sel.t === "e") {
+      const e = EPS[E.sel.i], o = K.eps.get(E.sel.i);
+      caja.appendChild(el("h3", { texto: e.nombre }));
+      caja.appendChild(el("div", { clase: "sub", texto: "EPS · " + mes }));
+      if (!o) { caja.appendChild(el("p", { texto: "Sin giro directo en el mes." })); caja.style.display = "block"; return; }
+      let dl = el("dl");
+      filaDl(dl, "Giro directo por su cuenta", pesos(o.girado) + " (" + pct(o.participacion) + " del mes)");
+      if (o.contributivo) filaDl(dl, "Contributivo", pesos(o.contributivo) + (o.pct_contributivo != null ? " · " + pct(o.pct_contributivo) + " de su UPC" : ""));
+      if (o.subsidiado) filaDl(dl, "Subsidiado", pesos(o.subsidiado) + (o.pct_subsidiado != null ? " · " + pct(o.pct_subsidiado) + " de su UPC" : ""));
+      if (o.complemento) filaDl(dl, "Del subsidiado, como complemento", pesos(o.complemento));
+      filaDl(dl, "Prestadores", f0.format(o.prestadores));
+      filaDl(dl, "Reciben solo de ella", f0.format(o.exclusivos));
+      filaDl(dl, "Reciben de ella la mitad o más", f0.format(o.dependientes));
+      filaDl(dl, "Comparte prestadores con", f0.format(o.eps_comunes) + " EPS");
+      filaDl(dl, "Intermediación", f3.format(o.intermediacion));
+      caja.appendChild(dl);
+      caja.appendChild(el("p", { texto: "Si esta EPS no programa su giro, " + f0.format(o.exclusivos) + " prestadores se quedan sin giro directo y " +
+        f0.format(o.dependientes - o.exclusivos) + " más pierden la mitad o más de lo que reciben por esta vía." }));
+      caja.appendChild(el("h4", { texto: "Capa de información" }));
+      dl = el("dl");
+      filaDl(dl, "Programó ante la ADRES", pesos(o.programado));
+      if (o.pct_subsidiado_proceso != null) filaDl(dl, "Proceso del subsidiado", pct(o.pct_subsidiado_proceso) + " de su UPC");
+      if (o.sns_girado) filaDl(dl, "Girado por comunicación de la Supersalud", pesos(o.sns_girado));
+      if (o.sns_retenido) filaDl(dl, "No girado por comunicación de la Supersalud", pesos(o.sns_retenido));
+      if (o.retenido) filaDl(dl, "Giro neto que la ADRES le retuvo", pesos(o.retenido) + " · " + o.motivo_retencion);
+      caja.appendChild(dl);
+      if (o.grupo && o.grupo.length) {
+        caja.appendChild(el("h4", { texto: "En este mes forma grupo con" }));
+        caja.appendChild(el("p", { texto: o.grupo.map(i => EPS[i].nombre).join(", ") }));
+      }
+      caja.appendChild(el("h4", { texto: "Sus mayores receptores" }));
+      const ul = el("ul");
+      (K.porEps.get(E.sel.i) || []).slice().sort((a, b) => b.w - a.w).slice(0, 8).forEach(a => {
+        const p = K.porPre.get(a.p);
+        ul.appendChild(el("li", {}, [el("span", { clase: "nombre" }, [botonSel(p.s.nombre, { t: "p", i: a.p })]),
+          el("span", { clase: "valor", texto: pesos(a.w) + " · " + pct(100 * a.w / p.girado) + " de lo suyo" })]));
+      });
+      caja.appendChild(ul);
+    } else if (E.sel.t === "p") {
+      const p = K.porPre.get(E.sel.i);
+      if (!p) { E.sel = null; caja.style.display = "none"; return; }
+      caja.appendChild(el("h3", { texto: p.s.nombre }));
+      caja.appendChild(el("div", { clase: "sub", texto: "NIT " + p.s.nit + " · " + TIPOS[p.s.tipo] + " · " + DEPTOS[p.s.depto] +
+        (p.s.municipio ? " (" + p.s.municipio + ")" : "") }));
+      const dl = el("dl");
+      filaDl(dl, "Giro directo recibido", pesos(p.girado) + " (" + f2.format(100 * p.girado / K.d.red.girado) + " % del mes)");
+      filaDl(dl, "EPS que ordenan su giro", f0.format(p.eps));
+      filaDl(dl, "Parte de su EPS principal", pct(p.parte));
+      filaDl(dl, "Intermediación", f3.format(p.inter * 1000) + " ‰");
+      caja.appendChild(dl);
+      caja.appendChild(el("h4", { texto: "Giro recibido, por la EPS que lo ordena" }));
+      const ul = el("ul");
+      (K.dePre.get(p.i) || []).slice().sort((a, b) => b.w - a.w).forEach(a => {
+        ul.appendChild(el("li", {}, [el("span", { clase: "nombre" }, [botonSel(EPS[a.e].nombre, { t: "e", i: a.e })]),
+          el("span", { clase: "valor", texto: pesos(a.w) + " · " + pct(100 * a.w / p.girado) })]));
+      });
+      caja.appendChild(ul);
+    } else if (E.sel.t === "adres") {
+      const r = K.d.red;
+      caja.appendChild(el("h3", { texto: "ADRES" }));
+      caja.appendChild(el("div", { clase: "sub", texto: "Administradora de los Recursos del SGSSS · " + mes }));
+      caja.appendChild(el("p", { texto: "Ejecuta el pago del giro directo por cuenta de cada EPS: no decide a quién se le paga. En la capa de información recibe la programación de cada EPS y las comunicaciones de la Supersalud." }));
+      const dl = el("dl");
+      filaDl(dl, "Girado por cuenta de las EPS", pesos(r.girado));
+      filaDl(dl, "EPS", f0.format(r.eps));
+      filaDl(dl, "Prestadores", f0.format(r.prestadores));
+      if (r.sns_girado) filaDl(dl, "Girado por comunicación de la Supersalud", pesos(r.sns_girado));
+      if (r.sns_retenido) filaDl(dl, "No girado por comunicación de la Supersalud", pesos(r.sns_retenido));
+      caja.appendChild(dl);
+    } else {
+      const r = K.d.red;
+      caja.appendChild(el("h3", { texto: "Superintendencia Nacional de Salud" }));
+      caja.appendChild(el("div", { clase: "sub", texto: "Capa de información · " + mes }));
+      caja.appendChild(el("p", { texto: "Le comunica a la ADRES a qué prestadores girar el dinero que la liquidación no aplicó, y qué giros detener." }));
+      const dl = el("dl");
+      filaDl(dl, "Girado por su comunicación", pesos(r.sns_girado));
+      filaDl(dl, "No girado por su comunicación", pesos(r.sns_retenido));
+      caja.appendChild(dl);
+      const ul = el("ul");
+      K.d.eps.filter(o => o.sns_girado > 0 || o.sns_retenido > 0).sort((a, b) => (b.sns_girado + b.sns_retenido) - (a.sns_girado + a.sns_retenido)).forEach(o => {
+        ul.appendChild(el("li", {}, [el("span", { clase: "nombre" }, [botonSel(EPS[o.i].nombre, { t: "e", i: o.i })]),
+          el("span", { clase: "valor", texto: pesos(o.sns_girado + o.sns_retenido) })]));
+      });
+      if (ul.childNodes.length) { caja.appendChild(el("h4", { texto: "EPS cuyo giro tocaron sus comunicaciones" })); caja.appendChild(ul); }
+      else caja.appendChild(el("p", { texto: "En este mes no hubo giros ni retenciones por comunicación de la Supersalud en los anexos." }));
+    }
+    caja.style.display = "block";
+  }
+
+  // ----------------------------------------------------------------- tabla
+  function pintarTabla() {
+    const caja = $("tabla");
+    if (E.vista !== "tabla") { caja.style.display = "none"; return; }
+    caja.textContent = "";
+    caja.style.display = "block";
+    const K = C.K;
+    caja.appendChild(el("h2", { texto: "EPS — " + nombreCorte(E.corte) }));
+    caja.appendChild(el("p", { texto: "Porcentaje de giro directo sobre la UPC con la base del boletín de la ADRES: en el contributivo, sobre la UPC de afiliados activos; en el subsidiado, proceso más complemento sobre la UPC apropiada." }));
+    const cab = ["EPS", "Giro directo", "% del mes", "Prestadores", "Solo de ella", "La mitad o más", "Intermediación",
+      "% contributivo", "% subsidiado", "Por comunicación de la Supersalud", "Giro neto retenido"];
+    const t = el("table"), th = el("tr");
+    cab.forEach((c, i) => th.appendChild(el("th", { texto: c, clase: i ? "num" : "" })));
+    t.appendChild(el("thead", {}, [th]));
+    const tb = el("tbody");
+    K.d.eps.slice().sort((a, b) => b.girado - a.girado).forEach(o => {
+      const tr = el("tr");
+      [EPS[o.i].nombre, pesos(o.girado), pct(o.participacion), f0.format(o.prestadores), f0.format(o.exclusivos),
+       f0.format(o.dependientes), f3.format(o.intermediacion), pct(o.pct_contributivo), pct(o.pct_subsidiado),
+       o.sns_girado + o.sns_retenido ? pesos(o.sns_girado + o.sns_retenido) : "—", o.retenido ? pesos(o.retenido) : "—"]
+        .forEach((v, i) => tr.appendChild(el("td", { texto: v, clase: i ? "num" : "" })));
+      tb.appendChild(tr);
+    });
+    t.appendChild(tb);
+    caja.appendChild(t);
+    const lista = K.pres.filter(p => C.coincide.has(p.i)).sort((a, b) => b.girado - a.girado);
+    caja.appendChild(el("h2", { texto: "Prestadores resaltados (" + f0.format(lista.length) + ")" }));
+    caja.appendChild(el("p", { texto: lista.length > 300 ? "Se muestran los 300 que más reciben." : descripcionVista() }));
+    const t2 = el("table"), th2 = el("tr");
+    ["Prestador", "NIT", "Tipo", "Departamento", "Giro directo", "EPS", "EPS principal", "Parte de la principal", "Intermediación (‰)"]
+      .forEach((c, i) => th2.appendChild(el("th", { texto: c, clase: [4, 5, 7, 8].includes(i) ? "num" : "" })));
+    t2.appendChild(el("thead", {}, [th2]));
+    const tb2 = el("tbody");
+    lista.slice(0, 300).forEach(p => {
+      const principal = (K.dePre.get(p.i) || []).slice().sort((a, b) => b.w - a.w)[0];
+      const tr = el("tr");
+      [p.s.nombre, p.s.nit, TIPOS[p.s.tipo], DEPTOS[p.s.depto], pesos(p.girado), f0.format(p.eps),
+       principal ? EPS[principal.e].nombre : "—", pct(p.parte), f3.format(p.inter * 1000)]
+        .forEach((v, i) => tr.appendChild(el("td", { texto: v, clase: [4, 5, 7, 8].includes(i) ? "num" : "" })));
+      tb2.appendChild(tr);
+    });
+    t2.appendChild(tb2);
+    caja.appendChild(t2);
+  }
+
+  // ----------------------------------------------------------------- enlace
+  function aEnlace() {
+    const q = new URLSearchParams();
+    if (E.corte !== D.meta.principal) q.set("c", E.corte);
+    if (!E.capas.recursos || !E.capas.informacion) q.set("cap", (E.capas.recursos ? "r" : "") + (E.capas.informacion ? "i" : ""));
+    if (E.color !== "capas") q.set("col", E.color);
+    if (E.tipos.size < TIPOS.length) q.set("t", [...E.tipos].sort().join("."));
+    if (E.dep !== "todas") q.set("dep", E.dep);
+    if (E.depto !== "") q.set("d", E.depto);
+    if (E.buscar.trim()) q.set("q", E.buscar.trim());
+    if (E.sel) q.set("s", E.sel.t === "e" ? "e" + E.sel.i : E.sel.t === "p" ? "p" + PRE[E.sel.i].nit : E.sel.t);
+    if (E.ocultar) q.set("o", "1");
+    if (E.aristas !== "todas") q.set("a", E.aristas);
+    if (E.etiquetas !== "eps") q.set("et", E.etiquetas);
+    if (E.vista !== "grafo") q.set("v", E.vista);
+    const h = q.toString();
+    ultimoEnlace = h;
+    try { history.replaceState(null, "", h ? "#" + h : location.pathname + location.search); } catch (err) { /* sin historial disponible */ }
+  }
+  function deEnlace() {
+    const q = new URLSearchParams(location.hash.slice(1));
+    if (q.has("c") && D.cortes[q.get("c")]) E.corte = q.get("c");
+    if (q.has("cap")) { const c = q.get("cap"); E.capas = { recursos: c.includes("r"), informacion: c.includes("i") }; }
+    if (q.get("col") === "dependencia") E.color = "dependencia";
+    if (q.has("t")) E.tipos = new Set(q.get("t").split(".").filter(x => x !== "").map(Number).filter(i => i >= 0 && i < TIPOS.length));
+    if (DEP[q.get("dep")]) E.dep = q.get("dep");
+    if (q.has("d") && DEPTOS[+q.get("d")]) E.depto = q.get("d");
+    if (q.has("q")) E.buscar = q.get("q");
+    const s = q.get("s");
+    if (s === "adres" || s === "sns") E.sel = { t: s };
+    else if (s && s[0] === "e" && EPS[+s.slice(1)]) E.sel = { t: "e", i: +s.slice(1) };
+    else if (s && s[0] === "p") { const i = PRE.findIndex(p => p.nit === s.slice(1)); if (i >= 0) E.sel = { t: "p", i }; }
+    E.ocultar = q.get("o") === "1";
+    if (q.get("a") === "resaltadas") E.aristas = "resaltadas";
+    if (["todas", "ninguna"].includes(q.get("et"))) E.etiquetas = q.get("et");
+    if (q.get("v") === "tabla") E.vista = "tabla";
+  }
+
+  // ------------------------------------------------- estado de los botones
+  let ultimoEnlace = "";
+  let contraste = null;
+  function estadoBotones() {
+    const enTabla = E.vista !== "grafo";
+    const ajustada = vistaAjustada();
+    const b = $("btn-ajustar");
+    b.disabled = ajustada || enTabla;
+    b.title = enTabla ? "Disponible en la gráfica" : ajustada ? "La vista ya muestra toda la red" : "Encuadrar toda la red (tecla 0)";
+    $("zoom-ajustar").disabled = ajustada;
+    const inicial = !ultimoEnlace && ajustada;
+    const r = $("btn-restablecer");
+    r.disabled = inicial;
+    r.title = inicial ? "La vista ya está en su estado inicial" : "Quitar los filtros y volver al encuadre inicial";
+    $("contrastes").value = contraste && contraste.enlace === ultimoEnlace ? contraste.id : "";
+  }
+  function teclas(e, quitarSeleccion, factor) {
+    if (e.key === "Escape") { quitarSeleccion(); return; }
+    const t = e.target;
+    if (e.ctrlKey || e.metaKey || e.altKey || (t && /^(INPUT|SELECT|TEXTAREA)$/.test(t.tagName))) return;
+    if (e.key === "+" || e.key === "=") zoom(factor, ancho / 2, alto / 2);
+    else if (e.key === "-" || e.key === "_") zoom(1 / factor, ancho / 2, alto / 2);
+    else if (e.key === "0") cambio({ reencuadrar: true });
+  }
+
+  // ------------------------------------------------------------ ciclo
+  let ultimoCorte = null;
+  function cambio(opciones) {
+    if (ultimoCorte !== E.corte || (opciones && opciones.reencuadrar)) { ajustar(); ultimoCorte = E.corte; }
+    dibujar();
+    sincronizarControles();
+    pintarLeyenda();
+    pintarDetalle();
+    pintarTabla();
+    aEnlace();
+    estadoBotones();
+  }
+  function aviso(texto) {
+    const a = $("aviso");
+    a.textContent = texto;
+    a.style.display = "block";
+    clearTimeout(aviso.t);
+    aviso.t = setTimeout(() => { a.style.display = "none"; }, 3200);
+  }
+
+  // ------------------------------------------------------------ eventos
+  function nodoEn(px, py) {
+    if (!C) return null;
+    const K = C.K;
+    let mejor = null, d0 = Infinity;
+    const probar = (sel, x, y, r) => {
+      const d = Math.hypot(px - x, py - y);
+      if (d < Math.max(7, r + 4) && d < d0) { d0 = d; mejor = sel; }
+    };
+    [[{ t: "adres" }, ADRES], [{ t: "sns" }, SNS]].forEach(([s, n]) => { if (s.t === "adres" || E.capas.informacion) { const [x, y] = P(n); probar(s, x, y, 9); } });
+    EPS.forEach((e, i) => {
+      if (!K.eps.has(i) || (E.ocultar && !C.epsRes.has(i))) return;
+      const [x, y] = P(e); probar({ t: "e", i }, x, y, radioE(i));
+    });
+    if (mejor) return mejor;
+    K.pres.forEach(p => {
+      if (E.ocultar && !C.coincide.has(p.i)) return;
+      const [x, y] = P(p); probar({ t: "p", i: p.i }, x, y, radioP(p));
+    });
+    return mejor;
+  }
+  function mostrarTooltip(s, px, py) {
+    const t = $("tooltip");
+    if (!s) { ocultarTooltip(); return; }
+    const K = C.K;
+    t.textContent = "";
+    if (s.t === "e") {
+      const o = K.eps.get(s.i);
+      t.appendChild(el("strong", { texto: EPS[s.i].nombre }));
+      t.appendChild(el("span", { texto: "EPS · " + pesos(o.girado) + " a " + f0.format(o.prestadores) + " prestadores" }));
+      t.appendChild(el("span", { texto: f0.format(o.exclusivos) + " reciben solo de ella" }));
+    } else if (s.t === "p") {
+      const p = K.porPre.get(s.i);
+      t.appendChild(el("strong", { texto: p.s.nombre }));
+      t.appendChild(el("span", { texto: TIPOS[p.s.tipo] + " · " + DEPTOS[p.s.depto] }));
+      t.appendChild(el("span", { texto: pesos(p.girado) + " de " + f0.format(p.eps) + " EPS · la principal da el " + pct(p.parte) }));
+    } else {
+      t.appendChild(el("strong", { texto: s.t === "adres" ? "ADRES" : "Supersalud" }));
+      t.appendChild(el("span", { texto: s.t === "adres" ? "Ejecuta el pago por cuenta de las EPS" : "Comunica giros y retenciones a la ADRES" }));
+    }
+    t.style.display = "block";
+    const w = t.offsetWidth, h = t.offsetHeight;
+    t.style.left = Math.min(px + 14, ancho - w - 8) + "px";
+    t.style.top = Math.min(py + 14, alto - h - 8) + "px";
+    lienzo.style.cursor = "pointer";
+  }
+  function ocultarTooltip() { $("tooltip").style.display = "none"; lienzo.style.cursor = ""; }
+  function zoom(f, px, py) {
+    const k = Math.max(0.2, Math.min(12, T.k * f));
+    const g = k / T.k;
+    T.x = px - (px - T.x) * g;
+    T.y = py - (py - T.y) * g;
+    T.k = k;
+    redibujar();
+    estadoBotones();
+  }
+  const mismo = (a, b) => a && b && a.t === b.t && a.i === b.i;
+  function enlazarEventos() {
+    $("capa-recursos").addEventListener("change", e => { E.capas.recursos = e.target.checked; cambio(); });
+    $("capa-informacion").addEventListener("change", e => { E.capas.informacion = e.target.checked; cambio(); });
+    $("color").addEventListener("change", e => { E.color = e.target.value; cambio(); });
+    $("tipos-todos").addEventListener("click", () => { E.tipos = new Set(TIPOS.map((_, i) => i)); cambio(); });
+    $("tipos-ninguno").addEventListener("click", () => { E.tipos = new Set(); cambio(); });
+    $("depto").addEventListener("change", e => { E.depto = e.target.value; cambio(); });
+    $("buscar").addEventListener("input", e => { E.buscar = e.target.value; cambio(); });
+    $("buscar").addEventListener("keydown", e => {
+      if (e.key !== "Enter") return;
+      const q = normalizar(E.buscar.trim());
+      if (!q) return;
+      const ie = EPS.findIndex(x => normalizar(x.nombre).includes(q));
+      if (ie >= 0 && C.K.eps.has(ie)) { E.sel = { t: "e", i: ie }; E.buscar = ""; cambio(); return; }
+      const p = C.K.pres.filter(x => normalizar(x.s.nombre + " " + x.s.nit).includes(q)).sort((a, b) => b.girado - a.girado)[0];
+      if (p) { E.sel = { t: "p", i: p.i }; E.buscar = ""; cambio(); }
+    });
+    $("ocultar").addEventListener("change", e => { E.ocultar = e.target.checked; cambio(); });
+    $("aristas").addEventListener("change", e => { E.aristas = e.target.value; cambio(); });
+    $("etiquetas").addEventListener("change", e => { E.etiquetas = e.target.value; cambio(); });
+    $("contrastes").addEventListener("change", e => {
+      const c = CONTRASTES.find(x => x.id === e.target.value);
+      if (c && c.aplicar) {
+        const corte = E.corte; E = estadoInicial(); E.corte = corte; c.aplicar(E); contraste = null;
+        cambio({ reencuadrar: true });
+        contraste = { id: c.id, enlace: ultimoEnlace };
+        estadoBotones();
+        aviso("Vista: " + c.etiqueta);
+      } else e.target.value = "";
+    });
+    $("btn-ajustar").addEventListener("click", () => cambio({ reencuadrar: true }));
+    $("btn-vista").addEventListener("click", () => { E.vista = E.vista === "grafo" ? "tabla" : "grafo"; cambio(); });
+    $("btn-restablecer").addEventListener("click", () => { E = estadoInicial(); cambio({ reencuadrar: true }); aviso("Vista inicial restablecida"); });
+    $("zoom-ajustar").addEventListener("click", () => cambio({ reencuadrar: true }));
+    $("btn-png").addEventListener("click", exportarPNG);
+    $("btn-enlace").addEventListener("click", copiarEnlace);
+    $("btn-tema").addEventListener("click", cambiarTema);
+    $("zoom-mas").addEventListener("click", () => zoom(1.3, ancho / 2, alto / 2));
+    $("zoom-menos").addEventListener("click", () => zoom(1 / 1.3, ancho / 2, alto / 2));
+    document.addEventListener("keydown", e => teclas(e, () => { if (E.sel) { E.sel = null; cambio(); } }, 1.3));
+
+    let arrastre = null;
+    lienzo.addEventListener("pointerdown", e => {
+      arrastre = { x: e.clientX, y: e.clientY, tx: T.x, ty: T.y, movio: false };
+      lienzo.setPointerCapture(e.pointerId);
+    });
+    lienzo.addEventListener("pointermove", e => {
+      if (arrastre) {
+        const dx = e.clientX - arrastre.x, dy = e.clientY - arrastre.y;
+        if (Math.abs(dx) + Math.abs(dy) > 3) { arrastre.movio = true; lienzo.classList.add("arrastrando"); }
+        if (arrastre.movio) { T.x = arrastre.tx + dx; T.y = arrastre.ty + dy; ocultarTooltip(); redibujar(); estadoBotones(); }
+        return;
+      }
+      mostrarTooltip(nodoEn(e.offsetX, e.offsetY), e.offsetX, e.offsetY);
+    });
+    lienzo.addEventListener("pointerup", e => {
+      if (arrastre && !arrastre.movio) {
+        const s = nodoEn(e.offsetX, e.offsetY);
+        E.sel = s ? (mismo(s, E.sel) ? null : s) : null;
+        cambio();
+      }
+      arrastre = null;
+      lienzo.classList.remove("arrastrando");
+    });
+    lienzo.addEventListener("pointerleave", ocultarTooltip);
+    lienzo.addEventListener("wheel", e => {
+      e.preventDefault();
+      zoom(Math.exp(-e.deltaY * 0.0015), e.offsetX, e.offsetY);
+    }, { passive: false });
+    new ResizeObserver(() => { medir(); ajustar(); dibujar(); estadoBotones(); }).observe(lienzo.parentElement);
+    if (oscuroDelSistema.addEventListener) oscuroDelSistema.addEventListener("change", () => { rotularTema(); leerColores(); cambio(); });
+  }
+
+  // ------------------------------------------------------- exportar y tema
+  function exportarPNG() {
+    const escala = 2, pie = 112;
+    const c2 = document.createElement("canvas");
+    c2.width = Math.round(ancho * escala);
+    c2.height = Math.round((alto + pie) * escala);
+    const g = c2.getContext("2d");
+    g.scale(escala, escala);
+    pintarEscena(g, ancho, alto + pie);
+    const y0 = alto + 8;
+    g.save();
+    g.fillStyle = colores["--ink"];
+    g.font = "600 13px system-ui, -apple-system, 'Segoe UI', sans-serif";
+    g.textBaseline = "top";
+    g.textAlign = "left";
+    g.fillText(D.meta.titulo + " — " + nombreCorte(E.corte), 14, y0);
+    g.font = "12px system-ui, -apple-system, 'Segoe UI', sans-serif";
+    g.fillStyle = colores["--ink-2"];
+    g.fillText(descripcionVista(), 14, y0 + 20);
+    g.fillText(D.meta.version, 14, y0 + 38);
+    let x = 14;
+    const y = y0 + 64;
+    ["recursos", "informacion"].filter(c => E.capas[c]).forEach(capa => {
+      g.strokeStyle = colores["--" + capa]; g.lineWidth = 2; g.setLineDash(capa === "informacion" ? [6, 4] : []);
+      g.beginPath(); g.moveTo(x, y + 7); g.lineTo(x + 26, y + 7); g.stroke(); g.setLineDash([]);
+      const t = capa === "recursos" ? "Recursos" : "Información";
+      g.fillStyle = colores["--ink-2"]; g.fillText(t, x + 32, y);
+      x += 32 + g.measureText(t).width + 18;
+    });
+    const { colorItems, formas } = itemsLeyenda();
+    colorItems.concat(formas).forEach(([c, f, t]) => {
+      if (x + 30 + g.measureText(t).width > ancho - 10) { x = 14; }
+      trazarForma(g, f, x + 6, (x === 14 ? y + 22 : y) + 7, 5); g.fillStyle = c; g.fill();
+      g.fillStyle = colores["--ink-2"]; g.fillText(t, x + 16, x === 14 ? y + 22 : y);
+      x += 16 + g.measureText(t).width + 16;
+    });
+    g.restore();
+    c2.toBlob(blob => {
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "red-observada-" + E.corte + ".png";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+      aviso("Imagen descargada: " + a.download);
+    });
+  }
+  async function copiarEnlace() {
+    aEnlace();
+    try {
+      await navigator.clipboard.writeText(location.href);
+      aviso("Enlace de la vista copiado");
+    } catch (err) {
+      const campo = $("campo-enlace");
+      campo.style.display = "block";
+      campo.value = location.href;
+      campo.focus();
+      campo.select();
+      aviso("Copie el enlace del campo seleccionado, al final de los filtros");
+    }
+  }
+  const oscuroDelSistema = window.matchMedia("(prefers-color-scheme: dark)");
+  function temaActual() { return document.documentElement.dataset.theme || (oscuroDelSistema.matches ? "dark" : "light"); }
+  function rotularTema() {
+    const oscuro = temaActual() === "dark";
+    $("btn-tema").textContent = oscuro ? "Tema claro" : "Tema oscuro";
+    $("btn-tema").title = oscuro ? "Pasar al tema claro" : "Pasar al tema oscuro";
+  }
+  function cambiarTema() {
+    document.documentElement.dataset.theme = temaActual() === "dark" ? "light" : "dark";
+    rotularTema();
+    leerColores();
+    cambio();
+  }
+
+
+  // --------------------------------------------------------------- inicio
+  leerColores();
+  rotularTema();
+  construirControles();
+  deEnlace();
+  enlazarEventos();
+  medir();
+  cambio({ reencuadrar: true });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RedGiroDirecto · visores de las redes</title>
+<meta name="description" content="Visores interactivos de la red normada y la red observada del giro directo en el sistema de salud colombiano.">
+<style>
+  :root {
+    --fondo: #f6f7f9;
+    --tarjeta: #ffffff;
+    --texto: #1c2430;
+    --suave: #566173;
+    --borde: #dfe3ea;
+    --acento: #1f5fbf;
+    --acento-texto: #ffffff;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fondo: #12161c;
+      --tarjeta: #1b2129;
+      --texto: #e6eaf0;
+      --suave: #a3adbb;
+      --borde: #2c3440;
+      --acento: #6ea2ff;
+      --acento-texto: #0d1420;
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1rem 3rem;
+    background: var(--fondo);
+    color: var(--texto);
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  main { max-width: 64rem; margin: 0 auto; }
+  h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 .6rem; }
+  .entrada { color: var(--suave); max-width: 46rem; margin: 0 0 2rem; }
+  .visores { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 1.25rem; }
+  .visor {
+    display: flex; flex-direction: column;
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .visor img {
+    display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center;
+    background: #ffffff; border-bottom: 1px solid var(--borde);
+  }
+  .cuerpo { display: flex; flex-direction: column; gap: .6rem; padding: 1.1rem 1.2rem 1.3rem; flex: 1; }
+  .visor h2 { font-size: 1.2rem; margin: 0; }
+  .visor p { margin: 0; color: var(--suave); }
+  .abrir {
+    align-self: flex-start; margin-top: auto;
+    display: inline-block; padding: .55rem 1rem;
+    background: var(--acento); color: var(--acento-texto);
+    border-radius: 8px; text-decoration: none; font-weight: 600;
+  }
+  .abrir:hover, .abrir:focus-visible { filter: brightness(1.08); }
+  .abrir:focus-visible { outline: 3px solid var(--acento); outline-offset: 2px; }
+  footer { margin-top: 2.25rem; color: var(--suave); font-size: .9rem; max-width: 46rem; }
+  footer p { margin: 0 0 .5rem; }
+  footer a { color: var(--acento); }
+</style>
+</head>
+<body>
+<main>
+  <h1>RedGiroDirecto</h1>
+  <p class="entrada">Visores interactivos del proyecto de grado de Juanita Bejarano y Federico Niño (Ingeniería Industrial, Universidad de los Andes). El proyecto estudia la red de flujos de recursos e información entre la ADRES, las EPS y los prestadores de salud bajo el giro directo en Colombia. Los visores se abren en el navegador y no necesitan instalar nada.</p>
+
+  <section class="visores" aria-label="Visores">
+    <article class="visor">
+      <img src="red-normada/red-normada.png" alt="Vista de la red normada: los actores del sistema de salud unidos por los flujos que establecen las normas." loading="lazy">
+      <div class="cuerpo">
+        <h2>Red normada</h2>
+        <p>Los flujos de dinero y de información que establecen las normas: 25 actores y 49 vínculos, cada uno con su norma y artículo.</p>
+        <a class="abrir" href="red-normada/visor-red-normada.html">Abrir el visor</a>
+      </div>
+    </article>
+    <article class="visor">
+      <img src="red-observada/red-observada.png" alt="Vista de la red observada: las EPS unidas a los prestadores que recibieron giro directo por su cuenta." loading="lazy">
+      <div class="cuerpo">
+        <h2>Red observada</h2>
+        <p>El giro directo tal como ocurrió, con los anexos mensuales que publica la ADRES. En septiembre de 2026: 25 EPS, 3.810 prestadores y $7,58 billones.</p>
+        <a class="abrir" href="red-observada/visor-red-observada.html">Abrir el visor</a>
+      </div>
+    </article>
+  </section>
+
+  <footer>
+    <p>Fuentes: ADRES (<i>Lupa al Giro</i>), Ministerio de Salud y Protección Social (REPS) y las normas que cita cada vínculo.</p>
+    <p>La red observada se deriva de los anexos de la ADRES y se publica con licencia Creative Commons Atribución-NoComercial-CompartirIgual 4.0: no admite uso comercial sin autorización previa de la ADRES. La red normada se publica con Creative Commons Atribución-CompartirIgual 4.0, que sí lo admite.</p>
+    <p id="repositorio" hidden>Los datos, los programas y la documentación están en el <a href="#">repositorio del proyecto en GitHub</a>.</p>
+  </footer>
+</main>
+<script>
+  // En GitHub Pages la dirección es https://<cuenta>.github.io/<repositorio>/: de ahí sale el enlace al repositorio.
+  (function () {
+    var host = location.hostname;
+    var partes = location.pathname.split("/").filter(Boolean);
+    if (/\.github\.io$/.test(host) && partes.length > 0) {
+      var cuenta = host.replace(/\.github\.io$/, "");
+      var p = document.getElementById("repositorio");
+      p.querySelector("a").href = "https://github.com/" + cuenta + "/" + partes[0];
+      p.hidden = false;
+    }
+  })();
+</script>
+</body>
+</html>

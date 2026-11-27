@@ -1,0 +1,7 @@
+﻿actor,alcance,entra,entra_valor,sale,sale_valor,diferencia,diferencia_pct,explicacion
+ADRES,septiembre de 2026,órdenes de giro de las EPS (filas con valor ordenado),7622844238000.0,giro a prestadores en esas filas,7575702599258.0,47141638742.0,0.618425843033735,comunicación de la Supersalud 100.0 %; falla bancaria 0.0 %; embargo 0.0 %
+ADRES,serie completa,órdenes de giro de las EPS (filas con valor ordenado),168816734795238.0,giro a prestadores en esas filas,168738842094715.0,77892700523.0,0.046140390416553184,comunicación de la Supersalud 68.7 %; falla bancaria 15.5 %; embargo 15.0 %; otra 0.8 %
+EPS (contributivo),septiembre de 2026,UPC de la base del giro (upc_base),4029957677350.0,giro directo por cuenta de las EPS,3621433825120.0,408523852230.0,10.13717475312632,17 EPS con giro; mediana del porcentaje: 89.97 %; retenido del giro neto a las EPS: 0
+EPS (subsidiado),septiembre de 2026,UPC de la base del giro (upc_base),4419557019921.0,giro directo por cuenta de las EPS,3964495201336.0,455061818585.0,10.296548195527844,"25 EPS con giro; mediana del porcentaje: 90.22 %; retenido del giro neto a las EPS: 82,591,246,878"
+Supersalud,septiembre de 2026,—,,giro dirigido por sus comunicaciones (complemento),47636903093.0,47130631637.0,,"relaciones ordenadas y no giradas: 22 por 26,149,718,352; prestadores sin giro directo de ninguna EPS: 9"
+Prestadores,septiembre de 2026,giro directo,,—,,,,expuestos a comunicaciones de la Supersalud: 198 (5.2 %); expuestos a una retención: 663 (17.4 %)

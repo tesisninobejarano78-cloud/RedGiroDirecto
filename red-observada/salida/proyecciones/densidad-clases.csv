@@ -1,0 +1,10 @@
+﻿clase,clase_nombre,vinculo_normado,en_la_norma,eps_que_la_usan
+ASC-010,IPS (prestadores inscritos en el REPS),R04,True,25
+ASC-047,Cajas de compensación familiar,R11,True,15
+ASC-065,Industria farmacéutica y de dispositivos médicos,R26,True,1
+ASC-067,Audifarma,R08,True,7
+ASC-068,Disfarma,R09,True,7
+ASC-069,Helpharma,R10,True,3
+ASC-070,Importadores y distribuidores mayoristas de medicamentos y tecnologías,R25,True,10
+ASC-071,"Droguerías, gestores farmacéuticos y canal de dispensación",R07,True,5
+ASC-253,Proveedores de servicios y tecnologías de salud sin inscripción en el REPS,R27,True,23

@@ -1,0 +1,19 @@
+Verificación de redes_metodos.py — 17 pruebas, 0 fallas
+
+OK    asortatividad = NetworkX dirigida (salida→entrada)  · 0.008972 frente a 0.008972
+OK    asortatividad por rangos = Spearman de SciPy sobre las aristas
+OK    Q de Barber = definición por pares (binaria y ponderada)
+OK    Q = 1 - 1/c en c bloques completos y el optimizador lo encuentra  · Q = 0.750000
+OK    el optimizador recupera exacta una partición sembrada nítida (NMI = 1)  · NMI = 1.000, Q = 0.731
+OK    con ruido, la Q hallada nunca es menor que la de la partición sembrada
+OK    arrancar desde la partición sembrada no supera la búsqueda al azar
+OK    BRIM nunca baja la modularidad  · 0.1380 → 0.4252
+OK    NMI = 1 y ARI = 1 en particiones idénticas con otras etiquetas
+OK    ARI = conteo de pares uno a uno
+OK    NMI = implementación independiente
+OK    NMI = 0 en particiones independientes de cuatro elementos
+OK    Gini = diferencia media absoluta
+OK    Gini = 0 con valores iguales y (n-1)/n si uno tiene todo
+OK    p de permutación = 1/(n+1) si el observado supera a todos los permutados
+OK    p de permutación de dos colas = 1 si el observado es la media de los permutados
+OK    heterogeneidad = 1 con grados iguales

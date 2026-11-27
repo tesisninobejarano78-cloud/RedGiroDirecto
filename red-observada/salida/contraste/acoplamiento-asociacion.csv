@@ -1,0 +1,9 @@
+﻿corte,variable_informacion,variable_red,eps,eps_con_valor_positivo,spearman,p_permutacion_dos_colas
+2026-09,condicionado_pct_del_giro,prestadores_dependientes,25,3,0.007493975693404941,0.9722055588882224
+2026-09,retenido_giro_neto,prestadores_dependientes,25,9,-0.3178371037532467,0.1205758848230354
+2026-06,condicionado_pct_del_giro,prestadores_dependientes,25,3,0.16295329974193287,0.4357128574285143
+2026-06,retenido_giro_neto,prestadores_dependientes,25,0,,
+2026-07,condicionado_pct_del_giro,prestadores_dependientes,25,2,0.08184906706611886,0.7324535092981403
+2026-07,retenido_giro_neto,prestadores_dependientes,25,1,0.05665745113741707,0.8838232353529294
+2026-08,condicionado_pct_del_giro,prestadores_dependientes,25,0,,
+2026-08,retenido_giro_neto,prestadores_dependientes,25,0,,

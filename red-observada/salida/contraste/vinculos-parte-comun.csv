@@ -1,0 +1,20 @@
+﻿id,capa,tipo,origen,destino,observabilidad,girado_en_el_mes,receptores_en_el_mes
+R03,recursos,Reconocimiento de la UPC,ASC-007,ASC-009,parcial,,
+R04,recursos,Giro directo de la UPC,ASC-007,ASC-010,observable,6302933658202.0,3522.0
+R05,recursos,Giro directo de presupuestos máximos,ASC-007,ASC-010,observable,,
+R06,recursos,Pago contractual y residual,ASC-009,ASC-010,no observable,,
+R07,recursos,Giro directo a proveedores,ASC-007,ASC-071,observable,184678463788.0,2.0
+R08,recursos,Giro directo a proveedores,ASC-007,ASC-067,observable,70099803103.0,1.0
+R09,recursos,Giro directo a proveedores,ASC-007,ASC-068,observable,110671605658.0,1.0
+R10,recursos,Giro directo a proveedores,ASC-007,ASC-069,observable,71146831070.0,1.0
+R11,recursos,Giro directo a cajas prestadoras,ASC-007,ASC-047,observable,382999011473.0,9.0
+R17,recursos,Aportes de fuentes al sistema,ASC-047,ASC-007,no observable,,
+R25,recursos,Giro directo a proveedores,ASC-007,ASC-070,observable,85334206423.0,13.0
+R26,recursos,Giro directo a proveedores,ASC-007,ASC-065,observable,10989518485.0,5.0
+R27,recursos,Giro directo a proveedores,ASC-007,ASC-253,observable,356849501056.0,256.0
+I01,informacion,Ordenación del giro,ASC-009,ASC-007,parcial,,
+I02,informacion,Afiliación y novedades,ASC-009,ASC-007,parcial,,
+I03,informacion,Lista de incumplimiento,ASC-011,ASC-007,observable,,
+I08,informacion,"Inspección, vigilancia y control",ASC-011,ASC-009,parcial,,
+I09,informacion,"Inspección, vigilancia y control",ASC-011,ASC-010,parcial,,
+I24,informacion,Resultados del recaudo y la compensación,ASC-007,ASC-009,no observable,,

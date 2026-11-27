@@ -1,0 +1,7 @@
+﻿corte,base,retenidas,retenidas_bajo_90,no_retenidas_bajo_90_sin_otra_causa,no_retenidas_bajo_90_con_otra_causa,codigos_no_explicados
+2026-09,proceso / UPC apropiada,10,10,2,6,Aliansalud (EPSS01); Servicio Occidental de Salud (EPSS18)
+2026-09,proceso / UPC neta,10,8,1,4,Aliansalud (EPSS01); Comfenalco Valle (EPSS12); Familiar de Colombia (CCF033)
+2026-09,(proceso + complemento) / UPC apropiada,10,4,2,4,Aliansalud (EPSS01); Capresoca (EPS025); Comfachoco (CCF102); Comfenalco Valle (EPSS12); Compensar (EPSS08); Proteger (CCF055); Servicio Occidental de Salud (EPSS18); Suramericana (EPSS10)
+2026-10,proceso / UPC apropiada,6,5,10,0,Capital Salud (EPSS34); Comfachoco (CCF102); Comfaoriente (CCF050); Coosalud (EPSS42); Emssanar (ESS118); Mallamas (EPSI05); Mutual Ser (EPSS48); Mutual Ser (ESS207); Salud Mia (EPSS46); Salud Mia (EPSS49); Salud Total (EPSS02)
+2026-10,proceso / UPC neta,6,5,3,0,Comfachoco (CCF102); Coosalud (EPSS42); Salud Mia (EPSS46); Salud Mia (EPSS49)
+2026-10,(proceso + complemento) / UPC apropiada,6,5,10,0,Capital Salud (EPSS34); Comfachoco (CCF102); Comfaoriente (CCF050); Coosalud (EPSS42); Emssanar (ESS118); Mallamas (EPSI05); Mutual Ser (EPSS48); Mutual Ser (ESS207); Salud Mia (EPSS46); Salud Mia (EPSS49); Salud Total (EPSS02)

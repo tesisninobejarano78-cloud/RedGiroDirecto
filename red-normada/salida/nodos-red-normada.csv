@@ -1,0 +1,167 @@
+﻿id,nombre,sigla,grupo,sector,subsector,naturaleza,nivel,en_colev,tamano,en_red,participacion,grado_doc,rol_recursos,rol_informacion,x,y
+ASC-001,Ministerio de Salud y Protección Social,MinSalud,Estado,A,A1,Pública,1,Sí,Macro,True,ambas,10,solo emite,emite y recibe,300.0,0.0
+ASC-002,Departamento Administrativo de la Presidencia de la República,DAPRE,Estado,A,A1,Pública,2,Sí,Grande,False,ninguna,0,sin vínculos,sin vínculos,220,786
+ASC-003,Ministerio de Hacienda y Crédito Público,MinHacienda,Estado,A,A1,Pública,2,No,Macro,True,recursos,1,solo emite,sin vínculos,60.0,200.0
+ASC-004,Departamento Nacional de Planeación,DNP,Estado,A,A1,Pública,2,Sí,Mediano,False,ninguna,0,sin vínculos,sin vínculos,260,786
+ASC-005,Ministerio del Trabajo,MinTrabajo,Estado,A,A1,Pública,2,No,Macro,False,ninguna,0,sin vínculos,sin vínculos,460,786
+ASC-006,Ministerio de Educación Nacional,MinEducación,Estado,A,A1,Pública,3,No,Macro,False,ninguna,0,sin vínculos,sin vínculos,340,786
+ASC-007,Administradora de los Recursos del Sistema General de Seguridad Social en Salud,ADRES,Estado,A,A2,Pública,1,No,Macro,True,ambas,29,emite y recibe,emite y recibe,430.0,330.0
+ASC-008,Unidad de Gestión Pensional y Parafiscales,UGPP,Estado,A,A2,Pública,2,No,Sin dato,True,recursos,1,solo emite,sin vínculos,60.0,280.0
+ASC-009,Entidades Promotoras de Salud (vista agregada),EPS,Sector privado,A,A3,Mixta,1,Sí,Macro,True,ambas,10,emite y recibe,emite y recibe,430.0,110.0
+ASC-010,Instituciones Prestadoras de Servicios de Salud (vista agregada),IPS,Sector privado,A,A4,Mixta,1,Sí,Macro,True,ambas,11,solo recibe,emite y recibe,800.0,250.0
+ASC-011,Superintendencia Nacional de Salud,Supersalud,Estado,A,A5,Pública,1,Sí,Mediano,True,informacion,3,sin vínculos,solo emite,640.0,0.0
+ASC-012,Superintendencia Financiera de Colombia,Superfinanciera,Estado,A,A5,Pública,2,No,Mediano,False,ninguna,0,sin vínculos,sin vínculos,860,786
+ASC-013,Superintendencia del Subsidio Familiar,Supersubsidio,Estado,A,A5,Pública,2,No,Pequeño,False,ninguna,0,sin vínculos,sin vínculos,60,822
+ASC-014,Superintendencia de la Economía Solidaria,Supersolidaria,Estado,A,A5,Pública,2,No,Pequeño,False,ninguna,0,sin vínculos,sin vínculos,980,786
+ASC-015,Superintendencia de Industria y Comercio,SIC,Estado,A,A5,Pública,3,No,Mediano,False,ninguna,0,sin vínculos,sin vínculos,900,786
+ASC-016,Instituto Nacional de Salud,INS,Estado,A,A6,Pública,1,Sí,Mediano,False,ninguna,0,sin vínculos,sin vínculos,340,822
+ASC-017,Instituto Nacional de Vigilancia de Medicamentos y Alimentos,INVIMA,Estado,A,A6,Pública,1,Sí,Mediano,False,ninguna,0,sin vínculos,sin vínculos,380,822
+ASC-018,Unidad Administrativa Especial Fondo Nacional de Estupefacientes,FNE,Estado,A,A6,Pública,1,No,Pequeño,False,ninguna,0,sin vínculos,sin vínculos,580,822
+ASC-019,Instituto Nacional de Medicina Legal y Ciencias Forenses,Medicina Legal,Estado,A,A6,Pública,2,No,Mediano,False,ninguna,0,sin vínculos,sin vínculos,300,822
+ASC-020,Instituto Nacional de Donación y Trasplante de Órganos y Tejidos,INDTOT,Estado,A,A6,Pública,1,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,260,822
+ASC-021,Instituto de Evaluación Tecnológica en Salud,IETS,Estado,A,A7,Mixta,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,780,822
+ASC-022,Departamento Administrativo Nacional de Estadística,DANE,Estado,A,A7,Pública,2,Sí,Mediano,False,ninguna,0,sin vínculos,sin vínculos,740,822
+ASC-023,Contaduría General de la Nación,CGN,Estado,A,A7,Pública,2,No,Pequeño,False,ninguna,0,sin vínculos,sin vínculos,660,822
+ASC-024,Registraduría Nacional del Estado Civil,Registraduría,Estado,A,A7,Pública,3,No,Grande,False,ninguna,0,sin vínculos,sin vínculos,980,822
+ASC-025,Unidad Administrativa Especial Migración Colombia,Migración Colombia,Estado,A,A7,Pública,3,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,60,858
+ASC-026,Ministerio de Tecnologías de la Información y las Comunicaciones,MinTIC,Estado,A,A7,Pública,3,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,820,822
+ASC-027,Entidades territoriales de salud departamentales (vista agregada),DTS departamentales,Estado,A,A8,Pública,1,Sí,Macro,True,ambas,4,emite y recibe,emite y recibe,230.0,470.0
+ASC-028,Entidades territoriales de salud distritales y municipales (vista agregada),DTS municipales,Estado,A,A8,Pública,1,Sí,Sin dato,True,ambas,4,emite y recibe,emite y recibe,230.0,560.0
+ASC-029,Subsistema de Salud de las Fuerzas Militares — Dirección General de Sanidad Militar,DGSM,Estado,A,A9,Pública,1,No,Grande,False,ninguna,0,sin vínculos,sin vínculos,540,858
+ASC-030,Subsistema de Salud de la Policía Nacional — Dirección de Sanidad,DISAN PONAL,Estado,A,A9,Pública,1,No,Grande,False,ninguna,0,sin vínculos,sin vínculos,500,858
+ASC-031,Fondo de Pasivo Social de Ferrocarriles Nacionales de Colombia,FPS,Estado,A,A9,Pública,1,No,Mediano,False,ninguna,0,sin vínculos,sin vínculos,380,858
+ASC-032,Fiduciaria La Previsora S.A.,Fiduprevisora,Estado,A,A9,Mixta,1,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,300,858
+ASC-033,Positiva Compañía de Seguros S.A.,Positiva,Estado,A,A10,Mixta,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,860,858
+ASC-034,Senado de la República — Comisión Séptima Constitucional Permanente,Senado,Estado,F,F1,Pública,2,No,Mediano,False,ninguna,0,sin vínculos,sin vínculos,100,1294
+ASC-035,Cámara de Representantes — Comisión Séptima Constitucional Permanente,Cámara,Estado,F,F1,Pública,2,No,Mediano,False,ninguna,0,sin vínculos,sin vínculos,60,1294
+ASC-036,Corte Constitucional,Corte Constitucional,Estado,F,F2,Pública,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,180,1294
+ASC-037,Consejo de Estado,Consejo de Estado,Estado,F,F2,Pública,3,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,140,1294
+ASC-038,Rama Judicial — jurisdicción de tutela,Rama Judicial,Estado,F,F2,Pública,2,No,Macro,False,ninguna,0,sin vínculos,sin vínculos,260,1294
+ASC-039,Fiscalía General de la Nación,Fiscalía,Estado,F,F2,Pública,3,No,Grande,False,ninguna,0,sin vínculos,sin vínculos,220,1294
+ASC-040,Contraloría General de la República,CGR,Estado,F,F3,Pública,2,Sí,Grande,False,ninguna,0,sin vínculos,sin vínculos,340,1294
+ASC-041,Procuraduría General de la Nación,PGN,Estado,F,F3,Pública,2,Sí,Grande,False,ninguna,0,sin vínculos,sin vínculos,420,1294
+ASC-042,Defensoría del Pueblo,Defensoría,Estado,F,F3,Pública,2,Sí,Grande,False,ninguna,0,sin vínculos,sin vínculos,380,1294
+ASC-043,Auditoría General de la República,AGR,Estado,F,F3,Pública,3,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,300,1294
+ASC-044,Empresa Industrial y Comercial del Estado Administradora del Monopolio Rentístico de los Juegos de Suerte y Azar,Coljuegos,Estado,A,A2,Pública,1,No,Sin dato,True,recursos,1,solo emite,sin vínculos,60.0,360.0
+ASC-045,Operadores de juegos de suerte y azar y loterías territoriales,Operadores de juegos,Sector privado,A,A2,Privada,2,No,Grande,True,recursos,3,solo emite,sin vínculos,60.0,650.0
+ASC-047,Cajas de Compensación Familiar,CCF,Sector privado,A,A3,Sin ánimo de lucro,1,No,Macro,True,recursos,2,emite y recibe,sin vínculos,610.0,560.0
+ASC-048,Profesionales independientes de salud,Profesionales independientes,Sector privado,A,A4,Privada,1,No,Macro,False,ninguna,0,sin vínculos,sin vínculos,780,786
+ASC-049,Entidades con objeto social diferente a la prestación de servicios de salud,Objeto social diferente,Sector privado,A,A4,Privada,1,No,Grande,False,ninguna,0,sin vínculos,sin vínculos,740,786
+ASC-050,Servicios de transporte especial de pacientes,Transporte especial,Sector privado,A,A4,Privada,1,No,Mediano,False,ninguna,0,sin vínculos,sin vínculos,820,786
+ASC-051,Red Nacional de Laboratorios,RNL,Estado,A,A6,Pública,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,460,822
+ASC-052,Laboratorios Departamentales de Salud Pública,LDSP,Estado,A,A6,Pública,1,No,Pequeño,False,ninguna,0,sin vínculos,sin vínculos,420,822
+ASC-053,Cuenta de Alto Costo,CAC,Sector privado,A,A7,Sin ánimo de lucro,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,700,822
+ASC-054,Observatorio Nacional de Salud,ONS,Estado,A,A7,Pública,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,860,822
+ASC-055,Federación Nacional de Departamentos,FND,Estado,A,A8,Mixta,2,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,180,858
+ASC-056,Federación Colombiana de Municipios,FCM,Estado,A,A8,Mixta,3,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,140,858
+ASC-057,Corporación Colombiana de Secretarios Municipales y Distritales de Salud,COSESAM,Sociedad civil,A,A8,Sin ánimo de lucro,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,100,858
+ASC-058,Empresa Colombiana de Petróleos S.A. — Ecopetrol,Ecopetrol,Sector privado,A,A9,Mixta,1,No,Macro,False,ninguna,0,sin vínculos,sin vínculos,220,858
+ASC-059,Universidades públicas con régimen de excepción en salud,Unisalud,Academia,A,A9,Pública,1,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,620,858
+ASC-060,Administradoras de Riesgos Laborales,ARL,Sector privado,A,A10,Privada,1,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,660,858
+ASC-061,Compañías de medicina prepagada y planes voluntarios de salud,Prepagadas,Sector privado,A,A10,Privada,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,740,858
+ASC-062,Aseguradoras del SOAT,SOAT,Sector privado,A,A10,Privada,1,No,Sin dato,True,recursos,1,solo emite,sin vínculos,60.0,440.0
+ASC-063,Tecnoquímicas S.A.,Tecnoquímicas,Sector privado,B,B1,Privada,2,No,Grande,False,ninguna,0,sin vínculos,sin vínculos,60,938
+ASC-065,Industria farmacéutica y de dispositivos médicos (fabricación nacional),Industria farma,Sector privado,B,B1,Privada,1,No,Macro,True,recursos,1,solo recibe,sin vínculos,800.0,630.0
+ASC-067,Audifarma S.A.,Audifarma,Sector privado,B,B2,Privada,1,No,Grande,True,recursos,1,solo recibe,sin vínculos,800.0,390.0
+ASC-068,Disfarma G.C. S.A.S.,Disfarma,Sector privado,B,B2,Privada,1,No,Grande,True,recursos,1,solo recibe,sin vínculos,800.0,450.0
+ASC-069,Helpharma S.A.S.,Helpharma,Sector privado,B,B2,Privada,1,No,Mediano,True,recursos,1,solo recibe,sin vínculos,800.0,510.0
+ASC-070,Importadores y distribuidores mayoristas de medicamentos y tecnologías,Importadores y distribuidores,Sector privado,B,B2,Privada,1,No,Macro,True,recursos,1,solo recibe,sin vínculos,800.0,570.0
+ASC-071,"Droguerías, gestores farmacéuticos y canal de dispensación",Droguerías,Sector privado,B,B2,Privada,2,No,Macro,True,recursos,1,solo recibe,sin vínculos,800.0,330.0
+ASC-072,Compañía de Medicina Prepagada Colsanitas S.A.,Colsanitas,Sector privado,A,A10,Privada,1,No,Grande,False,ninguna,0,sin vínculos,sin vínculos,700,858
+ASC-073,Sociedades fiduciarias administradoras de recursos del sistema,Fiduciarias,Sector privado,B,B3,Privada,2,No,Pequeño,False,ninguna,0,sin vínculos,sin vínculos,220,938
+ASC-075,Proveedores de sistemas de información en salud,Proveedores TI,Sector privado,B,B3,Privada,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,180,938
+ASC-076,Asociación Colombiana de Empresas de Medicina Integral,ACEMI,Sector privado,C,C1,Sin ánimo de lucro,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,100,1018
+ASC-077,Asociación de Empresas Gestoras del Aseguramiento en Salud,GESTARSALUD,Sector privado,C,C1,Sin ánimo de lucro,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,220,1018
+ASC-078,Asociación Colombiana de Hospitales y Clínicas,ACHC,Sector privado,C,C1,Sin ánimo de lucro,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,140,1018
+ASC-079,Asociación Colombiana de Empresas Sociales del Estado y Hospitales Públicos,ACESI,Sociedad civil,C,C1,Sin ánimo de lucro,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,60,1018
+ASC-080,Federación de Aseguradores Colombianos,FASECOLDA,Sector privado,C,C1,Sin ánimo de lucro,2,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,260,1018
+ASC-081,Asociación Nacional de Cajas de Compensación Familiar,ASOCAJAS,Sector privado,C,C1,Sin ánimo de lucro,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,180,1018
+ASC-082,Asociación de Laboratorios Farmacéuticos de Investigación y Desarrollo,AFIDRO,Sector privado,C,C2,Sin ánimo de lucro,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,380,1018
+ASC-083,Asociación de Industrias Farmacéuticas en Colombia,ASINFAR,Sector privado,C,C2,Sin ánimo de lucro,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,340,1018
+ASC-084,Asociación Nacional de Empresarios de Colombia — Cámara Sectorial de Salud,ANDI Salud,Sector privado,C,C2,Sin ánimo de lucro,2,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,300,1018
+ASC-085,Federación Médica Colombiana,FMC,Sociedad civil,C,C3,Sin ánimo de lucro,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,980,1018
+ASC-086,Colegio Médico Colombiano,CMC,Sociedad civil,C,C3,Sin ánimo de lucro,1,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,900,1018
+ASC-087,Asociación Nacional de Enfermeras de Colombia,ANEC,Sociedad civil,C,C3,Sin ánimo de lucro,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,660,1018
+ASC-088,Asociación Nacional de Internos y Residentes,ANIR,Sociedad civil,C,C3,Sin ánimo de lucro,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,700,1018
+ASC-089,Academia Nacional de Medicina,ANM,Sociedad civil,C,C3,Sin ánimo de lucro,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,420,1018
+ASC-090,Asociación Colombiana de Infectología,ACIN,Sociedad civil,C,C3,Sin ánimo de lucro,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,460,1018
+ASC-091,Asociación Colombiana de Medicina Crítica y Cuidado Intensivo,AMCI,Sociedad civil,C,C3,Sin ánimo de lucro,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,500,1018
+ASC-092,Asociación Colombiana de Sociedades Científicas,ACSC,Sociedad civil,C,C3,Sin ánimo de lucro,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,580,1018
+ASC-093,Sindicatos del sector salud,Sindicatos,Sociedad civil,C,C3,Sin ánimo de lucro,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,100,1054
+ASC-098,Universidades con programas del área de la salud,Universidades,Academia,D,D1,Mixta,3,No,Macro,False,ninguna,0,sin vínculos,sin vínculos,140,1134
+ASC-099,Asociación Colombiana de Facultades de Medicina,ASCOFAME,Academia,D,D1,Sin ánimo de lucro,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,100,1134
+ASC-100,Asociación Colombiana de Facultades de Enfermería,ACOFAEN,Academia,D,D1,Sin ánimo de lucro,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,60,1134
+ASC-101,Así Vamos en Salud,Así Vamos en Salud,Sociedad civil,D,D2,Sin ánimo de lucro,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,180,1134
+ASC-102,Fundación para la Educación Superior y el Desarrollo,Fedesarrollo,Academia,D,D2,Sin ánimo de lucro,3,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,220,1134
+ASC-103,"Ministerio de Ciencia, Tecnología e Innovación",MinCiencias,Estado,D,D3,Pública,3,No,Mediano,False,ninguna,0,sin vínculos,sin vínculos,260,1134
+ASC-104,Pacientes Colombia,Pacientes Colombia,Sociedad civil,E,E1,Sin ánimo de lucro,2,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,220,1214
+ASC-105,Liga Colombiana Contra el Cáncer,LCCC,Sociedad civil,E,E1,Sin ánimo de lucro,1,No,Mediano,False,ninguna,0,sin vínculos,sin vínculos,180,1214
+ASC-106,Asociaciones de usuarios de EPS e IPS,Asociaciones de usuarios,Sociedad civil,E,E2,Sin ánimo de lucro,1,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,260,1214
+ASC-107,Comités de Participación Comunitaria en Salud,COPACOS,Sociedad civil,E,E2,Sin ánimo de lucro,1,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,300,1214
+ASC-108,Veedurías ciudadanas en salud,Veedurías,Sociedad civil,E,E2,Sin ánimo de lucro,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,340,1214
+ASC-109,Observatorios sectoriales en salud,Observatorios,Estado,A,A7,Pública,1,Sí,Pequeño,False,ninguna,0,sin vínculos,sin vínculos,900,822
+ASC-110,Asociación Colombiana de Salud Pública,ACSP,Sociedad civil,C,C3,Sin ánimo de lucro,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,540,1018
+ASC-111,Sociedad Colombiana de Anestesiología y Reanimación,SCARE,Sociedad civil,C,C3,Sin ánimo de lucro,1,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,140,1054
+ASC-112,Fundaciones y filantropía privada con inversión en salud,Filantropía,Sociedad civil,E,E3,Sin ánimo de lucro,3,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,460,1214
+ASC-113,Cámaras de Comercio,Cámaras de Comercio,Sector privado,B,B3,Sin ánimo de lucro,3,Sí,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,140,938
+ASC-155,Comisión Nacional de Precios de Medicamentos y Dispositivos Médicos,CNPMDM,Estado,A,A1,Pública,1,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,60,786
+ASC-156,Consejo Nacional de Seguridad Social en Salud,CNSSS,Estado,A,A1,Pública,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,100,786
+ASC-157,Consejo Nacional de Talento Humano en Salud,CNTHS,Estado,A,A1,Pública,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,140,786
+ASC-158,"Ministerio de Comercio, Industria y Turismo",MinCIT,Estado,A,A1,Pública,2,No,Grande,False,ninguna,0,sin vínculos,sin vínculos,300,786
+ASC-159,Ministerio del Interior,MinInterior,Estado,A,A1,Pública,3,No,Grande,False,ninguna,0,sin vínculos,sin vínculos,420,786
+ASC-160,Ministerio de Justicia y del Derecho,MinJusticia,Estado,A,A1,Pública,2,No,Mediano,False,ninguna,0,sin vínculos,sin vínculos,380,786
+ASC-161,Departamento Administrativo de la Función Pública,Función Pública,Estado,A,A1,Pública,3,No,Pequeño,False,ninguna,0,sin vínculos,sin vínculos,180,786
+ASC-162,Dirección de Impuestos y Aduanas Nacionales,DIAN,Estado,A,A2,Pública,1,No,Grande,False,ninguna,0,sin vínculos,sin vínculos,500,786
+ASC-163,Fondo Financiero Distrital de Salud,FFDS,Estado,A,A2,Pública,1,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,620,786
+ASC-164,Fondo de Salvamento y Garantías para el Sector Salud,FONSAET,Estado,A,A2,Pública,1,No,Sin dato,True,recursos,2,emite y recibe,sin vínculos,610.0,250.0
+ASC-165,Fondo de Riesgos Laborales,FRL,Estado,A,A2,Pública,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,660,786
+ASC-166,Financiera de Desarrollo Territorial S.A.,FINDETER,Estado,A,A2,Mixta,3,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,580,786
+ASC-167,Empresa Nacional Promotora del Desarrollo Territorial,ENTerritorio,Estado,A,A2,Pública,3,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,540,786
+ASC-168,Unidad Nacional para la Gestión del Riesgo de Desastres,UNGRD,Estado,A,A2,Pública,2,No,Grande,False,ninguna,0,sin vínculos,sin vínculos,700,786
+ASC-169,Superintendencia de Sociedades,Supersociedades,Estado,A,A5,Pública,2,No,Mediano,False,ninguna,0,sin vínculos,sin vínculos,940,786
+ASC-170,Instituto Nacional de Cancerología E.S.E.,INC,Estado,A,A6,Pública,1,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,220,822
+ASC-171,Sanatorio de Agua de Dios E.S.E.,Agua de Dios,Estado,A,A6,Pública,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,500,822
+ASC-172,Sanatorio de Contratación E.S.E.,Contratación,Estado,A,A6,Pública,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,540,822
+ASC-173,Centro Dermatológico Federico Lleras Acosta E.S.E.,CDFLLA,Estado,A,A6,Pública,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,100,822
+ASC-174,Instituto Colombiano Agropecuario,ICA,Estado,A,A6,Pública,2,No,Mediano,False,ninguna,0,sin vínculos,sin vínculos,140,822
+ASC-175,Instituto Colombiano de Bienestar Familiar,ICBF,Estado,A,A6,Pública,2,No,Macro,False,ninguna,0,sin vínculos,sin vínculos,180,822
+ASC-176,Organismo Nacional de Acreditación de Colombia,ONAC,Sector privado,A,A7,Sin ánimo de lucro,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,940,822
+ASC-177,Instituto Colombiano de Normas Técnicas y Certificación,ICONTEC,Sector privado,A,A7,Sin ánimo de lucro,2,No,Sin dato,True,informacion,2,sin vínculos,solo emite,980.0,180.0
+ASC-178,Archivo General de la Nación,AGN,Estado,A,A7,Pública,3,No,Pequeño,False,ninguna,0,sin vínculos,sin vínculos,620,822
+ASC-179,Ministerio de Defensa Nacional,MinDefensa,Estado,A,A9,Pública,1,No,Grande,False,ninguna,0,sin vínculos,sin vínculos,460,858
+ASC-180,Fondo Nacional de Prestaciones Sociales del Magisterio,FOMAG,Estado,A,A9,Pública,1,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,340,858
+ASC-181,Unidad de Servicios Penitenciarios y Carcelarios,USPEC,Estado,A,A9,Pública,1,No,Grande,False,ninguna,0,sin vínculos,sin vínculos,580,858
+ASC-182,Fideicomiso Fondo Nacional de Salud de las Personas Privadas de la Libertad,Fondo Salud PPL,Estado,A,A9,Pública,1,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,260,858
+ASC-183,Instituto Nacional Penitenciario y Carcelario,INPEC,Estado,A,A9,Pública,2,No,Grande,False,ninguna,0,sin vínculos,sin vínculos,420,858
+ASC-184,Junta Nacional de Calificación de Invalidez,JNCI,Estado,A,A10,Mixta,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,780,858
+ASC-185,Juntas Regionales de Calificación de Invalidez,JRCI,Estado,A,A10,Mixta,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,820,858
+ASC-212,Operadores de información de la Planilla Integrada de Liquidación de Aportes,Operadores PILA,Sector privado,B,B3,Privada,1,No,Sin dato,True,informacion,4,sin vínculos,emite y recibe,230.0,160.0
+ASC-215,Cooperativa Nacional de Droguistas Detallistas,Coopidrogas,Sector privado,B,B2,Sin ánimo de lucro,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,100,938
+ASC-216,Colegio Colombiano de Odontólogos,CCO,Sociedad civil,C,C3,Sin ánimo de lucro,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,820,1018
+ASC-217,Colegio Colombiano de Fisioterapeutas,COLFI,Sociedad civil,C,C3,Sin ánimo de lucro,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,740,1018
+ASC-218,Colegio Colombiano de Fonoaudiólogos,CCF-Fonoaudiología,Sociedad civil,C,C3,Sin ánimo de lucro,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,780,1018
+ASC-219,Colegio Nacional de Bacteriología,CNB Colombia,Sociedad civil,C,C3,Sin ánimo de lucro,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,940,1018
+ASC-220,Colegio Federación Colombiana de Optómetras,Fedopto,Sociedad civil,C,C3,Sin ánimo de lucro,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,860,1018
+ASC-221,Asociación Médica Sindical Colombiana,ASMEDAS,Sociedad civil,C,C3,Sin ánimo de lucro,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,620,1018
+ASC-222,Sindicato Nacional de Trabajadores de la Salud de Colombia,Sintrasaludcol,Sociedad civil,C,C3,Sin ánimo de lucro,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,60,1054
+ASC-223,Sociedad Colombiana de Cardiología y Cirugía Cardiovascular,SCC,Sociedad civil,C,C3,Sin ánimo de lucro,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,220,1054
+ASC-224,Sociedad Colombiana de Cancerología,SCC-Cancerología,Sociedad civil,C,C3,Sin ánimo de lucro,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,180,1054
+ASC-227,Asociación Colombiana de Diabetes,Asodiabetes,Sociedad civil,E,E1,Sin ánimo de lucro,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,100,1214
+ASC-228,Fundación Colombiana de Trasplantados,FCT,Sociedad civil,E,E1,Sin ánimo de lucro,3,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,140,1214
+ASC-229,Asociaciones y fundaciones de pacientes por patología,Asociaciones de pacientes,Sociedad civil,E,E1,Sin ánimo de lucro,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,60,1214
+ASC-230,Asociación Profamilia,Profamilia,Sociedad civil,E,E3,Sin ánimo de lucro,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,380,1214
+ASC-233,Cruz Roja Colombiana,Cruz Roja,Sociedad civil,E,E3,Sin ánimo de lucro,1,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,420,1214
+ASC-234,Titulares de registro sanitario de dispositivos médicos y diagnóstico in vitro,Industria de dispositivos,Sector privado,B,B4,Privada,2,No,Grande,False,ninguna,0,sin vínculos,sin vínculos,620,938
+ASC-235,Annar Diagnóstica Import S.A.S.,Annar,Sector privado,B,B4,Privada,2,No,Mediano,False,ninguna,0,sin vínculos,sin vínculos,260,938
+ASC-236,Thermo Fisher Scientific Colombia S.A.S.,Thermo Fisher,Sector privado,B,B4,Privada,2,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,580,938
+ASC-237,Becton Dickinson de Colombia Ltda.,BD,Sector privado,B,B4,Privada,2,No,Mediano,False,ninguna,0,sin vínculos,sin vínculos,340,938
+ASC-238,Siemens Healthcare S.A.S.,Siemens Healthineers,Sector privado,B,B4,Privada,2,No,Mediano,False,ninguna,0,sin vínculos,sin vínculos,540,938
+ASC-239,Mindray Medical Colombia S.A.S.,Mindray,Sector privado,B,B4,Privada,2,No,Pequeño,False,ninguna,0,sin vínculos,sin vínculos,420,938
+ASC-240,Beckman Coulter Colombia S.A.S.,Beckman Coulter,Sector privado,B,B4,Privada,2,No,Pequeño,False,ninguna,0,sin vínculos,sin vínculos,300,938
+ASC-241,Rochem Biocare Colombia S.A.S.,Rochem,Sector privado,B,B4,Privada,2,No,Pequeño,False,ninguna,0,sin vínculos,sin vínculos,500,938
+ASC-242,Labcare de Colombia S.A.S.,Labcare,Sector privado,B,B4,Privada,2,No,Pequeño,False,ninguna,0,sin vínculos,sin vínculos,380,938
+ASC-243,Quimiolab S.A.S.,Quimiolab,Sector privado,B,B4,Privada,2,No,Pequeño,False,ninguna,0,sin vínculos,sin vínculos,460,938
+ASC-244,Titulares extranjeros de registro sanitario sin domicilio en Colombia,Titulares extranjeros,Sector privado,B,B4,Privada,3,No,Sin dato,False,ninguna,0,sin vínculos,sin vínculos,660,938
+ASC-251,Aportantes y cotizantes al Sistema General de Seguridad Social en Salud,Aportantes,Sector privado,A,A2,Mixta,1,No,Sin dato,True,ambas,2,solo emite,solo emite,60.0,90.0
+ASC-252,Afiliados y beneficiarios del Sistema General de Seguridad Social en Salud,Afiliados,Sociedad civil,A,A3,Privada,1,No,Macro,True,informacion,1,sin vínculos,solo recibe,980.0,330.0
+ASC-253,Proveedores de servicios y tecnologías de salud sin inscripción en el REPS,Proveedores sin REPS,Sector privado,B,B2,Privada,1,No,Mediano,True,recursos,1,solo recibe,sin vínculos,800.0,690.0

@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "Si usa este material, cítelo con estos datos y cite también las fuentes originales que indica cada carpeta."
+title: "RedGiroDirecto: red de flujos de recursos e información entre la ADRES, las EPS y los prestadores de salud bajo el giro directo en Colombia"
+type: software
+authors:
+  - family-names: Bejarano
+    given-names: Juanita
+    affiliation: Universidad de los Andes
+  - family-names: Niño
+    given-names: Federico
+    affiliation: Universidad de los Andes
+abstract: >-
+  Datos, programas y resultados de un proyecto de grado de Ingeniería Industrial
+  de la Universidad de los Andes que estudia la estructura de la red de flujos de
+  recursos e información entre la ADRES, las EPS y los prestadores de salud bajo
+  el giro directo en Colombia. Incluye un inventario de actores del sistema de
+  salud, la red de flujos que establecen las normas, la red del giro directo
+  construida con los anexos que publica la ADRES, sus visores interactivos y una
+  bóveda de Obsidian con las normas, los actores y el método.
+keywords:
+  - giro directo
+  - ADRES
+  - EPS
+  - sistema de salud
+  - análisis de redes
+  - Colombia
+license:
+  - MIT
+  - CC-BY-SA-4.0
+  - CC-BY-NC-SA-4.0

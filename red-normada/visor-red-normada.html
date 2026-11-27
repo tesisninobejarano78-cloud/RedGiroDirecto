@@ -1,0 +1,1201 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Red normada de flujos</title>
+<!--
+  Visor de la red de flujos de recursos e información. Lo genera
+  construir-red-normada.py a partir de esta plantilla: no editar el visor
+  generado, editar la plantilla y volver a correr el script.
+  Sin dependencias externas: funciona sin conexión.
+-->
+<style>
+  :root {
+    color-scheme: light;
+    --page: #f9f9f7;
+    --surface: #fcfcfb;
+    --ink: #0b0b0b;
+    --ink-2: #52514e;
+    --muted: #898781;
+    --grid: #e1e0d9;
+    --border: rgba(11, 11, 11, 0.10);
+    --wash: rgba(11, 11, 11, 0.05);
+    --control: #ffffff;
+    --control-hover: #efeee9;
+    --border-strong: rgba(11, 11, 11, 0.20);
+    --seleccion: rgba(42, 120, 214, 0.12);
+    --sombra: 0 1px 3px rgba(0, 0, 0, 0.06), 0 6px 20px rgba(0, 0, 0, 0.08);
+    --recursos: #2a78d6;
+    --informacion: #eb6834;
+    --ambas: #1baf7a;
+    --ninguna: #898781;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page: #0d0d0d;
+      --surface: #1a1a19;
+      --ink: #f0efec;
+      --ink-2: #c3c2b7;
+      --muted: #898781;
+      --grid: #2c2c2a;
+      --border: rgba(255, 255, 255, 0.10);
+      --wash: rgba(255, 255, 255, 0.06);
+      --control: #262625;
+      --control-hover: #31312f;
+      --border-strong: rgba(255, 255, 255, 0.18);
+      --seleccion: rgba(57, 135, 229, 0.24);
+      --sombra: 0 1px 3px rgba(0, 0, 0, 0.35), 0 6px 20px rgba(0, 0, 0, 0.45);
+      --recursos: #3987e5;
+      --informacion: #d95926;
+      --ambas: #199e70;
+      --ninguna: #898781;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --ink: #f0efec;
+    --ink-2: #c3c2b7;
+    --muted: #898781;
+    --grid: #2c2c2a;
+    --border: rgba(255, 255, 255, 0.10);
+    --wash: rgba(255, 255, 255, 0.06);
+    --control: #262625;
+    --control-hover: #31312f;
+    --border-strong: rgba(255, 255, 255, 0.18);
+    --seleccion: rgba(57, 135, 229, 0.24);
+    --sombra: 0 1px 3px rgba(0, 0, 0, 0.35), 0 6px 20px rgba(0, 0, 0, 0.45);
+    --recursos: #3987e5;
+    --informacion: #d95926;
+    --ambas: #199e70;
+    --ninguna: #898781;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--page);
+    color: var(--ink);
+    font: 13px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  #app {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+  }
+  header {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  header h1 { font-size: 15px; margin: 0; font-weight: 600; }
+  header .version { color: var(--ink-2); font-size: 12px; }
+  header .acciones { margin-left: auto; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  button, select, input[type="search"], input[type="text"] {
+    font: inherit;
+    color: var(--ink);
+    background-color: var(--control);
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    padding: 5px 10px;
+    min-height: 30px;
+  }
+  select { cursor: pointer; }
+  /* Las opciones de una lista se dibujan aparte de la página: llevan fondo y color propios para leerse en los dos temas. */
+  select option, select optgroup { background-color: var(--control); color: var(--ink); }
+  button { cursor: pointer; transition: background-color 0.12s, border-color 0.12s, opacity 0.12s; }
+  button:hover:not(:disabled), select:hover { background-color: var(--control-hover); }
+  button:active:not(:disabled) { transform: translateY(1px); }
+  button:disabled { opacity: 0.4; cursor: default; }
+  button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--recursos); outline-offset: 1px; }
+  input[type="checkbox"], input[type="radio"] { accent-color: var(--recursos); margin: 0; width: 14px; height: 14px; flex: none; cursor: pointer; }
+  input::placeholder { color: var(--muted); }
+  header .grupo { display: flex; gap: 6px; align-items: center; }
+  header .grupo + .grupo { padding-left: 8px; border-left: 1px solid var(--border); }
+  #contrastes { max-width: 260px; }
+  #filtros {
+    overflow-y: auto;
+    border-right: 1px solid var(--border);
+    background: var(--surface);
+    padding: 6px 16px 24px;
+  }
+  #filtros { scrollbar-width: thin; scrollbar-color: var(--grid) transparent; }
+  #filtros details { border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+  #filtros details:last-of-type { border-bottom: none; }
+  #filtros summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-2);
+    margin: 12px 0 6px;
+    font-weight: 600;
+    user-select: none;
+  }
+  #filtros summary::-webkit-details-marker { display: none; }
+  #filtros summary::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-right: 1.5px solid var(--muted);
+    border-bottom: 1.5px solid var(--muted);
+    transform: rotate(45deg);
+    margin: 0 4px 3px 0;
+    transition: transform 0.15s;
+  }
+  #filtros details:not([open]) > summary::after { transform: rotate(-45deg); margin-bottom: 0; }
+  #filtros summary:hover { color: var(--ink); }
+  #filtros label { display: flex; align-items: center; gap: 7px; padding: 3px 5px; margin: 0 -5px; border-radius: 5px; cursor: pointer; }
+  #filtros label:hover { background: var(--wash); }
+  #filtros label .cuenta { margin-left: auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+  #filtros select, #filtros input[type="search"] { width: 100%; }
+  .enlaces { display: flex; gap: 6px; margin: 0 0 6px; }
+  .enlaces[hidden] { display: none; }
+  .enlaces button { min-height: 0; padding: 1px 10px; font-size: 11.5px; border-radius: 999px; color: var(--ink-2); }
+  .pista { color: var(--muted); font-size: 11.5px; margin-top: 3px; }
+  .subtitulo { font-size: 12px; color: var(--ink-2); margin: 8px 0 2px; }
+  .ayuda { font-size: 12px; color: var(--muted); margin: 4px 0 0; }
+  .clave-linea { width: 26px; height: 10px; flex: none; }
+  main { position: relative; overflow: hidden; background: var(--surface); }
+  #lienzo { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+  #lienzo.arrastrando { cursor: grabbing; }
+  .flotante {
+    position: absolute;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--sombra);
+  }
+  #resumen { left: 12px; top: 12px; padding: 6px 10px; max-width: min(640px, calc(100% - 24px)); font-size: 12px; color: var(--ink-2); }
+  #resumen strong { color: var(--ink); }
+  #leyenda { left: 12px; bottom: 12px; padding: 8px 12px; font-size: 12px; max-width: calc(100% - 24px); }
+  #leyenda .fila { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; margin: 2px 0; }
+  #leyenda .item { display: inline-flex; align-items: center; gap: 6px; }
+  #leyenda .titulo { color: var(--ink-2); min-width: 64px; }
+  #zoom { right: 12px; bottom: 12px; display: flex; flex-direction: column; overflow: hidden; }
+  #zoom button { border: none; border-radius: 0; width: 34px; height: 32px; min-height: 0; padding: 0; font-size: 17px; display: flex; align-items: center; justify-content: center; background-color: var(--surface); }
+  #zoom button + button { border-top: 1px solid var(--border); }
+  #detalle { right: 12px; top: 12px; width: 340px; max-height: calc(100% - 70px); overflow-y: auto; padding: 12px 14px; display: none; }
+  #detalle h3 { margin: 0 26px 2px 0; font-size: 14px; }
+  #detalle .sub { color: var(--ink-2); font-size: 12px; margin-bottom: 8px; }
+  #detalle dl { display: grid; grid-template-columns: 112px 1fr; gap: 3px 10px; margin: 0 0 8px; font-size: 12px; }
+  #detalle dt { color: var(--ink-2); }
+  #detalle dd { margin: 0; }
+  #detalle h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-2); margin: 12px 0 4px; }
+  #detalle ul { list-style: none; padding: 0; margin: 0; }
+  #detalle li { padding: 5px 0; border-top: 1px solid var(--border); font-size: 12px; }
+  #detalle li .norma { color: var(--ink-2); }
+  #detalle .cerrar { position: absolute; right: 8px; top: 8px; border: none; font-size: 16px; padding: 2px 8px; }
+  #detalle .funcion { font-size: 12px; color: var(--ink-2); margin: 6px 0; }
+  #tooltip { pointer-events: none; padding: 6px 9px; font-size: 12px; display: none; max-width: 300px; z-index: 5; }
+  #tooltip strong { display: block; color: var(--ink); }
+  #tooltip span { color: var(--ink-2); display: block; }
+  #tabla { position: absolute; inset: 0; overflow: auto; background: var(--surface); padding: 14px 18px 40px; display: none; }
+  #tabla h2 { font-size: 13px; margin: 8px 0; }
+  #tabla p { color: var(--ink-2); margin: 0 0 8px; font-size: 12px; }
+  table { border-collapse: collapse; width: 100%; font-size: 12px; margin-bottom: 18px; }
+  tbody tr:hover td { background: var(--wash); }
+  th, td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+  th { color: var(--ink-2); font-weight: 600; position: sticky; top: -14px; background: var(--surface); }
+  td.num { font-variant-numeric: tabular-nums; text-align: right; }
+  #aviso { left: 50%; bottom: 18px; transform: translateX(-50%); padding: 8px 14px; font-size: 12.5px; display: none; z-index: 10; background: var(--ink); color: var(--page); border-color: transparent; white-space: nowrap; }
+  #campo-enlace { width: 100%; margin-top: 6px; font: inherit; font-size: 11px; display: none; }
+  @media (max-width: 860px) {
+    #app { grid-template-columns: 1fr; grid-template-rows: auto auto 75vh; height: auto; }
+    #filtros { border-right: none; border-bottom: 1px solid var(--border); max-height: none; }
+    #detalle { width: calc(100% - 24px); }
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div>
+      <h1 id="titulo"></h1>
+      <div class="version" id="version"></div>
+    </div>
+    <div class="acciones">
+      <div class="grupo">
+        <select id="contrastes" aria-label="Vistas sugeridas" title="Vistas preparadas para comparar"></select>
+      </div>
+      <div class="grupo">
+        <button id="btn-ajustar" type="button" title="Encuadrar todos los actores visibles">Ajustar vista</button>
+        <button id="btn-vista" type="button" title="Ver lo resaltado como tabla">Tabla</button>
+      </div>
+      <div class="grupo">
+        <button id="btn-png" type="button" title="Descargar la vista actual como imagen">Exportar PNG</button>
+        <button id="btn-enlace" type="button" title="Copiar un enlace que reproduce esta vista">Copiar enlace</button>
+      </div>
+      <div class="grupo">
+        <button id="btn-restablecer" type="button" title="Quitar los filtros y volver al encuadre inicial">Restablecer</button>
+        <button id="btn-tema" type="button" title="Cambiar de tema">Tema</button>
+      </div>
+    </div>
+  </header>
+
+  <aside id="filtros" aria-label="Filtros">
+    <details open><summary>Capas</summary>
+    <label><input type="checkbox" id="capa-recursos" checked>
+      <svg class="clave-linea" viewBox="0 0 26 10" aria-hidden="true"><line x1="1" y1="5" x2="25" y2="5" stroke="var(--recursos)" stroke-width="2"/></svg>
+      Recursos (línea continua)</label>
+    <label><input type="checkbox" id="capa-informacion" checked>
+      <svg class="clave-linea" viewBox="0 0 26 10" aria-hidden="true"><line x1="1" y1="5" x2="25" y2="5" stroke="var(--informacion)" stroke-width="2" stroke-dasharray="6 4"/></svg>
+      Información (línea punteada)</label>
+
+    </details>
+    <details open><summary>Resaltar actores por</summary>
+    <select id="resaltar-por" aria-label="Atributo para resaltar"></select>
+    <div class="enlaces" id="valores-enlaces" hidden>
+      <button type="button" id="valores-todos">Todos</button><button type="button" id="valores-ninguno">Ninguno</button>
+    </div>
+    <div id="valores"></div>
+
+    </details>
+    <details open><summary>Rol en lo visible</summary>
+    <div id="roles"></div>
+    <p class="ayuda">Se calcula con los vínculos que quedan después de los filtros de capa, tipo y observabilidad.</p>
+
+    </details>
+    <details open><summary>Vínculos resaltados</summary>
+    <label><input type="radio" name="vinculos" value="alguno" checked> Los de los actores resaltados</label>
+    <label><input type="radio" name="vinculos" value="ambos"> Solo entre actores resaltados</label>
+
+    </details>
+    <details open><summary>Tipo de flujo</summary>
+    <div class="enlaces">
+      <button type="button" id="tipos-todos">Todos</button><button type="button" id="tipos-ninguno">Ninguno</button>
+    </div>
+    <div id="tipos"></div>
+
+    </details>
+    <details open><summary>Observabilidad con datos públicos</summary>
+    <div id="observabilidad"></div>
+
+    </details>
+    <details open><summary>Buscar actor</summary>
+    <input type="search" id="buscar" list="lista-actores" placeholder="Nombre o sigla" aria-label="Buscar actor">
+    <datalist id="lista-actores"></datalist>
+    <p class="ayuda">Enter selecciona el primer resultado y muestra sus vecinos.</p>
+
+    </details>
+    <details open><summary>Presentación</summary>
+    <label><input type="checkbox" id="mostrar-inventario"> <span id="texto-inventario">Actores del inventario sin flujo documentado</span></label>
+    <label><input type="checkbox" id="ocultar"> Ocultar en vez de atenuar</label>
+    <div class="subtitulo">Etiquetas</div>
+    <select id="etiquetas" aria-label="Etiquetas">
+      <option value="red">Actores de la red</option>
+      <option value="todas">Todas</option>
+      <option value="ninguna">Ninguna</option>
+    </select>
+    <div class="subtitulo">Tamaño del nodo</div>
+    <select id="tamano" aria-label="Tamaño del nodo">
+      <option value="vinculos">Vínculos documentados</option>
+      <option value="inventario">Tamaño según el inventario</option>
+      <option value="uniforme">Uniforme</option>
+    </select>
+    <input type="text" id="campo-enlace" readonly aria-label="Enlace de la vista">
+    </details>
+  </aside>
+
+  <main id="principal">
+    <canvas id="lienzo" role="img" aria-label="Red de actores y vínculos. La vista de tabla contiene la misma información."></canvas>
+    <div id="resumen" class="flotante"></div>
+    <div id="leyenda" class="flotante" aria-label="Leyenda"></div>
+    <div id="zoom" class="flotante">
+      <button type="button" id="zoom-mas" aria-label="Acercar" title="Acercar (tecla +)">+</button>
+      <button type="button" id="zoom-menos" aria-label="Alejar" title="Alejar (tecla −)">&minus;</button>
+      <button type="button" id="zoom-ajustar" aria-label="Ajustar vista" title="Ajustar vista (tecla 0)"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+    </div>
+    <div id="detalle" class="flotante" aria-live="polite"></div>
+    <div id="tooltip" class="flotante" role="tooltip"></div>
+    <div id="aviso" class="flotante" role="status"></div>
+    <div id="tabla"></div>
+  </main>
+</div>
+
+<script>window.DATOS = {"meta": {"titulo": "Red normada de flujos de recursos e información", "version": "versión 2 · 15 de noviembre de 2026", "fuente": "Inventario de actores (nivel base) y vínculos que establecen las normas, cada uno con su norma de respaldo.", "y_inventario": 760, "etiquetas_inventario": [{"texto": "A · Núcleo funcional del SGSSS (69)", "x": 60, "y": 760}, {"texto": "B · Cadena de suministro y soporte (16)", "x": 60, "y": 912}, {"texto": "C · Representación de intereses (29)", "x": 60, "y": 992}, {"texto": "D · Conocimiento (6)", "x": 60, "y": 1108}, {"texto": "E · Sociedad civil y participación (11)", "x": 60, "y": 1188}, {"texto": "F · Contrapesos institucionales (10)", "x": 60, "y": 1268}]}, "catalogos": {"sectores": {"A": "Núcleo funcional del SGSSS", "B": "Cadena de suministro y soporte", "C": "Representación de intereses", "D": "Conocimiento", "E": "Sociedad civil y participación", "F": "Contrapesos institucionales"}, "subsectores": {"A1": "Rectoría, regulación y formulación de política", "A2": "Financiamiento y administración de recursos", "A3": "Aseguramiento", "A4": "Prestación de servicios", "A5": "Inspección, vigilancia y control del sistema", "A6": "Salud pública y vigilancia sanitaria", "A7": "Información, conocimiento y evaluación de tecnologías", "A8": "Gobierno territorial de la salud", "A9": "Regímenes especiales y de excepción", "A10": "Otros aseguramientos en salud (laboral, tránsito, voluntario)", "B1": "Producción de medicamentos, dispositivos y biológicos", "B2": "Distribución, dispensación y operación logística", "B3": "Servicios financieros y tecnológicos de soporte", "B4": "Dispositivos médicos, diagnóstico in vitro y equipamiento biomédico", "C1": "Gremios de aseguradores y prestadores", "C2": "Gremios de industria y comercio en salud", "C3": "Talento humano: colegios, sindicatos y sociedades científicas", "D1": "Universidades y facultades del área de la salud", "D2": "Centros de investigación, observatorios y think tanks", "D3": "Institucionalidad de ciencia y tecnología", "E1": "Organizaciones de pacientes", "E2": "Participación social, veeduría y control ciudadano", "E3": "ONG y fundaciones con misión en salud", "F1": "Poder legislativo", "F2": "Poder judicial y control constitucional", "F3": "Órganos de control del Estado"}, "niveles": {"1": "1 · funciones exclusivamente de salud", "2": "2 · trabaja en salud, no exclusivamente", "3": "3 · sin misión sanitaria, con influencia"}, "tipos": [{"tipo": "Cotizaciones", "capa": "recursos"}, {"tipo": "Reconocimiento de la UPC", "capa": "recursos"}, {"tipo": "Giro directo de la UPC", "capa": "recursos"}, {"tipo": "Giro directo de presupuestos máximos", "capa": "recursos"}, {"tipo": "Pago contractual y residual", "capa": "recursos"}, {"tipo": "Giro directo a proveedores", "capa": "recursos"}, {"tipo": "Giro directo a cajas prestadoras", "capa": "recursos"}, {"tipo": "Aportes de fuentes al sistema", "capa": "recursos"}, {"tipo": "Administración del FONSAET", "capa": "recursos"}, {"tipo": "Rescate de ESE", "capa": "recursos"}, {"tipo": "Rentas de juegos a los territorios", "capa": "recursos"}, {"tipo": "Ordenación del giro", "capa": "informacion"}, {"tipo": "Afiliación y novedades", "capa": "informacion"}, {"tipo": "Lista de incumplimiento", "capa": "informacion"}, {"tipo": "Trazabilidad y publicidad del giro", "capa": "informacion"}, {"tipo": "Reporte al sistema único", "capa": "informacion"}, {"tipo": "Información a los usuarios", "capa": "informacion"}, {"tipo": "Inspección, vigilancia y control", "capa": "informacion"}, {"tipo": "Reglas del giro", "capa": "informacion"}, {"tipo": "Evaluación del goce efectivo", "capa": "informacion"}, {"tipo": "Inscripción y habilitación", "capa": "informacion"}, {"tipo": "Consolidación del REPS", "capa": "informacion"}, {"tipo": "Acreditación", "capa": "informacion"}, {"tipo": "Planilla de aportes", "capa": "informacion"}, {"tipo": "Resultados del recaudo y la compensación", "capa": "informacion"}]}, "nodos": [{"id": "ASC-001", "nombre": "Ministerio de Salud y Protección Social", "sigla": "MinSalud", "grupo": "Estado", "sector": "A", "subsector": "A1", "naturaleza": "Pública", "nivel": "1", "en_colev": "Sí", "tamano": "Macro", "tamano_medida": "Apropiación vigente PGN: $76,5433 billones (Ministerio De Salud Y Proteccion Social - Gestion General)", "funcion": "Rectoría del sistema: formula la política, regula el plan de beneficios y la UPC, y define las reglas del flujo de recursos y de información.", "en_red": true, "x": 300.0, "y": 0.0, "participacion": "ambas", "grado_doc": 10, "rol_recursos": "solo emite", "rol_informacion": "emite y recibe"}, {"id": "ASC-002", "nombre": "Departamento Administrativo de la Presidencia de la República", "sigla": "DAPRE", "grupo": "Estado", "sector": "A", "subsector": "A1", "naturaleza": "Pública", "nivel": "2", "en_colev": "Sí", "tamano": "Grande", "tamano_medida": "Apropiación vigente PGN: $1,8176 billones (Presidencia De La Republica - Gestion General)", "funcion": "Coordina la agenda de gobierno y la dirección política de las reformas al sistema de salud.", "en_red": false, "x": 220, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-003", "nombre": "Ministerio de Hacienda y Crédito Público", "sigla": "MinHacienda", "grupo": "Estado", "sector": "A", "subsector": "A1", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Macro", "tamano_medida": "Apropiación vigente PGN: $27,2206 billones (Ministerio De Hacienda Y Crédito Público - Gestión General)", "funcion": "Fija el techo presupuestal del sector y las condiciones macrofiscales del financiamiento de la salud.", "en_red": true, "x": 60.0, "y": 200.0, "participacion": "recursos", "grado_doc": 1, "rol_recursos": "solo emite", "rol_informacion": "sin vínculos"}, {"id": "ASC-004", "nombre": "Departamento Nacional de Planeación", "sigla": "DNP", "grupo": "Estado", "sector": "A", "subsector": "A1", "naturaleza": "Pública", "nivel": "2", "en_colev": "Sí", "tamano": "Mediano", "tamano_medida": "Apropiación vigente PGN: $0,9916 billones (Departamento Nacional De Planeacion - Gestion General)", "funcion": "Formula el Plan Nacional de Desarrollo y define la distribución del Sistema General de Participaciones, del que depende la salud territorial.", "en_red": false, "x": 260, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-005", "nombre": "Ministerio del Trabajo", "sigla": "MinTrabajo", "grupo": "Estado", "sector": "A", "subsector": "A1", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Macro", "tamano_medida": "Apropiación vigente PGN: $50,2112 billones (Ministerio Del Trabajo - Gestion General)", "funcion": "Regula el sistema de riesgos laborales y la cotización a seguridad social, que alimenta el financiamiento de la salud.", "en_red": false, "x": 460, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-006", "nombre": "Ministerio de Educación Nacional", "sigla": "MinEducación", "grupo": "Estado", "sector": "A", "subsector": "A1", "naturaleza": "Pública", "nivel": "3", "en_colev": "No", "tamano": "Macro", "tamano_medida": "Apropiación vigente PGN: $74,8639 billones (Ministerio Educacion Nacional - Gestion General)", "funcion": "Regula la formación del talento humano en salud y responde por el régimen de excepción del magisterio.", "en_red": false, "x": 340, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-007", "nombre": "Administradora de los Recursos del Sistema General de Seguridad Social en Salud", "sigla": "ADRES", "grupo": "Estado", "sector": "A", "subsector": "A2", "naturaleza": "Pública", "nivel": "1", "en_colev": "No", "tamano": "Macro", "tamano_medida": "$52,16 billones reconocidos para el aseguramiento, ene–jun 2026 (de los cuales $39,79 billones girados directamente)", "funcion": "Administra los recursos del sistema, reconoce la UPC y ejecuta el giro directo a prestadores y proveedores.", "en_red": true, "x": 430.0, "y": 330.0, "participacion": "ambas", "grado_doc": 29, "rol_recursos": "emite y recibe", "rol_informacion": "emite y recibe"}, {"id": "ASC-008", "nombre": "Unidad de Gestión Pensional y Parafiscales", "sigla": "UGPP", "grupo": "Estado", "sector": "A", "subsector": "A2", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Fiscaliza el cumplimiento de los aportes parafiscales a la seguridad social: determina quién cotiza y cuánto entra al sistema.", "en_red": true, "x": 60.0, "y": 280.0, "participacion": "recursos", "grado_doc": 1, "rol_recursos": "solo emite", "rol_informacion": "sin vínculos"}, {"id": "ASC-009", "nombre": "Entidades Promotoras de Salud (vista agregada)", "sigla": "EPS", "grupo": "Sector privado", "sector": "A", "subsector": "A3", "naturaleza": "Mixta", "nivel": "1", "en_colev": "Sí", "tamano": "Macro", "tamano_medida": "50.100.427 afiliados activos en 28 entidades (BDUA, consulta 2026-08-23), de las cuales 2 son entidades adaptadas", "funcion": "Afilian a la población, administran el riesgo en salud, contratan la red prestadora y postulan ante la ADRES el giro directo.", "en_red": true, "x": 430.0, "y": 110.0, "participacion": "ambas", "grado_doc": 10, "rol_recursos": "emite y recibe", "rol_informacion": "emite y recibe"}, {"id": "ASC-010", "nombre": "Instituciones Prestadoras de Servicios de Salud (vista agregada)", "sigla": "IPS", "grupo": "Sector privado", "sector": "A", "subsector": "A4", "naturaleza": "Mixta", "nivel": "1", "en_colev": "Sí", "tamano": "Macro", "tamano_medida": "10.939 IPS habilitadas (REPS, 12-mar-2026): 9.923 privadas, 932 ESE públicas, 66 públicas no ESE y 18 mixtas", "funcion": "Prestan los servicios de salud y son el destinatario final del giro directo.", "en_red": true, "x": 800.0, "y": 250.0, "participacion": "ambas", "grado_doc": 11, "rol_recursos": "solo recibe", "rol_informacion": "emite y recibe"}, {"id": "ASC-011", "nombre": "Superintendencia Nacional de Salud", "sigla": "Supersalud", "grupo": "Estado", "sector": "A", "subsector": "A5", "naturaleza": "Pública", "nivel": "1", "en_colev": "Sí", "tamano": "Mediano", "tamano_medida": "Apropiación vigente PGN: $0,5627 billones (Superintendencia Nacional De Salud)", "funcion": "Inspecciona, vigila y controla el flujo de recursos del sistema; su medición de patrimonio adecuado activa la obligación de giro directo.", "en_red": true, "x": 640.0, "y": 0.0, "participacion": "informacion", "grado_doc": 3, "rol_recursos": "sin vínculos", "rol_informacion": "solo emite"}, {"id": "ASC-012", "nombre": "Superintendencia Financiera de Colombia", "sigla": "Superfinanciera", "grupo": "Estado", "sector": "A", "subsector": "A5", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Mediano", "tamano_medida": "Apropiación vigente PGN: $0,5045 billones (Superintendencia Financiera De Colombia)", "funcion": "Vigila a las aseguradoras que operan planes voluntarios, SOAT y riesgos laborales, y a las fiduciarias que administran recursos del sistema.", "en_red": false, "x": 860, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-013", "nombre": "Superintendencia del Subsidio Familiar", "sigla": "Supersubsidio", "grupo": "Estado", "sector": "A", "subsector": "A5", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Pequeño", "tamano_medida": "Apropiación vigente PGN: $0,086 billones (Ministerio Del Trabajo - Superintendencia De Subsidio Familiar)", "funcion": "Vigila a las cajas de compensación familiar, varias de las cuales operan EPS, IPS y son grandes receptoras de giro directo.", "en_red": false, "x": 60, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-014", "nombre": "Superintendencia de la Economía Solidaria", "sigla": "Supersolidaria", "grupo": "Estado", "sector": "A", "subsector": "A5", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Pequeño", "tamano_medida": "Apropiación vigente PGN: $0,0461 billones (Superintendencia De La Economía Solidaria)", "funcion": "Vigila a las cooperativas y mutuales que operan como aseguradoras o prestadoras dentro del sistema.", "en_red": false, "x": 980, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-015", "nombre": "Superintendencia de Industria y Comercio", "sigla": "SIC", "grupo": "Estado", "sector": "A", "subsector": "A5", "naturaleza": "Pública", "nivel": "3", "en_colev": "No", "tamano": "Mediano", "tamano_medida": "Apropiación vigente PGN: $0,3115 billones (Superintendencia De Industria Y Comercio)", "funcion": "Autoridad de competencia y de protección de datos personales: interviene en integraciones entre actores del sector y en el tratamiento de datos de salud.", "en_red": false, "x": 900, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-016", "nombre": "Instituto Nacional de Salud", "sigla": "INS", "grupo": "Estado", "sector": "A", "subsector": "A6", "naturaleza": "Pública", "nivel": "1", "en_colev": "Sí", "tamano": "Mediano", "tamano_medida": "Apropiación vigente PGN: $0,1213 billones (Instituto Nacional De Salud (Ins))", "funcion": "Vigilancia en salud pública, laboratorio nacional de referencia y producción de evidencia epidemiológica.", "en_red": false, "x": 340, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-017", "nombre": "Instituto Nacional de Vigilancia de Medicamentos y Alimentos", "sigla": "INVIMA", "grupo": "Estado", "sector": "A", "subsector": "A6", "naturaleza": "Pública", "nivel": "1", "en_colev": "Sí", "tamano": "Mediano", "tamano_medida": "Apropiación vigente PGN: $0,2776 billones (Instituto Nacional De Vigilancia De Medicamentos Y Alimentos - Invima)", "funcion": "Autoriza y vigila medicamentos, dispositivos médicos y alimentos: define qué tecnologías pueden circular por el sistema.", "en_red": false, "x": 380, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-018", "nombre": "Unidad Administrativa Especial Fondo Nacional de Estupefacientes", "sigla": "FNE", "grupo": "Estado", "sector": "A", "subsector": "A6", "naturaleza": "Pública", "nivel": "1", "en_colev": "No", "tamano": "Pequeño", "tamano_medida": "Apropiación vigente PGN: $0,0427 billones (Ministerio  De Salud Y Protección Social - Unidad Administrativa Especial Fondo Nacional De Estupefacientes)", "funcion": "Monopolio estatal de importación y distribución de medicamentos de control especial.", "en_red": false, "x": 580, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-019", "nombre": "Instituto Nacional de Medicina Legal y Ciencias Forenses", "sigla": "Medicina Legal", "grupo": "Estado", "sector": "A", "subsector": "A6", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Mediano", "tamano_medida": "Apropiación vigente PGN: $0,5484 billones (Instituto Nacional De Medicina Legal Y Ciencias Forenses)", "funcion": "Presta servicios forenses y produce estadísticas de lesiones y muertes que alimentan la vigilancia en salud pública.", "en_red": false, "x": 300, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-020", "nombre": "Instituto Nacional de Donación y Trasplante de Órganos y Tejidos", "sigla": "INDTOT", "grupo": "Estado", "sector": "A", "subsector": "A6", "naturaleza": "Pública", "nivel": "1", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Coordina la red nacional de donación y trasplante de órganos y tejidos.", "en_red": false, "x": 260, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-021", "nombre": "Instituto de Evaluación Tecnológica en Salud", "sigla": "IETS", "grupo": "Estado", "sector": "A", "subsector": "A7", "naturaleza": "Mixta", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Evalúa tecnologías en salud y produce las guías que sustentan las decisiones de cobertura.", "en_red": false, "x": 780, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-022", "nombre": "Departamento Administrativo Nacional de Estadística", "sigla": "DANE", "grupo": "Estado", "sector": "A", "subsector": "A7", "naturaleza": "Pública", "nivel": "2", "en_colev": "Sí", "tamano": "Mediano", "tamano_medida": "Apropiación vigente PGN: $0,3777 billones (Departamento Administrativo Nacional De Estadística (Dane) - Gestión General)", "funcion": "Produce las estadísticas vitales y demográficas que sirven de denominador a todo indicador del sistema.", "en_red": false, "x": 740, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-023", "nombre": "Contaduría General de la Nación", "sigla": "CGN", "grupo": "Estado", "sector": "A", "subsector": "A7", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Pequeño", "tamano_medida": "Apropiación vigente PGN: $0,0274 billones (Unidad Administrativa Especial Contaduría General De La Nación)", "funcion": "Fija el régimen contable de las entidades públicas del sector y consolida la información financiera con que se mide la cartera hospitalaria.", "en_red": false, "x": 660, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-024", "nombre": "Registraduría Nacional del Estado Civil", "sigla": "Registraduría", "grupo": "Estado", "sector": "A", "subsector": "A7", "naturaleza": "Pública", "nivel": "3", "en_colev": "No", "tamano": "Grande", "tamano_medida": "Apropiación vigente PGN: $5,5862 billones (Registraduria Nacional Del Estado Civil - Gestion General)", "funcion": "Administra la identificación de los ciudadanos, base de la afiliación y de la depuración de la BDUA.", "en_red": false, "x": 980, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-025", "nombre": "Unidad Administrativa Especial Migración Colombia", "sigla": "Migración Colombia", "grupo": "Estado", "sector": "A", "subsector": "A7", "naturaleza": "Pública", "nivel": "3", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Identifica y regulariza a la población migrante, condición previa para su afiliación al sistema.", "en_red": false, "x": 60, "y": 858, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-026", "nombre": "Ministerio de Tecnologías de la Información y las Comunicaciones", "sigla": "MinTIC", "grupo": "Estado", "sector": "A", "subsector": "A7", "naturaleza": "Pública", "nivel": "3", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Fija los estándares de interoperabilidad y gobierno digital que condicionan el intercambio de información entre los agentes del sistema.", "en_red": false, "x": 820, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-027", "nombre": "Entidades territoriales de salud departamentales (vista agregada)", "sigla": "DTS departamentales", "grupo": "Estado", "sector": "A", "subsector": "A8", "naturaleza": "Pública", "nivel": "1", "en_colev": "Sí", "tamano": "Macro", "tamano_medida": "32 departamentos con 42.361.409 afiliados activos (BDUA, consulta 2026-08-23; total nacional menos Bogotá D.C.)", "funcion": "Dirigen el sistema en su territorio: administran recursos del SGP, vigilan la red pública y habilitan prestadores.", "en_red": true, "x": 230.0, "y": 470.0, "participacion": "ambas", "grado_doc": 4, "rol_recursos": "emite y recibe", "rol_informacion": "emite y recibe"}, {"id": "ASC-028", "nombre": "Entidades territoriales de salud distritales y municipales (vista agregada)", "sigla": "DTS municipales", "grupo": "Estado", "sector": "A", "subsector": "A8", "naturaleza": "Pública", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Ejecutan las competencias de salud pública y aseguramiento en el municipio o distrito.", "en_red": true, "x": 230.0, "y": 560.0, "participacion": "ambas", "grado_doc": 4, "rol_recursos": "emite y recibe", "rol_informacion": "emite y recibe"}, {"id": "ASC-029", "nombre": "Subsistema de Salud de las Fuerzas Militares — Dirección General de Sanidad Militar", "sigla": "DGSM", "grupo": "Estado", "sector": "A", "subsector": "A9", "naturaleza": "Pública", "nivel": "1", "en_colev": "No", "tamano": "Grande", "tamano_medida": "Apropiación vigente PGN: $2,2752 billones (Ministerio De Defensa Nacional - Salud)", "funcion": "Asegura y presta servicios de salud a los miembros de las Fuerzas Militares y sus beneficiarios, fuera del SGSSS.", "en_red": false, "x": 540, "y": 858, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-030", "nombre": "Subsistema de Salud de la Policía Nacional — Dirección de Sanidad", "sigla": "DISAN PONAL", "grupo": "Estado", "sector": "A", "subsector": "A9", "naturaleza": "Pública", "nivel": "1", "en_colev": "No", "tamano": "Grande", "tamano_medida": "Apropiación vigente PGN: $2,2249 billones (Policía Nacional - Salud)", "funcion": "Asegura y presta servicios de salud a los miembros de la Policía Nacional y sus beneficiarios, fuera del SGSSS.", "en_red": false, "x": 500, "y": 858, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-031", "nombre": "Fondo de Pasivo Social de Ferrocarriles Nacionales de Colombia", "sigla": "FPS", "grupo": "Estado", "sector": "A", "subsector": "A9", "naturaleza": "Pública", "nivel": "1", "en_colev": "No", "tamano": "Mediano", "tamano_medida": "Apropiación vigente PGN: $0,3972 billones (Fondo Pasivo Social De Ferrocarriles Nacionales De Colombia - Salud)", "funcion": "Administra y presta los servicios de salud de los antiguos trabajadores de Ferrocarriles Nacionales y sus beneficiarios.", "en_red": false, "x": 380, "y": 858, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-032", "nombre": "Fiduciaria La Previsora S.A.", "sigla": "Fiduprevisora", "grupo": "Estado", "sector": "A", "subsector": "A9", "naturaleza": "Mixta", "nivel": "1", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Administra el Fondo Nacional de Prestaciones Sociales del Magisterio, régimen de excepción de salud de los docentes oficiales.", "en_red": false, "x": 300, "y": 858, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-033", "nombre": "Positiva Compañía de Seguros S.A.", "sigla": "Positiva", "grupo": "Estado", "sector": "A", "subsector": "A10", "naturaleza": "Mixta", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Administradora de riesgos laborales de propiedad estatal: asegura la atención en salud de origen laboral.", "en_red": false, "x": 860, "y": 858, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-034", "nombre": "Senado de la República — Comisión Séptima Constitucional Permanente", "sigla": "Senado", "grupo": "Estado", "sector": "F", "subsector": "F1", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Mediano", "tamano_medida": "Apropiación vigente PGN: $0,4968 billones (Senado De La Republica)", "funcion": "Tramita y aprueba las leyes de salud y seguridad social; la Comisión Séptima es la instancia sectorial.", "en_red": false, "x": 100, "y": 1294, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-035", "nombre": "Cámara de Representantes — Comisión Séptima Constitucional Permanente", "sigla": "Cámara", "grupo": "Estado", "sector": "F", "subsector": "F1", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Mediano", "tamano_medida": "Apropiación vigente PGN: $0,8571 billones (Camara De Representantes)", "funcion": "Tramita y aprueba las leyes de salud y seguridad social; ejerce control político sobre el sector.", "en_red": false, "x": 60, "y": 1294, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-036", "nombre": "Corte Constitucional", "sigla": "Corte Constitucional", "grupo": "Estado", "sector": "F", "subsector": "F2", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Define por vía jurisprudencial el contenido del derecho a la salud; la sentencia T-760 de 2008 reordenó el sistema.", "en_red": false, "x": 180, "y": 1294, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-037", "nombre": "Consejo de Estado", "sigla": "Consejo de Estado", "grupo": "Estado", "sector": "F", "subsector": "F2", "naturaleza": "Pública", "nivel": "3", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Máximo tribunal de lo contencioso administrativo: decide la legalidad de los decretos y resoluciones que rigen el sistema.", "en_red": false, "x": 140, "y": 1294, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-038", "nombre": "Rama Judicial — jurisdicción de tutela", "sigla": "Rama Judicial", "grupo": "Estado", "sector": "F", "subsector": "F2", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Macro", "tamano_medida": "Apropiación vigente PGN: $10,9268 billones (Rama Judicial - Gestión General)", "funcion": "Los jueces de tutela ordenan prestaciones concretas y son, en la práctica, un mecanismo paralelo de asignación de recursos del sistema.", "en_red": false, "x": 260, "y": 1294, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-039", "nombre": "Fiscalía General de la Nación", "sigla": "Fiscalía", "grupo": "Estado", "sector": "F", "subsector": "F2", "naturaleza": "Pública", "nivel": "3", "en_colev": "No", "tamano": "Grande", "tamano_medida": "Apropiación vigente PGN: $6,7864 billones (Fiscalia General De La Nacion - Gestion General)", "funcion": "Investiga los delitos contra los recursos del sistema de salud.", "en_red": false, "x": 220, "y": 1294, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-040", "nombre": "Contraloría General de la República", "sigla": "CGR", "grupo": "Estado", "sector": "F", "subsector": "F3", "naturaleza": "Pública", "nivel": "2", "en_colev": "Sí", "tamano": "Grande", "tamano_medida": "Apropiación vigente PGN: $1,4986 billones (Contraloria General De La Republica - Gestion General)", "funcion": "Ejerce el control fiscal sobre los recursos públicos del sistema de salud.", "en_red": false, "x": 340, "y": 1294, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-041", "nombre": "Procuraduría General de la Nación", "sigla": "PGN", "grupo": "Estado", "sector": "F", "subsector": "F3", "naturaleza": "Pública", "nivel": "2", "en_colev": "Sí", "tamano": "Grande", "tamano_medida": "Apropiación vigente PGN: $2,1016 billones (Procuraduria General De La Nacion - Gestion General)", "funcion": "Ejerce el control disciplinario sobre los funcionarios del sector y la defensa del derecho a la salud.", "en_red": false, "x": 420, "y": 1294, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-042", "nombre": "Defensoría del Pueblo", "sigla": "Defensoría", "grupo": "Estado", "sector": "F", "subsector": "F3", "naturaleza": "Pública", "nivel": "2", "en_colev": "Sí", "tamano": "Grande", "tamano_medida": "Apropiación vigente PGN: $1,2025 billones (Defensoria Del Pueblo)", "funcion": "Recibe y tramita las quejas de los usuarios; publica el informe anual de tutelas en salud.", "en_red": false, "x": 380, "y": 1294, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-043", "nombre": "Auditoría General de la República", "sigla": "AGR", "grupo": "Estado", "sector": "F", "subsector": "F3", "naturaleza": "Pública", "nivel": "3", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Vigila la gestión fiscal de las contralorías, incluidas las territoriales que controlan la red pública hospitalaria.", "en_red": false, "x": 300, "y": 1294, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-044", "nombre": "Empresa Industrial y Comercial del Estado Administradora del Monopolio Rentístico de los Juegos de Suerte y Azar", "sigla": "Coljuegos", "grupo": "Estado", "sector": "A", "subsector": "A2", "naturaleza": "Pública", "nivel": "1", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Explota y administra los juegos de suerte y azar novedosos y localizados, y gira a la ADRES, a nombre de las entidades territoriales, la parte de sus rentas que financia el aseguramiento.", "en_red": true, "x": 60.0, "y": 360.0, "participacion": "recursos", "grado_doc": 1, "rol_recursos": "solo emite", "rol_informacion": "sin vínculos"}, {"id": "ASC-045", "nombre": "Operadores de juegos de suerte y azar y loterías territoriales", "sigla": "Operadores de juegos", "grupo": "Sector privado", "sector": "A", "subsector": "A2", "naturaleza": "Privada", "nivel": "2", "en_colev": "No", "tamano": "Grande", "tamano_medida": "Ingresos operacionales agregados 2024: $2,62 billones en 20 sociedades de juegos de suerte y azar vigiladas por la Superintendencia Nacional de Salud (CIIU 9200)", "funcion": "Explotan loterías, chance y rifas: giran directo a la ADRES la parte de los derechos de explotación que financia el régimen subsidiado y pagan el resto al departamento, distrito o municipio titular.", "en_red": true, "x": 60.0, "y": 650.0, "participacion": "recursos", "grado_doc": 3, "rol_recursos": "solo emite", "rol_informacion": "sin vínculos"}, {"id": "ASC-047", "nombre": "Cajas de Compensación Familiar", "sigla": "CCF", "grupo": "Sector privado", "sector": "A", "subsector": "A3", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "No", "tamano": "Macro", "tamano_medida": "20.876.583 personas cubiertas por 42 cajas (agosto de 2025)", "funcion": "Administran el subsidio familiar y operan EPS, IPS y programas de salud; varias están entre los mayores receptores de giro directo.", "en_red": true, "x": 610.0, "y": 560.0, "participacion": "recursos", "grado_doc": 2, "rol_recursos": "emite y recibe", "rol_informacion": "sin vínculos"}, {"id": "ASC-048", "nombre": "Profesionales independientes de salud", "sigla": "Profesionales independientes", "grupo": "Sector privado", "sector": "A", "subsector": "A4", "naturaleza": "Privada", "nivel": "1", "en_colev": "No", "tamano": "Macro", "tamano_medida": "48.183 profesionales independientes habilitados (REPS, 12-mar-2026)", "funcion": "Prestan servicios de salud a título personal bajo habilitación propia en el REPS.", "en_red": false, "x": 780, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-049", "nombre": "Entidades con objeto social diferente a la prestación de servicios de salud", "sigla": "Objeto social diferente", "grupo": "Sector privado", "sector": "A", "subsector": "A4", "naturaleza": "Privada", "nivel": "1", "en_colev": "No", "tamano": "Grande", "tamano_medida": "1.452 entidades habilitadas (REPS, 12-mar-2026)", "funcion": "Organizaciones cuya actividad principal no es la salud pero que habilitan servicios de salud para su población (empresas, colegios, cárceles).", "en_red": false, "x": 740, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-050", "nombre": "Servicios de transporte especial de pacientes", "sigla": "Transporte especial", "grupo": "Sector privado", "sector": "A", "subsector": "A4", "naturaleza": "Privada", "nivel": "1", "en_colev": "No", "tamano": "Mediano", "tamano_medida": "499 prestadores habilitados (REPS, 12-mar-2026)", "funcion": "Trasladan pacientes entre puntos de la red; son eslabón crítico de la referencia y contrarreferencia.", "en_red": false, "x": 820, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-051", "nombre": "Red Nacional de Laboratorios", "sigla": "RNL", "grupo": "Estado", "sector": "A", "subsector": "A6", "naturaleza": "Pública", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Articula los laboratorios de salud pública del país para el diagnóstico y la vigilancia epidemiológica.", "en_red": false, "x": 460, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-052", "nombre": "Laboratorios Departamentales de Salud Pública", "sigla": "LDSP", "grupo": "Estado", "sector": "A", "subsector": "A6", "naturaleza": "Pública", "nivel": "1", "en_colev": "No", "tamano": "Pequeño", "tamano_medida": "33 laboratorios: uno por cada departamento y uno del Distrito Capital", "funcion": "Ejecutan la vigilancia por laboratorio en el territorio y reportan al Instituto Nacional de Salud.", "en_red": false, "x": 420, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-053", "nombre": "Cuenta de Alto Costo", "sigla": "CAC", "grupo": "Sector privado", "sector": "A", "subsector": "A7", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Organismo técnico no gubernamental que administra el registro nacional de pacientes de alto costo y calcula el ajuste de riesgo entre aseguradores.", "en_red": false, "x": 700, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-054", "nombre": "Observatorio Nacional de Salud", "sigla": "ONS", "grupo": "Estado", "sector": "A", "subsector": "A7", "naturaleza": "Pública", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Dependencia del Instituto Nacional de Salud que produce los informes técnicos sobre el estado de salud de la población.", "en_red": false, "x": 860, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-055", "nombre": "Federación Nacional de Departamentos", "sigla": "FND", "grupo": "Estado", "sector": "A", "subsector": "A8", "naturaleza": "Mixta", "nivel": "2", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Representa a los departamentos ante el nivel nacional; interviene en la negociación de las rentas cedidas destinadas a salud.", "en_red": false, "x": 180, "y": 858, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-056", "nombre": "Federación Colombiana de Municipios", "sigla": "FCM", "grupo": "Estado", "sector": "A", "subsector": "A8", "naturaleza": "Mixta", "nivel": "3", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Representa a los municipios ante el nivel nacional en las competencias de salud que la Ley 715 les asigna.", "en_red": false, "x": 140, "y": 858, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-057", "nombre": "Corporación Colombiana de Secretarios Municipales y Distritales de Salud", "sigla": "COSESAM", "grupo": "Sociedad civil", "sector": "A", "subsector": "A8", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Agremia a los secretarios de salud municipales y distritales y canaliza su posición ante el nivel nacional.", "en_red": false, "x": 100, "y": 858, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-058", "nombre": "Empresa Colombiana de Petróleos S.A. — Ecopetrol", "sigla": "Ecopetrol", "grupo": "Sector privado", "sector": "A", "subsector": "A9", "naturaleza": "Mixta", "nivel": "1", "en_colev": "No", "tamano": "Macro", "tamano_medida": "Ingresos operacionales $113,92 billones (2024)", "funcion": "Administra directamente el servicio de salud de sus trabajadores y pensionados, excluido del SGSSS.", "en_red": false, "x": 220, "y": 858, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-059", "nombre": "Universidades públicas con régimen de excepción en salud", "sigla": "Unisalud", "grupo": "Academia", "sector": "A", "subsector": "A9", "naturaleza": "Pública", "nivel": "1", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Unidades de salud de universidades estatales que aseguran y prestan servicios a su comunidad fuera del SGSSS.", "en_red": false, "x": 620, "y": 858, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-060", "nombre": "Administradoras de Riesgos Laborales", "sigla": "ARL", "grupo": "Sector privado", "sector": "A", "subsector": "A10", "naturaleza": "Privada", "nivel": "1", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Aseguran y pagan la atención en salud derivada de accidentes de trabajo y enfermedad laboral.", "en_red": false, "x": 660, "y": 858, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-061", "nombre": "Compañías de medicina prepagada y planes voluntarios de salud", "sigla": "Prepagadas", "grupo": "Sector privado", "sector": "A", "subsector": "A10", "naturaleza": "Privada", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Ofrecen planes voluntarios complementarios al plan de beneficios obligatorio.", "en_red": false, "x": 740, "y": 858, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-062", "nombre": "Aseguradoras del SOAT", "sigla": "SOAT", "grupo": "Sector privado", "sector": "A", "subsector": "A10", "naturaleza": "Privada", "nivel": "1", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Cubren la atención de víctimas de accidentes de tránsito y recaudan, junto con la prima, una contribución del 50 % que transfieren a la ADRES.", "en_red": true, "x": 60.0, "y": 440.0, "participacion": "recursos", "grado_doc": 1, "rol_recursos": "solo emite", "rol_informacion": "sin vínculos"}, {"id": "ASC-063", "nombre": "Tecnoquímicas S.A.", "sigla": "Tecnoquímicas", "grupo": "Sector privado", "sector": "B", "subsector": "B1", "naturaleza": "Privada", "nivel": "2", "en_colev": "No", "tamano": "Grande", "tamano_medida": "Ingresos operacionales 2024: $3,13 billones", "funcion": "Fabricante nacional de medicamentos y productos de consumo con presencia en el canal institucional.", "en_red": false, "x": 60, "y": 938, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-065", "nombre": "Industria farmacéutica y de dispositivos médicos (fabricación nacional)", "sigla": "Industria farma", "grupo": "Sector privado", "sector": "B", "subsector": "B1", "naturaleza": "Privada", "nivel": "1", "en_colev": "No", "tamano": "Macro", "tamano_medida": "Ingresos operacionales agregados 2024: $12,61 billones en 93 sociedades vigiladas (CIIU 2100, 3250)", "funcion": "Fabrican en el país los medicamentos, dispositivos y biológicos que consume el sistema.", "en_red": true, "x": 800.0, "y": 630.0, "participacion": "recursos", "grado_doc": 1, "rol_recursos": "solo recibe", "rol_informacion": "sin vínculos"}, {"id": "ASC-067", "nombre": "Audifarma S.A.", "sigla": "Audifarma", "grupo": "Sector privado", "sector": "B", "subsector": "B2", "naturaleza": "Privada", "nivel": "1", "en_colev": "No", "tamano": "Grande", "tamano_medida": "Ingresos operacionales 2023: $4,06 billones", "funcion": "Gestor farmacéutico y dispensador de medicamentos para EPS; gran receptor de giro directo.", "en_red": true, "x": 800.0, "y": 390.0, "participacion": "recursos", "grado_doc": 1, "rol_recursos": "solo recibe", "rol_informacion": "sin vínculos"}, {"id": "ASC-068", "nombre": "Disfarma G.C. S.A.S.", "sigla": "Disfarma", "grupo": "Sector privado", "sector": "B", "subsector": "B2", "naturaleza": "Privada", "nivel": "1", "en_colev": "No", "tamano": "Grande", "tamano_medida": "Ingresos operacionales 2023: $1,26 billones", "funcion": "Distribuidor y dispensador de medicamentos para el canal institucional; gran receptor de giro directo.", "en_red": true, "x": 800.0, "y": 450.0, "participacion": "recursos", "grado_doc": 1, "rol_recursos": "solo recibe", "rol_informacion": "sin vínculos"}, {"id": "ASC-069", "nombre": "Helpharma S.A.S.", "sigla": "Helpharma", "grupo": "Sector privado", "sector": "B", "subsector": "B2", "naturaleza": "Privada", "nivel": "1", "en_colev": "No", "tamano": "Mediano", "tamano_medida": "Ingresos operacionales 2023: $0,67 billones", "funcion": "Operador farmacéutico especializado en medicamentos de alto costo; receptor de giro directo.", "en_red": true, "x": 800.0, "y": 510.0, "participacion": "recursos", "grado_doc": 1, "rol_recursos": "solo recibe", "rol_informacion": "sin vínculos"}, {"id": "ASC-070", "nombre": "Importadores y distribuidores mayoristas de medicamentos y tecnologías", "sigla": "Importadores y distribuidores", "grupo": "Sector privado", "sector": "B", "subsector": "B2", "naturaleza": "Privada", "nivel": "1", "en_colev": "No", "tamano": "Macro", "tamano_medida": "Ingresos operacionales agregados 2024: $41,58 billones en 267 sociedades vigiladas (CIIU 4645)", "funcion": "Ponen el producto en el sistema —importándolo o distribuyéndolo al por mayor— y son titulares de buena parte de los registros sanitarios; concentran una parte alta del giro directo.", "en_red": true, "x": 800.0, "y": 570.0, "participacion": "recursos", "grado_doc": 1, "rol_recursos": "solo recibe", "rol_informacion": "sin vínculos"}, {"id": "ASC-071", "nombre": "Droguerías, gestores farmacéuticos y canal de dispensación", "sigla": "Droguerías", "grupo": "Sector privado", "sector": "B", "subsector": "B2", "naturaleza": "Privada", "nivel": "2", "en_colev": "No", "tamano": "Macro", "tamano_medida": "Ingresos operacionales agregados 2024: $13,37 billones en 80 sociedades vigiladas (CIIU 4773)", "funcion": "Entregan el medicamento al paciente; en el esquema de giro directo varios son receptores directos de los recursos de la ADRES.", "en_red": true, "x": 800.0, "y": 330.0, "participacion": "recursos", "grado_doc": 1, "rol_recursos": "solo recibe", "rol_informacion": "sin vínculos"}, {"id": "ASC-072", "nombre": "Compañía de Medicina Prepagada Colsanitas S.A.", "sigla": "Colsanitas", "grupo": "Sector privado", "sector": "A", "subsector": "A10", "naturaleza": "Privada", "nivel": "1", "en_colev": "No", "tamano": "Grande", "tamano_medida": "Ingresos operacionales $2,60 billones (2023)", "funcion": "Opera medicina prepagada y una red propia de prestación; receptora de giro directo a través de sus clínicas.", "en_red": false, "x": 700, "y": 858, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-073", "nombre": "Sociedades fiduciarias administradoras de recursos del sistema", "sigla": "Fiduciarias", "grupo": "Sector privado", "sector": "B", "subsector": "B3", "naturaleza": "Privada", "nivel": "2", "en_colev": "No", "tamano": "Pequeño", "tamano_medida": "26 sociedades fiduciarias vigiladas (agosto de 2026)", "funcion": "Administran patrimonios autónomos con recursos del sistema, incluidos los de regímenes de excepción.", "en_red": false, "x": 220, "y": 938, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-075", "nombre": "Proveedores de sistemas de información en salud", "sigla": "Proveedores TI", "grupo": "Sector privado", "sector": "B", "subsector": "B3", "naturaleza": "Privada", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Suministran los sistemas de historia clínica, facturación y RIPS con que los agentes producen y transmiten la información del sistema.", "en_red": false, "x": 180, "y": 938, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-076", "nombre": "Asociación Colombiana de Empresas de Medicina Integral", "sigla": "ACEMI", "grupo": "Sector privado", "sector": "C", "subsector": "C1", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Agremia a las EPS del régimen contributivo y negocia en su nombre ante el Gobierno y el Congreso.", "en_red": false, "x": 100, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-077", "nombre": "Asociación de Empresas Gestoras del Aseguramiento en Salud", "sigla": "GESTARSALUD", "grupo": "Sector privado", "sector": "C", "subsector": "C1", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Agremia a las EPS del régimen subsidiado.", "en_red": false, "x": 220, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-078", "nombre": "Asociación Colombiana de Hospitales y Clínicas", "sigla": "ACHC", "grupo": "Sector privado", "sector": "C", "subsector": "C1", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Agremia a hospitales y clínicas privadas; publica el estudio de cartera hospitalaria, la medición más citada del atraso en los pagos.", "en_red": false, "x": 140, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-079", "nombre": "Asociación Colombiana de Empresas Sociales del Estado y Hospitales Públicos", "sigla": "ACESI", "grupo": "Sociedad civil", "sector": "C", "subsector": "C1", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Agremia a las ESE y hospitales públicos ante el Gobierno nacional.", "en_red": false, "x": 60, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-080", "nombre": "Federación de Aseguradores Colombianos", "sigla": "FASECOLDA", "grupo": "Sector privado", "sector": "C", "subsector": "C1", "naturaleza": "Sin ánimo de lucro", "nivel": "2", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Agremia a las compañías de seguros, incluidas las que operan ARL y SOAT.", "en_red": false, "x": 260, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-081", "nombre": "Asociación Nacional de Cajas de Compensación Familiar", "sigla": "ASOCAJAS", "grupo": "Sector privado", "sector": "C", "subsector": "C1", "naturaleza": "Sin ánimo de lucro", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Agremia a las cajas de compensación familiar.", "en_red": false, "x": 180, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-082", "nombre": "Asociación de Laboratorios Farmacéuticos de Investigación y Desarrollo", "sigla": "AFIDRO", "grupo": "Sector privado", "sector": "C", "subsector": "C2", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Agremia a las farmacéuticas multinacionales de investigación; interlocutor en la política de precios de medicamentos.", "en_red": false, "x": 380, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-083", "nombre": "Asociación de Industrias Farmacéuticas en Colombia", "sigla": "ASINFAR", "grupo": "Sector privado", "sector": "C", "subsector": "C2", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Agremia a la industria farmacéutica de capital nacional y de genéricos.", "en_red": false, "x": 340, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-084", "nombre": "Asociación Nacional de Empresarios de Colombia — Cámara Sectorial de Salud", "sigla": "ANDI Salud", "grupo": "Sector privado", "sector": "C", "subsector": "C2", "naturaleza": "Sin ánimo de lucro", "nivel": "2", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Representa a las empresas del sector salud dentro del principal gremio empresarial del país.", "en_red": false, "x": 300, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-085", "nombre": "Federación Médica Colombiana", "sigla": "FMC", "grupo": "Sociedad civil", "sector": "C", "subsector": "C3", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Representa a los médicos del país y vigila las condiciones del ejercicio profesional.", "en_red": false, "x": 980, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-086", "nombre": "Colegio Médico Colombiano", "sigla": "CMC", "grupo": "Sociedad civil", "sector": "C", "subsector": "C3", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Colegio profesional con funciones públicas delegadas sobre el registro y la ética del ejercicio médico.", "en_red": false, "x": 900, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-087", "nombre": "Asociación Nacional de Enfermeras de Colombia", "sigla": "ANEC", "grupo": "Sociedad civil", "sector": "C", "subsector": "C3", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Representa al personal de enfermería, el grupo profesional más numeroso del sistema.", "en_red": false, "x": 660, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-088", "nombre": "Asociación Nacional de Internos y Residentes", "sigla": "ANIR", "grupo": "Sociedad civil", "sector": "C", "subsector": "C3", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Representa a médicos internos y residentes; actor visible en los conflictos sobre condiciones de formación y trabajo.", "en_red": false, "x": 700, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-089", "nombre": "Academia Nacional de Medicina", "sigla": "ANM", "grupo": "Sociedad civil", "sector": "C", "subsector": "C3", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Cuerpo consultivo del Gobierno en materia de salud y medicina.", "en_red": false, "x": 420, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-090", "nombre": "Asociación Colombiana de Infectología", "sigla": "ACIN", "grupo": "Sociedad civil", "sector": "C", "subsector": "C3", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Sociedad científica de infectología; produce guías y recomendaciones clínicas.", "en_red": false, "x": 460, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-091", "nombre": "Asociación Colombiana de Medicina Crítica y Cuidado Intensivo", "sigla": "AMCI", "grupo": "Sociedad civil", "sector": "C", "subsector": "C3", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Sociedad científica de cuidado intensivo; interlocutora técnica en la gestión de capacidad hospitalaria.", "en_red": false, "x": 500, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-092", "nombre": "Asociación Colombiana de Sociedades Científicas", "sigla": "ACSC", "grupo": "Sociedad civil", "sector": "C", "subsector": "C3", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Articula a las sociedades científicas médicas del país ante el Gobierno.", "en_red": false, "x": 580, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-093", "nombre": "Sindicatos del sector salud", "sigla": "Sindicatos", "grupo": "Sociedad civil", "sector": "C", "subsector": "C3", "naturaleza": "Sin ánimo de lucro", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Representan a los trabajadores de la red pública y privada; actores del conflicto sobre la reforma y las condiciones laborales.", "en_red": false, "x": 100, "y": 1054, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-098", "nombre": "Universidades con programas del área de la salud", "sigla": "Universidades", "grupo": "Academia", "sector": "D", "subsector": "D1", "naturaleza": "Mixta", "nivel": "3", "en_colev": "No", "tamano": "Macro", "tamano_medida": "105 instituciones de educación superior con programas del área de la salud y 183.863 estudiantes matriculados en ellos (SNIES, corte 2021)", "funcion": "Forman el talento humano en salud y son el origen de la oferta de profesionales del sistema.", "en_red": false, "x": 140, "y": 1134, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-099", "nombre": "Asociación Colombiana de Facultades de Medicina", "sigla": "ASCOFAME", "grupo": "Academia", "sector": "D", "subsector": "D1", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Agremia a las facultades de medicina y define estándares de calidad de la formación médica.", "en_red": false, "x": 100, "y": 1134, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-100", "nombre": "Asociación Colombiana de Facultades de Enfermería", "sigla": "ACOFAEN", "grupo": "Academia", "sector": "D", "subsector": "D1", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Agremia a las facultades de enfermería y define estándares de la formación en enfermería.", "en_red": false, "x": 60, "y": 1134, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-101", "nombre": "Así Vamos en Salud", "sigla": "Así Vamos en Salud", "grupo": "Sociedad civil", "sector": "D", "subsector": "D2", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Observatorio independiente que hace seguimiento a indicadores del sistema de salud colombiano.", "en_red": false, "x": 180, "y": 1134, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-102", "nombre": "Fundación para la Educación Superior y el Desarrollo", "sigla": "Fedesarrollo", "grupo": "Academia", "sector": "D", "subsector": "D2", "naturaleza": "Sin ánimo de lucro", "nivel": "3", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Centro de investigación económica que produce estudios sobre la sostenibilidad financiera del sistema de salud.", "en_red": false, "x": 220, "y": 1134, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-103", "nombre": "Ministerio de Ciencia, Tecnología e Innovación", "sigla": "MinCiencias", "grupo": "Estado", "sector": "D", "subsector": "D3", "naturaleza": "Pública", "nivel": "3", "en_colev": "No", "tamano": "Mediano", "tamano_medida": "Apropiación vigente PGN: $0,3799 billones (Ministerio De Ciencia, Tecnologia E Innovacion - Gestion General)", "funcion": "Financia y orienta la investigación en salud del país.", "en_red": false, "x": 260, "y": 1134, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-104", "nombre": "Pacientes Colombia", "sigla": "Pacientes Colombia", "grupo": "Sociedad civil", "sector": "E", "subsector": "E1", "naturaleza": "Sin ánimo de lucro", "nivel": "2", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Red nacional de organizaciones de pacientes; principal voz organizada de los usuarios ante el Gobierno.", "en_red": false, "x": 220, "y": 1214, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-105", "nombre": "Liga Colombiana Contra el Cáncer", "sigla": "LCCC", "grupo": "Sociedad civil", "sector": "E", "subsector": "E1", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "No", "tamano": "Mediano", "tamano_medida": "Ingresos operacionales $0,20 billones (2024)", "funcion": "Organización de lucha contra el cáncer que además presta servicios y aboga por los pacientes oncológicos.", "en_red": false, "x": 180, "y": 1214, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-106", "nombre": "Asociaciones de usuarios de EPS e IPS", "sigla": "Asociaciones de usuarios", "grupo": "Sociedad civil", "sector": "E", "subsector": "E2", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Instancia de participación obligatoria en cada aseguradora y prestador; canal formal de la voz del usuario.", "en_red": false, "x": 260, "y": 1214, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-107", "nombre": "Comités de Participación Comunitaria en Salud", "sigla": "COPACOS", "grupo": "Sociedad civil", "sector": "E", "subsector": "E2", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Instancia municipal de participación comunitaria en la planeación y vigilancia de la salud local.", "en_red": false, "x": 300, "y": 1214, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-108", "nombre": "Veedurías ciudadanas en salud", "sigla": "Veedurías", "grupo": "Sociedad civil", "sector": "E", "subsector": "E2", "naturaleza": "Sin ánimo de lucro", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Ejercen control social sobre la gestión de recursos y la prestación de servicios de salud.", "en_red": false, "x": 340, "y": 1214, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-109", "nombre": "Observatorios sectoriales en salud", "sigla": "Observatorios", "grupo": "Estado", "sector": "A", "subsector": "A7", "naturaleza": "Pública", "nivel": "1", "en_colev": "Sí", "tamano": "Pequeño", "tamano_medida": "6 observatorios sectoriales identificados en la base COLEV 2022", "funcion": "Producen y publican los indicadores temáticos del sistema (cáncer, salud mental, migración, calidad, talento humano, salud urbana).", "en_red": false, "x": 900, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-110", "nombre": "Asociación Colombiana de Salud Pública", "sigla": "ACSP", "grupo": "Sociedad civil", "sector": "C", "subsector": "C3", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Agremia a los profesionales de salud pública y participa en el debate sobre la política sanitaria.", "en_red": false, "x": 540, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-111", "nombre": "Sociedad Colombiana de Anestesiología y Reanimación", "sigla": "SCARE", "grupo": "Sociedad civil", "sector": "C", "subsector": "C3", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Sociedad científica de anestesiología; opera además un fondo de responsabilidad civil médica del gremio.", "en_red": false, "x": 140, "y": 1054, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-112", "nombre": "Fundaciones y filantropía privada con inversión en salud", "sigla": "Filantropía", "grupo": "Sociedad civil", "sector": "E", "subsector": "E3", "naturaleza": "Sin ánimo de lucro", "nivel": "3", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Financian infraestructura, investigación y programas de salud por fuera del flujo ordinario de recursos del sistema.", "en_red": false, "x": 460, "y": 1214, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-113", "nombre": "Cámaras de Comercio", "sigla": "Cámaras de Comercio", "grupo": "Sector privado", "sector": "B", "subsector": "B3", "naturaleza": "Sin ánimo de lucro", "nivel": "3", "en_colev": "Sí", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Administran el registro mercantil y el RUES, donde consta la existencia legal y el identificador de los actores privados del sistema.", "en_red": false, "x": 140, "y": 938, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-155", "nombre": "Comisión Nacional de Precios de Medicamentos y Dispositivos Médicos", "sigla": "CNPMDM", "grupo": "Estado", "sector": "A", "subsector": "A1", "naturaleza": "Pública", "nivel": "1", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Fija por regulación el precio máximo de venta de medicamentos y dispositivos médicos; es el actor que determina cuánto del gasto en salud se va en tecnologías.", "en_red": false, "x": 60, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-156", "nombre": "Consejo Nacional de Seguridad Social en Salud", "sigla": "CNSSS", "grupo": "Estado", "sector": "A", "subsector": "A1", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Órgano asesor y consultor del Ministerio de Salud donde se sientan a la vez el Estado, las EPS, las IPS, los trabajadores y los usuarios.", "en_red": false, "x": 100, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-157", "nombre": "Consejo Nacional de Talento Humano en Salud", "sigla": "CNTHS", "grupo": "Estado", "sector": "A", "subsector": "A1", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Asesora la política de formación y ejercicio de las profesiones de la salud y recomienda sobre la pertinencia de los programas académicos.", "en_red": false, "x": 140, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-158", "nombre": "Ministerio de Comercio, Industria y Turismo", "sigla": "MinCIT", "grupo": "Estado", "sector": "A", "subsector": "A1", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Grande", "tamano_medida": "Apropiación vigente PGN: $1,1118 billones (MINCOMERCIO INDUSTRIA TURISMO - GESTION GENERAL)", "funcion": "Cogobierna la regulación de precios de medicamentos y dispositivos, y regula la importación de tecnologías en salud.", "en_red": false, "x": 300, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-159", "nombre": "Ministerio del Interior", "sigla": "MinInterior", "grupo": "Estado", "sector": "A", "subsector": "A1", "naturaleza": "Pública", "nivel": "3", "en_colev": "No", "tamano": "Grande", "tamano_medida": "Apropiación vigente PGN: $1,3516 billones (MINISTERIO DEL INTERIOR - GESTION GENERAL)", "funcion": "Coordina la relación con los entes territoriales y con los pueblos indígenas, de quienes dependen el régimen especial indígena y la consulta previa en salud.", "en_red": false, "x": 420, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-160", "nombre": "Ministerio de Justicia y del Derecho", "sigla": "MinJusticia", "grupo": "Estado", "sector": "A", "subsector": "A1", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Mediano", "tamano_medida": "Apropiación vigente PGN: $0,2314 billones (MINISTERIO DE JUSTICIA Y DEL DERECHO - GESTION GENERAL)", "funcion": "Gobierna la política de drogas y el sistema penitenciario, de los que dependen el Fondo Nacional de Estupefacientes y la salud de la población privada de la libertad.", "en_red": false, "x": 380, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-161", "nombre": "Departamento Administrativo de la Función Pública", "sigla": "Función Pública", "grupo": "Estado", "sector": "A", "subsector": "A1", "naturaleza": "Pública", "nivel": "3", "en_colev": "No", "tamano": "Pequeño", "tamano_medida": "Apropiación vigente PGN: $0,056 billones (DEPARTAMENTO DE LA FUNCIÓN PÚBLICA - GESTIÓN GENERAL)", "funcion": "Define la planta, el manual de funciones y el régimen de empleo público de las entidades del sector salud, incluidas las Empresas Sociales del Estado.", "en_red": false, "x": 180, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-162", "nombre": "Dirección de Impuestos y Aduanas Nacionales", "sigla": "DIAN", "grupo": "Estado", "sector": "A", "subsector": "A2", "naturaleza": "Pública", "nivel": "1", "en_colev": "No", "tamano": "Grande", "tamano_medida": "Apropiación vigente PGN: $3,78 billones (UNIDAD ADMINISTRATIVA ESPECIAL DIRECCIÓN DE IMPUESTOS Y ADUANAS NACIONALES)", "funcion": "Recauda los impuestos con destinación específica a salud: IVA de cerveza y juegos de suerte y azar, impuesto al tabaco y los impuestos saludables.", "en_red": false, "x": 500, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-163", "nombre": "Fondo Financiero Distrital de Salud", "sigla": "FFDS", "grupo": "Estado", "sector": "A", "subsector": "A2", "naturaleza": "Pública", "nivel": "1", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Administra y ejecuta los recursos de salud del Distrito Capital; es la persona jurídica con que contrata la Secretaría Distrital de Salud.", "en_red": false, "x": 620, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-164", "nombre": "Fondo de Salvamento y Garantías para el Sector Salud", "sigla": "FONSAET", "grupo": "Estado", "sector": "A", "subsector": "A2", "naturaleza": "Pública", "nivel": "1", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Asegura el pago de las obligaciones de las Empresas Sociales del Estado intervenidas por la Superintendencia Nacional de Salud o liquidadas: es el mecanismo de última instancia cuando una IPS pública deja de ser viable.", "en_red": true, "x": 610.0, "y": 250.0, "participacion": "recursos", "grado_doc": 2, "rol_recursos": "emite y recibe", "rol_informacion": "sin vínculos"}, {"id": "ASC-165", "nombre": "Fondo de Riesgos Laborales", "sigla": "FRL", "grupo": "Estado", "sector": "A", "subsector": "A2", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Financia campañas de prevención y la atención de riesgos laborales que ninguna ARL cubre; se nutre de un porcentaje de las cotizaciones al sistema de riesgos laborales.", "en_red": false, "x": 660, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-166", "nombre": "Financiera de Desarrollo Territorial S.A.", "sigla": "FINDETER", "grupo": "Estado", "sector": "A", "subsector": "A2", "naturaleza": "Mixta", "nivel": "3", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Presta y estructura la financiación de infraestructura hospitalaria pública de los entes territoriales.", "en_red": false, "x": 580, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-167", "nombre": "Empresa Nacional Promotora del Desarrollo Territorial", "sigla": "ENTerritorio", "grupo": "Estado", "sector": "A", "subsector": "A2", "naturaleza": "Pública", "nivel": "3", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Estructura y gerencia proyectos de infraestructura en salud por encargo de entidades públicas.", "en_red": false, "x": 540, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-168", "nombre": "Unidad Nacional para la Gestión del Riesgo de Desastres", "sigla": "UNGRD", "grupo": "Estado", "sector": "A", "subsector": "A2", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Grande", "tamano_medida": "Apropiación vigente PGN: $7,048 billones (UNIDAD NACIONAL PARA LA GESTION DEL RIESGO DE DESASTRES)", "funcion": "Administra el Fondo Nacional de Gestión del Riesgo de Desastres, por donde entra el dinero extraordinario que financia la respuesta sanitaria en emergencias.", "en_red": false, "x": 700, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-169", "nombre": "Superintendencia de Sociedades", "sigla": "Supersociedades", "grupo": "Estado", "sector": "A", "subsector": "A5", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Mediano", "tamano_medida": "Apropiación vigente PGN: $0,2389 billones (SUPERINTENDENCIA DE SOCIEDADES)", "funcion": "Vigila las sociedades comerciales del sector —farmacéuticas, operadores logísticos, IPS privadas— y publica sus estados financieros.", "en_red": false, "x": 940, "y": 786, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-170", "nombre": "Instituto Nacional de Cancerología E.S.E.", "sigla": "INC", "grupo": "Estado", "sector": "A", "subsector": "A6", "naturaleza": "Pública", "nivel": "1", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Hospital público de orden nacional y a la vez referente técnico de la política de control del cáncer; opera el Observatorio Nacional de Cáncer.", "en_red": false, "x": 220, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-171", "nombre": "Sanatorio de Agua de Dios E.S.E.", "sigla": "Agua de Dios", "grupo": "Estado", "sector": "A", "subsector": "A6", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Hospital público de orden nacional dedicado a la atención de la enfermedad de Hansen y al subsidio de los enfermos censados.", "en_red": false, "x": 500, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-172", "nombre": "Sanatorio de Contratación E.S.E.", "sigla": "Contratación", "grupo": "Estado", "sector": "A", "subsector": "A6", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Hospital público de orden nacional dedicado a la atención de la enfermedad de Hansen en Santander.", "en_red": false, "x": 540, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-173", "nombre": "Centro Dermatológico Federico Lleras Acosta E.S.E.", "sigla": "CDFLLA", "grupo": "Estado", "sector": "A", "subsector": "A6", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Hospital público de orden nacional de referencia en dermatología y en investigación sobre lepra y leishmaniasis.", "en_red": false, "x": 100, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-174", "nombre": "Instituto Colombiano Agropecuario", "sigla": "ICA", "grupo": "Estado", "sector": "A", "subsector": "A6", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Mediano", "tamano_medida": "Apropiación vigente PGN: $0,4744 billones (INSTITUTO COLOMBIANO AGROPECUARIO (ICA))", "funcion": "Vigila la sanidad animal y vegetal y la inocuidad en la producción primaria: es el eslabón anterior al INVIMA en la cadena de vigilancia sanitaria de alimentos.", "en_red": false, "x": 140, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-175", "nombre": "Instituto Colombiano de Bienestar Familiar", "sigla": "ICBF", "grupo": "Estado", "sector": "A", "subsector": "A6", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Macro", "tamano_medida": "Apropiación vigente PGN: $10,9685 billones (INSTITUTO COLOMBIANO DE BIENESTAR FAMILIAR (ICBF))", "funcion": "Ejecuta la política de seguridad alimentaria y nutricional y atiende la primera infancia: determina resultados en salud por fuera del gasto del SGSSS.", "en_red": false, "x": 180, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-176", "nombre": "Organismo Nacional de Acreditación de Colombia", "sigla": "ONAC", "grupo": "Sector privado", "sector": "A", "subsector": "A7", "naturaleza": "Sin ánimo de lucro", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Acredita, a solicitud, la competencia técnica de los organismos de evaluación de la conformidad, entre ellos los laboratorios de ensayo y de calibración.", "en_red": false, "x": 940, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-177", "nombre": "Instituto Colombiano de Normas Técnicas y Certificación", "sigla": "ICONTEC", "grupo": "Sector privado", "sector": "A", "subsector": "A7", "naturaleza": "Sin ánimo de lucro", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Es la entidad acreditadora en salud: evalúa y otorga la acreditación de calidad a las IPS y EPS que se someten voluntariamente a ella.", "en_red": true, "x": 980.0, "y": 180.0, "participacion": "informacion", "grado_doc": 2, "rol_recursos": "sin vínculos", "rol_informacion": "solo emite"}, {"id": "ASC-178", "nombre": "Archivo General de la Nación", "sigla": "AGN", "grupo": "Estado", "sector": "A", "subsector": "A7", "naturaleza": "Pública", "nivel": "3", "en_colev": "No", "tamano": "Pequeño", "tamano_medida": "Apropiación vigente PGN: $0,0555 billones (ARCHIVO GENERAL DE LA NACION)", "funcion": "Fija las reglas de conservacion y retención documental que rigen la historia clínica, incluida la electrónica.", "en_red": false, "x": 620, "y": 822, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-179", "nombre": "Ministerio de Defensa Nacional", "sigla": "MinDefensa", "grupo": "Estado", "sector": "A", "subsector": "A9", "naturaleza": "Pública", "nivel": "1", "en_colev": "No", "tamano": "Grande", "tamano_medida": "Apropiación vigente PGN: $2,2752 billones (MINISTERIO DE DEFENSA NACIONAL - SALUD)", "funcion": "Dirige el Sistema de Salud de las Fuerzas Militares y de la Policía Nacional, el mayor régimen de excepción del país.", "en_red": false, "x": 460, "y": 858, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-180", "nombre": "Fondo Nacional de Prestaciones Sociales del Magisterio", "sigla": "FOMAG", "grupo": "Estado", "sector": "A", "subsector": "A9", "naturaleza": "Pública", "nivel": "1", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Financia y contrata la atención en salud de los docentes oficiales y sus familias, por fuera del SGSSS y con red propia contratada.", "en_red": false, "x": 340, "y": 858, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-181", "nombre": "Unidad de Servicios Penitenciarios y Carcelarios", "sigla": "USPEC", "grupo": "Estado", "sector": "A", "subsector": "A9", "naturaleza": "Pública", "nivel": "1", "en_colev": "No", "tamano": "Grande", "tamano_medida": "Apropiación vigente PGN: $2,0493 billones (UNIDAD DE SERVICIOS PENITENCIARIOS Y CARCELARIOS - USPEC)", "funcion": "Gestiona la prestación de servicios de salud a la población privada de la libertad y administra los contratos con que se atiende.", "en_red": false, "x": 580, "y": 858, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-182", "nombre": "Fideicomiso Fondo Nacional de Salud de las Personas Privadas de la Libertad", "sigla": "Fondo Salud PPL", "grupo": "Estado", "sector": "A", "subsector": "A9", "naturaleza": "Pública", "nivel": "1", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Patrimonio autónomo por donde circulan los recursos con que se atiende en salud a la población reclusa.", "en_red": false, "x": 260, "y": 858, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-183", "nombre": "Instituto Nacional Penitenciario y Carcelario", "sigla": "INPEC", "grupo": "Estado", "sector": "A", "subsector": "A9", "naturaleza": "Pública", "nivel": "2", "en_colev": "No", "tamano": "Grande", "tamano_medida": "Apropiación vigente PGN: $2,2086 billones (INSTITUTO NACIONAL PENITENCIARIO Y CARCELARIO - INPEC)", "funcion": "Custodia a la población privada de la libertad y es la contraparte operativa de la atención en salud dentro de los establecimientos de reclusión.", "en_red": false, "x": 420, "y": 858, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-184", "nombre": "Junta Nacional de Calificación de Invalidez", "sigla": "JNCI", "grupo": "Estado", "sector": "A", "subsector": "A10", "naturaleza": "Mixta", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Decide en segunda instancia el origen y el porcentaje de pérdida de capacidad laboral: su dictamen define quién paga una prestación, si la EPS, la ARL o el fondo de pensiones.", "en_red": false, "x": 780, "y": 858, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-185", "nombre": "Juntas Regionales de Calificación de Invalidez", "sigla": "JRCI", "grupo": "Estado", "sector": "A", "subsector": "A10", "naturaleza": "Mixta", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Deciden en primera instancia el origen y el porcentaje de pérdida de capacidad laboral en cada región.", "en_red": false, "x": 820, "y": 858, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-212", "nombre": "Operadores de información de la Planilla Integrada de Liquidación de Aportes", "sigla": "Operadores PILA", "grupo": "Sector privado", "sector": "B", "subsector": "B3", "naturaleza": "Privada", "nivel": "1", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Reciben la planilla con que los aportantes liquidan la cotización, la validan y distribuyen la información a la ADRES, a las EPS y al Ministerio de Salud. El pago no pasa por ellos: lo debita y lo acredita una institución financiera.", "en_red": true, "x": 230.0, "y": 160.0, "participacion": "informacion", "grado_doc": 4, "rol_recursos": "sin vínculos", "rol_informacion": "emite y recibe"}, {"id": "ASC-215", "nombre": "Cooperativa Nacional de Droguistas Detallistas", "sigla": "Coopidrogas", "grupo": "Sector privado", "sector": "B", "subsector": "B2", "naturaleza": "Sin ánimo de lucro", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Central de compras y distribución de la droguería independiente: agrupa a miles de droguerías de barrio y les da poder de negociación frente a los laboratorios.", "en_red": false, "x": 100, "y": 938, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-216", "nombre": "Colegio Colombiano de Odontólogos", "sigla": "CCO", "grupo": "Sociedad civil", "sector": "C", "subsector": "C3", "naturaleza": "Sin ánimo de lucro", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Agremia a los odontólogos y participa en la regulación del ejercicio de la profesión.", "en_red": false, "x": 820, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-217", "nombre": "Colegio Colombiano de Fisioterapeutas", "sigla": "COLFI", "grupo": "Sociedad civil", "sector": "C", "subsector": "C3", "naturaleza": "Sin ánimo de lucro", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Agremia a los fisioterapeutas y gestiona el registro del ejercicio de la profesión.", "en_red": false, "x": 740, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-218", "nombre": "Colegio Colombiano de Fonoaudiólogos", "sigla": "CCF-Fonoaudiología", "grupo": "Sociedad civil", "sector": "C", "subsector": "C3", "naturaleza": "Sin ánimo de lucro", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Agremia a los fonoaudiólogos y gestiona el registro del ejercicio de la profesión.", "en_red": false, "x": 780, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-219", "nombre": "Colegio Nacional de Bacteriología", "sigla": "CNB Colombia", "grupo": "Sociedad civil", "sector": "C", "subsector": "C3", "naturaleza": "Sin ánimo de lucro", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Agremia a los bacteriólogos, que operan el laboratorio clínico: el eslabón donde nace buena parte del dato diagnóstico del sistema.", "en_red": false, "x": 940, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-220", "nombre": "Colegio Federación Colombiana de Optómetras", "sigla": "Fedopto", "grupo": "Sociedad civil", "sector": "C", "subsector": "C3", "naturaleza": "Sin ánimo de lucro", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Agremia a los optómetras y gestiona el registro del ejercicio de la profesión.", "en_red": false, "x": 860, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-221", "nombre": "Asociación Médica Sindical Colombiana", "sigla": "ASMEDAS", "grupo": "Sociedad civil", "sector": "C", "subsector": "C3", "naturaleza": "Sin ánimo de lucro", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Sindicato de médicos: negocia condiciones laborales y es voz gremial en el debate sobre la reforma.", "en_red": false, "x": 620, "y": 1018, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-222", "nombre": "Sindicato Nacional de Trabajadores de la Salud de Colombia", "sigla": "Sintrasaludcol", "grupo": "Sociedad civil", "sector": "C", "subsector": "C3", "naturaleza": "Sin ánimo de lucro", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Sindicato de trabajadores del sector salud de alcance nacional.", "en_red": false, "x": 60, "y": 1054, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-223", "nombre": "Sociedad Colombiana de Cardiología y Cirugía Cardiovascular", "sigla": "SCC", "grupo": "Sociedad civil", "sector": "C", "subsector": "C3", "naturaleza": "Sin ánimo de lucro", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Sociedad científica de cardiología; produce las guías de la principal causa de mortalidad del país.", "en_red": false, "x": 220, "y": 1054, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-224", "nombre": "Sociedad Colombiana de Cancerología", "sigla": "SCC-Cancerología", "grupo": "Sociedad civil", "sector": "C", "subsector": "C3", "naturaleza": "Sin ánimo de lucro", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Sociedad científica de oncología; incide en las guías de la patología que concentra el gasto de alto costo.", "en_red": false, "x": 180, "y": 1054, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-227", "nombre": "Asociación Colombiana de Diabetes", "sigla": "Asodiabetes", "grupo": "Sociedad civil", "sector": "E", "subsector": "E1", "naturaleza": "Sin ánimo de lucro", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Organización de pacientes con diabetes: educa, acompaña y representa a los pacientes de una de las enfermedades crónicas de mayor prevalencia.", "en_red": false, "x": 100, "y": 1214, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-228", "nombre": "Fundación Colombiana de Trasplantados", "sigla": "FCT", "grupo": "Sociedad civil", "sector": "E", "subsector": "E1", "naturaleza": "Sin ánimo de lucro", "nivel": "3", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Organización de pacientes trasplantados; interlocutora en la política de donación y trasplante junto al Instituto Nacional de Donación y Trasplante.", "en_red": false, "x": 140, "y": 1214, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-229", "nombre": "Asociaciones y fundaciones de pacientes por patología", "sigla": "Asociaciones de pacientes", "grupo": "Sociedad civil", "sector": "E", "subsector": "E1", "naturaleza": "Sin ánimo de lucro", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Organizaciones de pacientes agrupadas por enfermedad —cáncer, huérfanas, crónicas, VIH— que litigan, acompañan y presionan por el acceso efectivo.", "en_red": false, "x": 60, "y": 1214, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-230", "nombre": "Asociación Profamilia", "sigla": "Profamilia", "grupo": "Sociedad civil", "sector": "E", "subsector": "E3", "naturaleza": "Sin ánimo de lucro", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Mayor prestador no gubernamental de servicios de salud sexual y reproductiva del país; opera red propia y llega donde la red pública no.", "en_red": false, "x": 380, "y": 1214, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-233", "nombre": "Cruz Roja Colombiana", "sigla": "Cruz Roja", "grupo": "Sociedad civil", "sector": "E", "subsector": "E3", "naturaleza": "Sin ánimo de lucro", "nivel": "1", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Sociedad nacional de la Cruz Roja: presta servicios de salud, opera bancos de sangre y es actor de la respuesta sanitaria en emergencias y conflicto.", "en_red": false, "x": 420, "y": 1214, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-234", "nombre": "Titulares de registro sanitario de dispositivos médicos y diagnóstico in vitro", "sigla": "Industria de dispositivos", "grupo": "Sector privado", "sector": "B", "subsector": "B4", "naturaleza": "Privada", "nivel": "2", "en_colev": "No", "tamano": "Grande", "tamano_medida": "5.207 titulares con 301.963 registros sanitarios vigentes de dispositivos médicos, reactivos de diagnóstico e in vitro (INVIMA, consulta 2026-08-23)", "funcion": "Fabrican o importan los dispositivos, reactivos y equipos con que la red presta servicios y produce diagnóstico.", "en_red": false, "x": 620, "y": 938, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-235", "nombre": "Annar Diagnóstica Import S.A.S.", "sigla": "Annar", "grupo": "Sector privado", "sector": "B", "subsector": "B4", "naturaleza": "Privada", "nivel": "2", "en_colev": "No", "tamano": "Mediano", "tamano_medida": "Ingresos operacionales 2024: $0,38 billones", "funcion": "Importa y comercializa reactivos de diagnóstico in vitro y equipos de laboratorio: es el origen material del dato clínico con que opera la capa de información del sistema.", "en_red": false, "x": 260, "y": 938, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-236", "nombre": "Thermo Fisher Scientific Colombia S.A.S.", "sigla": "Thermo Fisher", "grupo": "Sector privado", "sector": "B", "subsector": "B4", "naturaleza": "Privada", "nivel": "2", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Importa y comercializa reactivos de diagnóstico in vitro y equipos de laboratorio: es el origen material del dato clínico con que opera la capa de información del sistema.", "en_red": false, "x": 580, "y": 938, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-237", "nombre": "Becton Dickinson de Colombia Ltda.", "sigla": "BD", "grupo": "Sector privado", "sector": "B", "subsector": "B4", "naturaleza": "Privada", "nivel": "2", "en_colev": "No", "tamano": "Mediano", "tamano_medida": "Ingresos operacionales 2024: $0,27 billones", "funcion": "Importa y comercializa equipamiento biomédico y dispositivos: define con que tecnología puede prestar servicios la red y a que costo.", "en_red": false, "x": 340, "y": 938, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-238", "nombre": "Siemens Healthcare S.A.S.", "sigla": "Siemens Healthineers", "grupo": "Sector privado", "sector": "B", "subsector": "B4", "naturaleza": "Privada", "nivel": "2", "en_colev": "No", "tamano": "Mediano", "tamano_medida": "Ingresos operacionales 2024: $0,39 billones", "funcion": "Importa y comercializa equipamiento biomédico y dispositivos: define con que tecnología puede prestar servicios la red y a que costo.", "en_red": false, "x": 540, "y": 938, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-239", "nombre": "Mindray Medical Colombia S.A.S.", "sigla": "Mindray", "grupo": "Sector privado", "sector": "B", "subsector": "B4", "naturaleza": "Privada", "nivel": "2", "en_colev": "No", "tamano": "Pequeño", "tamano_medida": "Ingresos operacionales 2024: $0,04 billones", "funcion": "Importa y comercializa equipamiento biomédico y dispositivos: define con que tecnología puede prestar servicios la red y a que costo.", "en_red": false, "x": 420, "y": 938, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-240", "nombre": "Beckman Coulter Colombia S.A.S.", "sigla": "Beckman Coulter", "grupo": "Sector privado", "sector": "B", "subsector": "B4", "naturaleza": "Privada", "nivel": "2", "en_colev": "No", "tamano": "Pequeño", "tamano_medida": "Ingresos operacionales 2024: $0,04 billones", "funcion": "Importa y comercializa reactivos de diagnóstico in vitro y equipos de laboratorio: es el origen material del dato clínico con que opera la capa de información del sistema.", "en_red": false, "x": 300, "y": 938, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-241", "nombre": "Rochem Biocare Colombia S.A.S.", "sigla": "Rochem", "grupo": "Sector privado", "sector": "B", "subsector": "B4", "naturaleza": "Privada", "nivel": "2", "en_colev": "No", "tamano": "Pequeño", "tamano_medida": "Ingresos operacionales 2024: $0,06 billones", "funcion": "Importa y comercializa reactivos de diagnóstico in vitro y equipos de laboratorio: es el origen material del dato clínico con que opera la capa de información del sistema.", "en_red": false, "x": 500, "y": 938, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-242", "nombre": "Labcare de Colombia S.A.S.", "sigla": "Labcare", "grupo": "Sector privado", "sector": "B", "subsector": "B4", "naturaleza": "Privada", "nivel": "2", "en_colev": "No", "tamano": "Pequeño", "tamano_medida": "Ingresos operacionales 2024: $0,05 billones", "funcion": "Importa y comercializa reactivos de diagnóstico in vitro y equipos de laboratorio: es el origen material del dato clínico con que opera la capa de información del sistema.", "en_red": false, "x": 380, "y": 938, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-243", "nombre": "Quimiolab S.A.S.", "sigla": "Quimiolab", "grupo": "Sector privado", "sector": "B", "subsector": "B4", "naturaleza": "Privada", "nivel": "2", "en_colev": "No", "tamano": "Pequeño", "tamano_medida": "Ingresos operacionales 2024: $0,03 billones", "funcion": "Importa y comercializa reactivos de diagnóstico in vitro y equipos de laboratorio: es el origen material del dato clínico con que opera la capa de información del sistema.", "en_red": false, "x": 460, "y": 938, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-244", "nombre": "Titulares extranjeros de registro sanitario sin domicilio en Colombia", "sigla": "Titulares extranjeros", "grupo": "Sector privado", "sector": "B", "subsector": "B4", "naturaleza": "Privada", "nivel": "3", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Sociedades extranjeras que son titulares del registro sanitario de productos que circulan en Colombia y operan por medio de importadores y apoderados.", "en_red": false, "x": 660, "y": 938, "participacion": "ninguna", "grado_doc": 0, "rol_recursos": "sin vínculos", "rol_informacion": "sin vínculos"}, {"id": "ASC-251", "nombre": "Aportantes y cotizantes al Sistema General de Seguridad Social en Salud", "sigla": "Aportantes", "grupo": "Sector privado", "sector": "A", "subsector": "A2", "naturaleza": "Mixta", "nivel": "1", "en_colev": "No", "tamano": "Sin dato", "tamano_medida": "No se encontró una cifra en las fuentes oficiales consultadas", "funcion": "Empleadores, trabajadores independientes y pensionados que cotizan: son la puerta de entrada del dinero al régimen contributivo, y quienes originan el dato de la planilla con que ese dinero viaja.", "en_red": true, "x": 60.0, "y": 90.0, "participacion": "ambas", "grado_doc": 2, "rol_recursos": "solo emite", "rol_informacion": "solo emite"}, {"id": "ASC-252", "nombre": "Afiliados y beneficiarios del Sistema General de Seguridad Social en Salud", "sigla": "Afiliados", "grupo": "Sociedad civil", "sector": "A", "subsector": "A3", "naturaleza": "Privada", "nivel": "1", "en_colev": "No", "tamano": "Macro", "tamano_medida": "50.100.427 afiliados activos (BDUA, consulta 2026-08-23)", "funcion": "La población afiliada. Cada afiliado ancla una UPC que la ADRES reconoce y produce, al usar el servicio, el registro clínico y el RIPS que alimentan la capa de información.", "en_red": true, "x": 980.0, "y": 330.0, "participacion": "informacion", "grado_doc": 1, "rol_recursos": "sin vínculos", "rol_informacion": "solo recibe"}, {"id": "ASC-253", "nombre": "Proveedores de servicios y tecnologías de salud sin inscripción en el REPS", "sigla": "Proveedores sin REPS", "grupo": "Sector privado", "sector": "B", "subsector": "B2", "naturaleza": "Privada", "nivel": "1", "en_colev": "No", "tamano": "Mediano", "tamano_medida": "256 organizaciones receptoras del giro directo en septiembre de 2026", "funcion": "Proveen servicios y tecnologías incluidos en el plan de beneficios sin ser prestadores inscritos: distribuidores de medicamentos, proveedores de dispositivos médicos, de oxígeno y de transporte de pacientes, entre otros. Reciben giro directo cuando la EPS los certifica.", "en_red": true, "x": 800.0, "y": 690.0, "participacion": "recursos", "grado_doc": 1, "rol_recursos": "solo recibe", "rol_informacion": "sin vínculos"}], "aristas": [{"id": "R01", "origen": "ASC-251", "destino": "ASC-007", "capa": "recursos", "tipo": "Cotizaciones", "descripcion": "Los aportantes pagan la cotización con la PILA; el dinero llega a cuentas de recaudo cuya titular es la ADRES. La EPS gestiona el recaudo, pero no recibe el dinero.", "norma": "Decreto 780 de 2016, arts. 2.6.4.2.1.2 y 2.6.4.2.1.4, modificados por el Decreto 1437 de 2021; Ley 1753 de 2015, art. 67, lit. d", "observabilidad": "no observable", "nota": "Una institución financiera hace el débito y el crédito; solo intermedia la transacción (Decreto 780 de 2016, art. 3.2.3.5, num. 5)."}, {"id": "R03", "origen": "ASC-007", "destino": "ASC-009", "capa": "recursos", "tipo": "Reconocimiento de la UPC", "descripcion": "Reconocimiento y pago de la UPC y de los gastos de administración.", "norma": "Ley 1753 de 2015, art. 66, lit. c; Decreto 780 de 2016, arts. 2.6.4.3.1.1.1 y 2.6.4.3.1.1.2", "observabilidad": "parcial", "nota": "Solo agregado en los boletines: $1,68 billones girados a las EPS por tesorería en junio de 2026."}, {"id": "R04", "origen": "ASC-007", "destino": "ASC-010", "capa": "recursos", "tipo": "Giro directo de la UPC", "descripcion": "En nombre de la EPS que lo programa: al menos el 90 % de la UPC en el subsidiado y en el contributivo de las EPS obligadas (en el contributivo, el 80 % hasta julio de 2026).", "norma": "Decreto 489 de 2024, art. 2.6.4.3.1.3.5, modificado por el Decreto 930 de 2026, art. 2 (contributivo); Decreto 930 de 2026, art. 1, y Resoluciones 1587 y 4621 de 2016 y 3110 de 2018 del Ministerio de Salud (subsidiado)", "observabilidad": "observable", "nota": "Por pareja EPS-prestador en los anexos de Lupa al Giro."}, {"id": "R05", "origen": "ASC-007", "destino": "ASC-010", "capa": "recursos", "tipo": "Giro directo de presupuestos máximos", "descripcion": "Al menos el 90 % de los presupuestos máximos asignados, según la postulación de la EPS (el 80 % hasta julio de 2026).", "norma": "Decreto 489 de 2024, art. 2.6.4.3.5.1.9, modificado por el Decreto 930 de 2026, art. 3", "observabilidad": "observable", "nota": "Se publica en un módulo propio de Lupa al Giro; la red observada de este proyecto usa solo el giro de la UPC."}, {"id": "R06", "origen": "ASC-009", "destino": "ASC-010", "capa": "recursos", "tipo": "Pago contractual y residual", "descripcion": "La EPS paga lo que el giro directo no cubre; el contrato sigue vigente.", "norma": "Ley 100 de 1993, art. 179; Decreto 489 de 2024, art. 2.6.4.3.1.3.4", "observabilidad": "no observable", "nota": "Los contratos entre EPS e IPS no son públicos."}, {"id": "R07", "origen": "ASC-007", "destino": "ASC-071", "capa": "recursos", "tipo": "Giro directo a proveedores", "descripcion": "Giro a droguerías, gestores farmacéuticos y dispensadores que proveen tecnologías del plan de beneficios.", "norma": "Decreto 489 de 2024, art. 2.6.4.3.1.3.5; Resolución 4621 de 2016, arts. 2 y 3; Ley 2294 de 2023, art. 150", "observabilidad": "observable", "nota": "Por pareja EPS-receptor en los anexos de Lupa al Giro."}, {"id": "R08", "origen": "ASC-007", "destino": "ASC-067", "capa": "recursos", "tipo": "Giro directo a proveedores", "descripcion": "Gestor farmacéutico entre los mayores receptores del giro directo.", "norma": "Decreto 489 de 2024, art. 2.6.4.3.1.3.5; Resolución 4621 de 2016, arts. 2 y 3; Ley 2294 de 2023, art. 150", "observabilidad": "observable", "nota": "La ADRES lo nombra entre los mayores receptores en su boletín técnico n.º 72."}, {"id": "R09", "origen": "ASC-007", "destino": "ASC-068", "capa": "recursos", "tipo": "Giro directo a proveedores", "descripcion": "Distribuidor de medicamentos entre los mayores receptores del giro directo.", "norma": "Decreto 489 de 2024, art. 2.6.4.3.1.3.5; Resolución 4621 de 2016, arts. 2 y 3; Ley 2294 de 2023, art. 150", "observabilidad": "observable", "nota": "La ADRES lo nombra entre los mayores receptores en su boletín técnico n.º 72."}, {"id": "R10", "origen": "ASC-007", "destino": "ASC-069", "capa": "recursos", "tipo": "Giro directo a proveedores", "descripcion": "Operador de medicamentos de alto costo entre los mayores receptores del giro directo.", "norma": "Decreto 489 de 2024, art. 2.6.4.3.1.3.5; Resolución 4621 de 2016, arts. 2 y 3; Ley 2294 de 2023, art. 150", "observabilidad": "observable", "nota": "La ADRES lo nombra entre los mayores receptores en su boletín técnico n.º 72."}, {"id": "R11", "origen": "ASC-007", "destino": "ASC-047", "capa": "recursos", "tipo": "Giro directo a cajas prestadoras", "descripcion": "Colsubsidio, Cafam y Compensar están entre los 20 mayores receptores del giro directo.", "norma": "Decreto 489 de 2024, art. 2.6.4.3.1.3.5; Ley 2294 de 2023, art. 150", "observabilidad": "observable", "nota": "Según el boletín técnico n.º 72 de la ADRES."}, {"id": "R12", "origen": "ASC-003", "destino": "ASC-007", "capa": "recursos", "tipo": "Aportes de fuentes al sistema", "descripcion": "Recursos del Presupuesto General de la Nación.", "norma": "Ley 1753 de 2015, art. 67, lit. g", "observabilidad": "no observable", "nota": "No observable con las fuentes actuales del proyecto."}, {"id": "R13", "origen": "ASC-027", "destino": "ASC-007", "capa": "recursos", "tipo": "Aportes de fuentes al sistema", "descripcion": "Los departamentos giran su esfuerzo propio para cofinanciar el régimen subsidiado y rentas cedidas de salud, como el impuesto al consumo de cigarrillos y tabaco.", "norma": "Ley 1753 de 2015, art. 67, lit. l; Decreto 780 de 2016, arts. 2.6.4.2.2.1.19, 2.6.4.2.2.1.20 y 2.6.4.2.2.1.28", "observabilidad": "no observable", "nota": "El SGP de los territorios no pasa por ellos: lo gira directamente el Ministerio de Salud."}, {"id": "R14", "origen": "ASC-028", "destino": "ASC-007", "capa": "recursos", "tipo": "Aportes de fuentes al sistema", "descripcion": "Los municipios y distritos giran su esfuerzo propio para cofinanciar el régimen subsidiado.", "norma": "Decreto 780 de 2016, art. 2.6.4.2.2.1.28", "observabilidad": "no observable", "nota": "El SGP de los territorios no pasa por ellos: lo gira directamente el Ministerio de Salud."}, {"id": "R15", "origen": "ASC-044", "destino": "ASC-007", "capa": "recursos", "tipo": "Aportes de fuentes al sistema", "descripcion": "Rentas de los juegos novedosos y localizados que pertenecen a las entidades territoriales y financian el aseguramiento.", "norma": "Ley 1753 de 2015, art. 67, lit. c; Decreto 780 de 2016, art. 2.6.4.2.2.1.6", "observabilidad": "no observable", "nota": ""}, {"id": "R16", "origen": "ASC-062", "destino": "ASC-007", "capa": "recursos", "tipo": "Aportes de fuentes al sistema", "descripcion": "Las aseguradoras recaudan con la prima una contribución del 50 % y la transfieren a la ADRES.", "norma": "Ley 1753 de 2015, art. 67, lit. j; Decreto 780 de 2016, art. 2.6.4.2.1.12", "observabilidad": "no observable", "nota": ""}, {"id": "R17", "origen": "ASC-047", "destino": "ASC-007", "capa": "recursos", "tipo": "Aportes de fuentes al sistema", "descripcion": "Recursos de las cajas de compensación familiar.", "norma": "Ley 1753 de 2015, art. 67, lit. e; Decreto 780 de 2016, art. 2.6.4.2.1.7", "observabilidad": "no observable", "nota": ""}, {"id": "R18", "origen": "ASC-008", "destino": "ASC-007", "capa": "recursos", "tipo": "Aportes de fuentes al sistema", "descripcion": "Recursos recaudados por la UGPP.", "norma": "Ley 1753 de 2015, art. 67, lit. o; Decreto 780 de 2016, art. 2.6.4.2.1.18", "observabilidad": "no observable", "nota": ""}, {"id": "R19", "origen": "ASC-007", "destino": "ASC-164", "capa": "recursos", "tipo": "Administración del FONSAET", "descripcion": "La ADRES administra la cuenta del FONSAET.", "norma": "Ley 1753 de 2015, art. 66, lit. b", "observabilidad": "no observable", "nota": ""}, {"id": "R20", "origen": "ASC-164", "destino": "ASC-010", "capa": "recursos", "tipo": "Rescate de ESE", "descripcion": "Asegura el pago de obligaciones de las ESE intervenidas por la Supersalud o liquidadas: solo se activa cuando el flujo ordinario ya falló.", "norma": "Ley 1438 de 2011, art. 50; Decreto 780 de 2016, arts. 2.6.3.6 y 2.6.4.4.1", "observabilidad": "no observable", "nota": "Rige el texto original de la Ley 1438 de 2011, art. 50: la Ley 1608 de 2013, art. 7, que lo había modificado, quedó derogada desde el 31 de diciembre de 2019 (Sentencia C-252 de 2020)."}, {"id": "R23", "origen": "ASC-045", "destino": "ASC-027", "capa": "recursos", "tipo": "Rentas de juegos a los territorios", "descripcion": "Las loterías y los concesionarios del chance pagan al departamento o distrito la parte de los derechos de explotación que no va al aseguramiento, con hasta un 25 % para el funcionamiento de su fondo de salud.", "norma": "Ley 643 de 2001, arts. 2, 12 y 22; Decreto 780 de 2016, arts. 2.6.4.2.2.1.7 y 2.6.4.2.2.1.11", "observabilidad": "no observable", "nota": ""}, {"id": "R24", "origen": "ASC-045", "destino": "ASC-028", "capa": "recursos", "tipo": "Rentas de juegos a los territorios", "descripcion": "Quien hace una rifa en uno o varios municipios paga los derechos de explotación ante la alcaldía.", "norma": "Ley 643 de 2001, arts. 2 y 28; Decreto 780 de 2016, art. 2.6.4.2.2.1.12", "observabilidad": "no observable", "nota": ""}, {"id": "R25", "origen": "ASC-007", "destino": "ASC-070", "capa": "recursos", "tipo": "Giro directo a proveedores", "descripcion": "Giro a importadores y distribuidores mayoristas que proveen tecnologías del plan de beneficios.", "norma": "Decreto 489 de 2024, art. 2.6.4.3.1.3.5; Resolución 4621 de 2016, arts. 2 y 3; Ley 2294 de 2023, art. 150", "observabilidad": "observable", "nota": "Por pareja EPS-receptor en los anexos de Lupa al Giro."}, {"id": "R26", "origen": "ASC-007", "destino": "ASC-065", "capa": "recursos", "tipo": "Giro directo a proveedores", "descripcion": "Giro a fabricantes de medicamentos y dispositivos que proveen tecnologías del plan de beneficios.", "norma": "Decreto 489 de 2024, art. 2.6.4.3.1.3.5; Resolución 4621 de 2016, arts. 2 y 3; Ley 2294 de 2023, art. 150", "observabilidad": "observable", "nota": "Por pareja EPS-receptor en los anexos de Lupa al Giro."}, {"id": "R27", "origen": "ASC-007", "destino": "ASC-253", "capa": "recursos", "tipo": "Giro directo a proveedores", "descripcion": "Giro a proveedores certificados por la EPS que no están inscritos en el REPS.", "norma": "Decreto 489 de 2024, art. 2.6.4.3.1.3.5; Resolución 4621 de 2016, arts. 2 y 3; Ley 2294 de 2023, art. 150", "observabilidad": "observable", "nota": "Por pareja EPS-receptor en los anexos de Lupa al Giro."}, {"id": "R28", "origen": "ASC-001", "destino": "ASC-007", "capa": "recursos", "tipo": "Aportes de fuentes al sistema", "descripcion": "Gira el SGP de los territorios para el régimen subsidiado y rentas nacionales como el IVA destinado a la salud y la compensación de regalías.", "norma": "Ley 1753 de 2015, art. 67, lits. a y h; Decreto 780 de 2016, arts. 2.6.4.2.1.9, 2.6.4.2.1.10, 2.6.4.2.1.11 y 2.6.4.2.2.1.5", "observabilidad": "no observable", "nota": ""}, {"id": "R29", "origen": "ASC-045", "destino": "ASC-007", "capa": "recursos", "tipo": "Aportes de fuentes al sistema", "descripcion": "Las loterías, el chance y otros juegos giran directo a la ADRES, a nombre de la entidad territorial, la parte de sus rentas que financia el régimen subsidiado.", "norma": "Ley 1753 de 2015, art. 67, lit. l; Decreto 780 de 2016, arts. 2.6.4.2.2.1.3, 2.6.4.2.2.1.7, 2.6.4.2.2.1.8 y 2.6.4.2.2.1.11", "observabilidad": "no observable", "nota": ""}, {"id": "I01", "origen": "ASC-009", "destino": "ASC-007", "capa": "informacion", "tipo": "Ordenación del giro", "descripcion": "Postulación del giro, con exactitud, calidad y oportunidad: sin ella no hay giro.", "norma": "Decreto 489 de 2024, arts. 2.6.4.3.1.3.4 y 2.6.4.3.5.1.10", "observabilidad": "parcial", "nota": "El valor ordenado por pareja aparece en los anexos y casi siempre coincide con el girado."}, {"id": "I02", "origen": "ASC-009", "destino": "ASC-007", "capa": "informacion", "tipo": "Afiliación y novedades", "descripcion": "Información de afiliación, novedades, recaudos y desembolsos.", "norma": "Ley 100 de 1993, art. 178", "observabilidad": "parcial", "nota": "Agregada en la BDUA."}, {"id": "I03", "origen": "ASC-011", "destino": "ASC-007", "capa": "informacion", "tipo": "Lista de incumplimiento", "descripcion": "Publica cada mes las EPS que incumplen el patrimonio adecuado e informa las medidas especiales; puede detener el giro de presupuestos máximos.", "norma": "Decreto 489 de 2024, arts. 2.6.4.3.1.3.3 y 2.6.4.3.5.1.9; Decreto 930 de 2026, art. 3, parágrafo", "observabilidad": "observable", "nota": "Informe mensual de la Supersalud."}, {"id": "I04", "origen": "ASC-007", "destino": "ASC-001", "capa": "informacion", "tipo": "Trazabilidad y publicidad del giro", "descripcion": "Registro y trazabilidad de lo girado; seguimiento con publicidad a la ciudadanía.", "norma": "Decreto 489 de 2024, art. 2.6.4.3.1.3.6, num. 2, y art. 2.6.4.3.1.3.7, par.", "observabilidad": "observable", "nota": "Lupa al Giro."}, {"id": "I05", "origen": "ASC-009", "destino": "ASC-001", "capa": "informacion", "tipo": "Reporte al sistema único", "descripcion": "Los agentes suministran la información que requiera el Ministerio.", "norma": "Ley 1751 de 2015, art. 19", "observabilidad": "no observable", "nota": ""}, {"id": "I06", "origen": "ASC-010", "destino": "ASC-001", "capa": "informacion", "tipo": "Reporte al sistema único", "descripcion": "Los agentes suministran la información que requiera el Ministerio.", "norma": "Ley 1751 de 2015, art. 19", "observabilidad": "no observable", "nota": ""}, {"id": "I07", "origen": "ASC-010", "destino": "ASC-252", "capa": "informacion", "tipo": "Información a los usuarios", "descripcion": "Información oportuna, suficiente y veraz a los usuarios.", "norma": "Ley 100 de 1993, art. 185", "observabilidad": "no observable", "nota": ""}, {"id": "I08", "origen": "ASC-011", "destino": "ASC-009", "capa": "informacion", "tipo": "Inspección, vigilancia y control", "descripcion": "Autoriza, vigila, sanciona e interviene; sanciona el reporte inexacto o tardío del giro.", "norma": "Ley 100 de 1993, art. 180; Ley 1122 de 2007, arts. 35 a 37; Decreto 489 de 2024, art. 2.6.4.3.1.3.4, par.", "observabilidad": "parcial", "nota": "Medidas especiales e informes publicados."}, {"id": "I09", "origen": "ASC-011", "destino": "ASC-010", "capa": "informacion", "tipo": "Inspección, vigilancia y control", "descripcion": "Vigilancia sobre la prestación de servicios.", "norma": "Ley 1122 de 2007, arts. 35 a 37", "observabilidad": "parcial", "nota": ""}, {"id": "I10", "origen": "ASC-001", "destino": "ASC-007", "capa": "informacion", "tipo": "Reglas del giro", "descripcion": "Define con MinHacienda y el DNP los porcentajes y condiciones del giro directo.", "norma": "Ley 2294 de 2023, art. 150", "observabilidad": "no observable", "nota": ""}, {"id": "I11", "origen": "ASC-001", "destino": "ASC-009", "capa": "informacion", "tipo": "Evaluación del goce efectivo", "descripcion": "Informe anual presentado a todos los agentes del sistema.", "norma": "Ley 1751 de 2015, art. 7", "observabilidad": "no observable", "nota": ""}, {"id": "I12", "origen": "ASC-001", "destino": "ASC-010", "capa": "informacion", "tipo": "Evaluación del goce efectivo", "descripcion": "Informe anual presentado a todos los agentes del sistema.", "norma": "Ley 1751 de 2015, art. 7", "observabilidad": "no observable", "nota": ""}, {"id": "I13", "origen": "ASC-010", "destino": "ASC-027", "capa": "informacion", "tipo": "Inscripción y habilitación", "descripcion": "Los prestadores se inscriben y habilitan servicios ante las entidades departamentales y distritales.", "norma": "Resolución 3100 de 2019", "observabilidad": "observable", "nota": "Queda en el REPS."}, {"id": "I14", "origen": "ASC-010", "destino": "ASC-028", "capa": "informacion", "tipo": "Inscripción y habilitación", "descripcion": "Los prestadores se inscriben y habilitan servicios ante las entidades departamentales y distritales.", "norma": "Resolución 3100 de 2019", "observabilidad": "observable", "nota": "Vale solo para los distritos: la fila agrega distritos y municipios."}, {"id": "I15", "origen": "ASC-027", "destino": "ASC-001", "capa": "informacion", "tipo": "Consolidación del REPS", "descripcion": "Las entidades territoriales alimentan el REPS y el Ministerio lo consolida.", "norma": "Resolución 3100 de 2019", "observabilidad": "observable", "nota": ""}, {"id": "I16", "origen": "ASC-028", "destino": "ASC-001", "capa": "informacion", "tipo": "Consolidación del REPS", "descripcion": "Las entidades territoriales alimentan el REPS y el Ministerio lo consolida.", "norma": "Resolución 3100 de 2019", "observabilidad": "observable", "nota": "Vale solo para los distritos: la fila agrega distritos y municipios."}, {"id": "I17", "origen": "ASC-177", "destino": "ASC-010", "capa": "informacion", "tipo": "Acreditación", "descripcion": "Otorga o niega la acreditación de calidad, que es voluntaria, y le hace seguimiento durante sus cuatro años de vigencia.", "norma": "Decreto 780 de 2016, arts. 2.5.1.6.2, 2.5.1.6.5 y 2.5.1.6.10; Resolución 2082 de 2014, art. 4; Resolución 5095 de 2018 (manual de estándares)", "observabilidad": "no observable", "nota": "El ICONTEC es la entidad inscrita como acreditadora en salud hasta enero de 2030 (Resolución 488 de 2026 del Ministerio de Salud)."}, {"id": "I18", "origen": "ASC-177", "destino": "ASC-009", "capa": "informacion", "tipo": "Acreditación", "descripcion": "Otorga o niega la acreditación de calidad, que es voluntaria, y le hace seguimiento durante sus cuatro años de vigencia.", "norma": "Decreto 780 de 2016, arts. 2.5.1.6.2, 2.5.1.6.5 y 2.5.1.6.10; Resolución 2082 de 2014, art. 4; Resolución 5095 de 2018 (manual de estándares)", "observabilidad": "no observable", "nota": "El ICONTEC es la entidad inscrita como acreditadora en salud hasta enero de 2030 (Resolución 488 de 2026 del Ministerio de Salud)."}, {"id": "I20", "origen": "ASC-251", "destino": "ASC-212", "capa": "informacion", "tipo": "Planilla de aportes", "descripcion": "El aportante diligencia la planilla con quién cotiza y cuánto.", "norma": "Decreto 780 de 2016, arts. 3.2.3.5 y 3.2.3.6, que compilan el Decreto 1465 de 2005; Resolución 2388 de 2016, art. 1", "observabilidad": "no observable", "nota": ""}, {"id": "I21", "origen": "ASC-212", "destino": "ASC-007", "capa": "informacion", "tipo": "Planilla de aportes", "descripcion": "El operador reporta a la ADRES la información del recaudo, con la que se identifica cada pago.", "norma": "Decreto 780 de 2016, art. 2.6.4.2.1.5; Resolución 2388 de 2016, art. 1 (anexo técnico 4)", "observabilidad": "no observable", "nota": ""}, {"id": "I22", "origen": "ASC-212", "destino": "ASC-009", "capa": "informacion", "tipo": "Planilla de aportes", "descripcion": "El operador distribuye la planilla a la EPS de cada cotizante.", "norma": "Decreto 780 de 2016, art. 3.2.3.6, num. 5", "observabilidad": "no observable", "nota": ""}, {"id": "I23", "origen": "ASC-212", "destino": "ASC-001", "capa": "informacion", "tipo": "Planilla de aportes", "descripcion": "Los operadores envían cada día al Ministerio los archivos de la planilla.", "norma": "Resolución 2388 de 2016, art. 1 (anexo técnico 5)", "observabilidad": "no observable", "nota": ""}, {"id": "I24", "origen": "ASC-007", "destino": "ASC-009", "capa": "informacion", "tipo": "Resultados del recaudo y la compensación", "descripcion": "La ADRES informa a cada EPS lo recaudado a nombre de sus afiliados y lo que le reconoce en cada compensación.", "norma": "Decreto 780 de 2016, arts. 2.6.4.2.1.5 y 2.6.4.3.1.1.4", "observabilidad": "no observable", "nota": ""}]};</script>
+<script>
+(function () {
+  "use strict";
+  const D = window.DATOS;
+  if (!D) { document.body.textContent = "El visor no tiene datos: genérelo con construir-red-normada.py."; return; }
+
+  // ------------------------------------------------------------ catálogos
+  const nodos = D.nodos;
+  const aristas = D.aristas;
+  const porId = new Map(nodos.map(n => [n.id, n]));
+  const TIPOS = D.catalogos.tipos;
+  const CAPA = { recursos: "Recursos", informacion: "Información" };
+  const PARTICIPACION = { ambas: "Ambas capas", recursos: "Solo recursos", informacion: "Solo información", ninguna: "Sin flujo documentado" };
+  const ROLES = { todos: "Todos", emite: "Solo emite", recibe: "Solo recibe", ambos: "Emite y recibe", aislado: "Sin vínculos visibles" };
+  const OBSERV = { "observable": "Observable", "parcial": "Parcial o agregada", "no observable": "No observable" };
+  const FORMAS = { "Estado": "circulo", "Sector privado": "cuadrado", "Sociedad civil": "triangulo", "Academia": "rombo" };
+  const ORDEN_TAMANO = ["Macro", "Grande", "Mediano", "Pequeño", "Sin dato"];
+  const nombreTamano = v => v;
+  const ATRIBUTOS = [
+    { clave: "ninguno", etiqueta: "Ninguno (todos resaltados)" },
+    { clave: "participacion", etiqueta: "Capas en que participa", valor: n => n.participacion, nombre: v => PARTICIPACION[v] || v },
+    { clave: "grupo", etiqueta: "Grupo", valor: n => n.grupo },
+    { clave: "sector", etiqueta: "Sector", valor: n => n.sector, nombre: v => v + " · " + (D.catalogos.sectores[v] || "") },
+    { clave: "subsector", etiqueta: "Subsector", valor: n => n.subsector, nombre: v => v + " · " + (D.catalogos.subsectores[v] || "") },
+    { clave: "naturaleza", etiqueta: "Naturaleza jurídica", valor: n => n.naturaleza },
+    { clave: "nivel", etiqueta: "Relación con el sistema (criterio COLEV)", valor: n => n.nivel, nombre: v => D.catalogos.niveles[v] || v },
+    { clave: "en_colev", etiqueta: "¿Estaba en el mapa COLEV 2022?", valor: n => n.en_colev },
+    { clave: "tamano", etiqueta: "Tamaño según el inventario", valor: n => n.tamano, nombre: nombreTamano }
+  ];
+  const atributo = clave => ATRIBUTOS.find(a => a.clave === clave);
+
+  // --------------------------------------------------------------- estado
+  function estadoInicial() {
+    return {
+      capas: { recursos: true, informacion: true },
+      resaltarPor: "ninguno",
+      valores: null,
+      rol: "todos",
+      vinculos: "alguno",
+      tiposExcluidos: new Set(),
+      observ: new Set(Object.keys(OBSERV)),
+      buscar: "",
+      inventario: false,
+      ocultar: false,
+      etiquetas: "red",
+      tamano: "vinculos",
+      seleccion: null,
+      vista: "grafo"
+    };
+  }
+  let E = estadoInicial();
+
+  const CONTRASTES = [
+    { id: "", etiqueta: "Vistas sugeridas…" },
+    { id: "fuentes", etiqueta: "Quién pone el dinero (solo emite recursos)", aplicar: e => { e.capas = { recursos: true, informacion: false }; e.rol = "emite"; } },
+    { id: "receptores", etiqueta: "Quién solo recibe dinero", aplicar: e => { e.capas = { recursos: true, informacion: false }; e.rol = "recibe"; } },
+    { id: "intermediarios", etiqueta: "Quién recibe y vuelve a girar dinero", aplicar: e => { e.capas = { recursos: true, informacion: false }; e.rol = "ambos"; } },
+    { id: "emisores", etiqueta: "Quién solo emite información", aplicar: e => { e.capas = { recursos: false, informacion: true }; e.rol = "emite"; } },
+    { id: "ambas", etiqueta: "Actores presentes en las dos capas", aplicar: e => { e.resaltarPor = "participacion"; e.valores = new Set(["ambas"]); } },
+    { id: "estado", etiqueta: "El Estado frente a los demás grupos", aplicar: e => { e.resaltarPor = "grupo"; e.valores = new Set(["Estado"]); } },
+    { id: "colev", etiqueta: "Lo que el mapa COLEV 2022 no tenía", aplicar: e => { e.resaltarPor = "en_colev"; e.valores = new Set(["No"]); } },
+    { id: "observable", etiqueta: "Lo observable con datos públicos", aplicar: e => { e.observ = new Set(["observable"]); } },
+    { id: "adres", etiqueta: "La ADRES y sus vecinos", aplicar: e => { e.seleccion = "ASC-007"; } },
+    { id: "eps", etiqueta: "Las EPS y sus vecinos", aplicar: e => { e.seleccion = "ASC-009"; } }
+  ];
+
+  // ------------------------------------------------------------ utilidades
+  const $ = id => document.getElementById(id);
+  const normalizar = t => (t || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  const el = (etiqueta, props, hijos) => {
+    const n = document.createElement(etiqueta);
+    if (props) Object.keys(props).forEach(k => {
+      if (k === "texto") n.textContent = props[k];
+      else if (k === "clase") n.className = props[k];
+      else n.setAttribute(k, props[k]);
+    });
+    (hijos || []).forEach(h => n.appendChild(typeof h === "string" ? document.createTextNode(h) : h));
+    return n;
+  };
+  function claveLinea(capa) {
+    const ns = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("viewBox", "0 0 26 10");
+    svg.setAttribute("class", "clave-linea");
+    svg.setAttribute("aria-hidden", "true");
+    const l = document.createElementNS(ns, "line");
+    l.setAttribute("x1", "1"); l.setAttribute("y1", "5"); l.setAttribute("x2", "25"); l.setAttribute("y2", "5");
+    l.setAttribute("stroke", capa === "recursos" ? "var(--recursos)" : "var(--informacion)");
+    l.setAttribute("stroke-width", "2");
+    if (capa === "informacion") l.setAttribute("stroke-dasharray", "6 4");
+    svg.appendChild(l);
+    return svg;
+  }
+  function claveNodo(color, forma) {
+    const c = document.createElement("canvas");
+    c.width = 28; c.height = 28; c.style.width = "14px"; c.style.height = "14px";
+    const g = c.getContext("2d");
+    g.scale(2, 2);
+    trazarForma(g, forma || "circulo", 7, 7, 5);
+    g.fillStyle = color; g.fill();
+    return c;
+  }
+
+  // ------------------------------------------------------- datos derivados
+  const visibleNodo = n => n.en_red || E.inventario;
+  function aristaVisible(a) {
+    return E.capas[a.capa] && !E.tiposExcluidos.has(a.tipo) && E.observ.has(a.observabilidad) &&
+      visibleNodo(porId.get(a.origen)) && visibleNodo(porId.get(a.destino));
+  }
+  let C = null;
+  function derivar() {
+    const vis = nodos.filter(visibleNodo);
+    const av = aristas.filter(aristaVisible);
+    const entra = new Map(), sale = new Map();
+    av.forEach(a => {
+      sale.set(a.origen, (sale.get(a.origen) || 0) + 1);
+      entra.set(a.destino, (entra.get(a.destino) || 0) + 1);
+    });
+    const rol = n => {
+      const i = entra.get(n.id) || 0, o = sale.get(n.id) || 0;
+      return i === 0 && o === 0 ? "aislado" : i === 0 ? "emite" : o === 0 ? "recibe" : "ambos";
+    };
+    let vecinos = null;
+    if (E.seleccion) {
+      vecinos = new Set([E.seleccion]);
+      av.forEach(a => {
+        if (a.origen === E.seleccion) vecinos.add(a.destino);
+        if (a.destino === E.seleccion) vecinos.add(a.origen);
+      });
+    }
+    const attr = atributo(E.resaltarPor);
+    const q = normalizar(E.buscar.trim());
+    const coincide = new Set();
+    vis.forEach(n => {
+      if (attr && attr.valor && E.valores && !E.valores.has(attr.valor(n))) return;
+      if (E.rol !== "todos" && rol(n) !== E.rol) return;
+      if (q && !normalizar(n.nombre + " " + n.sigla).includes(q)) return;
+      if (vecinos && !vecinos.has(n.id)) return;
+      coincide.add(n.id);
+    });
+    const resaltadas = new Set();
+    av.forEach(a => {
+      const o = coincide.has(a.origen), d = coincide.has(a.destino);
+      const enSeleccion = !E.seleccion || a.origen === E.seleccion || a.destino === E.seleccion;
+      if (enSeleccion && (E.vinculos === "ambos" ? (o && d) : (o || d))) resaltadas.add(a.id);
+    });
+    C = { vis, av, entra, sale, rol, coincide, resaltadas };
+    return C;
+  }
+
+  // ------------------------------------------------------------- lienzo
+  const lienzo = $("lienzo");
+  let ctx = lienzo.getContext("2d");
+  let ancho = 0, alto = 0, dpr = 1;
+  const T = { k: 1, x: 0, y: 0 };
+  let colores = {};
+  function leerColores() {
+    const cs = getComputedStyle(document.documentElement);
+    ["--surface", "--ink", "--ink-2", "--muted", "--grid", "--recursos", "--informacion", "--ambas", "--ninguna"]
+      .forEach(v => { colores[v] = cs.getPropertyValue(v).trim(); });
+  }
+  const colorNodo = n => colores["--" + n.participacion] || colores["--ninguna"];
+  function medir() {
+    const r = lienzo.parentElement.getBoundingClientRect();
+    dpr = window.devicePixelRatio || 1;
+    ancho = Math.max(200, r.width);
+    alto = Math.max(200, r.height);
+    lienzo.width = Math.round(ancho * dpr);
+    lienzo.height = Math.round(alto * dpr);
+  }
+  function encuadre() {
+    const vis = nodos.filter(visibleNodo);
+    if (!vis.length) return null;
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    vis.forEach(n => { x0 = Math.min(x0, n.x); y0 = Math.min(y0, n.y); x1 = Math.max(x1, n.x); y1 = Math.max(y1, n.y); });
+    const margen = { izq: 40, der: 120, arr: 70, aba: 120 };
+    const k = Math.min((ancho - margen.izq - margen.der) / Math.max(1, x1 - x0), (alto - margen.arr - margen.aba) / Math.max(1, y1 - y0));
+    const kk = Math.max(0.2, Math.min(3, k));
+    return { k: kk,
+             x: margen.izq + ((ancho - margen.izq - margen.der) - (x1 - x0) * kk) / 2 - x0 * kk,
+             y: margen.arr + ((alto - margen.arr - margen.aba) - (y1 - y0) * kk) / 2 - y0 * kk };
+  }
+  function ajustar() { const e = encuadre(); if (e) Object.assign(T, e); }
+  function vistaAjustada() {
+    const e = encuadre();
+    return !e || (Math.abs(e.k - T.k) < 1e-6 && Math.abs(e.x - T.x) < 0.5 && Math.abs(e.y - T.y) < 0.5);
+  }
+  const P = n => [n.x * T.k + T.x, n.y * T.k + T.y];
+  function radio(n) {
+    if (!n.en_red) return 4.5;
+    if (E.tamano === "uniforme") return 8;
+    if (E.tamano === "inventario") return { "Macro": 13, "Grande": 10.5, "Mediano": 8.5, "Pequeño": 7 }[n.tamano] || 7;
+    return 5 + 2.2 * Math.sqrt(n.grado_doc || 0);
+  }
+  function trazarForma(g, forma, x, y, r) {
+    g.beginPath();
+    if (forma === "cuadrado") {
+      const s = r * 0.88;
+      g.rect(x - s, y - s, 2 * s, 2 * s);
+    } else if (forma === "triangulo") {
+      const h = r * 1.18;
+      g.moveTo(x, y - h); g.lineTo(x + h * 0.98, y + h * 0.72); g.lineTo(x - h * 0.98, y + h * 0.72); g.closePath();
+    } else if (forma === "rombo") {
+      const h = r * 1.22;
+      g.moveTo(x, y - h); g.lineTo(x + h, y); g.lineTo(x, y + h); g.lineTo(x - h, y); g.closePath();
+    } else {
+      g.arc(x, y, r, 0, Math.PI * 2);
+    }
+  }
+  function unitario(dx, dy) { const L = Math.hypot(dx, dy) || 1; return [dx / L, dy / L]; }
+
+  function geometrias(av) {
+    const pares = new Map();
+    av.forEach(a => {
+      const clave = a.origen < a.destino ? a.origen + "|" + a.destino : a.destino + "|" + a.origen;
+      if (!pares.has(clave)) pares.set(clave, []);
+      pares.get(clave).push(a);
+    });
+    const geo = new Map();
+    pares.forEach((lista, clave) => {
+      lista.sort((a, b) => (a.capa === b.capa ? 0 : a.capa === "recursos" ? -1 : 1) || a.id.localeCompare(b.id));
+      const [u, v] = clave.split("|");
+      const pu = P(porId.get(u)), pv = P(porId.get(v));
+      const [ux, uy] = unitario(pv[0] - pu[0], pv[1] - pu[1]);
+      const nx = -uy, ny = ux;
+      const n = lista.length;
+      lista.forEach((a, k) => {
+        const desv = n === 1 ? 0 : (k - (n - 1) / 2) * 16;
+        const cp = [(pu[0] + pv[0]) / 2 + nx * desv * 2, (pu[1] + pv[1]) / 2 + ny * desv * 2];
+        geo.set(a.id, { ps: P(porId.get(a.origen)), pt: P(porId.get(a.destino)), cp });
+      });
+    });
+    return geo;
+  }
+
+  function dibujarArista(g, a, geo, alfa) {
+    const ro = radio(porId.get(a.origen)), rd = radio(porId.get(a.destino));
+    const color = colores[a.capa === "recursos" ? "--recursos" : "--informacion"];
+    const [sx, sy] = unitario(geo.cp[0] - geo.ps[0], geo.cp[1] - geo.ps[1]);
+    const ini = [geo.ps[0] + sx * (ro + 2), geo.ps[1] + sy * (ro + 2)];
+    const [ex, ey] = unitario(geo.pt[0] - geo.cp[0], geo.pt[1] - geo.cp[1]);
+    const punta = [geo.pt[0] - ex * (rd + 3), geo.pt[1] - ey * (rd + 3)];
+    const base = [punta[0] - ex * 8, punta[1] - ey * 8];
+    g.save();
+    g.globalAlpha = alfa;
+    g.strokeStyle = color;
+    g.fillStyle = color;
+    g.lineWidth = 2;
+    g.setLineDash(a.capa === "informacion" ? [6, 4] : []);
+    g.beginPath();
+    g.moveTo(ini[0], ini[1]);
+    g.quadraticCurveTo(geo.cp[0], geo.cp[1], base[0], base[1]);
+    g.stroke();
+    g.setLineDash([]);
+    g.beginPath();
+    g.moveTo(punta[0], punta[1]);
+    g.lineTo(base[0] - ey * 4.5, base[1] + ex * 4.5);
+    g.lineTo(base[0] + ey * 4.5, base[1] - ex * 4.5);
+    g.closePath();
+    g.fill();
+    g.restore();
+  }
+
+  function dibujarNodo(g, n, alfa) {
+    const [x, y] = P(n);
+    const r = radio(n);
+    g.save();
+    g.globalAlpha = alfa;
+    trazarForma(g, FORMAS[n.grupo] || "circulo", x, y, r);
+    g.fillStyle = colorNodo(n);
+    g.fill();
+    g.lineWidth = 2;
+    g.strokeStyle = colores["--surface"];
+    g.stroke();
+    g.restore();
+  }
+
+  function debeEtiquetar(n, coincide) {
+    if (n.id === E.seleccion) return true;
+    if (E.etiquetas === "ninguna") return false;
+    if (n.en_red) return true;
+    // Los actores sin flujo documentado van en una cuadrícula densa: solo se rotulan si se
+    // buscan, o si hay zoom suficiente para que sus nombres quepan.
+    if (E.buscar.trim() && coincide) return true;
+    return (E.etiquetas === "todas" || coincide) && T.k >= 1.3;
+  }
+  function fuenteEtiqueta(n) {
+    return (n.en_red ? "12px" : "11px") + " system-ui, -apple-system, 'Segoe UI', sans-serif";
+  }
+  // Coloca las etiquetas de mayor a menor prioridad y omite las que chocarían con otra ya puesta.
+  function dibujarEtiquetas(g, lista, coincide) {
+    const prioridad = n => (n.id === E.seleccion ? 4 : 0) + (coincide.has(n.id) ? 2 : 0) + (n.en_red ? 1 : 0);
+    const orden = lista.slice().sort((a, b) => prioridad(b) - prioridad(a) || (b.grado_doc || 0) - (a.grado_doc || 0));
+    const puestas = [];
+    orden.forEach(n => {
+      const [x, y] = P(n);
+      const r = radio(n);
+      g.save();
+      g.font = fuenteEtiqueta(n);
+      const w = g.measureText(n.sigla).width;
+      const caja = { x: x + r + 3, y: y - 8, w: w + 4, h: 16 };
+      const choca = puestas.some(p => caja.x < p.x + p.w && p.x < caja.x + caja.w && caja.y < p.y + p.h && p.y < caja.y + caja.h);
+      if (!choca) {
+        puestas.push(caja);
+        const m = coincide.has(n.id);
+        g.textBaseline = "middle";
+        g.globalAlpha = m ? 1 : 0.35;
+        g.lineWidth = 3;
+        g.lineJoin = "round";
+        g.strokeStyle = colores["--surface"];
+        g.strokeText(n.sigla, x + r + 5, y);
+        g.fillStyle = m ? colores["--ink"] : colores["--muted"];
+        g.fillText(n.sigla, x + r + 5, y);
+      }
+      g.restore();
+    });
+  }
+
+  function pintarEscena(g, w, h) {
+    const c = C || derivar();
+    g.fillStyle = colores["--surface"];
+    g.fillRect(0, 0, w, h);
+    if (E.inventario) {
+      const yLinea = (D.meta.y_inventario - 34) * T.k + T.y;
+      g.save();
+      g.strokeStyle = colores["--grid"];
+      g.lineWidth = 1;
+      g.beginPath(); g.moveTo(0, yLinea); g.lineTo(w, yLinea); g.stroke();
+      g.fillStyle = colores["--ink-2"];
+      g.font = "12px system-ui, -apple-system, 'Segoe UI', sans-serif";
+      g.textBaseline = "bottom";
+      g.fillText("Actores del inventario sin flujo documentado, por sector y subsector", 14, yLinea - 6);
+      g.font = "600 12px system-ui, -apple-system, 'Segoe UI', sans-serif";
+      g.textBaseline = "middle";
+      (D.meta.etiquetas_inventario || []).forEach(e => g.fillText(e.texto, e.x * T.k + T.x - 6, e.y * T.k + T.y));
+      g.restore();
+    }
+    const geo = geometrias(c.av);
+    [false, true].forEach(turno => c.av.forEach(a => {
+      const r = c.resaltadas.has(a.id);
+      if (r !== turno || (!r && E.ocultar)) return;
+      dibujarArista(g, a, geo.get(a.id), r ? 0.9 : 0.08);
+    }));
+    const orden = c.vis.slice().sort((a, b) => (c.coincide.has(a.id) ? 1 : 0) - (c.coincide.has(b.id) ? 1 : 0));
+    orden.forEach(n => {
+      const m = c.coincide.has(n.id);
+      if (!m && E.ocultar) return;
+      dibujarNodo(g, n, m ? 1 : 0.14);
+    });
+    dibujarEtiquetas(g, orden.filter(n => {
+      const m = c.coincide.has(n.id);
+      return !(!m && E.ocultar) && debeEtiquetar(n, m);
+    }), c.coincide);
+    if (E.seleccion && porId.has(E.seleccion)) {
+      const n = porId.get(E.seleccion);
+      const [x, y] = P(n);
+      g.save();
+      g.strokeStyle = colores["--ink"];
+      g.lineWidth = 2;
+      g.beginPath(); g.arc(x, y, radio(n) + 5, 0, Math.PI * 2); g.stroke();
+      g.restore();
+    }
+  }
+
+  function dibujar() {
+    derivar();
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    pintarEscena(ctx, ancho, alto);
+    pintarResumen();
+  }
+
+  // ------------------------------------------------------- textos de la vista
+  function descripcionVista() {
+    const partes = [];
+    const capas = Object.keys(CAPA).filter(c => E.capas[c]).map(c => CAPA[c]);
+    partes.push("Capas: " + (capas.length ? capas.join(" y ") : "ninguna"));
+    const attr = atributo(E.resaltarPor);
+    if (attr && attr.valor && E.valores) {
+      const nombres = Array.from(E.valores).map(v => attr.nombre ? attr.nombre(v) : v);
+      partes.push(attr.etiqueta + ": " + (nombres.length ? nombres.join(", ") : "ninguno"));
+    }
+    if (E.rol !== "todos") partes.push("Rol: " + ROLES[E.rol].toLowerCase());
+    if (E.tiposExcluidos.size) partes.push(E.tiposExcluidos.size + " tipos de flujo ocultos");
+    if (E.observ.size < 3) partes.push("Observabilidad: " + Array.from(E.observ).map(o => OBSERV[o].toLowerCase()).join(", "));
+    if (E.buscar.trim()) partes.push("Búsqueda: «" + E.buscar.trim() + "»");
+    if (E.seleccion && porId.has(E.seleccion)) partes.push("Vecinos de " + porId.get(E.seleccion).sigla);
+    return partes.join(" · ");
+  }
+  function pintarResumen() {
+    const c = C;
+    const caja = $("resumen");
+    caja.textContent = "";
+    caja.appendChild(el("strong", { texto: c.coincide.size + " de " + c.vis.length + " actores resaltados · " + c.resaltadas.size + " de " + c.av.length + " vínculos visibles" }));
+    caja.appendChild(el("div", { texto: descripcionVista() }));
+    caja.appendChild(el("div", { clase: "pista", texto: "Arrastre para mover · rueda o +/− para acercar · clic en un actor para ver sus vínculos" }));
+  }
+
+  // ------------------------------------------------------------- leyenda
+  function pintarLeyenda() {
+    const caja = $("leyenda");
+    caja.textContent = "";
+    const fila1 = el("div", { clase: "fila" }, [el("span", { clase: "titulo", texto: "Vínculos" })]);
+    ["recursos", "informacion"].forEach(capa => fila1.appendChild(el("span", { clase: "item" }, [claveLinea(capa), CAPA[capa]])));
+    const fila2 = el("div", { clase: "fila" }, [el("span", { clase: "titulo", texto: "Color" })]);
+    ["recursos", "informacion", "ambas", "ninguna"].forEach(p => {
+      if (p === "ninguna" && !E.inventario) return;
+      fila2.appendChild(el("span", { clase: "item" }, [claveNodo(colores["--" + p]), PARTICIPACION[p]]));
+    });
+    const fila3 = el("div", { clase: "fila" }, [el("span", { clase: "titulo", texto: "Forma" })]);
+    Object.keys(FORMAS).forEach(gr => fila3.appendChild(el("span", { clase: "item" }, [claveNodo(colores["--ink-2"], FORMAS[gr]), gr])));
+    caja.appendChild(fila1);
+    caja.appendChild(fila2);
+    caja.appendChild(fila3);
+  }
+
+  // ------------------------------------------------------------- controles
+  function construirControles() {
+    $("titulo").textContent = D.meta.titulo;
+    $("version").textContent = D.meta.version + " · " + D.meta.fuente;
+    const sel = $("contrastes");
+    CONTRASTES.forEach(c => sel.appendChild(el("option", { value: c.id, texto: c.etiqueta })));
+    const rp = $("resaltar-por");
+    ATRIBUTOS.forEach(a => rp.appendChild(el("option", { value: a.clave, texto: a.etiqueta })));
+    const roles = $("roles");
+    Object.keys(ROLES).forEach(r => {
+      const inp = el("input", { type: "radio", name: "rol", value: r });
+      inp.addEventListener("change", () => { E.rol = r; cambio(); });
+      roles.appendChild(el("label", null, [inp, " " + ROLES[r]]));
+    });
+    const tipos = $("tipos");
+    ["recursos", "informacion"].forEach(capa => {
+      tipos.appendChild(el("div", { clase: "subtitulo", texto: CAPA[capa] }));
+      TIPOS.filter(t => t.capa === capa).forEach(t => {
+        const inp = el("input", { type: "checkbox", "data-tipo": t.tipo });
+        inp.addEventListener("change", () => {
+          if (inp.checked) E.tiposExcluidos.delete(t.tipo); else E.tiposExcluidos.add(t.tipo);
+          cambio();
+        });
+        const n = aristas.filter(a => a.tipo === t.tipo).length;
+        tipos.appendChild(el("label", null, [inp, claveLinea(capa), t.tipo, el("span", { clase: "cuenta", texto: String(n) })]));
+      });
+    });
+    const obs = $("observabilidad");
+    Object.keys(OBSERV).forEach(o => {
+      const inp = el("input", { type: "checkbox", "data-observ": o });
+      inp.addEventListener("change", () => { if (inp.checked) E.observ.add(o); else E.observ.delete(o); cambio(); });
+      const n = aristas.filter(a => a.observabilidad === o).length;
+      obs.appendChild(el("label", null, [inp, OBSERV[o], el("span", { clase: "cuenta", texto: String(n) })]));
+    });
+    const lista = $("lista-actores");
+    nodos.slice().sort((a, b) => a.sigla.localeCompare(b.sigla, "es")).forEach(n => lista.appendChild(el("option", { value: n.sigla })));
+    const sinFlujo = nodos.filter(n => !n.en_red).length;
+    $("texto-inventario").textContent = "Actores del inventario sin flujo documentado (" + sinFlujo + ")";
+  }
+
+  function valoresPresentes() {
+    const attr = atributo(E.resaltarPor);
+    if (!attr || !attr.valor) return [];
+    const cuenta = new Map();
+    nodos.filter(visibleNodo).forEach(n => { const v = attr.valor(n); cuenta.set(v, (cuenta.get(v) || 0) + 1); });
+    const lista = Array.from(cuenta.keys());
+    if (attr.clave === "tamano") lista.sort((a, b) => ORDEN_TAMANO.indexOf(a) - ORDEN_TAMANO.indexOf(b));
+    else if (attr.clave === "subsector") lista.sort((a, b) => a[0].localeCompare(b[0]) || parseInt(a.slice(1), 10) - parseInt(b.slice(1), 10));
+    else lista.sort((a, b) => String(a).localeCompare(String(b), "es"));
+    return lista.map(v => ({ v, n: cuenta.get(v) }));
+  }
+
+  function pintarValores() {
+    const caja = $("valores");
+    caja.textContent = "";
+    const attr = atributo(E.resaltarPor);
+    $("valores-enlaces").hidden = !(attr && attr.valor);
+    if (!attr || !attr.valor) return;
+    valoresPresentes().forEach(({ v, n }) => {
+      const inp = el("input", { type: "checkbox" });
+      inp.checked = !E.valores || E.valores.has(v);
+      inp.addEventListener("change", () => {
+        if (!E.valores) E.valores = new Set(valoresPresentes().map(x => x.v));
+        if (inp.checked) E.valores.add(v); else E.valores.delete(v);
+        cambio();
+      });
+      caja.appendChild(el("label", null, [inp, attr.nombre ? attr.nombre(v) : v, el("span", { clase: "cuenta", texto: String(n) })]));
+    });
+  }
+
+  function sincronizarControles() {
+    $("capa-recursos").checked = E.capas.recursos;
+    $("capa-informacion").checked = E.capas.informacion;
+    $("resaltar-por").value = E.resaltarPor;
+    document.querySelectorAll('input[name="rol"]').forEach(i => { i.checked = i.value === E.rol; });
+    document.querySelectorAll('input[name="vinculos"]').forEach(i => { i.checked = i.value === E.vinculos; });
+    document.querySelectorAll("[data-tipo]").forEach(i => { i.checked = !E.tiposExcluidos.has(i.getAttribute("data-tipo")); });
+    document.querySelectorAll("[data-observ]").forEach(i => { i.checked = E.observ.has(i.getAttribute("data-observ")); });
+    if ($("buscar").value !== E.buscar) $("buscar").value = E.buscar;
+    $("mostrar-inventario").checked = E.inventario;
+    $("ocultar").checked = E.ocultar;
+    $("etiquetas").value = E.etiquetas;
+    $("tamano").value = E.tamano;
+    $("btn-vista").textContent = E.vista === "grafo" ? "Tabla" : "Gráfica";
+    pintarValores();
+  }
+
+  // --------------------------------------------------------------- detalle
+  function pintarDetalle() {
+    const caja = $("detalle");
+    caja.textContent = "";
+    if (!E.seleccion || !porId.has(E.seleccion) || E.vista !== "grafo") { caja.style.display = "none"; return; }
+    const n = porId.get(E.seleccion);
+    const c = C;
+    const cerrar = el("button", { type: "button", clase: "cerrar", "aria-label": "Cerrar", texto: "×" });
+    cerrar.addEventListener("click", () => { E.seleccion = null; cambio(); });
+    caja.appendChild(cerrar);
+    caja.appendChild(el("h3", { texto: n.nombre }));
+    caja.appendChild(el("div", { clase: "sub", texto: n.sigla + " · " + n.id }));
+    const dl = el("dl");
+    const fila = (t, d) => { dl.appendChild(el("dt", { texto: t })); dl.appendChild(el("dd", { texto: d || "—" })); };
+    fila("Grupo", n.grupo);
+    fila("Sector", n.sector + " · " + (D.catalogos.sectores[n.sector] || ""));
+    fila("Subsector", n.subsector + " · " + (D.catalogos.subsectores[n.subsector] || ""));
+    fila("Naturaleza", n.naturaleza);
+    fila("Tamaño", n.tamano === "Sin dato" ? nombreTamano(n.tamano)
+      : n.tamano + (n.tamano_medida ? " — " + n.tamano_medida : ""));
+    fila("Relación (COLEV)", D.catalogos.niveles[n.nivel] || n.nivel);
+    fila("En COLEV 2022", n.en_colev);
+    fila("Capas", PARTICIPACION[n.participacion]);
+    fila("Rol en lo visible", ROLES[c.rol(n)]);
+    caja.appendChild(dl);
+    if (n.funcion) caja.appendChild(el("p", { clase: "funcion", texto: n.funcion }));
+    const propias = aristas.filter(a => a.origen === n.id || a.destino === n.id);
+    const visibles = propias.filter(a => c.av.includes(a));
+    [["Salen hacia", a => a.origen === n.id, "destino"], ["Llegan desde", a => a.destino === n.id, "origen"]].forEach(([titulo, f, extremo]) => {
+      const lista = visibles.filter(f);
+      if (!lista.length) return;
+      caja.appendChild(el("h4", { texto: titulo + " (" + lista.length + ")" }));
+      const ul = el("ul");
+      lista.forEach(a => {
+        const otro = porId.get(a[extremo]);
+        ul.appendChild(el("li", null, [
+          el("div", null, [claveLinea(a.capa), " ", el("strong", { texto: a.tipo }), " — " + otro.sigla]),
+          el("div", { texto: a.descripcion }),
+          el("div", { clase: "norma", texto: a.norma + " · " + OBSERV[a.observabilidad] }),
+          a.nota ? el("div", { clase: "norma", texto: a.nota }) : el("span")
+        ]));
+      });
+      caja.appendChild(ul);
+    });
+    const ocultos = propias.length - visibles.length;
+    if (ocultos > 0) caja.appendChild(el("p", { clase: "funcion", texto: ocultos + " vínculos de este actor quedan ocultos por los filtros." }));
+    if (!propias.length) caja.appendChild(el("p", { clase: "funcion", texto: "Este actor todavía no tiene vínculos documentados con su norma." }));
+    caja.style.display = "block";
+  }
+
+  // ----------------------------------------------------------------- tabla
+  function pintarTabla() {
+    const caja = $("tabla");
+    caja.textContent = "";
+    if (E.vista !== "tabla") { caja.style.display = "none"; return; }
+    const c = C;
+    caja.appendChild(el("p", { texto: "La tabla muestra lo que está resaltado en la vista: " + descripcionVista() }));
+    const vinc = c.av.filter(a => c.resaltadas.has(a.id));
+    caja.appendChild(el("h2", { texto: "Vínculos (" + vinc.length + ")" }));
+    const t1 = el("table");
+    t1.appendChild(el("thead", null, [el("tr", null, ["Id", "Origen", "Destino", "Capa", "Tipo", "Descripción", "Norma", "Observabilidad", "Nota"].map(h => el("th", { texto: h })))]));
+    const b1 = el("tbody");
+    vinc.forEach(a => b1.appendChild(el("tr", null, [a.id, porId.get(a.origen).sigla, porId.get(a.destino).sigla, CAPA[a.capa], a.tipo, a.descripcion, a.norma, OBSERV[a.observabilidad], a.nota].map(v => el("td", { texto: v || "" })))));
+    t1.appendChild(b1);
+    caja.appendChild(t1);
+    const act = c.vis.filter(n => c.coincide.has(n.id));
+    caja.appendChild(el("h2", { texto: "Actores (" + act.length + ")" }));
+    const t2 = el("table");
+    t2.appendChild(el("thead", null, [el("tr", null, ["Id", "Actor", "Sigla", "Grupo", "Sector", "Capas", "Entran", "Salen", "Rol en lo visible"].map(h => el("th", { texto: h })))]));
+    const b2 = el("tbody");
+    act.slice().sort((a, b) => a.sigla.localeCompare(b.sigla, "es")).forEach(n => b2.appendChild(el("tr", null, [
+      el("td", { texto: n.id }), el("td", { texto: n.nombre }), el("td", { texto: n.sigla }), el("td", { texto: n.grupo }),
+      el("td", { texto: n.sector }), el("td", { texto: PARTICIPACION[n.participacion] }),
+      el("td", { clase: "num", texto: String(c.entra.get(n.id) || 0) }), el("td", { clase: "num", texto: String(c.sale.get(n.id) || 0) }),
+      el("td", { texto: ROLES[c.rol(n)] })
+    ])));
+    t2.appendChild(b2);
+    caja.appendChild(t2);
+    caja.style.display = "block";
+  }
+
+  // ------------------------------------------------------- enlace de la vista
+  function aEnlace() {
+    const p = new URLSearchParams();
+    const capas = (E.capas.recursos ? "r" : "") + (E.capas.informacion ? "i" : "");
+    if (capas !== "ri") p.set("capas", capas || "-");
+    if (E.resaltarPor !== "ninguno") {
+      p.set("resaltar", E.resaltarPor);
+      if (E.valores) p.set("valores", Array.from(E.valores).join("~"));
+    }
+    if (E.rol !== "todos") p.set("rol", E.rol);
+    if (E.vinculos !== "alguno") p.set("vinculos", E.vinculos);
+    if (E.tiposExcluidos.size) p.set("sin", Array.from(E.tiposExcluidos).map(t => TIPOS.findIndex(x => x.tipo === t)).join(","));
+    if (E.observ.size < 3) p.set("obs", Array.from(E.observ).join(",") || "-");
+    if (E.buscar.trim()) p.set("q", E.buscar.trim());
+    if (E.inventario) p.set("inv", "1");
+    if (E.ocultar) p.set("ocultar", "1");
+    if (E.etiquetas !== "red") p.set("etiquetas", E.etiquetas);
+    if (E.tamano !== "vinculos") p.set("tamano", E.tamano);
+    if (E.seleccion) p.set("sel", E.seleccion);
+    if (E.vista !== "grafo") p.set("vista", E.vista);
+    const s = p.toString();
+    ultimoEnlace = s;
+    try { history.replaceState(null, "", s ? "#" + s : location.pathname + location.search); } catch (err) { /* sin historial disponible */ }
+  }
+  function deEnlace() {
+    const p = new URLSearchParams(location.hash.replace(/^#/, ""));
+    const e = estadoInicial();
+    if (p.has("capas")) { const c = p.get("capas"); e.capas = { recursos: c.includes("r"), informacion: c.includes("i") }; }
+    if (p.has("resaltar") && atributo(p.get("resaltar"))) {
+      e.resaltarPor = p.get("resaltar");
+      if (p.has("valores")) e.valores = new Set(p.get("valores").split("~").filter(Boolean));
+    }
+    if (p.has("rol") && ROLES[p.get("rol")]) e.rol = p.get("rol");
+    if (p.get("vinculos") === "ambos") e.vinculos = "ambos";
+    if (p.has("sin")) p.get("sin").split(",").forEach(i => { const t = TIPOS[parseInt(i, 10)]; if (t) e.tiposExcluidos.add(t.tipo); });
+    if (p.has("obs")) e.observ = new Set(p.get("obs").split(",").filter(o => OBSERV[o]));
+    if (p.has("q")) e.buscar = p.get("q");
+    e.inventario = p.get("inv") === "1";
+    e.ocultar = p.get("ocultar") === "1";
+    if (["todas", "ninguna"].includes(p.get("etiquetas"))) e.etiquetas = p.get("etiquetas");
+    if (["inventario", "uniforme"].includes(p.get("tamano"))) e.tamano = p.get("tamano");
+    if (p.has("sel") && porId.has(p.get("sel"))) e.seleccion = p.get("sel");
+    if (p.get("vista") === "tabla") e.vista = "tabla";
+    E = e;
+  }
+
+  // ------------------------------------------------- estado de los botones
+  let ultimoEnlace = "";
+  let contraste = null;
+  function estadoBotones() {
+    const enTabla = E.vista !== "grafo";
+    const ajustada = vistaAjustada();
+    const b = $("btn-ajustar");
+    b.disabled = ajustada || enTabla;
+    b.title = enTabla ? "Disponible en la gráfica" : ajustada ? "La vista ya muestra toda la red" : "Encuadrar toda la red (tecla 0)";
+    $("zoom-ajustar").disabled = ajustada;
+    const inicial = !ultimoEnlace && ajustada;
+    const r = $("btn-restablecer");
+    r.disabled = inicial;
+    r.title = inicial ? "La vista ya está en su estado inicial" : "Quitar los filtros y volver al encuadre inicial";
+    $("contrastes").value = contraste && contraste.enlace === ultimoEnlace ? contraste.id : "";
+  }
+  function teclas(e, quitarSeleccion, factor) {
+    if (e.key === "Escape") { quitarSeleccion(); return; }
+    const t = e.target;
+    if (e.ctrlKey || e.metaKey || e.altKey || (t && /^(INPUT|SELECT|TEXTAREA)$/.test(t.tagName))) return;
+    if (e.key === "+" || e.key === "=") zoom(factor, ancho / 2, alto / 2);
+    else if (e.key === "-" || e.key === "_") zoom(1 / factor, ancho / 2, alto / 2);
+    else if (e.key === "0") cambio({ reencuadrar: true });
+  }
+
+  // ------------------------------------------------------------ ciclo
+  let ultimoInventario = null;
+  function cambio(opciones) {
+    if (E.seleccion && (!porId.has(E.seleccion) || !visibleNodo(porId.get(E.seleccion)))) E.seleccion = null;
+    if (ultimoInventario !== E.inventario || (opciones && opciones.reencuadrar)) { ajustar(); ultimoInventario = E.inventario; }
+    dibujar();
+    sincronizarControles();
+    pintarLeyenda();
+    pintarDetalle();
+    pintarTabla();
+    aEnlace();
+    estadoBotones();
+  }
+  function aviso(texto) {
+    const a = $("aviso");
+    a.textContent = texto;
+    a.style.display = "block";
+    clearTimeout(aviso.t);
+    aviso.t = setTimeout(() => { a.style.display = "none"; }, 3200);
+  }
+
+  // ------------------------------------------------------------ eventos
+  function enlazarEventos() {
+    $("capa-recursos").addEventListener("change", e => { E.capas.recursos = e.target.checked; cambio(); });
+    $("capa-informacion").addEventListener("change", e => { E.capas.informacion = e.target.checked; cambio(); });
+    $("resaltar-por").addEventListener("change", e => { E.resaltarPor = e.target.value; E.valores = null; cambio(); });
+    $("valores-todos").addEventListener("click", () => { E.valores = null; cambio(); });
+    $("valores-ninguno").addEventListener("click", () => { E.valores = new Set(); cambio(); });
+    document.querySelectorAll('input[name="vinculos"]').forEach(i => i.addEventListener("change", () => { E.vinculos = i.value; cambio(); }));
+    $("tipos-todos").addEventListener("click", () => { E.tiposExcluidos = new Set(); cambio(); });
+    $("tipos-ninguno").addEventListener("click", () => { E.tiposExcluidos = new Set(TIPOS.map(t => t.tipo)); cambio(); });
+    $("buscar").addEventListener("input", e => { E.buscar = e.target.value; cambio(); });
+    $("buscar").addEventListener("keydown", e => {
+      if (e.key !== "Enter") return;
+      const q = normalizar(E.buscar.trim());
+      const primero = nodos.filter(visibleNodo).find(n => q && normalizar(n.nombre + " " + n.sigla).includes(q));
+      if (primero) { E.seleccion = primero.id; E.buscar = ""; cambio(); }
+    });
+    $("mostrar-inventario").addEventListener("change", e => { E.inventario = e.target.checked; cambio(); });
+    $("ocultar").addEventListener("change", e => { E.ocultar = e.target.checked; cambio(); });
+    $("etiquetas").addEventListener("change", e => { E.etiquetas = e.target.value; cambio(); });
+    $("tamano").addEventListener("change", e => { E.tamano = e.target.value; cambio(); });
+    $("contrastes").addEventListener("change", e => {
+      const c = CONTRASTES.find(x => x.id === e.target.value);
+      if (c && c.aplicar) {
+        E = estadoInicial(); c.aplicar(E); contraste = null;
+        cambio({ reencuadrar: true });
+        contraste = { id: c.id, enlace: ultimoEnlace };
+        estadoBotones();
+        aviso("Vista: " + c.etiqueta);
+      } else e.target.value = "";
+    });
+    $("btn-ajustar").addEventListener("click", () => cambio({ reencuadrar: true }));
+    $("btn-vista").addEventListener("click", () => { E.vista = E.vista === "grafo" ? "tabla" : "grafo"; cambio(); });
+    $("btn-restablecer").addEventListener("click", () => { E = estadoInicial(); cambio({ reencuadrar: true }); aviso("Vista inicial restablecida"); });
+    $("zoom-ajustar").addEventListener("click", () => cambio({ reencuadrar: true }));
+    $("btn-png").addEventListener("click", exportarPNG);
+    $("btn-enlace").addEventListener("click", copiarEnlace);
+    $("btn-tema").addEventListener("click", cambiarTema);
+    $("zoom-mas").addEventListener("click", () => zoom(1.25, ancho / 2, alto / 2));
+    $("zoom-menos").addEventListener("click", () => zoom(0.8, ancho / 2, alto / 2));
+    document.addEventListener("keydown", e => teclas(e, () => { if (E.seleccion) { E.seleccion = null; cambio(); } }, 1.25));
+
+    let arrastre = null;
+    lienzo.addEventListener("pointerdown", e => {
+      arrastre = { x: e.clientX, y: e.clientY, tx: T.x, ty: T.y, movio: false };
+      lienzo.setPointerCapture(e.pointerId);
+    });
+    lienzo.addEventListener("pointermove", e => {
+      if (arrastre) {
+        const dx = e.clientX - arrastre.x, dy = e.clientY - arrastre.y;
+        if (Math.abs(dx) + Math.abs(dy) > 3) { arrastre.movio = true; lienzo.classList.add("arrastrando"); }
+        if (arrastre.movio) { T.x = arrastre.tx + dx; T.y = arrastre.ty + dy; ocultarTooltip(); dibujar(); estadoBotones(); }
+        return;
+      }
+      mostrarTooltip(nodoEn(e.offsetX, e.offsetY), e.offsetX, e.offsetY);
+    });
+    lienzo.addEventListener("pointerup", e => {
+      if (arrastre && !arrastre.movio) {
+        const n = nodoEn(e.offsetX, e.offsetY);
+        E.seleccion = n ? (E.seleccion === n.id ? null : n.id) : null;
+        cambio();
+      }
+      arrastre = null;
+      lienzo.classList.remove("arrastrando");
+    });
+    lienzo.addEventListener("pointerleave", ocultarTooltip);
+    lienzo.addEventListener("wheel", e => {
+      e.preventDefault();
+      zoom(Math.exp(-e.deltaY * 0.0015), e.offsetX, e.offsetY);
+    }, { passive: false });
+    new ResizeObserver(() => { medir(); dibujar(); estadoBotones(); }).observe(lienzo.parentElement);
+    if (oscuroDelSistema.addEventListener) oscuroDelSistema.addEventListener("change", () => { rotularTema(); leerColores(); cambio(); });
+  }
+
+  function zoom(f, px, py) {
+    const k = Math.max(0.2, Math.min(6, T.k * f));
+    const g = k / T.k;
+    T.x = px - (px - T.x) * g;
+    T.y = py - (py - T.y) * g;
+    T.k = k;
+    dibujar();
+    estadoBotones();
+  }
+  function nodoEn(px, py) {
+    if (!C) return null;
+    let mejor = null, d0 = Infinity;
+    C.vis.forEach(n => {
+      if (E.ocultar && !C.coincide.has(n.id)) return;
+      const [x, y] = P(n);
+      const d = Math.hypot(px - x, py - y);
+      if (d < Math.max(12, radio(n) + 6) && d < d0) { d0 = d; mejor = n; }
+    });
+    return mejor;
+  }
+  function mostrarTooltip(n, px, py) {
+    const t = $("tooltip");
+    if (!n) { ocultarTooltip(); return; }
+    t.textContent = "";
+    t.appendChild(el("strong", { texto: n.nombre }));
+    t.appendChild(el("span", { texto: n.sigla + " · " + n.grupo + " · " + PARTICIPACION[n.participacion] }));
+    t.appendChild(el("span", { texto: "En lo visible: entran " + (C.entra.get(n.id) || 0) + ", salen " + (C.sale.get(n.id) || 0) + " (" + ROLES[C.rol(n)].toLowerCase() + ")" }));
+    t.style.display = "block";
+    const w = t.offsetWidth, h = t.offsetHeight;
+    t.style.left = Math.min(px + 14, ancho - w - 8) + "px";
+    t.style.top = Math.min(py + 14, alto - h - 8) + "px";
+    lienzo.style.cursor = "pointer";
+  }
+  function ocultarTooltip() { $("tooltip").style.display = "none"; lienzo.style.cursor = ""; }
+
+  // ------------------------------------------------------- exportar y tema
+  function exportarPNG() {
+    const escala = 2, pie = 92;
+    const c2 = document.createElement("canvas");
+    c2.width = Math.round(ancho * escala);
+    c2.height = Math.round((alto + pie) * escala);
+    const g = c2.getContext("2d");
+    g.scale(escala, escala);
+    pintarEscena(g, ancho, alto + pie);
+    const y0 = alto + 8;
+    g.save();
+    g.fillStyle = colores["--ink"];
+    g.font = "600 13px system-ui, -apple-system, 'Segoe UI', sans-serif";
+    g.textBaseline = "top";
+    g.fillText(D.meta.titulo + " — " + D.meta.version, 14, y0);
+    g.font = "12px system-ui, -apple-system, 'Segoe UI', sans-serif";
+    g.fillStyle = colores["--ink-2"];
+    g.fillText(descripcionVista(), 14, y0 + 20);
+    let x = 14;
+    const y = y0 + 48;
+    ["recursos", "informacion"].forEach(capa => {
+      g.strokeStyle = colores["--" + capa]; g.lineWidth = 2; g.setLineDash(capa === "informacion" ? [6, 4] : []);
+      g.beginPath(); g.moveTo(x, y + 7); g.lineTo(x + 26, y + 7); g.stroke(); g.setLineDash([]);
+      g.fillStyle = colores["--ink-2"]; g.fillText(CAPA[capa], x + 32, y);
+      x += 32 + g.measureText(CAPA[capa]).width + 18;
+    });
+    ["recursos", "informacion", "ambas"].concat(E.inventario ? ["ninguna"] : []).forEach(p => {
+      trazarForma(g, "circulo", x + 6, y + 7, 5); g.fillStyle = colores["--" + p]; g.fill();
+      g.fillStyle = colores["--ink-2"]; g.fillText(PARTICIPACION[p], x + 16, y);
+      x += 16 + g.measureText(PARTICIPACION[p]).width + 18;
+    });
+    Object.keys(FORMAS).forEach(gr => {
+      trazarForma(g, FORMAS[gr], x + 6, y + 7, 5); g.fillStyle = colores["--ink-2"]; g.fill();
+      g.fillText(gr, x + 16, y);
+      x += 16 + g.measureText(gr).width + 18;
+    });
+    g.restore();
+    c2.toBlob(blob => {
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "red-normada.png";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+      aviso("Imagen descargada: " + a.download);
+    });
+  }
+  async function copiarEnlace() {
+    aEnlace();
+    try {
+      await navigator.clipboard.writeText(location.href);
+      aviso("Enlace de la vista copiado");
+    } catch (err) {
+      const campo = $("campo-enlace");
+      campo.style.display = "block";
+      campo.value = location.href;
+      campo.focus();
+      campo.select();
+      aviso("Copie el enlace del campo seleccionado, al final de los filtros");
+    }
+  }
+  const oscuroDelSistema = window.matchMedia("(prefers-color-scheme: dark)");
+  function temaActual() { return document.documentElement.dataset.theme || (oscuroDelSistema.matches ? "dark" : "light"); }
+  function rotularTema() {
+    const oscuro = temaActual() === "dark";
+    $("btn-tema").textContent = oscuro ? "Tema claro" : "Tema oscuro";
+    $("btn-tema").title = oscuro ? "Pasar al tema claro" : "Pasar al tema oscuro";
+  }
+  function cambiarTema() {
+    document.documentElement.dataset.theme = temaActual() === "dark" ? "light" : "dark";
+    rotularTema();
+    leerColores();
+    cambio();
+  }
+
+
+  // --------------------------------------------------------------- inicio
+  leerColores();
+  rotularTema();
+  construirControles();
+  deEnlace();
+  enlazarEventos();
+  medir();
+  cambio({ reencuadrar: true });
+})();
+</script>
+</body>
+</html>

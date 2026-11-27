@@ -1,0 +1,94 @@
+Lectura de los anexos del giro directo descargados el 2026-10-19
+Archivos leídos: 101  ·  hojas: 199
+  contributivo    33 cortes (2024-01 a 2026-09)
+  subsidiado-ips  34 cortes (2024-01 a 2026-10)
+  subsidiado-eps  34 cortes (2024-01 a 2026-10)
+
+Notas de esquema:
+  subsidiado-ips 2024-01 «Giro a IPS - Proceso»: sin columna de valor ordenado
+  subsidiado-ips 2024-01 «Giro a Prestadores-Complemento»: sin columna de valor ordenado
+  subsidiado-ips 2024-02 «Giro a IPS - Proceso»: sin columna de valor ordenado
+  subsidiado-ips 2024-02 «Giro a Prestadores-Complemento»: sin columna de valor ordenado
+  subsidiado-ips 2024-03 «Giro a IPS - Proceso»: sin columna de valor ordenado
+  subsidiado-ips 2024-03 «Giro a Prestadores-Complemento»: sin columna de valor ordenado
+  subsidiado-ips 2024-04 «Giro a IPS - Proceso»: sin columna de valor ordenado
+  subsidiado-ips 2024-04 «Giro a Prestadores-Complemento»: sin columna de valor ordenado
+  subsidiado-ips 2024-05 «Giro a IPS - Proceso»: sin columna de valor ordenado
+  subsidiado-ips 2024-05 «Giro a Prestadores-Complemento»: sin columna de valor ordenado
+  subsidiado-ips 2024-06 «Giro a IPS - Proceso»: sin columna de valor ordenado
+  subsidiado-ips 2024-06 «Giro a Prestadores-Complemento»: encabezado «Valor Giro a IPS ($)» repetido: la primera se lee como valor ordenado
+  subsidiado-ips 2025-10 «Giro a Prestadores-Complemento»: el título dice 2025-11 y el catálogo 2025-10
+
+Controles (sumas sobre todas las hojas de aristas):
+  filas_datos                    656307
+  filas_descartadas              111
+  girado_cero                    146
+  girado_negativo                0
+  sin_valor_girado               28
+  ordenado_distinto_de_girado    815
+  filas_duplicadas_exactas       1
+  codigo_corregido               613
+  codigo_sin_correspondencia     0
+  id_no_8_9                      23
+  id_longitud_distinta_de_9      0
+  relaciones (corte, régimen, proceso, EPS, prestador): 534443
+  prestadores distintos: 4577  ·  códigos de EPS distintos: 73
+  operaciones con giro en cero u ordenado distinto de girado: 815
+  identificaciones agregadas como posible persona natural: 23
+
+Códigos de EPS reasignados o sin correspondencia (por corte y hoja):
+  subsidiado-ips 2024-04 complemento código de otra EPS                     -> EPSI01      4 operaciones
+  subsidiado-ips 2024-04 complemento código inexistente en el corte         -> EPSI01    158 operaciones
+  subsidiado-ips 2024-12 complemento código de otra EPS                     -> ESS118      1 operaciones
+  subsidiado-ips 2024-12 complemento código inexistente en el corte         -> ESS118    450 operaciones
+
+Causa citada en el campo Observación (todas las hojas de aristas; miles de millones):
+  contributivo proceso     descuento de auditoría                     70 operaciones · girado      38.7 · no girado    0.02 · por correo 0
+  contributivo proceso     embargo                                   347 operaciones · girado       8.1 · no girado    1.60 · por correo 0
+  contributivo proceso     falla bancaria                            117 operaciones · girado       0.0 · no girado   12.37 · por correo 0
+  contributivo proceso     giro tras un rechazo                       52 operaciones · girado      10.9 · no girado    0.00 · por correo 0
+  contributivo proceso     otra                                        2 operaciones · girado       0.3 · no girado    0.00 · por correo 0
+  subsidiado   complemento cargue en PISIS                          3522 operaciones · girado     801.9 · no girado    0.00 · por correo 0
+  subsidiado   complemento comunicación de la EPS                   2647 operaciones · girado     727.9 · no girado    0.00 · por correo 1085
+  subsidiado   complemento comunicación de la Supersalud           20273 operaciones · girado    9004.1 · no girado    6.39 · por correo 19751
+  subsidiado   complemento comunicación del agente interventor       726 operaciones · girado     424.4 · no girado    0.00 · por correo 145
+  subsidiado   complemento comunicación sin emisor identificado     2760 operaciones · girado    1863.8 · no girado    0.00 · por correo 2475
+  subsidiado   complemento otra                                       67 operaciones · girado       7.9 · no girado    0.00 · por correo 1
+  subsidiado   proceso     comunicación de la Supersalud              29 operaciones · girado       0.2 · no girado   47.13 · por correo 0
+  subsidiado   proceso     descuento de auditoría                     60 operaciones · girado     137.5 · no girado    0.02 · por correo 0
+  subsidiado   proceso     embargo                                   146 operaciones · girado      37.1 · no girado   10.09 · por correo 0
+  subsidiado   proceso     resolución sin emisor identificado          3 operaciones · girado       0.0 · no girado    0.02 · por correo 0
+
+Operaciones repetidas entre cortes consecutivos (hojas con fecha por fila):
+  63 pares de cortes comparados; 0 con operaciones repetidas
+
+Identidad de la certificación (valor a girar = descuentos + giro directo + giro neto): 1018 filas, 2 no cuadran por más de $1
+  2024-08 ESS062 diferencia -167400234503
+  2025-06 EPSI01 diferencia -27751446509
+
+Cotejo de la certificación del subsidiado con las aristas (por corte, EPS y proceso):
+  complemento igual a lo girado              22
+  complemento igual a lo ordenado            74
+  complemento no cuadra                      15
+  proceso     diferencia menor de $1.000      4
+  proceso     igual a lo girado             153
+  proceso     igual a lo ordenado           743
+  proceso     no cuadra                       3
+  no cuadra: 2024-06 EPSI01 complemento certificación 23531576814  ordenado -  girado 0
+  no cuadra: 2024-06 ESS062 complemento certificación 173107980122  ordenado 150950195642  girado 150938744104
+  no cuadra: 2024-06 ESS118 complemento certificación 195261295112  ordenado -  girado 0
+  no cuadra: 2024-12 EPSS42 complemento certificación 3190538136  ordenado -  girado 0
+  no cuadra: 2024-12 ESS024 complemento certificación 0  ordenado 3190538136  girado 3190538136
+  no cuadra: 2025-03 ESS118 complemento certificación 211468590283  ordenado 209545618560  girado 209545618560
+  no cuadra: 2025-04 EPSI01 complemento certificación 29292581552  ordenado 27989617395  girado 27989617395
+  no cuadra: 2025-12 EPS025 complemento certificación 0  ordenado 300000000  girado 300000000
+  no cuadra: 2025-12 EPS025 proceso     certificación 16804318817  ordenado 16504318817  girado 16504318817
+  no cuadra: 2025-12 EPSI01 complemento certificación 0  ordenado 28463825495  girado 28463825495
+  no cuadra: 2025-12 EPSI01 proceso     certificación 28463825495  ordenado -  girado 0
+  no cuadra: 2025-12 EPSS42 complemento certificación 381405519  ordenado 762811038  girado 762811038
+  no cuadra: 2025-12 EPSS42 proceso     certificación 4066952048  ordenado 3685546529  girado 3685546529
+  no cuadra: 2026-09 EPSS10 complemento certificación 10732698654  ordenado -  girado 0
+  no cuadra: 2026-09 EPSS42 complemento certificación 5736230709  ordenado -  girado 0
+  no cuadra: 2026-09 ESS024 complemento certificación 447190515426  ordenado 452926746135  girado 452926746135
+  no cuadra: 2026-09 ESS062 complemento certificación 0  ordenado 26703829593  girado 26703829593
+  no cuadra: 2026-09 ESS118 complemento certificación 1110253616  ordenado 22043327116  girado 22043327116

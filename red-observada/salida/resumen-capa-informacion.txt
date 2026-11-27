@@ -1,0 +1,87 @@
+Variables de la capa de información por EPS y mes
+
+== Reproducción del Boletín 72 (junio de 2026)
+  contributivo boletín 77,09 % · anexos 77.09 % (giro 3.10 / UPC 4.02 billones)
+  subsidiado   boletín 78,95 % · anexos 78.95 % (giro 3.48 / UPC 4.41 billones)
+  subsidiado, solo el proceso: 60.18 % · el complemento aporta 18.77 puntos
+
+== Porcentaje agregado por régimen y mes (meses de 2026)
+         contributivo  subsidiado  subsidiado_solo_proceso
+corte                                                     
+2026-01         80.17       72.55                    69.98
+2026-02         80.28       79.89                    69.53
+2026-03         80.30       77.80                    67.10
+2026-04         80.39       79.60                    74.13
+2026-05         80.21       80.24                    74.83
+2026-06         79.16       78.95                    60.18
+2026-07         79.86       80.97                    61.45
+2026-08         89.63       77.41                    77.41
+2026-09         89.86       89.70                    75.71
+2026-10           NaN       89.00                    89.00
+
+== Tamaño frente a cumplimiento: correlación de rangos entre la UPC y el porcentaje, por régimen y mes
+     regimen   corte           medida  entidades  spearman_tamano_vs_pct  p_valor  pct_min  pct_mediana  pct_max  bajo_80  bajo_90  en_ventana
+contributivo 2026-01 pct_giro_directo         17                  -0.157    0.548   79.119       79.732   86.483       15       17       False
+contributivo 2026-02 pct_giro_directo         17                  -0.277    0.282   79.464       79.984   86.840       14       17       False
+contributivo 2026-03 pct_giro_directo         17                  -0.402    0.110   79.365       79.998   86.809       15       17       False
+contributivo 2026-04 pct_giro_directo         17                  -0.395    0.117   79.538       79.991   86.824       14       17       False
+contributivo 2026-05 pct_giro_directo         17                  -0.299    0.244   67.369       79.998   86.734       14       17       False
+contributivo 2026-06 pct_giro_directo         17                  -0.471    0.057   20.283       79.995   80.000       16       17        True
+contributivo 2026-07 pct_giro_directo         16                  -0.279    0.295   79.603       79.928   80.000       16       16        True
+contributivo 2026-08 pct_giro_directo         16                  -0.374    0.154   88.726       89.981   90.000        0       13        True
+contributivo 2026-09 pct_giro_directo         17                  -0.108    0.680   89.418       89.969   90.000        0       16        True
+  subsidiado 2026-01 pct_giro_directo         26                   0.413    0.036    0.694       69.129   87.390       22       26       False
+  subsidiado 2026-01      pct_proceso         26                   0.385    0.052    0.694       68.080   87.390       24       26       False
+  subsidiado 2026-02 pct_giro_directo         26                   0.467    0.016    0.654       77.684   88.875       18       26       False
+  subsidiado 2026-02      pct_proceso         26                   0.275    0.175    0.000       71.396   88.875       20       26       False
+  subsidiado 2026-03 pct_giro_directo         26                   0.307    0.128    0.835       76.248   92.370       17       25       False
+  subsidiado 2026-03      pct_proceso         26                   0.108    0.600    0.000       70.779   92.370       19       25       False
+  subsidiado 2026-04 pct_giro_directo         26                   0.422    0.032    0.725       79.125   91.831       13       23       False
+  subsidiado 2026-04      pct_proceso         26                   0.279    0.167    0.000       77.105   91.831       14       23       False
+  subsidiado 2026-05 pct_giro_directo         25                   0.344    0.092    0.838       80.623   92.102       11       24       False
+  subsidiado 2026-05      pct_proceso         25                   0.186    0.373    0.000       80.314   92.102       12       24       False
+  subsidiado 2026-06 pct_giro_directo         25                   0.338    0.098    1.493       79.030   90.100       14       23        True
+  subsidiado 2026-06      pct_proceso         25                  -0.015    0.945    0.000       76.856   90.100       16       24        True
+  subsidiado 2026-07 pct_giro_directo         25                   0.387    0.056    1.277       80.638   92.471       12       22        True
+  subsidiado 2026-07      pct_proceso         25                   0.002    0.991    0.000       77.094   92.471       15       23        True
+  subsidiado 2026-08 pct_giro_directo         25                   0.379    0.062    0.834       78.271   92.370       17       24        True
+  subsidiado 2026-08      pct_proceso         25                   0.379    0.062    0.834       78.271   92.370       17       24        True
+  subsidiado 2026-09 pct_giro_directo         25                  -0.059    0.779    1.090       90.224   92.175        2        7        True
+  subsidiado 2026-09      pct_proceso         25                   0.193    0.355    0.000       89.657   92.175        5       15        True
+  subsidiado 2026-10 pct_giro_directo         25                   0.002    0.994    2.393       89.978   98.943        3       13       False
+  subsidiado 2026-10      pct_proceso         25                   0.002    0.994    2.393       89.978   98.943        3       13       False
+
+== Retenciones del giro neto y destino posterior
+  corte codigo_eps                    nombre_eps                             motivo        norma_citada  retenido  luego_giro_directo  luego_tesoreria  luego_giro_directo_pct  comunicacion_de  menciona_embargo  proceso_sobre_upc_apropiada_pct  proceso_sobre_upc_neta_pct
+2026-02     CCF055                      Cajacopi  porcentaje mínimo de giro directo       sin nombrarla     40.73                5.50            35.23                   13.50           la EPS             False                            77.11                       78.77
+2026-02     EPS025                     Capresoca  porcentaje mínimo de giro directo       sin nombrarla      8.92                4.27             4.64                   47.91           la EPS             False                            61.35                       62.89
+2026-07     EPSS42                      Coosalud cargue del archivo fuera de tiempo       sin nombrarla      6.09                5.45             0.63                   89.62        sin decir             False                             0.00                        0.00
+2026-07     ESS024                      Coosalud cargue del archivo fuera de tiempo       sin nombrarla    488.79              419.57            69.22                   85.84    la Supersalud              True                             0.00                        0.00
+2026-09     CCF033          Familiar de Colombia  porcentaje mínimo de giro directo Decreto 930 de 2026      4.75                0.05             4.70                    1.13           la EPS             False                            89.66                       91.02
+2026-09     CCF055                      Proteger  porcentaje mínimo de giro directo Decreto 930 de 2026     29.47               15.66            13.81                   53.14           la EPS              True                            82.54                       84.48
+2026-09     CCF102                    Comfachoco  porcentaje mínimo de giro directo Decreto 930 de 2026      7.89                6.80             1.09                   86.15           la EPS             False                            61.41                       62.86
+2026-09     EPS025                     Capresoca  porcentaje mínimo de giro directo Decreto 930 de 2026      2.62                0.77             1.85                   29.37           la EPS             False                            86.91                       88.85
+2026-09     EPSI03 Asociación Indígena del Cauca  porcentaje mínimo de giro directo Decreto 930 de 2026     10.55                0.00             0.00                    0.00 sin comunicación             False                            72.77                       73.66
+2026-09     EPSS08                     Compensar  porcentaje mínimo de giro directo Decreto 930 de 2026      4.84                1.84             2.99                   38.11           la EPS             False                            86.71                       89.19
+2026-09     EPSS10                  Suramericana  porcentaje mínimo de giro directo Decreto 930 de 2026     17.45               10.73             6.72                   61.50           la EPS             False                            83.95                       87.72
+2026-09     EPSS12              Comfenalco Valle  porcentaje mínimo de giro directo Decreto 930 de 2026      1.13                0.37             0.75                   33.22           la EPS             False                            88.35                       90.96
+2026-09     EPSS46                     Salud Mia  porcentaje mínimo de giro directo Decreto 930 de 2026      3.63                0.00             3.63                    0.00           la EPS             False                             0.93                        0.96
+2026-09     EPSS49                     Salud Mia  porcentaje mínimo de giro directo Decreto 930 de 2026      0.26                0.00             0.26                    0.00           la EPS             False                             3.25                        3.28
+2026-10     CCF033          Familiar de Colombia  porcentaje mínimo de giro directo Decreto 930 de 2026      9.60                0.00             0.00                    0.00 sin comunicación             False                            81.29                       82.59
+2026-10     CCF055                      Proteger  porcentaje mínimo de giro directo Decreto 930 de 2026     25.49                0.00             0.00                    0.00 sin comunicación             False                            83.17                       85.01
+2026-10     EPSS10                  Suramericana  porcentaje mínimo de giro directo Decreto 930 de 2026     32.29                0.00             0.00                    0.00 sin comunicación             False                            73.05                       77.41
+2026-10     EPSS12              Comfenalco Valle  porcentaje mínimo de giro directo Decreto 930 de 2026      1.75                0.00             0.00                    0.00 sin comunicación             False                            83.60                       86.11
+2026-10     EPSS42                      Coosalud  porcentaje mínimo de giro directo Decreto 930 de 2026      0.00                0.00             0.00                    0.00 sin comunicación             False                            90.22                       99.80
+2026-10     ESS024                      Coosalud  porcentaje mínimo de giro directo Decreto 930 de 2026     45.76                0.00             0.00                    0.00 sin comunicación             False                            88.07                       89.77
+  total retenido 742.0 mil millones · luego a prestadores 471.0 (63.5 %) · luego a la EPS 145.5 (19.6 %)
+
+== ¿Qué base de cálculo explica las retenciones por el 90 %?
+  corte                                    base  retenidas  retenidas_bajo_90  no_retenidas_bajo_90_sin_otra_causa  no_retenidas_bajo_90_con_otra_causa                                                                                                                                                                                                               codigos_no_explicados
+2026-09                 proceso / UPC apropiada         10                 10                                    2                                    6                                                                                                                                                                          Aliansalud (EPSS01); Servicio Occidental de Salud (EPSS18)
+2026-09                      proceso / UPC neta         10                  8                                    1                                    4                                                                                                                                                       Aliansalud (EPSS01); Comfenalco Valle (EPSS12); Familiar de Colombia (CCF033)
+2026-09 (proceso + complemento) / UPC apropiada         10                  4                                    2                                    4                                        Aliansalud (EPSS01); Capresoca (EPS025); Comfachoco (CCF102); Comfenalco Valle (EPSS12); Compensar (EPSS08); Proteger (CCF055); Servicio Occidental de Salud (EPSS18); Suramericana (EPSS10)
+2026-10                 proceso / UPC apropiada          6                  5                                   10                                    0 Capital Salud (EPSS34); Comfachoco (CCF102); Comfaoriente (CCF050); Coosalud (EPSS42); Emssanar (ESS118); Mallamas (EPSI05); Mutual Ser (EPSS48); Mutual Ser (ESS207); Salud Mia (EPSS46); Salud Mia (EPSS49); Salud Total (EPSS02)
+2026-10                      proceso / UPC neta          6                  5                                    3                                    0                                                                                                                                                      Comfachoco (CCF102); Coosalud (EPSS42); Salud Mia (EPSS46); Salud Mia (EPSS49)
+2026-10 (proceso + complemento) / UPC apropiada          6                  5                                   10                                    0 Capital Salud (EPSS34); Comfachoco (CCF102); Comfaoriente (CCF050); Coosalud (EPSS42); Emssanar (ESS118); Mallamas (EPSI05); Mutual Ser (EPSS48); Mutual Ser (ESS207); Salud Mia (EPSS46); Salud Mia (EPSS49); Salud Total (EPSS02)
+
+== Acoplamiento descriptivo, subsidiado 2026 (EPS-mes con giro): Spearman entre el porcentaje del proceso y la parte del giro que dirigió la Supersalud = -0.260 (n = 254, p = 0.0000)

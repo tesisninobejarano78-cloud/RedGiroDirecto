@@ -1,0 +1,76 @@
+﻿capa,id,actor,vinculos_salida,vinculos_entrada,vinculos,intermediacion_dirigida,alcance_aguas_abajo
+recursos,ASC-001,MinSalud,1,0,1,0.0,12
+recursos,ASC-003,MinHacienda,1,0,1,0.0,12
+recursos,ASC-007,ADRES,12,10,22,0.19746376811594202,11
+recursos,ASC-008,UGPP,1,0,1,0.0,12
+recursos,ASC-009,EPS,1,1,2,0.0,1
+recursos,ASC-010,IPS,0,4,4,0.0,0
+recursos,ASC-011,Supersalud,0,0,0,0.0,0
+recursos,ASC-027,DTS departamentales,1,1,2,0.0,12
+recursos,ASC-028,DTS municipales,1,1,2,0.0,12
+recursos,ASC-044,Coljuegos,1,0,1,0.0,12
+recursos,ASC-045,Operadores de juegos,3,0,3,0.0,14
+recursos,ASC-047,CCF,1,1,2,0.0,11
+recursos,ASC-062,SOAT,1,0,1,0.0,12
+recursos,ASC-065,Industria farma,0,1,1,0.0,0
+recursos,ASC-067,Audifarma,0,1,1,0.0,0
+recursos,ASC-068,Disfarma,0,1,1,0.0,0
+recursos,ASC-069,Helpharma,0,1,1,0.0,0
+recursos,ASC-070,Importadores y distribuidores,0,1,1,0.0,0
+recursos,ASC-071,Droguerías,0,1,1,0.0,0
+recursos,ASC-164,FONSAET,1,1,2,0.0,1
+recursos,ASC-177,ICONTEC,0,0,0,0.0,0
+recursos,ASC-212,Operadores PILA,0,0,0,0.0,0
+recursos,ASC-251,Aportantes,1,0,1,0.0,12
+recursos,ASC-252,Afiliados,0,0,0,0.0,0
+recursos,ASC-253,Proveedores sin REPS,0,1,1,0.0,0
+informacion,ASC-001,MinSalud,3,6,9,0.050724637681159424,6
+informacion,ASC-003,MinHacienda,0,0,0,0.0,0
+informacion,ASC-007,ADRES,2,5,7,0.0006038647342995169,6
+informacion,ASC-008,UGPP,0,0,0,0.0,0
+informacion,ASC-009,EPS,3,5,8,0.003321256038647343,6
+informacion,ASC-010,IPS,4,3,7,0.04679951690821257,6
+informacion,ASC-011,Supersalud,3,0,3,0.0,7
+informacion,ASC-027,DTS departamentales,1,1,2,0.0,6
+informacion,ASC-028,DTS municipales,1,1,2,0.0,6
+informacion,ASC-044,Coljuegos,0,0,0,0.0,0
+informacion,ASC-045,Operadores de juegos,0,0,0,0.0,0
+informacion,ASC-047,CCF,0,0,0,0.0,0
+informacion,ASC-062,SOAT,0,0,0,0.0,0
+informacion,ASC-065,Industria farma,0,0,0,0.0,0
+informacion,ASC-067,Audifarma,0,0,0,0.0,0
+informacion,ASC-068,Disfarma,0,0,0,0.0,0
+informacion,ASC-069,Helpharma,0,0,0,0.0,0
+informacion,ASC-070,Importadores y distribuidores,0,0,0,0.0,0
+informacion,ASC-071,Droguerías,0,0,0,0.0,0
+informacion,ASC-164,FONSAET,0,0,0,0.0,0
+informacion,ASC-177,ICONTEC,2,0,2,0.0,7
+informacion,ASC-212,Operadores PILA,3,1,4,0.012681159420289856,7
+informacion,ASC-251,Aportantes,1,0,1,0.0,8
+informacion,ASC-252,Afiliados,0,1,1,0.0,0
+informacion,ASC-253,Proveedores sin REPS,0,0,0,0.0,0
+las dos capas,ASC-001,MinSalud,4,6,10,0.024758454106280196,15
+las dos capas,ASC-003,MinHacienda,1,0,1,0.0,16
+las dos capas,ASC-007,ADRES,14,15,29,0.33695652173913043,15
+las dos capas,ASC-008,UGPP,1,0,1,0.0,16
+las dos capas,ASC-009,EPS,4,6,10,0.022041062801932368,15
+las dos capas,ASC-010,IPS,4,7,11,0.10114734299516907,15
+las dos capas,ASC-011,Supersalud,3,0,3,0.0,16
+las dos capas,ASC-027,DTS departamentales,2,2,4,0.012077294685990338,15
+las dos capas,ASC-028,DTS municipales,2,2,4,0.012077294685990338,15
+las dos capas,ASC-044,Coljuegos,1,0,1,0.0,16
+las dos capas,ASC-045,Operadores de juegos,3,0,3,0.0,16
+las dos capas,ASC-047,CCF,1,1,2,0.0,15
+las dos capas,ASC-062,SOAT,1,0,1,0.0,16
+las dos capas,ASC-065,Industria farma,0,1,1,0.0,0
+las dos capas,ASC-067,Audifarma,0,1,1,0.0,0
+las dos capas,ASC-068,Disfarma,0,1,1,0.0,0
+las dos capas,ASC-069,Helpharma,0,1,1,0.0,0
+las dos capas,ASC-070,Importadores y distribuidores,0,1,1,0.0,0
+las dos capas,ASC-071,Droguerías,0,1,1,0.0,0
+las dos capas,ASC-164,FONSAET,1,1,2,0.0,15
+las dos capas,ASC-177,ICONTEC,2,0,2,0.0,16
+las dos capas,ASC-212,Operadores PILA,3,1,4,0.0018115942028985507,16
+las dos capas,ASC-251,Aportantes,2,0,2,0.0,17
+las dos capas,ASC-252,Afiliados,0,1,1,0.0,0
+las dos capas,ASC-253,Proveedores sin REPS,0,1,1,0.0,0

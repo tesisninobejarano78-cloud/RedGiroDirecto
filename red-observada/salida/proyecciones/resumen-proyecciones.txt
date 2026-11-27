@@ -1,0 +1,121 @@
+Proyecciones de la red observada y comparación con la norma — septiembre de 2026
+
+1. Cuatro EPS más grandes
+     entidad       nombre  prestadores        girado  participacion_pct  prestadores_exclusivos  cartera_exclusiva_pct  giro_medio_por_vinculo
+       NUEVA    NUEVA EPS         1701 1819873731434          24.022508                     139               8.171664            1.069885e+09
+     SANITAS      SANITAS         1664  961760660694          12.695333                     242              14.543269            5.779812e+08
+SURAMERICANA SURAMERICANA         1138  895594224668          11.821930                     165              14.499121            7.869897e+08
+  SALUDTOTAL  SALUD TOTAL         1456  759728812954          10.028493                     161              11.057692            5.217918e+08
+
+2. Proyección EPS–EPS
+{'eps': 25, 'densidad_sin_pesos': 0.96, 'modularidad_jaccard': 0.1328, 'comunidades': 3, 'jaccard_mediana': 0.0475, 'jaccard_max': 0.4301}
+                   entidad                        nombre  prestadores  grado_proyeccion  fuerza_proyeccion  jaccard_medio  cartera_compartida_pct  comunidad
+                     NUEVA                     NUEVA EPS         1701                24               7125       0.147967               91.828336          3
+                   SANITAS                       SANITAS         1664                24               6509       0.134218               85.456731          3
+                SALUDTOTAL                   SALUD TOTAL         1456                24               6255       0.141061               88.942308          3
+                 FAMISANAR                     FAMISANAR         1224                24               5876       0.147147               92.728758          3
+                  COOSALUD                      COOSALUD         1124                24               5505       0.144566               92.437722          3
+              SURAMERICANA                  SURAMERICANA         1138                24               5106       0.130858               85.500879          3
+                  CAJACOPI                      CAJACOPI          594                24               2577       0.088377               89.057239          1
+                SAVIASALUD                   SAVIA SALUD          415                24               2380       0.095805               92.771084          3
+              CAPITALSALUD                 CAPITAL SALUD          326                24               2328       0.106602               96.319018          1
+                 MUTUALSER                    MUTUAL SER          481                23               2218       0.081367               84.199584          1
+        FAMILIARDECOLOMBIA          FAMILIAR DE COLOMBIA          367                24               2033       0.090414               89.645777          1
+                  MALLAMAS                      MALLAMAS          298                24               1691       0.087337               87.919463          2
+ SERVICIOOCCIDENTALDESALUD  SERVICIO OCCIDENTAL DE SALUD          306                23               1609       0.080455               87.908497          2
+                ASMETSALUD                   ASMET SALUD          271                24               1462       0.073663               93.726937          2
+                 COMPENSAR                     COMPENSAR          226                23               1359       0.068841               89.823009          1
+                    PIJAOS                        PIJAOS          146                24                952       0.059766               89.041096          2
+                  EMSSANAR                      EMSSANAR          163                19                692       0.043041               88.957055          2
+                COMFACHOCO                    COMFACHOCO          115                24                669       0.044524               84.347826          2
+                 ANASWAYUU                     ANASWAYUU           96                22                642       0.048303               89.583333          1
+           COMFENALCOVALLE              COMFENALCO VALLE          114                24                642       0.046514               90.350877          2
+              COMFAORIENTE                  COMFAORIENTE          101                23                460       0.026967               87.128713          1
+                  DUSAKAWI                      DUSAKAWI           91                22                397       0.029444               79.120879          1
+                 CAPRESOCA                     CAPRESOCA           61                22                305       0.021537               72.131148          1
+ASOCIACIONINDIGENADELCAUCA ASOCIACIÓN INDÍGENA DEL CAUCA           50                21                259       0.022431               78.000000          2
+                  SALUDMIA                     SALUD MIA            4                18                 35       0.004603              100.000000          1
+
+ comunidad                                                                                                                                eps  n_eps  girado_pct                      departamentos_principales
+         1      ANASWAYUU; CAJACOPI; CAPITAL SALUD; CAPRESOCA; COMFAORIENTE; COMPENSAR; DUSAKAWI; FAMILIAR DE COLOMBIA; MUTUAL SER; SALUD MIA     10   16.605065  Bogotá D.C 33 %; Bolívar 11 %; Atlántico 10 %
+         2 ASMET SALUD; ASOCIACIÓN INDÍGENA DEL CAUCA; COMFACHOCO; COMFENALCO VALLE; EMSSANAR; MALLAMAS; PIJAOS; SERVICIO OCCIDENTAL DE SALUD      8    9.827228   Valle del cauca 36 %; Nariño 21 %; Cauca 9 %
+         3                                                    COOSALUD; FAMISANAR; NUEVA EPS; SALUD TOTAL; SANITAS; SAVIA SALUD; SURAMERICANA      7   73.567708 Bogotá D.C 25 %; Antioquia 20 %; Santander 8 %
+
+Pares con mayor Jaccard:
+      eps_a        eps_b  compartidos  jaccard  misma_comunidad
+  FAMISANAR  SALUD TOTAL          806 0.430096             True
+   COOSALUD    NUEVA EPS          839 0.422457             True
+  NUEVA EPS      SANITAS          997 0.421030             True
+  FAMISANAR    NUEVA EPS          837 0.400862             True
+  FAMISANAR      SANITAS          826 0.400582             True
+  NUEVA EPS  SALUD TOTAL          890 0.392589             True
+SALUD TOTAL      SANITAS          855 0.377483             True
+SALUD TOTAL SURAMERICANA          707 0.374669             True
+   COOSALUD    FAMISANAR          605 0.347103             True
+   COOSALUD  SALUD TOTAL          655 0.340260             True
+
+Meses de control:
+  corte  eps  densidad_sin_pesos  comunidades  modularidad_jaccard  nmi_con_el_mes_principal  eps_en_comun_con_el_mes_principal
+2026-06   25            0.926667            4             0.146988                  0.813675                                 25
+2026-07   25            0.920000            4             0.153764                  0.787983                                 25
+2026-08   25            0.933333            4             0.123116                  0.524640                                 25
+
+3. Proyección prestador–prestador
+{'prestadores': 3810, 'pares_posibles': 7256145, 'umbral': 2, 'prestadores_en_la_red_filtrada': 2462, 'pares_en_la_red_filtrada': 1443352, 'densidad_filtrada': np.float64(0.4764), 'comunidades': 4, 'modularidad': 0.0863, 'nmi_departamento': 0.2511, 'ari_departamento': 0.1113, 'spearman_grado_proyeccion_vs_eps': 0.9134, 'spearman_fuerza_proyeccion_vs_eps': 0.9283}
+ umbral_eps_compartidas   pares  densidad  prestadores_con_vinculo  prestadores_con_al_menos_t_eps  componente_mayor
+                      1 3732978  0.514457                     3810                            3810              3810
+                      2 1443352  0.198914                     2462                            2462              2462
+                      3  699317  0.096376                     1734                            1734              1734
+                      4  375203  0.051708                     1298                            1298              1298
+                      5  199013  0.027427                      960                             960               960
+                      6   97219  0.013398                      704                             704               704
+                      7   42817  0.005901                      498                             499               498
+                      8   17846  0.002459                      357                             358               357
+
+ comunidad  prestadores  eps_medias_por_prestador                                  departamentos_principales                                      tipos_principales                                    eps_mas_presentes
+         1          664                  4.460843            Bogotá D.C 18 %; Cundinamarca 12 %; Tolima 11 % IPS privada 63 %; ESE (empresa social del Estado) 31 %  FAMISANAR (83 %); SANITAS (79 %); SALUDTOTAL (74 %)
+         2          650                  5.044615                 Bolívar 13 %; Atlántico 13 %; Córdoba 11 % IPS privada 54 %; ESE (empresa social del Estado) 40 %       CAJACOPI (75 %); NUEVA (64 %); COOSALUD (59 %)
+         3          609                  4.802956         Antioquia 37 %; Valle del cauca 7 %; Atlántico 7 % IPS privada 57 %; ESE (empresa social del Estado) 36 % SURAMERICANA (89 %); SALUDTOTAL (68 %); NUEVA (64 %)
+         4          539                  3.743970 Valle del cauca 18 %; Nariño 17 %; Norte de Santander 11 % IPS privada 58 %; ESE (empresa social del Estado) 37 %        NUEVA (69 %); SANITAS (63 %); COOSALUD (43 %)
+
+Mayor fuerza en la proyección:
+                                                                     razon_social                  tipo_prestador    departamento  eps_que_le_giran  grado_proyeccion  fuerza_proyeccion  comunidad
+                                                                    DAVITA S.A.S.                     IPS privada      Bogotá D.C                18              2386            10523.0          4
+                                   HOSPITAL DEPARTAMENTAL DE VILLAVICENCIO E.S.E. ESE (empresa social del Estado)            Meta                17              2374            10501.0          2
+                       SUBRED INTEGRADA DE SERVICIOS DE SALUD SUR OCCIDENTE E.S.E ESE (empresa social del Estado)      Bogotá D.C                18              2378            10430.0          2
+                                SUBRED INTEGRADA DE SERVICIOS DE SALUD SUR E.S.E. ESE (empresa social del Estado)      Bogotá D.C                17              2356            10321.0          2
+                               SUBRED INTEGRADA DE SERVICIOS DE SALUD NORTE E.S.E ESE (empresa social del Estado)      Bogotá D.C                17              2356            10321.0          2
+                                           E.S.E. HOSPITAL FEDERICO LLERAS ACOSTA ESE (empresa social del Estado)          Tolima                15              2329            10113.0          2
+                                                            ASOCIACIÓN PROFAMILIA                     IPS privada       Antioquia                17              2348            10023.0          2
+         EMPRESA SOCIAL DEL ESTADO HOSPITAL UNIVERSITARIO JULIO MENDEZ BARRENECHE ESE (empresa social del Estado)       Magdalena                14              2309             9849.0          2
+E.S.E. HOSPITAL UNIVERSITARIO DEL VALLE EVARISTO GARCIA EMPRESA SOCIAL DEL ESTADO ESE (empresa social del Estado) Valle del cauca                17              2326             9816.0          4
+                                                    MIRED BARRANQUILLA IPS S.A.S.                       IPS mixta       Atlántico                14              2293             9663.0          2
+
+4. Densidad sobre las mismas clases
+{'clases_en_la_parte_comun': 9, 'clases_normadas': 9, 'clases_observadas': 9, 'densidad_clase_norma': 1.0, 'densidad_clase_observada': 1.0, 'eps': 25, 'pares_eps_clase_posibles': 225, 'densidad_eps_clase_norma_habilita': 1.0, 'densidad_eps_clase_observada': 0.4267, 'uso_de_lo_que_la_norma_habilita': 0.4267, 'pares_eps_clase_fuera_de_la_norma': 0}
+  clase                                                               clase_nombre vinculo_normado  en_la_norma  eps_que_la_usan
+ASC-010                                     IPS (prestadores inscritos en el REPS)             R04         True               25
+ASC-047                                             Cajas de compensación familiar             R11         True               15
+ASC-065                           Industria farmacéutica y de dispositivos médicos             R26         True                1
+ASC-067                                                                  Audifarma             R08         True                7
+ASC-068                                                                   Disfarma             R09         True                7
+ASC-069                                                                  Helpharma             R10         True                3
+ASC-070     Importadores y distribuidores mayoristas de medicamentos y tecnologías             R25         True               10
+ASC-071                 Droguerías, gestores farmacéuticos y canal de dispensación             R07         True                5
+ASC-253 Proveedores de servicios y tecnologías de salud sin inscripción en el REPS             R27         True               23
+
+5. Lo que entra y lo que sale
+             actor            alcance                                                 entra  entra_valor                                               sale   sale_valor   diferencia  diferencia_pct                                                                                              explicacion
+             ADRES septiembre de 2026 órdenes de giro de las EPS (filas con valor ordenado) 7.622844e+12                   giro a prestadores en esas filas 7.575703e+12 4.714164e+10        0.618426                               comunicación de la Supersalud 100.0 %; falla bancaria 0.0 %; embargo 0.0 %
+             ADRES     serie completa órdenes de giro de las EPS (filas con valor ordenado) 1.688167e+14                   giro a prestadores en esas filas 1.687388e+14 7.789270e+10        0.046140                  comunicación de la Supersalud 68.7 %; falla bancaria 15.5 %; embargo 15.0 %; otra 0.8 %
+EPS (contributivo) septiembre de 2026                    UPC de la base del giro (upc_base) 4.029958e+12                 giro directo por cuenta de las EPS 3.621434e+12 4.085239e+11       10.137175                    17 EPS con giro; mediana del porcentaje: 89.97 %; retenido del giro neto a las EPS: 0
+  EPS (subsidiado) septiembre de 2026                    UPC de la base del giro (upc_base) 4.419557e+12                 giro directo por cuenta de las EPS 3.964495e+12 4.550618e+11       10.296548       25 EPS con giro; mediana del porcentaje: 90.22 %; retenido del giro neto a las EPS: 82,591,246,878
+        Supersalud septiembre de 2026                                                     —          NaN giro dirigido por sus comunicaciones (complemento) 4.763690e+10 4.713063e+10             NaN relaciones ordenadas y no giradas: 22 por 26,149,718,352; prestadores sin giro directo de ninguna EPS: 9
+       Prestadores septiembre de 2026                                          giro directo          NaN                                                  —          NaN          NaN             NaN        expuestos a comunicaciones de la Supersalud: 198 (5.2 %); expuestos a una retención: 663 (17.4 %)
+
+No girado por causa, serie completa:
+causa
+comunicación de la Supersalud    53518214553
+falla bancaria                   12072295778
+embargo                          11687556278
+otra                               614633909

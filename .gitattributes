@@ -1,0 +1,8 @@
+# Fines de línea: los archivos de texto se guardan y se entregan con LF en todos los sistemas.
+# Así, volver a correr los programas en Windows, Linux o Mac no marca archivos como cambiados.
+* text=auto eol=lf
+
+# Archivos binarios: git no los modifica.
+*.gz binary
+*.png binary
+*.xlsx binary

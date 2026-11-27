@@ -1,0 +1,220 @@
+﻿serie,corte,proceso,causa,operaciones,valor_girado,valor_no_girado,operaciones_por_correo,operaciones_no_giradas
+contributivo,2024-01,proceso,(vacía),2406,227910479649,0,0,0
+contributivo,2024-01,proceso,embargo,5,19809214,2201024,0,5
+contributivo,2024-01,proceso,falla bancaria,1,0,2153002,0,1
+contributivo,2024-01,proceso,giro tras un rechazo,2,4499989,0,0,0
+contributivo,2024-02,proceso,(vacía),2254,254260880554,0,0,0
+contributivo,2024-02,proceso,embargo,3,6485089,720565,0,3
+contributivo,2024-02,proceso,giro tras un rechazo,5,176744183,0,0,0
+contributivo,2024-03,proceso,(vacía),1981,211914521277,0,0,0
+contributivo,2024-03,proceso,embargo,6,21820871,3781968,0,6
+contributivo,2024-04,proceso,(vacía),6802,1571262366142,0,0,0
+contributivo,2024-04,proceso,embargo,37,1946049019,223990525,0,37
+contributivo,2024-04,proceso,falla bancaria,3,0,45336332,0,3
+contributivo,2024-04,proceso,giro tras un rechazo,15,5529233944,0,0,0
+contributivo,2024-05,proceso,(vacía),7886,2153654970523,0,0,0
+contributivo,2024-05,proceso,embargo,20,1335884694,148431633,0,20
+contributivo,2024-05,proceso,falla bancaria,1,0,3627297,0,1
+contributivo,2024-05,proceso,giro tras un rechazo,19,3857353843,0,0,0
+contributivo,2024-06,proceso,(vacía),8090,1977316712330,0,0,0
+contributivo,2024-06,proceso,embargo,21,326873624,35377768,0,21
+contributivo,2024-06,proceso,falla bancaria,2,0,12295288,0,2
+contributivo,2024-06,proceso,giro tras un rechazo,4,824761963,0,0,0
+contributivo,2024-07,proceso,(vacía),10233,2133084264837,0,0,0
+contributivo,2024-07,proceso,embargo,26,379440038,47776992,0,26
+contributivo,2024-07,proceso,falla bancaria,6,0,909297770,0,6
+contributivo,2024-07,proceso,giro tras un rechazo,7,506296658,0,0,0
+contributivo,2024-08,proceso,(vacía),9482,2205573076552,0,0,0
+contributivo,2024-08,proceso,embargo,8,68390907,8075794,0,8
+contributivo,2024-08,proceso,falla bancaria,10,0,493206413,0,10
+contributivo,2024-09,proceso,(vacía),8887,2102269419013,0,0,0
+contributivo,2024-09,proceso,embargo,13,98348960,15034427,0,13
+contributivo,2024-09,proceso,falla bancaria,5,0,272483158,0,5
+contributivo,2024-10,proceso,(vacía),8771,2242801258305,0,0,0
+contributivo,2024-10,proceso,embargo,12,133522231,23153925,0,12
+contributivo,2024-10,proceso,falla bancaria,4,0,39668715,0,4
+contributivo,2024-11,proceso,(vacía),11354,2098545875392,0,0,0
+contributivo,2024-11,proceso,embargo,27,311685768,34631750,0,27
+contributivo,2024-11,proceso,falla bancaria,4,0,51318614,0,4
+contributivo,2024-12,proceso,(vacía),11788,2256460604291,0,0,0
+contributivo,2024-12,proceso,embargo,13,1090496776,86339748,0,13
+contributivo,2024-12,proceso,falla bancaria,4,0,139909723,0,4
+contributivo,2025-01,proceso,(vacía),9396,2316361026943,0,0,0
+contributivo,2025-01,proceso,embargo,18,206443718,22938193,0,18
+contributivo,2025-01,proceso,falla bancaria,2,0,27062397,0,2
+contributivo,2025-02,proceso,(vacía),7446,2196364701029,0,0,0
+contributivo,2025-02,proceso,embargo,15,144515740,23814339,0,15
+contributivo,2025-02,proceso,falla bancaria,4,0,12200984,0,4
+contributivo,2025-02,proceso,otra,1,271385525,0,0,0
+contributivo,2025-03,proceso,(vacía),9214,2310354188359,0,0,0
+contributivo,2025-03,proceso,embargo,11,89143110,16608033,0,11
+contributivo,2025-03,proceso,falla bancaria,1,0,4008648,0,1
+contributivo,2025-04,proceso,(vacía),10032,2677456839060,0,0,0
+contributivo,2025-04,proceso,embargo,10,62692689,30878489,0,10
+contributivo,2025-04,proceso,falla bancaria,2,6793093,36076061,0,1
+contributivo,2025-05,proceso,(vacía),12485,3221036188665,0,0,0
+contributivo,2025-05,proceso,embargo,10,73687095,36293644,0,10
+contributivo,2025-06,proceso,(vacía),9938,2842118034663,0,0,0
+contributivo,2025-06,proceso,embargo,10,104814315,45437897,0,10
+contributivo,2025-06,proceso,falla bancaria,4,0,428851800,0,4
+contributivo,2025-07,proceso,(vacía),9466,2888739466410,0,0,0
+contributivo,2025-07,proceso,embargo,14,157384769,77517871,0,14
+contributivo,2025-07,proceso,falla bancaria,3,0,3112780003,0,3
+contributivo,2025-08,proceso,(vacía),11132,3039117205396,28272305,0,2
+contributivo,2025-08,proceso,embargo,19,391879531,187273200,0,19
+contributivo,2025-08,proceso,falla bancaria,8,0,476119663,0,8
+contributivo,2025-09,proceso,(vacía),11461,2953962575038,0,0,0
+contributivo,2025-09,proceso,embargo,10,152786354,75252981,0,10
+contributivo,2025-09,proceso,falla bancaria,2,0,43149295,0,2
+contributivo,2025-09,proceso,otra,1,6191167,3049381,0,1
+contributivo,2025-10,proceso,(vacía),11812,3101225279499,0,0,0
+contributivo,2025-10,proceso,embargo,8,82146625,40460278,0,8
+contributivo,2025-10,proceso,falla bancaria,1,0,6473606,0,1
+contributivo,2025-11,proceso,(vacía),10546,2841794335204,0,0,0
+contributivo,2025-11,proceso,embargo,4,19174480,9444147,0,4
+contributivo,2025-11,proceso,falla bancaria,4,0,3945377682,0,4
+contributivo,2025-12,proceso,(vacía),11256,3033778526398,0,0,0
+contributivo,2025-12,proceso,embargo,4,18389061,9057299,0,4
+contributivo,2025-12,proceso,falla bancaria,3,0,83719279,0,3
+contributivo,2026-01,proceso,(vacía),11879,3201600150267,0,0,0
+contributivo,2026-01,proceso,embargo,9,746641447,367748772,0,9
+contributivo,2026-01,proceso,falla bancaria,3,0,17199459,0,3
+contributivo,2026-02,proceso,(vacía),10055,3023481437837,202125925,0,3
+contributivo,2026-02,proceso,embargo,1,5040075,2482425,0,1
+contributivo,2026-02,proceso,falla bancaria,5,0,402521673,0,5
+contributivo,2026-03,proceso,(vacía),11904,3293633738521,0,0,0
+contributivo,2026-03,proceso,embargo,2,6401850,3153150,0,2
+contributivo,2026-03,proceso,falla bancaria,6,0,113851011,0,6
+contributivo,2026-04,proceso,(vacía),10383,3356079818737,0,0,0
+contributivo,2026-04,proceso,embargo,3,23585841,11616907,0,3
+contributivo,2026-04,proceso,falla bancaria,1,0,7690887,0,1
+contributivo,2026-05,proceso,(vacía),10842,3106031494435,0,0,0
+contributivo,2026-05,proceso,descuento de auditoría,35,35142108104,16377703,0,35
+contributivo,2026-05,proceso,embargo,2,4367463,2151139,0,2
+contributivo,2026-05,proceso,falla bancaria,2,0,27626488,0,2
+contributivo,2026-06,proceso,(vacía),10424,3094180167155,20100318,0,57
+contributivo,2026-06,proceso,descuento de auditoría,35,3512302376,0,0,0
+contributivo,2026-06,proceso,embargo,2,24665316,0,0,0
+contributivo,2026-06,proceso,falla bancaria,4,12476536,43892238,0,2
+contributivo,2026-07,proceso,(vacía),12743,3415220835590,0,0,0
+contributivo,2026-07,proceso,embargo,1,966099,475840,0,1
+contributivo,2026-07,proceso,falla bancaria,13,0,937356995,0,13
+contributivo,2026-08,proceso,(vacía),10762,3394416095146,0,0,0
+contributivo,2026-08,proceso,embargo,1,1129384,556263,0,1
+contributivo,2026-08,proceso,falla bancaria,7,0,668881962,0,7
+contributivo,2026-09,proceso,(vacía),14232,3621428043279,0,0,0
+contributivo,2026-09,proceso,embargo,2,5781841,2847770,0,2
+contributivo,2026-09,proceso,falla bancaria,2,0,8159335,0,2
+subsidiado-ips,2024-01,complemento,comunicación de la Supersalud,875,356936308470,0,875,0
+subsidiado-ips,2024-01,complemento,comunicación sin emisor identificado,16,8380228496,0,16,0
+subsidiado-ips,2024-01,proceso,(vacía),8001,1511786336755,0,0,0
+subsidiado-ips,2024-02,complemento,comunicación de la Supersalud,515,177710688652,0,515,0
+subsidiado-ips,2024-02,complemento,comunicación sin emisor identificado,436,198229325882,0,436,0
+subsidiado-ips,2024-02,proceso,(vacía),7988,1600623793840,0,0,0
+subsidiado-ips,2024-03,complemento,comunicación de la Supersalud,811,383337975034,0,811,0
+subsidiado-ips,2024-03,proceso,(vacía),7789,1572009716004,0,0,0
+subsidiado-ips,2024-04,complemento,cargue en PISIS,3522,801949323327,0,0,0
+subsidiado-ips,2024-04,complemento,comunicación de la Supersalud,907,369551334031,0,907,0
+subsidiado-ips,2024-04,proceso,(vacía),5944,1232869754128,0,0,0
+subsidiado-ips,2024-05,complemento,comunicación de la Supersalud,920,373408090867,0,920,0
+subsidiado-ips,2024-05,proceso,(vacía),9246,2098602670537,0,0,0
+subsidiado-ips,2024-06,complemento,comunicación de la Supersalud,433,150938744104,11451538,433,1
+subsidiado-ips,2024-06,proceso,(vacía),9213,2108626615652,0,0,0
+subsidiado-ips,2024-07,complemento,comunicación de la Supersalud,924,352954338138,11124398,924,1
+subsidiado-ips,2024-07,complemento,comunicación sin emisor identificado,129,25955913808,0,129,0
+subsidiado-ips,2024-07,proceso,(vacía),8513,2098461166871,0,0,0
+subsidiado-ips,2024-07,proceso,embargo,17,7037861131,510666709,0,15
+subsidiado-ips,2024-08,complemento,comunicación de la Supersalud,1022,387537170246,20243373,1022,2
+subsidiado-ips,2024-08,proceso,(vacía),9322,2150931747688,0,0,0
+subsidiado-ips,2024-08,proceso,embargo,14,3471099825,588088088,0,13
+subsidiado-ips,2024-09,complemento,comunicación de la Supersalud,936,383366516955,2775779,936,2
+subsidiado-ips,2024-09,proceso,(vacía),9670,2184453214823,0,0,0
+subsidiado-ips,2024-09,proceso,embargo,6,676953256,148964216,0,6
+subsidiado-ips,2024-10,complemento,comunicación de la Supersalud,811,380364875694,3036470,811,1
+subsidiado-ips,2024-10,proceso,(vacía),8574,2206269666393,0,0,0
+subsidiado-ips,2024-10,proceso,embargo,10,1454307155,470219163,0,10
+subsidiado-ips,2024-11,complemento,comunicación de la Supersalud,537,185598519484,3602922,537,1
+subsidiado-ips,2024-11,complemento,comunicación sin emisor identificado,304,194105780610,0,304,0
+subsidiado-ips,2024-11,proceso,(vacía),9135,2238981545496,0,0,0
+subsidiado-ips,2024-11,proceso,embargo,9,1909432609,240560557,0,8
+subsidiado-ips,2024-12,complemento,comunicación de la Supersalud,410,152345005727,3495693,410,1
+subsidiado-ips,2024-12,complemento,comunicación sin emisor identificado,530,215324546575,0,530,0
+subsidiado-ips,2024-12,proceso,(vacía),8991,2302403981958,0,0,0
+subsidiado-ips,2024-12,proceso,embargo,8,2949177570,197186041,0,8
+subsidiado-ips,2024-12,proceso,resolución sin emisor identificado,3,0,24037689,0,3
+subsidiado-ips,2025-01,complemento,comunicación de la Supersalud,771,264575727492,0,771,0
+subsidiado-ips,2025-01,complemento,comunicación sin emisor identificado,76,143434409975,0,76,0
+subsidiado-ips,2025-01,proceso,(vacía),9759,2361839565593,0,0,0
+subsidiado-ips,2025-01,proceso,embargo,5,572751277,82326327,0,5
+subsidiado-ips,2025-02,complemento,comunicación de la Supersalud,1000,412410866059,0,1000,0
+subsidiado-ips,2025-02,complemento,comunicación sin emisor identificado,27,3821899838,0,27,0
+subsidiado-ips,2025-02,proceso,(vacía),9435,2478697636847,0,0,0
+subsidiado-ips,2025-02,proceso,embargo,8,1053388639,867839730,0,8
+subsidiado-ips,2025-03,complemento,comunicación de la Supersalud,719,275031849223,0,719,0
+subsidiado-ips,2025-03,complemento,comunicación sin emisor identificado,259,149635089255,0,259,0
+subsidiado-ips,2025-03,proceso,(vacía),8564,2502298527773,0,0,0
+subsidiado-ips,2025-03,proceso,embargo,7,1198576312,320794287,0,7
+subsidiado-ips,2025-04,complemento,comunicación de la Supersalud,832,411563343091,0,832,0
+subsidiado-ips,2025-04,proceso,(vacía),8200,2469138440433,0,0,0
+subsidiado-ips,2025-04,proceso,embargo,7,1040587277,559709704,0,7
+subsidiado-ips,2025-05,complemento,comunicación de la EPS,235,122512045014,0,235,0
+subsidiado-ips,2025-05,complemento,comunicación de la Supersalud,728,299558959196,59218189,728,1
+subsidiado-ips,2025-05,proceso,(vacía),8332,2473525344914,0,0,0
+subsidiado-ips,2025-05,proceso,embargo,6,552044797,507196743,0,6
+subsidiado-ips,2025-06,complemento,comunicación de la Supersalud,1027,411169827322,52644827,1027,1
+subsidiado-ips,2025-06,proceso,(vacía),9018,2489191241247,0,0,0
+subsidiado-ips,2025-06,proceso,embargo,11,2806600449,883785095,0,11
+subsidiado-ips,2025-07,complemento,comunicación de la Supersalud,1023,412208122563,76959371,1023,4
+subsidiado-ips,2025-07,proceso,(vacía),8035,2612768982850,0,0,0
+subsidiado-ips,2025-07,proceso,embargo,8,433493791,715545468,0,8
+subsidiado-ips,2025-08,complemento,comunicación de la Supersalud,1230,417526834185,1388724726,1230,3
+subsidiado-ips,2025-08,proceso,(vacía),8647,2474821465688,0,0,0
+subsidiado-ips,2025-08,proceso,embargo,9,1664998717,673893645,0,9
+subsidiado-ips,2025-09,complemento,comunicación de la Supersalud,461,234599285935,1033883339,461,1
+subsidiado-ips,2025-09,proceso,(vacía),10207,2745160423572,0,0,0
+subsidiado-ips,2025-09,proceso,embargo,5,2453313790,355768548,0,5
+subsidiado-ips,2025-10,complemento,comunicación de la Supersalud,95,50191481796,1125406886,95,1
+subsidiado-ips,2025-10,proceso,(vacía),11236,2930209410141,0,0,0
+subsidiado-ips,2025-10,proceso,embargo,4,153293693,272302269,0,4
+subsidiado-ips,2025-11,complemento,comunicación de la Supersalud,67,34846182781,167952943,67,1
+subsidiado-ips,2025-11,proceso,(vacía),11019,2995281677001,0,0,0
+subsidiado-ips,2025-11,proceso,embargo,3,844503661,967332364,0,3
+subsidiado-ips,2025-12,complemento,comunicación de la EPS,8,1062811038,0,8,0
+subsidiado-ips,2025-12,complemento,comunicación de la Supersalud,408,220600791398,1601547035,65,2
+subsidiado-ips,2025-12,proceso,(vacía),9000,2732303113712,0,0,0
+subsidiado-ips,2025-12,proceso,embargo,2,592087468,194112891,0,2
+subsidiado-ips,2026-01,complemento,comunicación de la Supersalud,278,93191498649,0,278,0
+subsidiado-ips,2026-01,complemento,comunicación del agente interventor,145,18143498977,0,145,0
+subsidiado-ips,2026-01,proceso,(vacía),9849,3020784156523,0,0,0
+subsidiado-ips,2026-01,proceso,embargo,3,5293547019,972347479,0,3
+subsidiado-ips,2026-02,complemento,comunicación de la EPS,4,5500000000,0,4,0
+subsidiado-ips,2026-02,complemento,comunicación de la Supersalud,986,449838174497,825515427,986,1
+subsidiado-ips,2026-02,proceso,(vacía),9340,3061034249396,0,0,0
+subsidiado-ips,2026-02,proceso,embargo,1,126757556,190044516,0,1
+subsidiado-ips,2026-03,complemento,comunicación de la Supersalud,589,419276507028,0,410,0
+subsidiado-ips,2026-03,complemento,comunicación sin emisor identificado,171,57757975461,0,39,0
+subsidiado-ips,2026-03,proceso,(vacía),9282,2990449776612,0,0,0
+subsidiado-ips,2026-04,complemento,comunicación sin emisor identificado,486,242374085609,0,486,0
+subsidiado-ips,2026-04,proceso,(vacía),9567,3176324358046,0,0,0
+subsidiado-ips,2026-04,proceso,descuento de auditoría,34,102914833469,10430775,0,34
+subsidiado-ips,2026-05,complemento,comunicación de la Supersalud,57,39196270295,0,57,0
+subsidiado-ips,2026-05,complemento,comunicación sin emisor identificado,163,198959855096,0,163,0
+subsidiado-ips,2026-05,proceso,(vacía),9391,3293887184476,0,0,0
+subsidiado-ips,2026-05,proceso,embargo,2,836777644,371044879,0,2
+subsidiado-ips,2026-06,complemento,comunicación de la Supersalud,392,421437536762,0,392,0
+subsidiado-ips,2026-06,complemento,comunicación del agente interventor,581,406207906819,0,0,0
+subsidiado-ips,2026-06,proceso,(vacía),8168,2654240064210,0,0,0
+subsidiado-ips,2026-07,complemento,comunicación de la Supersalud,438,435163539921,0,438,0
+subsidiado-ips,2026-07,complemento,comunicación sin emisor identificado,158,425028550607,0,9,0
+subsidiado-ips,2026-07,proceso,(vacía),8530,2673255762996,0,0,0
+subsidiado-ips,2026-07,proceso,descuento de auditoría,25,34530715529,10023158,0,25
+subsidiado-ips,2026-08,proceso,(vacía),9519,3432860398823,0,0,0
+subsidiado-ips,2026-08,proceso,descuento de auditoría,1,35663337,216654,0,1
+subsidiado-ips,2026-09,complemento,comunicación de la EPS,2400,598801938833,0,838,0
+subsidiado-ips,2026-09,complemento,comunicación de la Supersalud,71,47636903093,0,71,0
+subsidiado-ips,2026-09,complemento,comunicación sin emisor identificado,5,822681623,0,1,0
+subsidiado-ips,2026-09,complemento,otra,67,7907012741,0,1,0
+subsidiado-ips,2026-09,proceso,(vacía),8945,3298886016080,0,0,0
+subsidiado-ips,2026-09,proceso,comunicación de la Supersalud,29,214221768,47130631637,0,29
+subsidiado-ips,2026-10,proceso,(vacía),11715,3933731270023,0,0,0
+subsidiado-ips,2026-10,proceso,embargo,1,4675404,2302810,0,1

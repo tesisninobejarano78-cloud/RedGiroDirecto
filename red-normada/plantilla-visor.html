@@ -1,0 +1,1201 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Red normada de flujos</title>
+<!--
+  Visor de la red de flujos de recursos e información. Lo genera
+  construir-red-normada.py a partir de esta plantilla: no editar el visor
+  generado, editar la plantilla y volver a correr el script.
+  Sin dependencias externas: funciona sin conexión.
+-->
+<style>
+  :root {
+    color-scheme: light;
+    --page: #f9f9f7;
+    --surface: #fcfcfb;
+    --ink: #0b0b0b;
+    --ink-2: #52514e;
+    --muted: #898781;
+    --grid: #e1e0d9;
+    --border: rgba(11, 11, 11, 0.10);
+    --wash: rgba(11, 11, 11, 0.05);
+    --control: #ffffff;
+    --control-hover: #efeee9;
+    --border-strong: rgba(11, 11, 11, 0.20);
+    --seleccion: rgba(42, 120, 214, 0.12);
+    --sombra: 0 1px 3px rgba(0, 0, 0, 0.06), 0 6px 20px rgba(0, 0, 0, 0.08);
+    --recursos: #2a78d6;
+    --informacion: #eb6834;
+    --ambas: #1baf7a;
+    --ninguna: #898781;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page: #0d0d0d;
+      --surface: #1a1a19;
+      --ink: #f0efec;
+      --ink-2: #c3c2b7;
+      --muted: #898781;
+      --grid: #2c2c2a;
+      --border: rgba(255, 255, 255, 0.10);
+      --wash: rgba(255, 255, 255, 0.06);
+      --control: #262625;
+      --control-hover: #31312f;
+      --border-strong: rgba(255, 255, 255, 0.18);
+      --seleccion: rgba(57, 135, 229, 0.24);
+      --sombra: 0 1px 3px rgba(0, 0, 0, 0.35), 0 6px 20px rgba(0, 0, 0, 0.45);
+      --recursos: #3987e5;
+      --informacion: #d95926;
+      --ambas: #199e70;
+      --ninguna: #898781;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --ink: #f0efec;
+    --ink-2: #c3c2b7;
+    --muted: #898781;
+    --grid: #2c2c2a;
+    --border: rgba(255, 255, 255, 0.10);
+    --wash: rgba(255, 255, 255, 0.06);
+    --control: #262625;
+    --control-hover: #31312f;
+    --border-strong: rgba(255, 255, 255, 0.18);
+    --seleccion: rgba(57, 135, 229, 0.24);
+    --sombra: 0 1px 3px rgba(0, 0, 0, 0.35), 0 6px 20px rgba(0, 0, 0, 0.45);
+    --recursos: #3987e5;
+    --informacion: #d95926;
+    --ambas: #199e70;
+    --ninguna: #898781;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--page);
+    color: var(--ink);
+    font: 13px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  #app {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+  }
+  header {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  header h1 { font-size: 15px; margin: 0; font-weight: 600; }
+  header .version { color: var(--ink-2); font-size: 12px; }
+  header .acciones { margin-left: auto; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  button, select, input[type="search"], input[type="text"] {
+    font: inherit;
+    color: var(--ink);
+    background-color: var(--control);
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    padding: 5px 10px;
+    min-height: 30px;
+  }
+  select { cursor: pointer; }
+  /* Las opciones de una lista se dibujan aparte de la página: llevan fondo y color propios para leerse en los dos temas. */
+  select option, select optgroup { background-color: var(--control); color: var(--ink); }
+  button { cursor: pointer; transition: background-color 0.12s, border-color 0.12s, opacity 0.12s; }
+  button:hover:not(:disabled), select:hover { background-color: var(--control-hover); }
+  button:active:not(:disabled) { transform: translateY(1px); }
+  button:disabled { opacity: 0.4; cursor: default; }
+  button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--recursos); outline-offset: 1px; }
+  input[type="checkbox"], input[type="radio"] { accent-color: var(--recursos); margin: 0; width: 14px; height: 14px; flex: none; cursor: pointer; }
+  input::placeholder { color: var(--muted); }
+  header .grupo { display: flex; gap: 6px; align-items: center; }
+  header .grupo + .grupo { padding-left: 8px; border-left: 1px solid var(--border); }
+  #contrastes { max-width: 260px; }
+  #filtros {
+    overflow-y: auto;
+    border-right: 1px solid var(--border);
+    background: var(--surface);
+    padding: 6px 16px 24px;
+  }
+  #filtros { scrollbar-width: thin; scrollbar-color: var(--grid) transparent; }
+  #filtros details { border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+  #filtros details:last-of-type { border-bottom: none; }
+  #filtros summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-2);
+    margin: 12px 0 6px;
+    font-weight: 600;
+    user-select: none;
+  }
+  #filtros summary::-webkit-details-marker { display: none; }
+  #filtros summary::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-right: 1.5px solid var(--muted);
+    border-bottom: 1.5px solid var(--muted);
+    transform: rotate(45deg);
+    margin: 0 4px 3px 0;
+    transition: transform 0.15s;
+  }
+  #filtros details:not([open]) > summary::after { transform: rotate(-45deg); margin-bottom: 0; }
+  #filtros summary:hover { color: var(--ink); }
+  #filtros label { display: flex; align-items: center; gap: 7px; padding: 3px 5px; margin: 0 -5px; border-radius: 5px; cursor: pointer; }
+  #filtros label:hover { background: var(--wash); }
+  #filtros label .cuenta { margin-left: auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+  #filtros select, #filtros input[type="search"] { width: 100%; }
+  .enlaces { display: flex; gap: 6px; margin: 0 0 6px; }
+  .enlaces[hidden] { display: none; }
+  .enlaces button { min-height: 0; padding: 1px 10px; font-size: 11.5px; border-radius: 999px; color: var(--ink-2); }
+  .pista { color: var(--muted); font-size: 11.5px; margin-top: 3px; }
+  .subtitulo { font-size: 12px; color: var(--ink-2); margin: 8px 0 2px; }
+  .ayuda { font-size: 12px; color: var(--muted); margin: 4px 0 0; }
+  .clave-linea { width: 26px; height: 10px; flex: none; }
+  main { position: relative; overflow: hidden; background: var(--surface); }
+  #lienzo { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+  #lienzo.arrastrando { cursor: grabbing; }
+  .flotante {
+    position: absolute;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--sombra);
+  }
+  #resumen { left: 12px; top: 12px; padding: 6px 10px; max-width: min(640px, calc(100% - 24px)); font-size: 12px; color: var(--ink-2); }
+  #resumen strong { color: var(--ink); }
+  #leyenda { left: 12px; bottom: 12px; padding: 8px 12px; font-size: 12px; max-width: calc(100% - 24px); }
+  #leyenda .fila { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; margin: 2px 0; }
+  #leyenda .item { display: inline-flex; align-items: center; gap: 6px; }
+  #leyenda .titulo { color: var(--ink-2); min-width: 64px; }
+  #zoom { right: 12px; bottom: 12px; display: flex; flex-direction: column; overflow: hidden; }
+  #zoom button { border: none; border-radius: 0; width: 34px; height: 32px; min-height: 0; padding: 0; font-size: 17px; display: flex; align-items: center; justify-content: center; background-color: var(--surface); }
+  #zoom button + button { border-top: 1px solid var(--border); }
+  #detalle { right: 12px; top: 12px; width: 340px; max-height: calc(100% - 70px); overflow-y: auto; padding: 12px 14px; display: none; }
+  #detalle h3 { margin: 0 26px 2px 0; font-size: 14px; }
+  #detalle .sub { color: var(--ink-2); font-size: 12px; margin-bottom: 8px; }
+  #detalle dl { display: grid; grid-template-columns: 112px 1fr; gap: 3px 10px; margin: 0 0 8px; font-size: 12px; }
+  #detalle dt { color: var(--ink-2); }
+  #detalle dd { margin: 0; }
+  #detalle h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-2); margin: 12px 0 4px; }
+  #detalle ul { list-style: none; padding: 0; margin: 0; }
+  #detalle li { padding: 5px 0; border-top: 1px solid var(--border); font-size: 12px; }
+  #detalle li .norma { color: var(--ink-2); }
+  #detalle .cerrar { position: absolute; right: 8px; top: 8px; border: none; font-size: 16px; padding: 2px 8px; }
+  #detalle .funcion { font-size: 12px; color: var(--ink-2); margin: 6px 0; }
+  #tooltip { pointer-events: none; padding: 6px 9px; font-size: 12px; display: none; max-width: 300px; z-index: 5; }
+  #tooltip strong { display: block; color: var(--ink); }
+  #tooltip span { color: var(--ink-2); display: block; }
+  #tabla { position: absolute; inset: 0; overflow: auto; background: var(--surface); padding: 14px 18px 40px; display: none; }
+  #tabla h2 { font-size: 13px; margin: 8px 0; }
+  #tabla p { color: var(--ink-2); margin: 0 0 8px; font-size: 12px; }
+  table { border-collapse: collapse; width: 100%; font-size: 12px; margin-bottom: 18px; }
+  tbody tr:hover td { background: var(--wash); }
+  th, td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+  th { color: var(--ink-2); font-weight: 600; position: sticky; top: -14px; background: var(--surface); }
+  td.num { font-variant-numeric: tabular-nums; text-align: right; }
+  #aviso { left: 50%; bottom: 18px; transform: translateX(-50%); padding: 8px 14px; font-size: 12.5px; display: none; z-index: 10; background: var(--ink); color: var(--page); border-color: transparent; white-space: nowrap; }
+  #campo-enlace { width: 100%; margin-top: 6px; font: inherit; font-size: 11px; display: none; }
+  @media (max-width: 860px) {
+    #app { grid-template-columns: 1fr; grid-template-rows: auto auto 75vh; height: auto; }
+    #filtros { border-right: none; border-bottom: 1px solid var(--border); max-height: none; }
+    #detalle { width: calc(100% - 24px); }
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div>
+      <h1 id="titulo"></h1>
+      <div class="version" id="version"></div>
+    </div>
+    <div class="acciones">
+      <div class="grupo">
+        <select id="contrastes" aria-label="Vistas sugeridas" title="Vistas preparadas para comparar"></select>
+      </div>
+      <div class="grupo">
+        <button id="btn-ajustar" type="button" title="Encuadrar todos los actores visibles">Ajustar vista</button>
+        <button id="btn-vista" type="button" title="Ver lo resaltado como tabla">Tabla</button>
+      </div>
+      <div class="grupo">
+        <button id="btn-png" type="button" title="Descargar la vista actual como imagen">Exportar PNG</button>
+        <button id="btn-enlace" type="button" title="Copiar un enlace que reproduce esta vista">Copiar enlace</button>
+      </div>
+      <div class="grupo">
+        <button id="btn-restablecer" type="button" title="Quitar los filtros y volver al encuadre inicial">Restablecer</button>
+        <button id="btn-tema" type="button" title="Cambiar de tema">Tema</button>
+      </div>
+    </div>
+  </header>
+
+  <aside id="filtros" aria-label="Filtros">
+    <details open><summary>Capas</summary>
+    <label><input type="checkbox" id="capa-recursos" checked>
+      <svg class="clave-linea" viewBox="0 0 26 10" aria-hidden="true"><line x1="1" y1="5" x2="25" y2="5" stroke="var(--recursos)" stroke-width="2"/></svg>
+      Recursos (línea continua)</label>
+    <label><input type="checkbox" id="capa-informacion" checked>
+      <svg class="clave-linea" viewBox="0 0 26 10" aria-hidden="true"><line x1="1" y1="5" x2="25" y2="5" stroke="var(--informacion)" stroke-width="2" stroke-dasharray="6 4"/></svg>
+      Información (línea punteada)</label>
+
+    </details>
+    <details open><summary>Resaltar actores por</summary>
+    <select id="resaltar-por" aria-label="Atributo para resaltar"></select>
+    <div class="enlaces" id="valores-enlaces" hidden>
+      <button type="button" id="valores-todos">Todos</button><button type="button" id="valores-ninguno">Ninguno</button>
+    </div>
+    <div id="valores"></div>
+
+    </details>
+    <details open><summary>Rol en lo visible</summary>
+    <div id="roles"></div>
+    <p class="ayuda">Se calcula con los vínculos que quedan después de los filtros de capa, tipo y observabilidad.</p>
+
+    </details>
+    <details open><summary>Vínculos resaltados</summary>
+    <label><input type="radio" name="vinculos" value="alguno" checked> Los de los actores resaltados</label>
+    <label><input type="radio" name="vinculos" value="ambos"> Solo entre actores resaltados</label>
+
+    </details>
+    <details open><summary>Tipo de flujo</summary>
+    <div class="enlaces">
+      <button type="button" id="tipos-todos">Todos</button><button type="button" id="tipos-ninguno">Ninguno</button>
+    </div>
+    <div id="tipos"></div>
+
+    </details>
+    <details open><summary>Observabilidad con datos públicos</summary>
+    <div id="observabilidad"></div>
+
+    </details>
+    <details open><summary>Buscar actor</summary>
+    <input type="search" id="buscar" list="lista-actores" placeholder="Nombre o sigla" aria-label="Buscar actor">
+    <datalist id="lista-actores"></datalist>
+    <p class="ayuda">Enter selecciona el primer resultado y muestra sus vecinos.</p>
+
+    </details>
+    <details open><summary>Presentación</summary>
+    <label><input type="checkbox" id="mostrar-inventario"> <span id="texto-inventario">Actores del inventario sin flujo documentado</span></label>
+    <label><input type="checkbox" id="ocultar"> Ocultar en vez de atenuar</label>
+    <div class="subtitulo">Etiquetas</div>
+    <select id="etiquetas" aria-label="Etiquetas">
+      <option value="red">Actores de la red</option>
+      <option value="todas">Todas</option>
+      <option value="ninguna">Ninguna</option>
+    </select>
+    <div class="subtitulo">Tamaño del nodo</div>
+    <select id="tamano" aria-label="Tamaño del nodo">
+      <option value="vinculos">Vínculos documentados</option>
+      <option value="inventario">Tamaño según el inventario</option>
+      <option value="uniforme">Uniforme</option>
+    </select>
+    <input type="text" id="campo-enlace" readonly aria-label="Enlace de la vista">
+    </details>
+  </aside>
+
+  <main id="principal">
+    <canvas id="lienzo" role="img" aria-label="Red de actores y vínculos. La vista de tabla contiene la misma información."></canvas>
+    <div id="resumen" class="flotante"></div>
+    <div id="leyenda" class="flotante" aria-label="Leyenda"></div>
+    <div id="zoom" class="flotante">
+      <button type="button" id="zoom-mas" aria-label="Acercar" title="Acercar (tecla +)">+</button>
+      <button type="button" id="zoom-menos" aria-label="Alejar" title="Alejar (tecla −)">&minus;</button>
+      <button type="button" id="zoom-ajustar" aria-label="Ajustar vista" title="Ajustar vista (tecla 0)"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+    </div>
+    <div id="detalle" class="flotante" aria-live="polite"></div>
+    <div id="tooltip" class="flotante" role="tooltip"></div>
+    <div id="aviso" class="flotante" role="status"></div>
+    <div id="tabla"></div>
+  </main>
+</div>
+
+<script>window.DATOS = /*__DATOS__*/null;</script>
+<script>
+(function () {
+  "use strict";
+  const D = window.DATOS;
+  if (!D) { document.body.textContent = "El visor no tiene datos: genérelo con construir-red-normada.py."; return; }
+
+  // ------------------------------------------------------------ catálogos
+  const nodos = D.nodos;
+  const aristas = D.aristas;
+  const porId = new Map(nodos.map(n => [n.id, n]));
+  const TIPOS = D.catalogos.tipos;
+  const CAPA = { recursos: "Recursos", informacion: "Información" };
+  const PARTICIPACION = { ambas: "Ambas capas", recursos: "Solo recursos", informacion: "Solo información", ninguna: "Sin flujo documentado" };
+  const ROLES = { todos: "Todos", emite: "Solo emite", recibe: "Solo recibe", ambos: "Emite y recibe", aislado: "Sin vínculos visibles" };
+  const OBSERV = { "observable": "Observable", "parcial": "Parcial o agregada", "no observable": "No observable" };
+  const FORMAS = { "Estado": "circulo", "Sector privado": "cuadrado", "Sociedad civil": "triangulo", "Academia": "rombo" };
+  const ORDEN_TAMANO = ["Macro", "Grande", "Mediano", "Pequeño", "Sin dato"];
+  const nombreTamano = v => v;
+  const ATRIBUTOS = [
+    { clave: "ninguno", etiqueta: "Ninguno (todos resaltados)" },
+    { clave: "participacion", etiqueta: "Capas en que participa", valor: n => n.participacion, nombre: v => PARTICIPACION[v] || v },
+    { clave: "grupo", etiqueta: "Grupo", valor: n => n.grupo },
+    { clave: "sector", etiqueta: "Sector", valor: n => n.sector, nombre: v => v + " · " + (D.catalogos.sectores[v] || "") },
+    { clave: "subsector", etiqueta: "Subsector", valor: n => n.subsector, nombre: v => v + " · " + (D.catalogos.subsectores[v] || "") },
+    { clave: "naturaleza", etiqueta: "Naturaleza jurídica", valor: n => n.naturaleza },
+    { clave: "nivel", etiqueta: "Relación con el sistema (criterio COLEV)", valor: n => n.nivel, nombre: v => D.catalogos.niveles[v] || v },
+    { clave: "en_colev", etiqueta: "¿Estaba en el mapa COLEV 2022?", valor: n => n.en_colev },
+    { clave: "tamano", etiqueta: "Tamaño según el inventario", valor: n => n.tamano, nombre: nombreTamano }
+  ];
+  const atributo = clave => ATRIBUTOS.find(a => a.clave === clave);
+
+  // --------------------------------------------------------------- estado
+  function estadoInicial() {
+    return {
+      capas: { recursos: true, informacion: true },
+      resaltarPor: "ninguno",
+      valores: null,
+      rol: "todos",
+      vinculos: "alguno",
+      tiposExcluidos: new Set(),
+      observ: new Set(Object.keys(OBSERV)),
+      buscar: "",
+      inventario: false,
+      ocultar: false,
+      etiquetas: "red",
+      tamano: "vinculos",
+      seleccion: null,
+      vista: "grafo"
+    };
+  }
+  let E = estadoInicial();
+
+  const CONTRASTES = [
+    { id: "", etiqueta: "Vistas sugeridas…" },
+    { id: "fuentes", etiqueta: "Quién pone el dinero (solo emite recursos)", aplicar: e => { e.capas = { recursos: true, informacion: false }; e.rol = "emite"; } },
+    { id: "receptores", etiqueta: "Quién solo recibe dinero", aplicar: e => { e.capas = { recursos: true, informacion: false }; e.rol = "recibe"; } },
+    { id: "intermediarios", etiqueta: "Quién recibe y vuelve a girar dinero", aplicar: e => { e.capas = { recursos: true, informacion: false }; e.rol = "ambos"; } },
+    { id: "emisores", etiqueta: "Quién solo emite información", aplicar: e => { e.capas = { recursos: false, informacion: true }; e.rol = "emite"; } },
+    { id: "ambas", etiqueta: "Actores presentes en las dos capas", aplicar: e => { e.resaltarPor = "participacion"; e.valores = new Set(["ambas"]); } },
+    { id: "estado", etiqueta: "El Estado frente a los demás grupos", aplicar: e => { e.resaltarPor = "grupo"; e.valores = new Set(["Estado"]); } },
+    { id: "colev", etiqueta: "Lo que el mapa COLEV 2022 no tenía", aplicar: e => { e.resaltarPor = "en_colev"; e.valores = new Set(["No"]); } },
+    { id: "observable", etiqueta: "Lo observable con datos públicos", aplicar: e => { e.observ = new Set(["observable"]); } },
+    { id: "adres", etiqueta: "La ADRES y sus vecinos", aplicar: e => { e.seleccion = "ASC-007"; } },
+    { id: "eps", etiqueta: "Las EPS y sus vecinos", aplicar: e => { e.seleccion = "ASC-009"; } }
+  ];
+
+  // ------------------------------------------------------------ utilidades
+  const $ = id => document.getElementById(id);
+  const normalizar = t => (t || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  const el = (etiqueta, props, hijos) => {
+    const n = document.createElement(etiqueta);
+    if (props) Object.keys(props).forEach(k => {
+      if (k === "texto") n.textContent = props[k];
+      else if (k === "clase") n.className = props[k];
+      else n.setAttribute(k, props[k]);
+    });
+    (hijos || []).forEach(h => n.appendChild(typeof h === "string" ? document.createTextNode(h) : h));
+    return n;
+  };
+  function claveLinea(capa) {
+    const ns = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("viewBox", "0 0 26 10");
+    svg.setAttribute("class", "clave-linea");
+    svg.setAttribute("aria-hidden", "true");
+    const l = document.createElementNS(ns, "line");
+    l.setAttribute("x1", "1"); l.setAttribute("y1", "5"); l.setAttribute("x2", "25"); l.setAttribute("y2", "5");
+    l.setAttribute("stroke", capa === "recursos" ? "var(--recursos)" : "var(--informacion)");
+    l.setAttribute("stroke-width", "2");
+    if (capa === "informacion") l.setAttribute("stroke-dasharray", "6 4");
+    svg.appendChild(l);
+    return svg;
+  }
+  function claveNodo(color, forma) {
+    const c = document.createElement("canvas");
+    c.width = 28; c.height = 28; c.style.width = "14px"; c.style.height = "14px";
+    const g = c.getContext("2d");
+    g.scale(2, 2);
+    trazarForma(g, forma || "circulo", 7, 7, 5);
+    g.fillStyle = color; g.fill();
+    return c;
+  }
+
+  // ------------------------------------------------------- datos derivados
+  const visibleNodo = n => n.en_red || E.inventario;
+  function aristaVisible(a) {
+    return E.capas[a.capa] && !E.tiposExcluidos.has(a.tipo) && E.observ.has(a.observabilidad) &&
+      visibleNodo(porId.get(a.origen)) && visibleNodo(porId.get(a.destino));
+  }
+  let C = null;
+  function derivar() {
+    const vis = nodos.filter(visibleNodo);
+    const av = aristas.filter(aristaVisible);
+    const entra = new Map(), sale = new Map();
+    av.forEach(a => {
+      sale.set(a.origen, (sale.get(a.origen) || 0) + 1);
+      entra.set(a.destino, (entra.get(a.destino) || 0) + 1);
+    });
+    const rol = n => {
+      const i = entra.get(n.id) || 0, o = sale.get(n.id) || 0;
+      return i === 0 && o === 0 ? "aislado" : i === 0 ? "emite" : o === 0 ? "recibe" : "ambos";
+    };
+    let vecinos = null;
+    if (E.seleccion) {
+      vecinos = new Set([E.seleccion]);
+      av.forEach(a => {
+        if (a.origen === E.seleccion) vecinos.add(a.destino);
+        if (a.destino === E.seleccion) vecinos.add(a.origen);
+      });
+    }
+    const attr = atributo(E.resaltarPor);
+    const q = normalizar(E.buscar.trim());
+    const coincide = new Set();
+    vis.forEach(n => {
+      if (attr && attr.valor && E.valores && !E.valores.has(attr.valor(n))) return;
+      if (E.rol !== "todos" && rol(n) !== E.rol) return;
+      if (q && !normalizar(n.nombre + " " + n.sigla).includes(q)) return;
+      if (vecinos && !vecinos.has(n.id)) return;
+      coincide.add(n.id);
+    });
+    const resaltadas = new Set();
+    av.forEach(a => {
+      const o = coincide.has(a.origen), d = coincide.has(a.destino);
+      const enSeleccion = !E.seleccion || a.origen === E.seleccion || a.destino === E.seleccion;
+      if (enSeleccion && (E.vinculos === "ambos" ? (o && d) : (o || d))) resaltadas.add(a.id);
+    });
+    C = { vis, av, entra, sale, rol, coincide, resaltadas };
+    return C;
+  }
+
+  // ------------------------------------------------------------- lienzo
+  const lienzo = $("lienzo");
+  let ctx = lienzo.getContext("2d");
+  let ancho = 0, alto = 0, dpr = 1;
+  const T = { k: 1, x: 0, y: 0 };
+  let colores = {};
+  function leerColores() {
+    const cs = getComputedStyle(document.documentElement);
+    ["--surface", "--ink", "--ink-2", "--muted", "--grid", "--recursos", "--informacion", "--ambas", "--ninguna"]
+      .forEach(v => { colores[v] = cs.getPropertyValue(v).trim(); });
+  }
+  const colorNodo = n => colores["--" + n.participacion] || colores["--ninguna"];
+  function medir() {
+    const r = lienzo.parentElement.getBoundingClientRect();
+    dpr = window.devicePixelRatio || 1;
+    ancho = Math.max(200, r.width);
+    alto = Math.max(200, r.height);
+    lienzo.width = Math.round(ancho * dpr);
+    lienzo.height = Math.round(alto * dpr);
+  }
+  function encuadre() {
+    const vis = nodos.filter(visibleNodo);
+    if (!vis.length) return null;
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    vis.forEach(n => { x0 = Math.min(x0, n.x); y0 = Math.min(y0, n.y); x1 = Math.max(x1, n.x); y1 = Math.max(y1, n.y); });
+    const margen = { izq: 40, der: 120, arr: 70, aba: 120 };
+    const k = Math.min((ancho - margen.izq - margen.der) / Math.max(1, x1 - x0), (alto - margen.arr - margen.aba) / Math.max(1, y1 - y0));
+    const kk = Math.max(0.2, Math.min(3, k));
+    return { k: kk,
+             x: margen.izq + ((ancho - margen.izq - margen.der) - (x1 - x0) * kk) / 2 - x0 * kk,
+             y: margen.arr + ((alto - margen.arr - margen.aba) - (y1 - y0) * kk) / 2 - y0 * kk };
+  }
+  function ajustar() { const e = encuadre(); if (e) Object.assign(T, e); }
+  function vistaAjustada() {
+    const e = encuadre();
+    return !e || (Math.abs(e.k - T.k) < 1e-6 && Math.abs(e.x - T.x) < 0.5 && Math.abs(e.y - T.y) < 0.5);
+  }
+  const P = n => [n.x * T.k + T.x, n.y * T.k + T.y];
+  function radio(n) {
+    if (!n.en_red) return 4.5;
+    if (E.tamano === "uniforme") return 8;
+    if (E.tamano === "inventario") return { "Macro": 13, "Grande": 10.5, "Mediano": 8.5, "Pequeño": 7 }[n.tamano] || 7;
+    return 5 + 2.2 * Math.sqrt(n.grado_doc || 0);
+  }
+  function trazarForma(g, forma, x, y, r) {
+    g.beginPath();
+    if (forma === "cuadrado") {
+      const s = r * 0.88;
+      g.rect(x - s, y - s, 2 * s, 2 * s);
+    } else if (forma === "triangulo") {
+      const h = r * 1.18;
+      g.moveTo(x, y - h); g.lineTo(x + h * 0.98, y + h * 0.72); g.lineTo(x - h * 0.98, y + h * 0.72); g.closePath();
+    } else if (forma === "rombo") {
+      const h = r * 1.22;
+      g.moveTo(x, y - h); g.lineTo(x + h, y); g.lineTo(x, y + h); g.lineTo(x - h, y); g.closePath();
+    } else {
+      g.arc(x, y, r, 0, Math.PI * 2);
+    }
+  }
+  function unitario(dx, dy) { const L = Math.hypot(dx, dy) || 1; return [dx / L, dy / L]; }
+
+  function geometrias(av) {
+    const pares = new Map();
+    av.forEach(a => {
+      const clave = a.origen < a.destino ? a.origen + "|" + a.destino : a.destino + "|" + a.origen;
+      if (!pares.has(clave)) pares.set(clave, []);
+      pares.get(clave).push(a);
+    });
+    const geo = new Map();
+    pares.forEach((lista, clave) => {
+      lista.sort((a, b) => (a.capa === b.capa ? 0 : a.capa === "recursos" ? -1 : 1) || a.id.localeCompare(b.id));
+      const [u, v] = clave.split("|");
+      const pu = P(porId.get(u)), pv = P(porId.get(v));
+      const [ux, uy] = unitario(pv[0] - pu[0], pv[1] - pu[1]);
+      const nx = -uy, ny = ux;
+      const n = lista.length;
+      lista.forEach((a, k) => {
+        const desv = n === 1 ? 0 : (k - (n - 1) / 2) * 16;
+        const cp = [(pu[0] + pv[0]) / 2 + nx * desv * 2, (pu[1] + pv[1]) / 2 + ny * desv * 2];
+        geo.set(a.id, { ps: P(porId.get(a.origen)), pt: P(porId.get(a.destino)), cp });
+      });
+    });
+    return geo;
+  }
+
+  function dibujarArista(g, a, geo, alfa) {
+    const ro = radio(porId.get(a.origen)), rd = radio(porId.get(a.destino));
+    const color = colores[a.capa === "recursos" ? "--recursos" : "--informacion"];
+    const [sx, sy] = unitario(geo.cp[0] - geo.ps[0], geo.cp[1] - geo.ps[1]);
+    const ini = [geo.ps[0] + sx * (ro + 2), geo.ps[1] + sy * (ro + 2)];
+    const [ex, ey] = unitario(geo.pt[0] - geo.cp[0], geo.pt[1] - geo.cp[1]);
+    const punta = [geo.pt[0] - ex * (rd + 3), geo.pt[1] - ey * (rd + 3)];
+    const base = [punta[0] - ex * 8, punta[1] - ey * 8];
+    g.save();
+    g.globalAlpha = alfa;
+    g.strokeStyle = color;
+    g.fillStyle = color;
+    g.lineWidth = 2;
+    g.setLineDash(a.capa === "informacion" ? [6, 4] : []);
+    g.beginPath();
+    g.moveTo(ini[0], ini[1]);
+    g.quadraticCurveTo(geo.cp[0], geo.cp[1], base[0], base[1]);
+    g.stroke();
+    g.setLineDash([]);
+    g.beginPath();
+    g.moveTo(punta[0], punta[1]);
+    g.lineTo(base[0] - ey * 4.5, base[1] + ex * 4.5);
+    g.lineTo(base[0] + ey * 4.5, base[1] - ex * 4.5);
+    g.closePath();
+    g.fill();
+    g.restore();
+  }
+
+  function dibujarNodo(g, n, alfa) {
+    const [x, y] = P(n);
+    const r = radio(n);
+    g.save();
+    g.globalAlpha = alfa;
+    trazarForma(g, FORMAS[n.grupo] || "circulo", x, y, r);
+    g.fillStyle = colorNodo(n);
+    g.fill();
+    g.lineWidth = 2;
+    g.strokeStyle = colores["--surface"];
+    g.stroke();
+    g.restore();
+  }
+
+  function debeEtiquetar(n, coincide) {
+    if (n.id === E.seleccion) return true;
+    if (E.etiquetas === "ninguna") return false;
+    if (n.en_red) return true;
+    // Los actores sin flujo documentado van en una cuadrícula densa: solo se rotulan si se
+    // buscan, o si hay zoom suficiente para que sus nombres quepan.
+    if (E.buscar.trim() && coincide) return true;
+    return (E.etiquetas === "todas" || coincide) && T.k >= 1.3;
+  }
+  function fuenteEtiqueta(n) {
+    return (n.en_red ? "12px" : "11px") + " system-ui, -apple-system, 'Segoe UI', sans-serif";
+  }
+  // Coloca las etiquetas de mayor a menor prioridad y omite las que chocarían con otra ya puesta.
+  function dibujarEtiquetas(g, lista, coincide) {
+    const prioridad = n => (n.id === E.seleccion ? 4 : 0) + (coincide.has(n.id) ? 2 : 0) + (n.en_red ? 1 : 0);
+    const orden = lista.slice().sort((a, b) => prioridad(b) - prioridad(a) || (b.grado_doc || 0) - (a.grado_doc || 0));
+    const puestas = [];
+    orden.forEach(n => {
+      const [x, y] = P(n);
+      const r = radio(n);
+      g.save();
+      g.font = fuenteEtiqueta(n);
+      const w = g.measureText(n.sigla).width;
+      const caja = { x: x + r + 3, y: y - 8, w: w + 4, h: 16 };
+      const choca = puestas.some(p => caja.x < p.x + p.w && p.x < caja.x + caja.w && caja.y < p.y + p.h && p.y < caja.y + caja.h);
+      if (!choca) {
+        puestas.push(caja);
+        const m = coincide.has(n.id);
+        g.textBaseline = "middle";
+        g.globalAlpha = m ? 1 : 0.35;
+        g.lineWidth = 3;
+        g.lineJoin = "round";
+        g.strokeStyle = colores["--surface"];
+        g.strokeText(n.sigla, x + r + 5, y);
+        g.fillStyle = m ? colores["--ink"] : colores["--muted"];
+        g.fillText(n.sigla, x + r + 5, y);
+      }
+      g.restore();
+    });
+  }
+
+  function pintarEscena(g, w, h) {
+    const c = C || derivar();
+    g.fillStyle = colores["--surface"];
+    g.fillRect(0, 0, w, h);
+    if (E.inventario) {
+      const yLinea = (D.meta.y_inventario - 34) * T.k + T.y;
+      g.save();
+      g.strokeStyle = colores["--grid"];
+      g.lineWidth = 1;
+      g.beginPath(); g.moveTo(0, yLinea); g.lineTo(w, yLinea); g.stroke();
+      g.fillStyle = colores["--ink-2"];
+      g.font = "12px system-ui, -apple-system, 'Segoe UI', sans-serif";
+      g.textBaseline = "bottom";
+      g.fillText("Actores del inventario sin flujo documentado, por sector y subsector", 14, yLinea - 6);
+      g.font = "600 12px system-ui, -apple-system, 'Segoe UI', sans-serif";
+      g.textBaseline = "middle";
+      (D.meta.etiquetas_inventario || []).forEach(e => g.fillText(e.texto, e.x * T.k + T.x - 6, e.y * T.k + T.y));
+      g.restore();
+    }
+    const geo = geometrias(c.av);
+    [false, true].forEach(turno => c.av.forEach(a => {
+      const r = c.resaltadas.has(a.id);
+      if (r !== turno || (!r && E.ocultar)) return;
+      dibujarArista(g, a, geo.get(a.id), r ? 0.9 : 0.08);
+    }));
+    const orden = c.vis.slice().sort((a, b) => (c.coincide.has(a.id) ? 1 : 0) - (c.coincide.has(b.id) ? 1 : 0));
+    orden.forEach(n => {
+      const m = c.coincide.has(n.id);
+      if (!m && E.ocultar) return;
+      dibujarNodo(g, n, m ? 1 : 0.14);
+    });
+    dibujarEtiquetas(g, orden.filter(n => {
+      const m = c.coincide.has(n.id);
+      return !(!m && E.ocultar) && debeEtiquetar(n, m);
+    }), c.coincide);
+    if (E.seleccion && porId.has(E.seleccion)) {
+      const n = porId.get(E.seleccion);
+      const [x, y] = P(n);
+      g.save();
+      g.strokeStyle = colores["--ink"];
+      g.lineWidth = 2;
+      g.beginPath(); g.arc(x, y, radio(n) + 5, 0, Math.PI * 2); g.stroke();
+      g.restore();
+    }
+  }
+
+  function dibujar() {
+    derivar();
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    pintarEscena(ctx, ancho, alto);
+    pintarResumen();
+  }
+
+  // ------------------------------------------------------- textos de la vista
+  function descripcionVista() {
+    const partes = [];
+    const capas = Object.keys(CAPA).filter(c => E.capas[c]).map(c => CAPA[c]);
+    partes.push("Capas: " + (capas.length ? capas.join(" y ") : "ninguna"));
+    const attr = atributo(E.resaltarPor);
+    if (attr && attr.valor && E.valores) {
+      const nombres = Array.from(E.valores).map(v => attr.nombre ? attr.nombre(v) : v);
+      partes.push(attr.etiqueta + ": " + (nombres.length ? nombres.join(", ") : "ninguno"));
+    }
+    if (E.rol !== "todos") partes.push("Rol: " + ROLES[E.rol].toLowerCase());
+    if (E.tiposExcluidos.size) partes.push(E.tiposExcluidos.size + " tipos de flujo ocultos");
+    if (E.observ.size < 3) partes.push("Observabilidad: " + Array.from(E.observ).map(o => OBSERV[o].toLowerCase()).join(", "));
+    if (E.buscar.trim()) partes.push("Búsqueda: «" + E.buscar.trim() + "»");
+    if (E.seleccion && porId.has(E.seleccion)) partes.push("Vecinos de " + porId.get(E.seleccion).sigla);
+    return partes.join(" · ");
+  }
+  function pintarResumen() {
+    const c = C;
+    const caja = $("resumen");
+    caja.textContent = "";
+    caja.appendChild(el("strong", { texto: c.coincide.size + " de " + c.vis.length + " actores resaltados · " + c.resaltadas.size + " de " + c.av.length + " vínculos visibles" }));
+    caja.appendChild(el("div", { texto: descripcionVista() }));
+    caja.appendChild(el("div", { clase: "pista", texto: "Arrastre para mover · rueda o +/− para acercar · clic en un actor para ver sus vínculos" }));
+  }
+
+  // ------------------------------------------------------------- leyenda
+  function pintarLeyenda() {
+    const caja = $("leyenda");
+    caja.textContent = "";
+    const fila1 = el("div", { clase: "fila" }, [el("span", { clase: "titulo", texto: "Vínculos" })]);
+    ["recursos", "informacion"].forEach(capa => fila1.appendChild(el("span", { clase: "item" }, [claveLinea(capa), CAPA[capa]])));
+    const fila2 = el("div", { clase: "fila" }, [el("span", { clase: "titulo", texto: "Color" })]);
+    ["recursos", "informacion", "ambas", "ninguna"].forEach(p => {
+      if (p === "ninguna" && !E.inventario) return;
+      fila2.appendChild(el("span", { clase: "item" }, [claveNodo(colores["--" + p]), PARTICIPACION[p]]));
+    });
+    const fila3 = el("div", { clase: "fila" }, [el("span", { clase: "titulo", texto: "Forma" })]);
+    Object.keys(FORMAS).forEach(gr => fila3.appendChild(el("span", { clase: "item" }, [claveNodo(colores["--ink-2"], FORMAS[gr]), gr])));
+    caja.appendChild(fila1);
+    caja.appendChild(fila2);
+    caja.appendChild(fila3);
+  }
+
+  // ------------------------------------------------------------- controles
+  function construirControles() {
+    $("titulo").textContent = D.meta.titulo;
+    $("version").textContent = D.meta.version + " · " + D.meta.fuente;
+    const sel = $("contrastes");
+    CONTRASTES.forEach(c => sel.appendChild(el("option", { value: c.id, texto: c.etiqueta })));
+    const rp = $("resaltar-por");
+    ATRIBUTOS.forEach(a => rp.appendChild(el("option", { value: a.clave, texto: a.etiqueta })));
+    const roles = $("roles");
+    Object.keys(ROLES).forEach(r => {
+      const inp = el("input", { type: "radio", name: "rol", value: r });
+      inp.addEventListener("change", () => { E.rol = r; cambio(); });
+      roles.appendChild(el("label", null, [inp, " " + ROLES[r]]));
+    });
+    const tipos = $("tipos");
+    ["recursos", "informacion"].forEach(capa => {
+      tipos.appendChild(el("div", { clase: "subtitulo", texto: CAPA[capa] }));
+      TIPOS.filter(t => t.capa === capa).forEach(t => {
+        const inp = el("input", { type: "checkbox", "data-tipo": t.tipo });
+        inp.addEventListener("change", () => {
+          if (inp.checked) E.tiposExcluidos.delete(t.tipo); else E.tiposExcluidos.add(t.tipo);
+          cambio();
+        });
+        const n = aristas.filter(a => a.tipo === t.tipo).length;
+        tipos.appendChild(el("label", null, [inp, claveLinea(capa), t.tipo, el("span", { clase: "cuenta", texto: String(n) })]));
+      });
+    });
+    const obs = $("observabilidad");
+    Object.keys(OBSERV).forEach(o => {
+      const inp = el("input", { type: "checkbox", "data-observ": o });
+      inp.addEventListener("change", () => { if (inp.checked) E.observ.add(o); else E.observ.delete(o); cambio(); });
+      const n = aristas.filter(a => a.observabilidad === o).length;
+      obs.appendChild(el("label", null, [inp, OBSERV[o], el("span", { clase: "cuenta", texto: String(n) })]));
+    });
+    const lista = $("lista-actores");
+    nodos.slice().sort((a, b) => a.sigla.localeCompare(b.sigla, "es")).forEach(n => lista.appendChild(el("option", { value: n.sigla })));
+    const sinFlujo = nodos.filter(n => !n.en_red).length;
+    $("texto-inventario").textContent = "Actores del inventario sin flujo documentado (" + sinFlujo + ")";
+  }
+
+  function valoresPresentes() {
+    const attr = atributo(E.resaltarPor);
+    if (!attr || !attr.valor) return [];
+    const cuenta = new Map();
+    nodos.filter(visibleNodo).forEach(n => { const v = attr.valor(n); cuenta.set(v, (cuenta.get(v) || 0) + 1); });
+    const lista = Array.from(cuenta.keys());
+    if (attr.clave === "tamano") lista.sort((a, b) => ORDEN_TAMANO.indexOf(a) - ORDEN_TAMANO.indexOf(b));
+    else if (attr.clave === "subsector") lista.sort((a, b) => a[0].localeCompare(b[0]) || parseInt(a.slice(1), 10) - parseInt(b.slice(1), 10));
+    else lista.sort((a, b) => String(a).localeCompare(String(b), "es"));
+    return lista.map(v => ({ v, n: cuenta.get(v) }));
+  }
+
+  function pintarValores() {
+    const caja = $("valores");
+    caja.textContent = "";
+    const attr = atributo(E.resaltarPor);
+    $("valores-enlaces").hidden = !(attr && attr.valor);
+    if (!attr || !attr.valor) return;
+    valoresPresentes().forEach(({ v, n }) => {
+      const inp = el("input", { type: "checkbox" });
+      inp.checked = !E.valores || E.valores.has(v);
+      inp.addEventListener("change", () => {
+        if (!E.valores) E.valores = new Set(valoresPresentes().map(x => x.v));
+        if (inp.checked) E.valores.add(v); else E.valores.delete(v);
+        cambio();
+      });
+      caja.appendChild(el("label", null, [inp, attr.nombre ? attr.nombre(v) : v, el("span", { clase: "cuenta", texto: String(n) })]));
+    });
+  }
+
+  function sincronizarControles() {
+    $("capa-recursos").checked = E.capas.recursos;
+    $("capa-informacion").checked = E.capas.informacion;
+    $("resaltar-por").value = E.resaltarPor;
+    document.querySelectorAll('input[name="rol"]').forEach(i => { i.checked = i.value === E.rol; });
+    document.querySelectorAll('input[name="vinculos"]').forEach(i => { i.checked = i.value === E.vinculos; });
+    document.querySelectorAll("[data-tipo]").forEach(i => { i.checked = !E.tiposExcluidos.has(i.getAttribute("data-tipo")); });
+    document.querySelectorAll("[data-observ]").forEach(i => { i.checked = E.observ.has(i.getAttribute("data-observ")); });
+    if ($("buscar").value !== E.buscar) $("buscar").value = E.buscar;
+    $("mostrar-inventario").checked = E.inventario;
+    $("ocultar").checked = E.ocultar;
+    $("etiquetas").value = E.etiquetas;
+    $("tamano").value = E.tamano;
+    $("btn-vista").textContent = E.vista === "grafo" ? "Tabla" : "Gráfica";
+    pintarValores();
+  }
+
+  // --------------------------------------------------------------- detalle
+  function pintarDetalle() {
+    const caja = $("detalle");
+    caja.textContent = "";
+    if (!E.seleccion || !porId.has(E.seleccion) || E.vista !== "grafo") { caja.style.display = "none"; return; }
+    const n = porId.get(E.seleccion);
+    const c = C;
+    const cerrar = el("button", { type: "button", clase: "cerrar", "aria-label": "Cerrar", texto: "×" });
+    cerrar.addEventListener("click", () => { E.seleccion = null; cambio(); });
+    caja.appendChild(cerrar);
+    caja.appendChild(el("h3", { texto: n.nombre }));
+    caja.appendChild(el("div", { clase: "sub", texto: n.sigla + " · " + n.id }));
+    const dl = el("dl");
+    const fila = (t, d) => { dl.appendChild(el("dt", { texto: t })); dl.appendChild(el("dd", { texto: d || "—" })); };
+    fila("Grupo", n.grupo);
+    fila("Sector", n.sector + " · " + (D.catalogos.sectores[n.sector] || ""));
+    fila("Subsector", n.subsector + " · " + (D.catalogos.subsectores[n.subsector] || ""));
+    fila("Naturaleza", n.naturaleza);
+    fila("Tamaño", n.tamano === "Sin dato" ? nombreTamano(n.tamano)
+      : n.tamano + (n.tamano_medida ? " — " + n.tamano_medida : ""));
+    fila("Relación (COLEV)", D.catalogos.niveles[n.nivel] || n.nivel);
+    fila("En COLEV 2022", n.en_colev);
+    fila("Capas", PARTICIPACION[n.participacion]);
+    fila("Rol en lo visible", ROLES[c.rol(n)]);
+    caja.appendChild(dl);
+    if (n.funcion) caja.appendChild(el("p", { clase: "funcion", texto: n.funcion }));
+    const propias = aristas.filter(a => a.origen === n.id || a.destino === n.id);
+    const visibles = propias.filter(a => c.av.includes(a));
+    [["Salen hacia", a => a.origen === n.id, "destino"], ["Llegan desde", a => a.destino === n.id, "origen"]].forEach(([titulo, f, extremo]) => {
+      const lista = visibles.filter(f);
+      if (!lista.length) return;
+      caja.appendChild(el("h4", { texto: titulo + " (" + lista.length + ")" }));
+      const ul = el("ul");
+      lista.forEach(a => {
+        const otro = porId.get(a[extremo]);
+        ul.appendChild(el("li", null, [
+          el("div", null, [claveLinea(a.capa), " ", el("strong", { texto: a.tipo }), " — " + otro.sigla]),
+          el("div", { texto: a.descripcion }),
+          el("div", { clase: "norma", texto: a.norma + " · " + OBSERV[a.observabilidad] }),
+          a.nota ? el("div", { clase: "norma", texto: a.nota }) : el("span")
+        ]));
+      });
+      caja.appendChild(ul);
+    });
+    const ocultos = propias.length - visibles.length;
+    if (ocultos > 0) caja.appendChild(el("p", { clase: "funcion", texto: ocultos + " vínculos de este actor quedan ocultos por los filtros." }));
+    if (!propias.length) caja.appendChild(el("p", { clase: "funcion", texto: "Este actor todavía no tiene vínculos documentados con su norma." }));
+    caja.style.display = "block";
+  }
+
+  // ----------------------------------------------------------------- tabla
+  function pintarTabla() {
+    const caja = $("tabla");
+    caja.textContent = "";
+    if (E.vista !== "tabla") { caja.style.display = "none"; return; }
+    const c = C;
+    caja.appendChild(el("p", { texto: "La tabla muestra lo que está resaltado en la vista: " + descripcionVista() }));
+    const vinc = c.av.filter(a => c.resaltadas.has(a.id));
+    caja.appendChild(el("h2", { texto: "Vínculos (" + vinc.length + ")" }));
+    const t1 = el("table");
+    t1.appendChild(el("thead", null, [el("tr", null, ["Id", "Origen", "Destino", "Capa", "Tipo", "Descripción", "Norma", "Observabilidad", "Nota"].map(h => el("th", { texto: h })))]));
+    const b1 = el("tbody");
+    vinc.forEach(a => b1.appendChild(el("tr", null, [a.id, porId.get(a.origen).sigla, porId.get(a.destino).sigla, CAPA[a.capa], a.tipo, a.descripcion, a.norma, OBSERV[a.observabilidad], a.nota].map(v => el("td", { texto: v || "" })))));
+    t1.appendChild(b1);
+    caja.appendChild(t1);
+    const act = c.vis.filter(n => c.coincide.has(n.id));
+    caja.appendChild(el("h2", { texto: "Actores (" + act.length + ")" }));
+    const t2 = el("table");
+    t2.appendChild(el("thead", null, [el("tr", null, ["Id", "Actor", "Sigla", "Grupo", "Sector", "Capas", "Entran", "Salen", "Rol en lo visible"].map(h => el("th", { texto: h })))]));
+    const b2 = el("tbody");
+    act.slice().sort((a, b) => a.sigla.localeCompare(b.sigla, "es")).forEach(n => b2.appendChild(el("tr", null, [
+      el("td", { texto: n.id }), el("td", { texto: n.nombre }), el("td", { texto: n.sigla }), el("td", { texto: n.grupo }),
+      el("td", { texto: n.sector }), el("td", { texto: PARTICIPACION[n.participacion] }),
+      el("td", { clase: "num", texto: String(c.entra.get(n.id) || 0) }), el("td", { clase: "num", texto: String(c.sale.get(n.id) || 0) }),
+      el("td", { texto: ROLES[c.rol(n)] })
+    ])));
+    t2.appendChild(b2);
+    caja.appendChild(t2);
+    caja.style.display = "block";
+  }
+
+  // ------------------------------------------------------- enlace de la vista
+  function aEnlace() {
+    const p = new URLSearchParams();
+    const capas = (E.capas.recursos ? "r" : "") + (E.capas.informacion ? "i" : "");
+    if (capas !== "ri") p.set("capas", capas || "-");
+    if (E.resaltarPor !== "ninguno") {
+      p.set("resaltar", E.resaltarPor);
+      if (E.valores) p.set("valores", Array.from(E.valores).join("~"));
+    }
+    if (E.rol !== "todos") p.set("rol", E.rol);
+    if (E.vinculos !== "alguno") p.set("vinculos", E.vinculos);
+    if (E.tiposExcluidos.size) p.set("sin", Array.from(E.tiposExcluidos).map(t => TIPOS.findIndex(x => x.tipo === t)).join(","));
+    if (E.observ.size < 3) p.set("obs", Array.from(E.observ).join(",") || "-");
+    if (E.buscar.trim()) p.set("q", E.buscar.trim());
+    if (E.inventario) p.set("inv", "1");
+    if (E.ocultar) p.set("ocultar", "1");
+    if (E.etiquetas !== "red") p.set("etiquetas", E.etiquetas);
+    if (E.tamano !== "vinculos") p.set("tamano", E.tamano);
+    if (E.seleccion) p.set("sel", E.seleccion);
+    if (E.vista !== "grafo") p.set("vista", E.vista);
+    const s = p.toString();
+    ultimoEnlace = s;
+    try { history.replaceState(null, "", s ? "#" + s : location.pathname + location.search); } catch (err) { /* sin historial disponible */ }
+  }
+  function deEnlace() {
+    const p = new URLSearchParams(location.hash.replace(/^#/, ""));
+    const e = estadoInicial();
+    if (p.has("capas")) { const c = p.get("capas"); e.capas = { recursos: c.includes("r"), informacion: c.includes("i") }; }
+    if (p.has("resaltar") && atributo(p.get("resaltar"))) {
+      e.resaltarPor = p.get("resaltar");
+      if (p.has("valores")) e.valores = new Set(p.get("valores").split("~").filter(Boolean));
+    }
+    if (p.has("rol") && ROLES[p.get("rol")]) e.rol = p.get("rol");
+    if (p.get("vinculos") === "ambos") e.vinculos = "ambos";
+    if (p.has("sin")) p.get("sin").split(",").forEach(i => { const t = TIPOS[parseInt(i, 10)]; if (t) e.tiposExcluidos.add(t.tipo); });
+    if (p.has("obs")) e.observ = new Set(p.get("obs").split(",").filter(o => OBSERV[o]));
+    if (p.has("q")) e.buscar = p.get("q");
+    e.inventario = p.get("inv") === "1";
+    e.ocultar = p.get("ocultar") === "1";
+    if (["todas", "ninguna"].includes(p.get("etiquetas"))) e.etiquetas = p.get("etiquetas");
+    if (["inventario", "uniforme"].includes(p.get("tamano"))) e.tamano = p.get("tamano");
+    if (p.has("sel") && porId.has(p.get("sel"))) e.seleccion = p.get("sel");
+    if (p.get("vista") === "tabla") e.vista = "tabla";
+    E = e;
+  }
+
+  // ------------------------------------------------- estado de los botones
+  let ultimoEnlace = "";
+  let contraste = null;
+  function estadoBotones() {
+    const enTabla = E.vista !== "grafo";
+    const ajustada = vistaAjustada();
+    const b = $("btn-ajustar");
+    b.disabled = ajustada || enTabla;
+    b.title = enTabla ? "Disponible en la gráfica" : ajustada ? "La vista ya muestra toda la red" : "Encuadrar toda la red (tecla 0)";
+    $("zoom-ajustar").disabled = ajustada;
+    const inicial = !ultimoEnlace && ajustada;
+    const r = $("btn-restablecer");
+    r.disabled = inicial;
+    r.title = inicial ? "La vista ya está en su estado inicial" : "Quitar los filtros y volver al encuadre inicial";
+    $("contrastes").value = contraste && contraste.enlace === ultimoEnlace ? contraste.id : "";
+  }
+  function teclas(e, quitarSeleccion, factor) {
+    if (e.key === "Escape") { quitarSeleccion(); return; }
+    const t = e.target;
+    if (e.ctrlKey || e.metaKey || e.altKey || (t && /^(INPUT|SELECT|TEXTAREA)$/.test(t.tagName))) return;
+    if (e.key === "+" || e.key === "=") zoom(factor, ancho / 2, alto / 2);
+    else if (e.key === "-" || e.key === "_") zoom(1 / factor, ancho / 2, alto / 2);
+    else if (e.key === "0") cambio({ reencuadrar: true });
+  }
+
+  // ------------------------------------------------------------ ciclo
+  let ultimoInventario = null;
+  function cambio(opciones) {
+    if (E.seleccion && (!porId.has(E.seleccion) || !visibleNodo(porId.get(E.seleccion)))) E.seleccion = null;
+    if (ultimoInventario !== E.inventario || (opciones && opciones.reencuadrar)) { ajustar(); ultimoInventario = E.inventario; }
+    dibujar();
+    sincronizarControles();
+    pintarLeyenda();
+    pintarDetalle();
+    pintarTabla();
+    aEnlace();
+    estadoBotones();
+  }
+  function aviso(texto) {
+    const a = $("aviso");
+    a.textContent = texto;
+    a.style.display = "block";
+    clearTimeout(aviso.t);
+    aviso.t = setTimeout(() => { a.style.display = "none"; }, 3200);
+  }
+
+  // ------------------------------------------------------------ eventos
+  function enlazarEventos() {
+    $("capa-recursos").addEventListener("change", e => { E.capas.recursos = e.target.checked; cambio(); });
+    $("capa-informacion").addEventListener("change", e => { E.capas.informacion = e.target.checked; cambio(); });
+    $("resaltar-por").addEventListener("change", e => { E.resaltarPor = e.target.value; E.valores = null; cambio(); });
+    $("valores-todos").addEventListener("click", () => { E.valores = null; cambio(); });
+    $("valores-ninguno").addEventListener("click", () => { E.valores = new Set(); cambio(); });
+    document.querySelectorAll('input[name="vinculos"]').forEach(i => i.addEventListener("change", () => { E.vinculos = i.value; cambio(); }));
+    $("tipos-todos").addEventListener("click", () => { E.tiposExcluidos = new Set(); cambio(); });
+    $("tipos-ninguno").addEventListener("click", () => { E.tiposExcluidos = new Set(TIPOS.map(t => t.tipo)); cambio(); });
+    $("buscar").addEventListener("input", e => { E.buscar = e.target.value; cambio(); });
+    $("buscar").addEventListener("keydown", e => {
+      if (e.key !== "Enter") return;
+      const q = normalizar(E.buscar.trim());
+      const primero = nodos.filter(visibleNodo).find(n => q && normalizar(n.nombre + " " + n.sigla).includes(q));
+      if (primero) { E.seleccion = primero.id; E.buscar = ""; cambio(); }
+    });
+    $("mostrar-inventario").addEventListener("change", e => { E.inventario = e.target.checked; cambio(); });
+    $("ocultar").addEventListener("change", e => { E.ocultar = e.target.checked; cambio(); });
+    $("etiquetas").addEventListener("change", e => { E.etiquetas = e.target.value; cambio(); });
+    $("tamano").addEventListener("change", e => { E.tamano = e.target.value; cambio(); });
+    $("contrastes").addEventListener("change", e => {
+      const c = CONTRASTES.find(x => x.id === e.target.value);
+      if (c && c.aplicar) {
+        E = estadoInicial(); c.aplicar(E); contraste = null;
+        cambio({ reencuadrar: true });
+        contraste = { id: c.id, enlace: ultimoEnlace };
+        estadoBotones();
+        aviso("Vista: " + c.etiqueta);
+      } else e.target.value = "";
+    });
+    $("btn-ajustar").addEventListener("click", () => cambio({ reencuadrar: true }));
+    $("btn-vista").addEventListener("click", () => { E.vista = E.vista === "grafo" ? "tabla" : "grafo"; cambio(); });
+    $("btn-restablecer").addEventListener("click", () => { E = estadoInicial(); cambio({ reencuadrar: true }); aviso("Vista inicial restablecida"); });
+    $("zoom-ajustar").addEventListener("click", () => cambio({ reencuadrar: true }));
+    $("btn-png").addEventListener("click", exportarPNG);
+    $("btn-enlace").addEventListener("click", copiarEnlace);
+    $("btn-tema").addEventListener("click", cambiarTema);
+    $("zoom-mas").addEventListener("click", () => zoom(1.25, ancho / 2, alto / 2));
+    $("zoom-menos").addEventListener("click", () => zoom(0.8, ancho / 2, alto / 2));
+    document.addEventListener("keydown", e => teclas(e, () => { if (E.seleccion) { E.seleccion = null; cambio(); } }, 1.25));
+
+    let arrastre = null;
+    lienzo.addEventListener("pointerdown", e => {
+      arrastre = { x: e.clientX, y: e.clientY, tx: T.x, ty: T.y, movio: false };
+      lienzo.setPointerCapture(e.pointerId);
+    });
+    lienzo.addEventListener("pointermove", e => {
+      if (arrastre) {
+        const dx = e.clientX - arrastre.x, dy = e.clientY - arrastre.y;
+        if (Math.abs(dx) + Math.abs(dy) > 3) { arrastre.movio = true; lienzo.classList.add("arrastrando"); }
+        if (arrastre.movio) { T.x = arrastre.tx + dx; T.y = arrastre.ty + dy; ocultarTooltip(); dibujar(); estadoBotones(); }
+        return;
+      }
+      mostrarTooltip(nodoEn(e.offsetX, e.offsetY), e.offsetX, e.offsetY);
+    });
+    lienzo.addEventListener("pointerup", e => {
+      if (arrastre && !arrastre.movio) {
+        const n = nodoEn(e.offsetX, e.offsetY);
+        E.seleccion = n ? (E.seleccion === n.id ? null : n.id) : null;
+        cambio();
+      }
+      arrastre = null;
+      lienzo.classList.remove("arrastrando");
+    });
+    lienzo.addEventListener("pointerleave", ocultarTooltip);
+    lienzo.addEventListener("wheel", e => {
+      e.preventDefault();
+      zoom(Math.exp(-e.deltaY * 0.0015), e.offsetX, e.offsetY);
+    }, { passive: false });
+    new ResizeObserver(() => { medir(); dibujar(); estadoBotones(); }).observe(lienzo.parentElement);
+    if (oscuroDelSistema.addEventListener) oscuroDelSistema.addEventListener("change", () => { rotularTema(); leerColores(); cambio(); });
+  }
+
+  function zoom(f, px, py) {
+    const k = Math.max(0.2, Math.min(6, T.k * f));
+    const g = k / T.k;
+    T.x = px - (px - T.x) * g;
+    T.y = py - (py - T.y) * g;
+    T.k = k;
+    dibujar();
+    estadoBotones();
+  }
+  function nodoEn(px, py) {
+    if (!C) return null;
+    let mejor = null, d0 = Infinity;
+    C.vis.forEach(n => {
+      if (E.ocultar && !C.coincide.has(n.id)) return;
+      const [x, y] = P(n);
+      const d = Math.hypot(px - x, py - y);
+      if (d < Math.max(12, radio(n) + 6) && d < d0) { d0 = d; mejor = n; }
+    });
+    return mejor;
+  }
+  function mostrarTooltip(n, px, py) {
+    const t = $("tooltip");
+    if (!n) { ocultarTooltip(); return; }
+    t.textContent = "";
+    t.appendChild(el("strong", { texto: n.nombre }));
+    t.appendChild(el("span", { texto: n.sigla + " · " + n.grupo + " · " + PARTICIPACION[n.participacion] }));
+    t.appendChild(el("span", { texto: "En lo visible: entran " + (C.entra.get(n.id) || 0) + ", salen " + (C.sale.get(n.id) || 0) + " (" + ROLES[C.rol(n)].toLowerCase() + ")" }));
+    t.style.display = "block";
+    const w = t.offsetWidth, h = t.offsetHeight;
+    t.style.left = Math.min(px + 14, ancho - w - 8) + "px";
+    t.style.top = Math.min(py + 14, alto - h - 8) + "px";
+    lienzo.style.cursor = "pointer";
+  }
+  function ocultarTooltip() { $("tooltip").style.display = "none"; lienzo.style.cursor = ""; }
+
+  // ------------------------------------------------------- exportar y tema
+  function exportarPNG() {
+    const escala = 2, pie = 92;
+    const c2 = document.createElement("canvas");
+    c2.width = Math.round(ancho * escala);
+    c2.height = Math.round((alto + pie) * escala);
+    const g = c2.getContext("2d");
+    g.scale(escala, escala);
+    pintarEscena(g, ancho, alto + pie);
+    const y0 = alto + 8;
+    g.save();
+    g.fillStyle = colores["--ink"];
+    g.font = "600 13px system-ui, -apple-system, 'Segoe UI', sans-serif";
+    g.textBaseline = "top";
+    g.fillText(D.meta.titulo + " — " + D.meta.version, 14, y0);
+    g.font = "12px system-ui, -apple-system, 'Segoe UI', sans-serif";
+    g.fillStyle = colores["--ink-2"];
+    g.fillText(descripcionVista(), 14, y0 + 20);
+    let x = 14;
+    const y = y0 + 48;
+    ["recursos", "informacion"].forEach(capa => {
+      g.strokeStyle = colores["--" + capa]; g.lineWidth = 2; g.setLineDash(capa === "informacion" ? [6, 4] : []);
+      g.beginPath(); g.moveTo(x, y + 7); g.lineTo(x + 26, y + 7); g.stroke(); g.setLineDash([]);
+      g.fillStyle = colores["--ink-2"]; g.fillText(CAPA[capa], x + 32, y);
+      x += 32 + g.measureText(CAPA[capa]).width + 18;
+    });
+    ["recursos", "informacion", "ambas"].concat(E.inventario ? ["ninguna"] : []).forEach(p => {
+      trazarForma(g, "circulo", x + 6, y + 7, 5); g.fillStyle = colores["--" + p]; g.fill();
+      g.fillStyle = colores["--ink-2"]; g.fillText(PARTICIPACION[p], x + 16, y);
+      x += 16 + g.measureText(PARTICIPACION[p]).width + 18;
+    });
+    Object.keys(FORMAS).forEach(gr => {
+      trazarForma(g, FORMAS[gr], x + 6, y + 7, 5); g.fillStyle = colores["--ink-2"]; g.fill();
+      g.fillText(gr, x + 16, y);
+      x += 16 + g.measureText(gr).width + 18;
+    });
+    g.restore();
+    c2.toBlob(blob => {
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "red-normada.png";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+      aviso("Imagen descargada: " + a.download);
+    });
+  }
+  async function copiarEnlace() {
+    aEnlace();
+    try {
+      await navigator.clipboard.writeText(location.href);
+      aviso("Enlace de la vista copiado");
+    } catch (err) {
+      const campo = $("campo-enlace");
+      campo.style.display = "block";
+      campo.value = location.href;
+      campo.focus();
+      campo.select();
+      aviso("Copie el enlace del campo seleccionado, al final de los filtros");
+    }
+  }
+  const oscuroDelSistema = window.matchMedia("(prefers-color-scheme: dark)");
+  function temaActual() { return document.documentElement.dataset.theme || (oscuroDelSistema.matches ? "dark" : "light"); }
+  function rotularTema() {
+    const oscuro = temaActual() === "dark";
+    $("btn-tema").textContent = oscuro ? "Tema claro" : "Tema oscuro";
+    $("btn-tema").title = oscuro ? "Pasar al tema claro" : "Pasar al tema oscuro";
+  }
+  function cambiarTema() {
+    document.documentElement.dataset.theme = temaActual() === "dark" ? "light" : "dark";
+    rotularTema();
+    leerColores();
+    cambio();
+  }
+
+
+  // --------------------------------------------------------------- inicio
+  leerColores();
+  rotularTema();
+  construirControles();
+  deEnlace();
+  enlazarEventos();
+  medir();
+  cambio({ reencuadrar: true });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+# Librerías de Python con las versiones con que se probó el repositorio (Python 3.14).
+# Con estas versiones, los programas dan los mismos resultados que están publicados.
+# Se instalan desde la raíz del repositorio con:  pip install -r requirements.txt
+networkx==3.7
+pandas==3.0.3
+numpy==2.5.1
+scipy==1.18.1
+matplotlib==3.11.2
+openpyxl==3.1.5
